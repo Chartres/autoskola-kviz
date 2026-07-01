@@ -1,0 +1,35 @@
+import { test, expect } from '@playwright/test'
+
+// Phone viewport on Chromium (iPhone-13-sized) — avoids needing the WebKit build.
+test.use({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true })
+
+test('mobile UX walkthrough with screenshots', async ({ page }) => {
+  await page.goto('/')
+  await page.screenshot({ path: 'test-results/m-menu.png', fullPage: true })
+
+  // Practise the rules section (longest questions) to stress the layout.
+  await page.getByRole('button', { name: 'Procvičovat' }).click()
+  await page.screenshot({ path: 'test-results/m-practice.png', fullPage: true })
+  await page.getByRole('button', { name: /Pravidla provozu/ }).click()
+  await page.getByRole('button', { name: 'Spustit procvičování' }).click()
+  await expect(page.getByText(/01 \//)).toBeVisible()
+  await page.screenshot({ path: 'test-results/m-question.png', fullPage: true })
+
+  // Answer the first option (locks + reveals verdict).
+  await page.locator('button[data-state="idle"]').first().click()
+
+  // The sticky action bar (verdict + Další) must be on screen WITHOUT scrolling,
+  // even on a long question. Scroll back to the top first to prove it.
+  await page.evaluate(() => window.scrollTo(0, 0))
+  const nextBtn = page.getByRole('button', { name: /Další|Dokončit/ })
+  await expect(nextBtn).toBeInViewport()
+  await page.screenshot({ path: 'test-results/m-answered-top.png' })
+
+  // Full page too, to inspect the reflow of the correct-answer label.
+  await page.screenshot({ path: 'test-results/m-answered-full.png', fullPage: true })
+
+  await nextBtn.click()
+  // single-question placeholder category → straight to the summary
+  await expect(page.getByRole('button', { name: 'Zpět na rozcestník' })).toBeVisible()
+  await page.screenshot({ path: 'test-results/m-summary.png', fullPage: true })
+})

@@ -1,0 +1,166 @@
+@import 'tailwindcss';
+
+/*
+  Autoškola kvíz — bright, calm, Montessori-warm.
+  Warm paper neutrals, a terracotta accent, soft rounded corners.
+
+  NOTE: the sand scale is SEMANTIC, not literal lightness:
+  950 = the page surface (lightest), 50 = the strongest ink (darkest).
+  This keeps every `text-sand-50 on bg-sand-950` pairing high-contrast
+  without touching each component.
+*/
+@theme {
+  /* Warm paper → ink */
+  --color-sand-950: #faf6ee; /* page background */
+  --color-sand-900: #f4eee1; /* deep panel */
+  --color-sand-800: #ede4d2; /* panel */
+  --color-sand-700: #d9cdb6; /* borders */
+  --color-sand-600: #8f806b; /* subtle text / disabled */
+  --color-sand-500: #7a6c58; /* muted text */
+  --color-sand-400: #64573f; /* secondary text */
+  --color-sand-300: #524632; /* body text */
+  --color-sand-200: #423827; /* strong text */
+  --color-sand-100: #332b1e; /* near-ink */
+  --color-sand-50: #241e14; /* ink — headings */
+
+  /* Terracotta accent — primary actions, focus, streak */
+  --color-terra-300: #8a3d18; /* accent text on paper */
+  --color-terra-400: #9c4a20; /* hover / icons */
+  --color-terra-500: #b05a2b; /* primary button surface (paper text on top) */
+  --color-terra-600: #7c360f;
+
+  /* Calm semantic feedback */
+  --color-moss-400: #3c7a4e; /* correct — readable on paper */
+  --color-moss-500: #2f6b41;
+  --color-rust-400: #b03a2e; /* wrong — a learning moment, not an alarm */
+  --color-rust-500: #96281e;
+
+  --font-sans: 'Nunito', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Nunito', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', monospace;
+
+  /* Soft, friendly corners */
+  --radius-card: 14px;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-sand-950);
+  color: var(--color-sand-100);
+  font-family: var(--font-sans);
+  font-feature-settings: 'tnum' 1; /* tabular numerals for scores */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  /* warm paper with a soft morning-light wash at the top */
+  background-image:
+    radial-gradient(1100px 620px at 50% -12%, rgba(176, 90, 43, 0.07), transparent 60%),
+    linear-gradient(180deg, #fdfaf4 0%, var(--color-sand-950) 45%);
+  background-repeat: no-repeat;
+}
+
+/* Prevent horizontal overflow (e.g. edge tooltips) without breaking sticky/fixed. */
+#root {
+  overflow-x: clip;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-terra-500) 25%, transparent);
+  color: var(--color-sand-50);
+}
+
+/* Soft warm emphasis for the active/primary surface */
+.glow-terra {
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--color-terra-500) 30%, transparent),
+    0 6px 18px -10px color-mix(in srgb, var(--color-terra-500) 55%, transparent);
+}
+.glow-moss {
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--color-moss-500) 40%, transparent),
+    0 6px 18px -10px color-mix(in srgb, var(--color-moss-400) 55%, transparent);
+}
+
+/* Visible, warm focus ring across all interactive elements */
+*:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--color-sand-950),
+    0 0 0 4px var(--color-terra-500);
+}
+
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+/* Prose styling for the study guide (no typography plugin) */
+.study-prose h2 {
+  margin: 2rem 0 0.75rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-terra-300);
+  border-bottom: 1px solid var(--color-sand-700);
+  padding-bottom: 0.4rem;
+}
+.study-prose h3 {
+  margin: 1.5rem 0 0.5rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--color-sand-100);
+}
+.study-prose h4 {
+  margin: 1rem 0 0.4rem;
+  font-weight: 600;
+  color: var(--color-sand-200);
+}
+.study-prose p {
+  margin: 0.6rem 0;
+  line-height: 1.7;
+  color: var(--color-sand-300);
+}
+.study-prose ul,
+.study-prose ol {
+  margin: 0.6rem 0 0.6rem 1.25rem;
+  list-style: disc;
+  color: var(--color-sand-300);
+  line-height: 1.7;
+}
+.study-prose li {
+  margin: 0.25rem 0;
+}
+.study-prose strong {
+  color: var(--color-sand-100);
+  font-weight: 700;
+}
+.study-prose table {
+  width: 100%;
+  margin: 1rem 0;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.study-prose th,
+.study-prose td {
+  border: 1px solid var(--color-sand-700);
+  padding: 0.4rem 0.6rem;
+  text-align: left;
+  color: var(--color-sand-300);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

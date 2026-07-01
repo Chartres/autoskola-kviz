@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+# extraction scratch / debug — not part of the dataset
+study/
+dbg.py
+dbg2.py
+scan.py
+explore.py
+corrupt-tokens.txt
+# derived/large source artifacts (keep the canonical PDF only)
+source/*.txt
+source/*.png
+source/mv-2026-cover.txt
+source/mv-2026-questions.pdf

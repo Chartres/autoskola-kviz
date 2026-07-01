@@ -1,0 +1,72 @@
+[
+ {
+  "id": 1,
+  "cat": "Pravidla provozu",
+  "q": "Smí řidič při jízdě držet v ruce telefonní přístroj nebo jiné hovorové či záznamové zařízení?",
+  "a": "Ano, pokud jede rychlostí nejvýše 30 km/h.",
+  "b": "Nesmí — za jízdy je zakázáno držet telefon v ruce nebo jiným způsobem.",
+  "c": "Ano, ale pouze mimo obec, kde je slabší provoz.",
+  "correct": "b",
+  "image": null
+ },
+ {
+  "id": 2,
+  "cat": "Dopravní značky",
+  "q": "Jak se zachová řidič, který přijíždí k této dopravní značce?",
+  "a": "Zastaví vozidlo na takovém místě, odkud má do křižovatky náležitý rozhled, a dá přednost v jízdě.",
+  "b": "Sníží rychlost a projede křižovatkou, pokud se z žádného směru neblíží jiné vozidlo.",
+  "c": "Značka platí pouze za snížené viditelnosti; za dobré viditelnosti stačí dát přednost v jízdě.",
+  "correct": "a",
+  "image": "znacka-stuj.svg"
+ },
+ {
+  "id": 3,
+  "cat": "Dopravní situace",
+  "q": "Na křižovatce neupravené dopravními značkami projedou vozidla v tomto pořadí:",
+  "a": "První projede červené vozidlo, protože přijíždí zprava; modré vozidlo mu dá přednost.",
+  "b": "První projede modré vozidlo, protože jede rovně.",
+  "c": "Vozidla mohou křižovatkou projet současně.",
+  "correct": "a",
+  "image": "situace-krizovatka.svg"
+ },
+ {
+  "id": 4,
+  "cat": "Zásady bezpečné jízdy",
+  "q": "Bezpečná vzdálenost za vozidlem jedoucím vpředu je vzdálenost:",
+  "a": "nejméně 5 metrů při jakékoli rychlosti.",
+  "b": "kterou řidič odhadne podle šířky vozovky.",
+  "c": "která řidiči umožní bezpečně zastavit nebo se vyhnout, i když vpředu jedoucí vozidlo náhle sníží rychlost nebo zastaví.",
+  "correct": "c",
+  "image": null
+ },
+ {
+  "id": 5,
+  "cat": "Podmínky provozu vozidel",
+  "q": "Nejmenší přípustná hloubka dezénu pneumatiky osobního automobilu (mimo zimní podmínky) je:",
+  "a": "1,6 mm na celém povrchu pneumatiky.",
+  "b": "1,0 mm alespoň na polovině povrchu pneumatiky.",
+  "c": "2,0 mm na celém povrchu pneumatiky.",
+  "correct": "a",
+  "image": null
+ },
+ {
+  "id": 6,
+  "cat": "Související předpisy",
+  "q": "Řidič smí řídit motorové vozidlo po požití alkoholického nápoje:",
+  "a": "pokud hladina alkoholu v krvi nepřesáhne 0,3 ‰.",
+  "b": "až poté, kdy již není alkoholem ovlivněn — v České republice platí pro řidiče nulová tolerance alkoholu.",
+  "c": "pokud od požití uplynuly alespoň 2 hodiny.",
+  "correct": "b",
+  "image": null
+ },
+ {
+  "id": 7,
+  "cat": "Zdravotnická příprava",
+  "q": "Zjistíte-li u zraněné osoby zástavu dechu, zahájíte:",
+  "a": "resuscitaci — stlačování hrudníku uprostřed hrudní kosti frekvencí přibližně 100–120 stlačení za minutu.",
+  "b": "podávání tekutin a sledování zraněného do příjezdu záchranné služby.",
+  "c": "transport zraněného vlastním vozidlem do nejbližší nemocnice.",
+  "correct": "a",
+  "image": null
+ }
+]

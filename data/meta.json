@@ -1,0 +1,29 @@
+{
+  "source": "PLACEHOLDER — ručně psané ukázkové otázky. Oficiální zkušební otázky spravuje Ministerstvo dopravy ČR (eTesty).",
+  "sourceUrl": "https://etesty2.mdcr.cz/",
+  "totalQuestions": 7,
+  "categories": [
+    { "id": "pravidla", "name": "Pravidla provozu", "group": "pravidla", "range": [1, 1], "count": 1 },
+    { "id": "znacky", "name": "Dopravní značky", "group": "znacky", "range": [2, 2], "count": 1 },
+    { "id": "situace", "name": "Dopravní situace", "group": "situace", "range": [3, 3], "count": 1 },
+    { "id": "zasady", "name": "Zásady bezpečné jízdy", "group": "zasady", "range": [4, 4], "count": 1 },
+    { "id": "podminky", "name": "Podmínky provozu vozidel", "group": "podminky", "range": [5, 5], "count": 1 },
+    { "id": "predpisy", "name": "Související předpisy", "group": "predpisy", "range": [6, 6], "count": 1 },
+    { "id": "zdravoveda", "name": "Zdravotnická příprava", "group": "zdravoveda", "range": [7, 7], "count": 1 }
+  ],
+  "exam": {
+    "totalQuestions": 25,
+    "composition": [
+      { "group": "pravidla", "categories": ["Pravidla provozu"], "count": 10 },
+      { "group": "znacky", "categories": ["Dopravní značky"], "count": 3 },
+      { "group": "situace", "categories": ["Dopravní situace"], "count": 3 },
+      { "group": "zasady", "categories": ["Zásady bezpečné jízdy"], "count": 4 },
+      { "group": "podminky", "categories": ["Podmínky provozu vozidel"], "count": 2 },
+      { "group": "predpisy", "categories": ["Související předpisy"], "count": 2 },
+      { "group": "zdravoveda", "categories": ["Zdravotnická příprava"], "count": 1 }
+    ],
+    "passThreshold": 21,
+    "timeLimitMinutes": 30
+  },
+  "duplicatePairs": []
+}

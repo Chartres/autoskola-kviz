@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Křižovatka: modré vozidlo jede zdola nahoru, červené přijíždí zprava">
+  <!-- schematic placeholder: equal crossroads, red arrives from the blue car's right -->
+  <rect width="200" height="200" fill="#e8f0e4"/>
+  <rect x="80" y="0" width="40" height="200" fill="#9aa0a6"/>
+  <rect x="0" y="80" width="200" height="40" fill="#9aa0a6"/>
+  <g stroke="#f5f5f0" stroke-width="3" stroke-dasharray="10 8">
+    <line x1="100" y1="0" x2="100" y2="72"/>
+    <line x1="100" y1="128" x2="100" y2="200"/>
+    <line x1="0" y1="100" x2="72" y2="100"/>
+    <line x1="128" y1="100" x2="200" y2="100"/>
+  </g>
+  <!-- blue car heading up -->
+  <rect x="88" y="140" width="24" height="44" rx="6" fill="#1e5fa8"/>
+  <path d="M100 128 l-9 14 h18 z" fill="#1e5fa8"/>
+  <!-- red car heading left (from blue's right) -->
+  <rect x="140" y="88" width="44" height="24" rx="6" fill="#c1121f"/>
+  <path d="M128 100 l14 -9 v18 z" fill="#c1121f"/>
+</svg>
