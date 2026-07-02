@@ -22,6 +22,7 @@ from __future__ import annotations
 import json
 import re
 import shutil
+import subprocess
 import sys
 import time
 import unicodedata
@@ -134,6 +135,35 @@ def fetch_media(url_path: str) -> Path:
     return path
 
 
+COMPRESS_OVER = 100_000  # bytes
+
+
+def publish_media(name: str) -> str:
+    """Copy a cached media file into public/media.
+
+    Large png/jpg (video stills, photos) are resized to ≤1280px and re-encoded
+    as webp — the app renders them at ~450px anyway.
+    ponytail: without cwebp installed, files are committed as-is.
+    """
+    src = CACHE_M / name
+    dst = PUBLIC_MEDIA / name
+    if (
+        src.stat().st_size > COMPRESS_OVER
+        and src.suffix.lower() in (".png", ".jpg", ".jpeg")
+        and shutil.which("cwebp")
+    ):
+        dst = dst.with_suffix(".webp")
+        if not dst.exists():
+            subprocess.run(
+                ["cwebp", "-quiet", "-q", "75", "-resize", "1280", "0",
+                 str(src), "-o", str(dst)],
+                check=True, capture_output=True,
+            )
+    elif not dst.exists():
+        shutil.copy2(src, dst)
+    return dst.name
+
+
 def norm_text(q: dict) -> str:
     """Dedupe key: question text + sorted answer texts, whitespace-normalized."""
     parts = [q["questionText"]] + sorted(
@@ -201,7 +231,7 @@ def transform(lists: dict[int, list[int]], questions: dict[int, dict]) -> None:
         if mc:
             fmt = mc["mediaFormatCode"]
             main = CACHE_M / mc["mediaUrl"].rsplit("/", 1)[-1]
-            if fmt == "video_mp4":
+            if fmt in ("video_mp4", "video/mp4"):
                 stats["video"] += 1
                 videos.append(main)
                 video_bytes += main.stat().st_size
@@ -209,26 +239,44 @@ def transform(lists: dict[int, list[int]], questions: dict[int, dict]) -> None:
                 still = mc.get("printMediaName")
                 if still and (CACHE_M / still).exists():
                     image = still
-            elif fmt in ("image_png", "image_jpg"):
+            elif fmt in ("image_png", "image_jpg", "image_gif"):
                 stats["image"] += 1
                 image = main.name
             else:
                 sys.exit(f"question {qid}: unknown media format {fmt}")
             if image:
-                shutil.copy2(CACHE_M / image, PUBLIC_MEDIA / image)
+                image = publish_media(image)
+
+        # Image answers ("which of these signs …"): answerText is a bare ".".
+        answer_imgs: list[str | None] = []
+        for a in answers:
+            amc = a.get("mediaContent")
+            if amc:
+                answer_imgs.append(publish_media(amc["mediaUrl"].rsplit("/", 1)[-1]))
+            else:
+                answer_imgs.append(None)
+
+        def answer_text(i: int) -> str | None:
+            if i >= len(answers):
+                return None
+            t = answers[i]["answerText"].strip()
+            return "" if t == "." and answer_imgs[i] else t
 
         rec: dict = {
             "id": new_id,
             "cat": cat,
             "q": q["questionText"].strip(),
-            "a": answers[0]["answerText"].strip(),
-            "b": answers[1]["answerText"].strip(),
-            "c": answers[2]["answerText"].strip() if len(answers) == 3 else None,
+            "a": answer_text(0),
+            "b": answer_text(1),
+            "c": answer_text(2),
             "correct": "abc"[correct[0]],
             "image": image,
             "points": q["pointsCount"],
             "sourceId": qid,
         }
+        for key, img in zip(("aImg", "bImg", "cImg"), answer_imgs):
+            if img:
+                rec[key] = img
         if video_url:
             rec["videoUrl"] = video_url
         if qid in groups_by_qid:
@@ -287,7 +335,7 @@ def transform(lists: dict[int, list[int]], questions: dict[int, dict]) -> None:
         if r["points"] != pts[next(g for g, c in CAT_ORDER if c == r["cat"])]
     ]
 
-    img_bytes = sum((PUBLIC_MEDIA / r["image"]).stat().st_size for r in out if r["image"])
+    img_bytes = sum(f.stat().st_size for f in PUBLIC_MEDIA.iterdir() if f.is_file())
     print(f"\nquestions: {len(out)} (dropped {len(drop)} zásady content-duplicates)")
     for c in categories:
         print(f"  {c['name']}: {c['count']}")
@@ -321,14 +369,13 @@ def main() -> None:
     if fetch:
         for q in questions.values():
             mc = q.get("mediaContent")
-            if not mc:
-                continue
-            fetch_media(mc["mediaUrl"])
-            if mc["mediaFormatCode"] == "video_mp4" and mc.get("printMediaName"):
-                try:
-                    fetch_media(mc["printMediaName"])
-                except requests.RequestException:
-                    print(f"  still missing for {q['id']}: {mc['printMediaName']}")
+            if mc:
+                fetch_media(mc["mediaUrl"])
+                if mc["mediaFormatCode"].startswith("video") and mc.get("printMediaName"):
+                    try:
+                        fetch_media(mc["printMediaName"])
+                    except requests.RequestException:
+                        print(f"  still missing for {q['id']}: {mc['printMediaName']}")
             for a in q["questionAnswers"]:
                 if a.get("mediaContent"):
                     fetch_media(a["mediaContent"]["mediaUrl"])
