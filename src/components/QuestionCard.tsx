@@ -189,7 +189,7 @@ export function QuestionCard({
           <button
             type="button"
             onClick={onNext}
-            className="glow-terra inline-flex shrink-0 items-center gap-2 rounded-card bg-terra-500 px-5 py-2.5 font-display font-semibold uppercase tracking-wide text-sand-950 transition-colors hover:bg-terra-400"
+            className="glow-terra inline-flex shrink-0 items-center gap-2 rounded-card bg-terra-500 px-5 py-2.5 font-display font-semibold text-sand-950 transition-colors hover:bg-terra-400"
           >
             <span>{index + 1 === total ? 'Dokončit' : 'Další'}</span>
             <kbd className="flex h-5 min-w-5 items-center justify-center rounded-[2px] border border-sand-950/30 px-1 font-mono text-xs leading-none">

@@ -37,7 +37,7 @@ export function PracticeScreen() {
 
   return (
     <div className="mx-auto w-full max-w-xl px-4 pt-2">
-      <h1 className="mb-4 font-display text-2xl font-bold uppercase tracking-tight text-sand-50">
+      <h1 className="mb-4 font-display text-2xl font-bold tracking-tight text-sand-50">
         Procvičovat
       </h1>
 
@@ -51,7 +51,7 @@ export function PracticeScreen() {
         className="mb-5 flex w-full items-center justify-between gap-3 rounded-card border border-sand-700 bg-sand-800/40 p-4 text-left transition-colors hover:border-sand-500"
       >
         <span>
-          <span className="block font-display text-lg font-semibold uppercase tracking-wide text-sand-50">
+          <span className="block font-display text-lg font-semibold text-sand-50">
             Zkušební test
           </span>
           <span className="mt-0.5 block text-sm text-sand-400">
@@ -65,7 +65,7 @@ export function PracticeScreen() {
 
       {/* MODE 2 — practice by topic */}
       <section className="rounded-card border border-sand-700 bg-sand-800/40 p-4">
-        <h2 className="font-display text-lg font-semibold uppercase tracking-wide text-sand-50">
+        <h2 className="font-display text-lg font-semibold text-sand-50">
           Procvičit okruhy
         </h2>
         <p className="mt-0.5 mb-3 text-sm text-sand-400">
@@ -119,7 +119,7 @@ export function PracticeScreen() {
             track('start_practice')
             dispatch({ type: 'startPractice', rng: rng() })
           }}
-          className="glow-terra mt-3 w-full rounded-card bg-terra-500 px-5 py-3 font-display font-semibold uppercase tracking-wide text-sand-950 transition-colors hover:bg-terra-400 disabled:cursor-not-allowed disabled:opacity-50"
+          className="glow-terra mt-3 w-full rounded-card bg-terra-500 px-5 py-3 font-display font-semibold text-sand-950 transition-colors hover:bg-terra-400 disabled:cursor-not-allowed disabled:opacity-50"
         >
           Spustit procvičování
         </button>

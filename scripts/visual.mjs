@@ -52,7 +52,7 @@ for (const t of targets) {
   }
 
   // 3) Daily lesson — first question
-  await page.getByRole('button', { name: /Dnešní lekce/ }).click()
+  await page.getByRole('button', { name: /Denní dávka/ }).click()
   await shot(page, t.name, '03-lesson-q')
   // answer it → feedback
   await page.locator('button[data-state="idle"]').first().click()

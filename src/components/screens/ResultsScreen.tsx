@@ -30,7 +30,7 @@ export function ResultsScreen() {
       <div className="rounded-card border border-sand-700 bg-sand-800/40 p-6 text-center">
         {isLesson && (
           <div className="mb-4">
-            <div className="font-display text-2xl font-bold uppercase tracking-tight text-moss-400">
+            <div className="font-display text-2xl font-bold tracking-tight text-moss-400">
               Lekce dokončena
             </div>
             <div className="mt-2 inline-flex items-center gap-2 rounded-card border border-terra-500/60 bg-terra-500/10 px-4 py-1.5">
@@ -81,7 +81,7 @@ export function ResultsScreen() {
 
       {wrong.length > 0 && (
         <section className="mt-8">
-          <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-rust-400">
+          <h2 className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.2em] text-rust-400">
             Chybné odpovědi ({wrong.length})
           </h2>
           <ul className="space-y-3">
@@ -110,7 +110,7 @@ export function ResultsScreen() {
           <button
             type="button"
             onClick={() => dispatch({ type: 'startLesson', rng: makeRng(timeSeed()) })}
-            className="glow-terra rounded-card bg-terra-500 px-5 py-2.5 font-display font-semibold uppercase tracking-wide text-sand-950 hover:bg-terra-400"
+            className="glow-terra rounded-card bg-terra-500 px-5 py-2.5 font-display font-semibold text-sand-950 hover:bg-terra-400"
           >
             Další lekce
           </button>

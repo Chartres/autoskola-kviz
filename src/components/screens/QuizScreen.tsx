@@ -10,7 +10,7 @@ import { todayStr } from '@/lib/date'
 import type { Choice } from '@/domain/types'
 
 const MODE_LABEL: Record<string, string> = {
-  lesson: 'Dnešní lekce',
+  lesson: 'Denní dávka',
   practice: 'Procvičování',
   review: 'Moje chyby',
   bookmarks: 'Záložky',
@@ -57,7 +57,7 @@ export function QuizScreen() {
         >
           ← Konec
         </button>
-        <span className="text-xs uppercase tracking-wide text-sand-500">
+        <span className="font-mono text-[0.7rem] uppercase tracking-[0.15em] text-sand-500">
           {MODE_LABEL[mode]}
         </span>
         {isExam && state.examEndsAt != null ? (

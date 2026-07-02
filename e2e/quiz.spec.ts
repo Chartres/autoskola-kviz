@@ -52,5 +52,5 @@ test('guide and stats tabs are reachable', async ({ page }) => {
   await expect(page.getByRole('heading', { name: 'Studijní průvodce' })).toBeVisible()
   await expect(page.getByRole('heading', { name: /Jak zkouška probíhá/ })).toBeVisible()
   await page.getByRole('button', { name: 'Postup' }).click()
-  await expect(page.getByRole('heading', { name: 'Statistiky' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Postup' })).toBeVisible()
 })

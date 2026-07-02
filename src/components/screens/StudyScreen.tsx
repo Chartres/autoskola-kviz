@@ -5,7 +5,7 @@ import { imageUrl } from '@/lib/assets'
 export function StudyScreen() {
   return (
     <div className="mx-auto w-full max-w-3xl px-4 pt-2">
-      <h1 className="font-display text-2xl font-bold uppercase tracking-tight text-sand-50">
+      <h1 className="font-display text-2xl font-bold tracking-tight text-sand-50">
         Studijní průvodce
       </h1>
       <p className="mt-1 text-sm text-sand-400">
@@ -39,7 +39,7 @@ export function StudyScreen() {
 
       {LESSONS.map((l) => (
         <section key={l.id} id={l.id} className="mt-8 scroll-mt-4">
-          <h2 className="mb-3 font-display text-xl font-bold uppercase tracking-tight text-terra-300">
+          <h2 className="mb-3 font-display text-xl font-bold tracking-tight text-terra-300">
             {l.title}
           </h2>
           <article className="study-prose" dangerouslySetInnerHTML={{ __html: l.html }} />

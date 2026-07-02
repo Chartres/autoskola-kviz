@@ -28,7 +28,7 @@ export function HomeScreen() {
   return (
     <div className="mx-auto w-full max-w-xl px-4 pt-2">
       <header className="mb-4 flex items-center justify-between">
-        <h1 className="font-display text-xl font-bold tracking-tight text-sand-50">
+        <h1 className="font-display text-2xl font-bold tracking-tight text-sand-50">
           Autoškola kvíz
         </h1>
         <div className="flex items-center gap-2 rounded-card border border-sand-700 px-3 py-1.5">

@@ -43,7 +43,7 @@ export function BottomNav() {
                 type="button"
                 onClick={() => dispatch({ type: 'navigate', view: tab })}
                 aria-current={active ? 'page' : undefined}
-                className={`flex w-full flex-col items-center gap-1 py-2.5 text-[0.65rem] font-medium uppercase tracking-wide transition-colors ${
+                className={`flex w-full flex-col items-center gap-1 py-2.5 text-[0.7rem] font-medium transition-colors ${
                   active ? 'text-terra-400' : 'text-sand-500 hover:text-sand-300'
                 }`}
               >
