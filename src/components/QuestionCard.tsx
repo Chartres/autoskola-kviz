@@ -112,11 +112,12 @@ export function QuestionCard({
       </header>
 
       {question.image && (
-        <div className="mb-5 flex justify-center rounded-card border border-sand-700 bg-white p-4">
+        /* min-h-64 = image cap (max-h-56) + p-4 padding — the box height is
+           reserved up front so the arriving image never shifts the layout. */
+        <div className="mb-5 flex min-h-64 items-center justify-center rounded-card border border-sand-700 bg-white p-4">
           <img
             src={imageUrl(question.image)}
             alt={`Obrázek k otázce ${question.id}`}
-            loading="lazy"
             className="max-h-56 w-auto object-contain"
           />
         </div>
@@ -146,7 +147,6 @@ export function QuestionCard({
                   <img
                     src={imageUrl(question[`${opt}Img`]!)}
                     alt={`Možnost ${opt.toUpperCase()}`}
-                    loading="lazy"
                     className="max-h-24 w-auto rounded-[2px] bg-white p-1"
                   />
                 )}

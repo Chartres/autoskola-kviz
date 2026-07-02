@@ -1,7 +1,8 @@
-import { useCallback } from 'react'
+import { useCallback, useEffect } from 'react'
 import { useApp } from '@/app/AppContext'
 import { currentQuestion } from '@/domain/session'
 import { isBookmarked } from '@/domain/progress'
+import { imageUrl } from '@/lib/assets'
 import { QuestionCard } from '@/components/QuestionCard'
 import { ExamTimer } from '@/components/ExamTimer'
 import { ProgressBar } from '@/components/ui/ProgressBar'
@@ -20,6 +21,12 @@ export function QuizScreen() {
   const { state, dispatch } = useApp()
   const { session, mode } = state
   const onExpire = useCallback(() => dispatch({ type: 'finishExam' }), [dispatch])
+
+  // Warm the cache for the next question's image so it shows without a flash.
+  const nextImage = session ? session.questions[session.index + 1]?.image : null
+  useEffect(() => {
+    if (nextImage) new Image().src = imageUrl(nextImage)
+  }, [nextImage])
 
   if (!session || !mode) return null
   const question = currentQuestion(session)

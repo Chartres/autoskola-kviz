@@ -109,11 +109,14 @@ describe('QuestionCard', () => {
     expect(onAnswer).toHaveBeenCalledWith('b')
   })
 
-  it('renders the question image lazily with an alt text', () => {
+  it('renders the question image eagerly (current question) with an alt text', () => {
     setup({ question: { ...Q, image: 'znacka-stuj.svg' } })
     const img = screen.getByRole('img')
     expect(img).toHaveAttribute('src', expect.stringContaining('znacka-stuj.svg'))
-    expect(img).toHaveAttribute('loading', 'lazy')
+    // Eager by default — the current question's image must not lazy-load.
+    expect(img).not.toHaveAttribute('loading', 'lazy')
     expect(img).toHaveAccessibleName()
+    // The media box reserves its height up front (no layout flash on load).
+    expect(img.parentElement).toHaveClass('min-h-64')
   })
 })
