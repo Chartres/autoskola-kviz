@@ -45,7 +45,8 @@ export function StatsScreen() {
             >
               {s.value}
             </div>
-            <div className="mt-0.5 font-mono text-[0.7rem] uppercase tracking-[0.15em] text-sand-500">
+            {/* 0.65rem + 0.1em keeps label + dot on one line at 390px */}
+            <div className="mt-0.5 whitespace-nowrap font-mono text-[0.65rem] uppercase tracking-[0.1em] text-sand-500">
               {s.label}
               <InfoDot text={s.info} />
             </div>
