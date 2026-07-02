@@ -3,6 +3,21 @@ import { test, expect } from '@playwright/test'
 // Phone viewport on Chromium (iPhone-13-sized) — avoids needing the WebKit build.
 test.use({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true })
 
+test('home content clears the bottom nav at scroll end', async ({ page }) => {
+  await page.goto('/')
+  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight))
+  const { lastBottom, navTop } = await page.evaluate(() => {
+    const cards = [...document.querySelectorAll('main > div > *')]
+    const nav = document.querySelector('nav')!
+    return {
+      lastBottom: cards[cards.length - 1].getBoundingClientRect().bottom,
+      navTop: nav.getBoundingClientRect().top,
+    }
+  })
+  expect(lastBottom).toBeLessThanOrEqual(navTop)
+  await page.screenshot({ path: 'test-results/m-home-bottom.png' })
+})
+
 test('mobile UX walkthrough with screenshots', async ({ page }) => {
   await page.goto('/')
   await page.screenshot({ path: 'test-results/m-menu.png', fullPage: true })

@@ -47,10 +47,9 @@ function Shell() {
           <AuthPanel />
         </header>
       )}
-      <main
-        className="flex-1"
-        style={tabbed ? { paddingBottom: 'calc(6rem + env(safe-area-inset-bottom))' } : undefined}
-      >
+      {/* pb-8 keeps a breathing gap between the last card and the nav; the nav
+          itself is sticky (in flow), so content can never end up beneath it. */}
+      <main className={`flex-1 ${tabbed ? 'pb-8' : ''}`}>
         <CurrentView />
       </main>
       {tabbed && <BottomNav />}
