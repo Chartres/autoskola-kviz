@@ -10,7 +10,7 @@ import {
 } from '@/domain/session'
 import {
   buildPractice,
-  reviewQuestions,
+  missedQuestions,
   bookmarkedQuestions,
 } from '@/domain/selection'
 import { buildExam, evaluateExam, EXAM, type ExamResult } from '@/domain/exam'
@@ -114,7 +114,7 @@ export function reducer(state: AppState, action: Action): AppState {
       return begin(
         state,
         'review',
-        createSession(reviewQuestions(state.progress)),
+        createSession(missedQuestions(state.progress)),
       )
 
     case 'startBookmarks':

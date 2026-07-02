@@ -12,7 +12,7 @@ import type { Choice } from '@/domain/types'
 const MODE_LABEL: Record<string, string> = {
   lesson: 'Dnešní lekce',
   practice: 'Procvičování',
-  review: 'Opakování chyb',
+  review: 'Moje chyby',
   bookmarks: 'Záložky',
   exam: 'Zkušební test',
 }

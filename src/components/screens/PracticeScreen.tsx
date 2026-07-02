@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { useApp } from '@/app/AppContext'
 import { META } from '@/domain/questions'
+import { missedIds } from '@/domain/progress'
 import { filterQuestions } from '@/domain/selection'
 import { timeSeed, makeRng } from '@/domain/rng'
 import { track } from '@/analytics'
@@ -9,6 +10,10 @@ import type { CategoryName } from '@/domain/types'
 export function PracticeScreen() {
   const { state, dispatch } = useApp()
   const bookmarkCount = state.progress.bookmarks.length
+  const missedCount = useMemo(
+    () => missedIds(state.progress).length,
+    [state.progress],
+  )
   const selectedCount = state.selectedCategories.size
 
   // Live count of what "Spustit procvičování" will serve (categories ∩ search).
@@ -119,6 +124,22 @@ export function PracticeScreen() {
           Spustit procvičování
         </button>
       </section>
+
+      {/* Missed questions — the error-drilling queue (points-weighted) */}
+      <button
+        type="button"
+        disabled={missedCount === 0}
+        onClick={() => {
+          track('start_review')
+          dispatch({ type: 'startReview', rng: rng() })
+        }}
+        className="mt-4 flex w-full items-center justify-between rounded-card border border-sand-700 bg-sand-800/40 px-5 py-3.5 text-left transition-colors hover:border-sand-500 disabled:cursor-not-allowed disabled:opacity-50"
+      >
+        <span className="font-medium text-sand-100">Moje chyby</span>
+        <span className="font-mono text-sm text-rust-400 tabular-nums">
+          {missedCount > 0 ? `${missedCount} otázek →` : 'žádné'}
+        </span>
+      </button>
 
       {/* Bookmarks */}
       <button

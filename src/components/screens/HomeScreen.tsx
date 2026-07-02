@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { useApp } from '@/app/AppContext'
 import { ALL_QUESTIONS, META } from '@/domain/questions'
-import { summary, needsReviewIds } from '@/domain/progress'
+import { summary, missedIds } from '@/domain/progress'
 import { LESSON_SIZE } from '@/domain/lesson'
 import { timeSeed, makeRng } from '@/domain/rng'
 import { track } from '@/analytics'
@@ -12,7 +12,7 @@ export function HomeScreen() {
   const { state, dispatch } = useApp()
   const sum = useMemo(() => summary(state.progress, ALL_QUESTIONS), [state.progress])
   const reviewCount = useMemo(
-    () => needsReviewIds(state.progress).length,
+    () => missedIds(state.progress).length,
     [state.progress],
   )
   const streak = state.progress.streak.current
@@ -77,7 +77,7 @@ export function HomeScreen() {
           }}
           className="mb-3 flex w-full items-center justify-between rounded-card border border-sand-700 bg-sand-800/40 px-5 py-3.5 text-left transition-colors hover:border-sand-500"
         >
-          <span className="font-medium text-sand-100">Opakovat chyby</span>
+          <span className="font-medium text-sand-100">Moje chyby</span>
           <span className="font-mono text-sm text-rust-400 tabular-nums">
             {reviewCount} otázek →
           </span>

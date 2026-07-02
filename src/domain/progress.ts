@@ -9,6 +9,8 @@ export interface QuestionStat {
   streak: number
   lastSeen: number
   lastCorrect: boolean
+  /** When the question was last answered wrong (0 / absent = never). */
+  lastWrong?: number
 }
 
 export interface Streak {
@@ -91,6 +93,7 @@ export function recordAnswer(
     streak: correct ? prev.streak + 1 : 0,
     lastSeen: now,
     lastCorrect: correct,
+    lastWrong: correct ? prev.lastWrong : now,
   }
   return {
     ...p,
@@ -153,6 +156,17 @@ export function dueForReview(p: ProgressData, _now: number): number[] {
     // older (smaller lastSeen) first
     return sa.lastSeen - sb.lastSeen
   })
+}
+
+/**
+ * "Moje chyby": questions the learner has ever answered wrong and has not
+ * (re-)mastered since. Mastery (two consecutive correct) clears the error —
+ * a learning moment, not a permanent mark.
+ */
+export function missedIds(p: ProgressData): number[] {
+  return Object.entries(p.stats)
+    .filter(([, s]) => s.correct < s.seen && !isMastered(s))
+    .map(([id]) => Number(id))
 }
 
 export interface CategorySummary {

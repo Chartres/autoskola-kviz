@@ -12,6 +12,7 @@ import {
   isBookmarked,
   needsReviewIds,
   dueForReview,
+  missedIds,
   summary,
   mergeProgress,
   recordLessonComplete,
@@ -94,6 +95,25 @@ describe('review selection (spaced repetition)', () => {
     // both wrong come before the merely-unmastered correct one;
     // among wrong, the older (id 2) comes first
     expect(ids.slice(0, 2)).toEqual([2, 3])
+  })
+})
+
+describe('missed questions (Moje chyby)', () => {
+  it('records when a question was last missed', () => {
+    let p = emptyProgress()
+    p = recordAnswer(p, 1, false, 10)
+    p = recordAnswer(p, 1, true, 20) // a later correct answer keeps the miss time
+    expect(statFor(p, 1).lastWrong).toBe(10)
+    expect(statFor(p, 2).lastWrong ?? 0).toBe(0)
+  })
+
+  it('lists only ever-missed questions, until mastered again', () => {
+    let p = emptyProgress()
+    p = recordAnswer(p, 1, false, 1) // missed → listed
+    p = recordAnswer(p, 2, true, 2) // seen, never missed → not listed
+    p = recordAnswer(p, 3, false, 3) // missed…
+    for (let i = 0; i < MASTERY_STREAK; i++) p = recordAnswer(p, 3, true, 10 + i) // …then mastered → drops out
+    expect(missedIds(p)).toEqual([1])
   })
 })
 

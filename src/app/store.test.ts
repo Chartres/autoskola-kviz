@@ -71,14 +71,15 @@ describe('app store', () => {
     expect(s.examResult?.passed).toBe(false)
   })
 
-  it('starts a review session from the weak-spots queue', () => {
+  it('starts a review session from the missed queue (recent miss first)', () => {
     let p = emptyProgress()
     p = recordAnswer(p, 6, false, 10)
     p = recordAnswer(p, 7, false, 20)
     let s = start({ progress: p })
     s = reducer(s, { type: 'startReview', rng: makeRng(1) })
     expect(s.mode).toBe('review')
-    expect(s.session?.questions.map((q) => q.id)).toEqual([6, 7])
+    // same points (both Pravidla, 2 b) → the more recently missed (7) first
+    expect(s.session?.questions.map((q) => q.id)).toEqual([7, 6])
   })
 
   it('toggles bookmarks in progress', () => {

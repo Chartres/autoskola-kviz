@@ -3,7 +3,7 @@ import { makeRng } from './rng'
 import {
   filterQuestions,
   buildPractice,
-  reviewQuestions,
+  missedQuestions,
   bookmarkedQuestions,
   normalizeForSearch,
 } from './selection'
@@ -63,13 +63,25 @@ describe('buildPractice', () => {
   })
 })
 
-describe('reviewQuestions', () => {
-  it('returns the spaced-repetition queue as full questions', () => {
+describe('missedQuestions (Moje chyby)', () => {
+  it('orders by points desc, then most recently missed first', () => {
+    // id 1–2: Pravidla provozu (2 pts), id 700: Dopravní situace (4 pts),
+    // id 460: Dopravní značky (1 pt) — real bank point values.
     let p = emptyProgress()
-    p = recordAnswer(p, 2, false, 50)
-    p = recordAnswer(p, 3, false, 90)
-    const ids = reviewQuestions(p).map((q) => q.id)
-    expect(ids).toEqual([2, 3])
+    p = recordAnswer(p, 460, false, 300) // 1 pt, newest miss
+    p = recordAnswer(p, 1, false, 100) // 2 pts, older miss
+    p = recordAnswer(p, 2, false, 200) // 2 pts, newer miss
+    p = recordAnswer(p, 700, false, 50) // 4 pts, oldest miss
+    const qs = missedQuestions(p)
+    expect(qs.map((q) => q.id)).toEqual([700, 2, 1, 460])
+    expect(qs[0].points).toBe(4)
+  })
+
+  it('excludes questions answered correctly but never missed', () => {
+    let p = emptyProgress()
+    p = recordAnswer(p, 1, true, 10)
+    p = recordAnswer(p, 2, false, 20)
+    expect(missedQuestions(p).map((q) => q.id)).toEqual([2])
   })
 })
 

@@ -1,0 +1,10 @@
+import { chromium } from '@playwright/test'
+const b = await chromium.launch()
+const p = await b.newPage({ viewport: { width: 375, height: 667 } })
+await p.goto('http://localhost:5199/')
+await p.waitForTimeout(500)
+// open Dopravní značky topic (image-heavy)
+await p.getByRole('button', { name: /Dopravní značky/ }).click()
+await p.waitForTimeout(700)
+await p.screenshot({ path: process.env.OUT + '/q-image.png' })
+await b.close()

@@ -1,7 +1,7 @@
 import type { CategoryName, Question } from './types'
 import { ALL_QUESTIONS, getQuestion } from './questions'
 import { shuffle, type Rng } from './rng'
-import { dueForReview, type ProgressData } from './progress'
+import { missedIds, statFor, type ProgressData } from './progress'
 
 export function normalizeForSearch(text: string): string {
   return text
@@ -32,10 +32,20 @@ export function buildPractice(opts: FilterOptions, rng: Rng): Question[] {
   return shuffle(filterQuestions(opts), rng)
 }
 
-export function reviewQuestions(p: ProgressData, now = 0): Question[] {
-  return dueForReview(p, now)
+/**
+ * "Moje chyby" queue: previously-missed questions, the expensive ones first —
+ * points desc (4-point situace surface before 1-point znacky), then the most
+ * recently missed. ponytail: no full FSRS; this ordering is the whole model.
+ */
+export function missedQuestions(p: ProgressData): Question[] {
+  return missedIds(p)
     .map((id) => getQuestion(id))
     .filter((q): q is Question => q !== undefined)
+    .sort(
+      (a, b) =>
+        b.points - a.points ||
+        (statFor(p, b.id).lastWrong ?? 0) - (statFor(p, a.id).lastWrong ?? 0),
+    )
 }
 
 export function bookmarkedQuestions(p: ProgressData): Question[] {
