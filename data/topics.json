@@ -1,0 +1,128 @@
+[
+  {
+    "slug": "pravidla-provozu",
+    "category": "Pravidla provozu",
+    "title": "Pravidla silničního provozu — testové otázky zdarma | Autoškola kvíz",
+    "description": "Test z pravidel silničního provozu zdarma: všech {count} oficiálních otázek Ministerstva dopravy k teoretické zkoušce v autoškole. Bez reklam a bez registrace.",
+    "h1": "Pravidla silničního provozu — testové otázky",
+    "intro": "Procvičte si všech {count} oficiálních otázek z okruhu Pravidla provozu — největšího okruhu teoretické zkoušky. Každá odpověď dostane okamžitou zpětnou vazbu a chyby se vám samy vrací k zopakování.",
+    "faq": [
+      {
+        "q": "Kolik otázek z pravidel provozu je u zkoušky?",
+        "a": "Zkušební test má 25 otázek celkem, z toho 10 otázek za 2 body je z pravidel provozu — je to nejdůležitější okruh."
+      },
+      {
+        "q": "Jsou otázky stejné jako u skutečné zkoušky?",
+        "a": "Ano, jde o oficiální zkušební otázky Ministerstva dopravy ČR (etesty2.mdcr.cz) v aktuálním znění."
+      }
+    ]
+  },
+  {
+    "slug": "dopravni-znacky",
+    "category": "Dopravní značky",
+    "title": "Dopravní značky — test zdarma, oficiální otázky | Autoškola kvíz",
+    "description": "Dopravní značky test zdarma: {count} oficiálních otázek s obrázky značek k teoretické zkoušce v autoškole. Bez reklam a bez registrace.",
+    "h1": "Dopravní značky — testové otázky s obrázky",
+    "intro": "Všech {count} oficiálních otázek na dopravní značky, včetně obrázků značek přímo z otázek u zkoušky. Značky, které pletete, se vám vrací, dokud je nezvládnete.",
+    "faq": [
+      {
+        "q": "Kolik otázek na značky je u zkoušky?",
+        "a": "Zkušební test obsahuje 3 otázky na dopravní značky, každá za 1 bod."
+      },
+      {
+        "q": "Jsou v testu obrázky značek?",
+        "a": "Ano, otázky obsahují oficiální vyobrazení značek — stejná, jaká uvidíte u zkoušky."
+      }
+    ]
+  },
+  {
+    "slug": "dopravni-situace",
+    "category": "Dopravní situace",
+    "title": "Dopravní situace a křižovatky — test zdarma | Autoškola kvíz",
+    "description": "Řešení dopravních situací a přednost v jízdě na křižovatkách: {count} oficiálních otázek za 4 body k teoretické zkoušce. Zdarma, bez reklam.",
+    "h1": "Dopravní situace — křižovatky a přednost v jízdě",
+    "intro": "{count} oficiálních otázek na řešení dopravních situací — přednost v jízdě, křižovatky a řazení. Každá otázka u zkoušky platí 4 body, proto se zde chyby procvičují přednostně.",
+    "faq": [
+      {
+        "q": "Kolik bodů platí otázky na dopravní situace?",
+        "a": "Nejvíc ze všech: 4 body za otázku. U zkoušky jsou 3 takové otázky — 12 bodů z 50, přitom stačí ztratit 8 bodů a neuspějete."
+      },
+      {
+        "q": "Jak se nejlépe naučit křižovatky?",
+        "a": "Opakováním s obrázky situací a okamžitou kontrolou správného řešení — přesně tak zde okruh funguje."
+      }
+    ]
+  },
+  {
+    "slug": "zasady-bezpecne-jizdy",
+    "category": "Zásady bezpečné jízdy",
+    "title": "Zásady bezpečné jízdy — testové otázky zdarma | Autoškola kvíz",
+    "description": "Zásady bezpečné jízdy: {count} oficiálních otázek k teoretické zkoušce v autoškole zdarma. Okamžitá zpětná vazba, bez reklam a bez registrace.",
+    "h1": "Zásady bezpečné jízdy — testové otázky",
+    "intro": "Okruh Zásady bezpečné jízdy má {count} oficiálních otázek — brzdná dráha, rozestupy, jízda za snížené viditelnosti a chování v krizových situacích.",
+    "faq": [
+      {
+        "q": "Kolik otázek ze zásad bezpečné jízdy je u zkoušky?",
+        "a": "Zkušební test obsahuje 4 otázky z tohoto okruhu, každá za 2 body."
+      },
+      {
+        "q": "Liší se otázky podle skupiny řidičského oprávnění?",
+        "a": "Část otázek je specifická pro skupiny A, B nebo C/D; procvičujete kompletní oficiální bank."
+      }
+    ]
+  },
+  {
+    "slug": "podminky-provozu-vozidel",
+    "category": "Podmínky provozu vozidel",
+    "title": "Podmínky provozu vozidel — testové otázky zdarma | Autoškola kvíz",
+    "description": "Podmínky provozu vozidel na pozemních komunikacích: {count} oficiálních otázek k teoretické zkoušce v autoškole. Zdarma, bez reklam.",
+    "h1": "Podmínky provozu vozidel — testové otázky",
+    "intro": "{count} oficiálních otázek o technickém stavu, povinné výbavě a podmínkách provozu vozidel. Krátký okruh — zvládnete ho celý za jedno odpoledne.",
+    "faq": [
+      {
+        "q": "Kolik otázek z podmínek provozu je u zkoušky?",
+        "a": "Zkušební test obsahuje 2 otázky z tohoto okruhu, každá za 1 bod."
+      },
+      {
+        "q": "Co okruh pokrývá?",
+        "a": "Povinnou výbavu, technické prohlídky, pneumatiky, osvětlení a další podmínky, za kterých smí vozidlo na silnici."
+      }
+    ]
+  },
+  {
+    "slug": "souvisejici-predpisy",
+    "category": "Související předpisy",
+    "title": "Předpisy související s provozem — testové otázky zdarma | Autoškola kvíz",
+    "description": "Předpisy o podmínkách provozu: {count} oficiálních otázek k teoretické zkoušce v autoškole — pojištění, řidičské oprávnění, bodový systém. Zdarma.",
+    "h1": "Související předpisy — testové otázky",
+    "intro": "{count} oficiálních otázek z předpisů souvisejících s provozem — povinné ručení, řidičské průkazy, bodový systém a přestupky.",
+    "faq": [
+      {
+        "q": "Kolik otázek ze souvisejících předpisů je u zkoušky?",
+        "a": "Zkušební test obsahuje 2 otázky z tohoto okruhu, každá za 2 body."
+      },
+      {
+        "q": "Patří sem bodový systém?",
+        "a": "Ano — body, přestupky, pojištění odpovědnosti i podmínky pro držení řidičského oprávnění."
+      }
+    ]
+  },
+  {
+    "slug": "zdravotnicka-priprava",
+    "category": "Zdravotnická příprava",
+    "title": "Zdravotnická příprava — první pomoc, test zdarma | Autoškola kvíz",
+    "description": "První pomoc k autoškole: {count} oficiálních otázek ze zdravotnické přípravy k teoretické zkoušce. Zdarma, bez reklam a bez registrace.",
+    "h1": "Zdravotnická příprava — otázky z první pomoci",
+    "intro": "Všech {count} oficiálních otázek z první pomoci — resuscitace, zástava krvácení, jednání na místě nehody. Nejkratší okruh zkoušky, přesto rozhoduje o bodech i o životech.",
+    "faq": [
+      {
+        "q": "Kolik otázek ze zdravovědy je u zkoušky?",
+        "a": "Zkušební test obsahuje 1 otázku ze zdravotnické přípravy za 1 bod."
+      },
+      {
+        "q": "Podle čeho jsou odpovědi správné?",
+        "a": "Podle oficiálního zkušebního banku Ministerstva dopravy, který vychází z platných postupů první pomoci."
+      }
+    ]
+  }
+]

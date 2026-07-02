@@ -6,7 +6,7 @@
   "description": "Practice trainer for the Czech driving-licence theory exam (autoškola).",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && node scripts/prerender.mjs",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",

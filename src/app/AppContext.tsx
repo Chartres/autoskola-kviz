@@ -7,6 +7,8 @@ import {
 } from 'react'
 import { reducer, initialState, type AppState, type Action } from './store'
 import { loadProgress, saveProgress } from '@/domain/storage'
+import { topicFromPath } from '@/lib/topics'
+import { makeRng, timeSeed } from '@/domain/rng'
 import { useAuth } from '@/auth/AuthContext'
 import { supabaseStore } from '@/auth/supabaseStore'
 import { syncProgress } from '@/auth/sync'
@@ -26,6 +28,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
   // Hydrate persisted progress once on mount.
   useEffect(() => {
     dispatch({ type: 'hydrate', progress: loadProgress() })
+    // SEO topic page (/okruh/<slug>/): start that okruh's practice directly.
+    const topic = topicFromPath(window.location.pathname)
+    if (topic) {
+      dispatch({ type: 'setCategories', categories: new Set([topic.category]) })
+      dispatch({ type: 'startPractice', rng: makeRng(timeSeed()) })
+      track('start_topic', { topic: topic.category, from: 'seo-page' })
+    }
     track('app_open')
   }, [])
 
