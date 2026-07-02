@@ -52,4 +52,5 @@ Official test: 25 questions from 7 okruhy, 30 minutes, point-weighted
 Current engine scores by count (ponytail: switch to point weighting with the
 real bank). Official questions: Ministerstvo dopravy ČR, etesty2.mdcr.cz.
 Many questions carry a traffic-sign/situation image — the schema's `image`
-field and `<img loading="lazy">` rendering are already in place.
+field is in place; the current question's image loads eagerly in a
+height-reserved box (no layout flash), the next one is prefetched.
