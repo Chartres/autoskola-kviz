@@ -25,10 +25,23 @@ export interface Question {
   q: string
   a: string
   b: string
-  c: string
+  /** Third option — some official questions have only two answers. */
+  c: string | null
   correct: Choice
-  /** Traffic-sign / situation picture (filename under public/img), or null. */
+  /** Question picture / video still (filename under public/media), or null. */
   image: string | null
+  /** Answer pictures ("which of these signs…"); the matching text is then empty. */
+  aImg?: string
+  bImg?: string
+  cImg?: string
+  /** Official point value (1, 2 or 4). */
+  points: number
+  /** eTesty question id (traceability back to the official bank). */
+  sourceId: number
+  /** Source video for animated situace questions (not played yet; `image` holds the still). */
+  videoUrl?: string
+  /** Licence groups a zásady question applies to (A / B / CD). */
+  groups?: string[]
 }
 
 export interface Category {
@@ -43,11 +56,15 @@ export interface ExamCompositionPart {
   group: ExamGroup
   categories: CategoryName[]
   count: number
+  pointsPerQuestion: number
 }
 
 export interface ExamConfig {
   totalQuestions: number
   composition: ExamCompositionPart[]
+  /** Maximum reachable points (50). */
+  maxPoints: number
+  /** Pass threshold in points (43 of 50). */
   passThreshold: number
   timeLimitMinutes: number
 }

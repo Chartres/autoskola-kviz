@@ -4,7 +4,7 @@ import { buildLesson, LESSON_SIZE } from './lesson'
 import { ALL_QUESTIONS } from './questions'
 import { emptyProgress, recordAnswer, MASTERY_STREAK } from './progress'
 
-// With the placeholder bank (7 questions) a full lesson is everything unmastered.
+// A lesson never exceeds the bank (relevant only for tiny test banks).
 const AVAILABLE = Math.min(LESSON_SIZE, ALL_QUESTIONS.length)
 
 describe('buildLesson', () => {
@@ -38,6 +38,7 @@ describe('buildLesson', () => {
     for (let i = 0; i < MASTERY_STREAK; i++) p = recordAnswer(p, 1, true, i)
     const lesson = buildLesson(p, makeRng(5))
     expect(lesson.some((q) => q.id === 1)).toBe(false)
-    expect(lesson).toHaveLength(AVAILABLE - 1)
+    // the bank is big enough that the lesson stays full-size regardless
+    expect(lesson).toHaveLength(AVAILABLE)
   })
 })

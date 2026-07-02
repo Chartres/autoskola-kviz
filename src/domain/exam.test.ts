@@ -1,7 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { makeRng } from './rng'
 import { buildExam, evaluateExam, EXAM } from './exam'
-import { ALL_QUESTIONS } from './questions'
 import {
   createSession,
   answerCurrent,
@@ -11,11 +10,21 @@ import {
 } from './session'
 
 describe('buildExam', () => {
-  it('draws from every okruh (placeholder bank: one question each)', () => {
+  it('draws 25 questions matching the official composition', () => {
     const exam = buildExam(makeRng(1))
-    // each composition part contributes what its pool has → all 7 questions
-    expect(exam).toHaveLength(ALL_QUESTIONS.length)
-    expect(new Set(exam.map((q) => q.cat)).size).toBe(7)
+    expect(exam).toHaveLength(25)
+    for (const part of EXAM.composition) {
+      const drawn = exam.filter((q) => part.categories.includes(q.cat))
+      expect(drawn, part.group).toHaveLength(part.count)
+      for (const q of drawn) {
+        expect(q.points, `${part.group} q${q.id}`).toBe(part.pointsPerQuestion)
+      }
+    }
+  })
+
+  it('is worth exactly 50 points', () => {
+    const exam = buildExam(makeRng(7))
+    expect(exam.reduce((n, q) => n + q.points, 0)).toBe(EXAM.maxPoints)
   })
 
   it('has no duplicate questions', () => {
@@ -31,7 +40,8 @@ describe('buildExam', () => {
 
   it('exposes the official exam format', () => {
     expect(EXAM.totalQuestions).toBe(25)
-    expect(EXAM.passThreshold).toBe(21)
+    expect(EXAM.maxPoints).toBe(50)
+    expect(EXAM.passThreshold).toBe(43)
     expect(EXAM.timeLimitMinutes).toBe(30)
   })
 })
@@ -41,7 +51,7 @@ function answerAll(exam: ReturnType<typeof buildExam>, correctCount: number) {
   let i = 0
   while (currentQuestion(s)) {
     const cur = currentQuestion(s)!
-    const wrong = (['a', 'b', 'c'] as const).find((o) => o !== cur.correct)!
+    const wrong = (['a', 'b'] as const).find((o) => o !== cur.correct) ?? 'b'
     s = answerCurrent(s, i < correctCount ? cur.correct : wrong)
     s = advance(s)
     i++
@@ -49,25 +59,33 @@ function answerAll(exam: ReturnType<typeof buildExam>, correctCount: number) {
   return s
 }
 
-describe('evaluateExam', () => {
-  it('scores correct answers and applies the pass threshold', () => {
+describe('evaluateExam (point-weighted)', () => {
+  it('a perfect exam scores 50/50 and passes', () => {
     const exam = buildExam(makeRng(3))
     const result = evaluateExam(answerAll(exam, exam.length))
-    expect(result.score).toBe(exam.length)
-    expect(result.total).toBe(exam.length)
-    expect(result.passThreshold).toBe(EXAM.passThreshold)
-    // 7 correct of a 21-question threshold: honest fail until the real bank lands
-    expect(result.passed).toBe(result.score >= result.passThreshold)
+    expect(result.score).toBe(50)
+    expect(result.total).toBe(50)
+    expect(result.passed).toBe(true)
+    expect(result.passThreshold).toBe(43)
   })
 
-  it('counts wrong answers as not scored', () => {
+  it('sums the points of correctly answered questions only', () => {
     const exam = buildExam(makeRng(3))
     const result = evaluateExam(answerAll(exam, 2))
-    expect(result.score).toBe(2)
+    const expected = exam.slice(0, 2).reduce((n, q) => n + q.points, 0)
+    expect(result.score).toBe(expected)
     expect(result.passed).toBe(false)
   })
 
-  it('breaks the score down by category', () => {
+  it('one wrong 4-point situace question can still pass; two cannot', () => {
+    // pass threshold 43 of 50: losing 7 points fails, losing 4 passes
+    const exam = buildExam(makeRng(9))
+    const all = evaluateExam(answerAll(exam, exam.length))
+    expect(all.score - 4).toBeGreaterThanOrEqual(43) // one situace wrong → 46
+    expect(all.score - 8).toBeLessThan(43) // two situace wrong → 42
+  })
+
+  it('breaks the score down by category (question counts)', () => {
     const exam = buildExam(makeRng(4))
     const result = evaluateExam(answerAll(exam, exam.length))
     const totalByCat = Object.values(result.byCategory).reduce(
@@ -75,5 +93,8 @@ describe('evaluateExam', () => {
       0,
     )
     expect(totalByCat).toBe(exam.length)
+    for (const part of EXAM.composition) {
+      expect(result.byCategory[part.categories[0]]?.total).toBe(part.count)
+    }
   })
 })

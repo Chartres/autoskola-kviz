@@ -29,7 +29,7 @@ test('mobile UX walkthrough with screenshots', async ({ page }) => {
   await page.screenshot({ path: 'test-results/m-answered-full.png', fullPage: true })
 
   await nextBtn.click()
-  // single-question placeholder category → straight to the summary
-  await expect(page.getByRole('button', { name: 'Zpět na rozcestník' })).toBeVisible()
-  await page.screenshot({ path: 'test-results/m-summary.png', fullPage: true })
+  // real bank: the next question loads
+  await expect(page.getByText(/02 \//)).toBeVisible()
+  await page.screenshot({ path: 'test-results/m-next-question.png', fullPage: true })
 })

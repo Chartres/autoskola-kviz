@@ -13,6 +13,8 @@ const Q: Question = {
   c: 'smí přecházet kdekoli, je-li přechod dále než 50 m.',
   correct: 'b',
   image: null,
+  points: 2,
+  sourceId: 1,
 }
 
 function setup(props: Partial<Parameters<typeof QuestionCard>[0]> = {}) {
@@ -95,6 +97,16 @@ describe('QuestionCard', () => {
     const { onToggleBookmark } = setup()
     await userEvent.click(screen.getByRole('button', { name: /zálož/i }))
     expect(onToggleBookmark).toHaveBeenCalled()
+  })
+
+  it('renders only two options when c is null and ignores the c key', async () => {
+    const { onAnswer } = setup({ question: { ...Q, c: null } })
+    expect(screen.queryByRole('button', { name: /kdekoli/ })).not.toBeInTheDocument()
+    await userEvent.keyboard('3')
+    await userEvent.keyboard('c')
+    expect(onAnswer).not.toHaveBeenCalled()
+    await userEvent.keyboard('2')
+    expect(onAnswer).toHaveBeenCalledWith('b')
   })
 
   it('renders the question image lazily with an alt text', () => {

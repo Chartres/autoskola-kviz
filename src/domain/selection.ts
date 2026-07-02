@@ -21,7 +21,7 @@ export function filterQuestions(opts: FilterOptions): Question[] {
     if (opts.categories && opts.categories.size > 0 && !opts.categories.has(q.cat))
       return false
     if (term) {
-      const hay = normalizeForSearch(q.q + ' ' + q.a + ' ' + q.b + ' ' + q.c)
+      const hay = normalizeForSearch(q.q + ' ' + q.a + ' ' + q.b + ' ' + (q.c ?? ''))
       if (!hay.includes(term)) return false
     }
     return true

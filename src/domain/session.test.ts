@@ -23,6 +23,8 @@ function q(id: number, correct: 'a' | 'b' | 'c'): Question {
     c: 'c',
     correct,
     image: null,
+    points: 2,
+    sourceId: id,
   }
 }
 

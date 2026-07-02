@@ -11,11 +11,12 @@ export function ResultsScreen() {
   const { session, examResult, mode } = state
   if (!session) return null
 
-  const total = session.questions.length
-  const correct = score(session)
-  const wrong = wrongAnswers(session)
   const isExam = mode === 'exam'
   const isLesson = mode === 'lesson'
+  // Exams score in points (official model, 50 max); practice counts questions.
+  const total = isExam && examResult ? examResult.total : session.questions.length
+  const correct = isExam && examResult ? examResult.score : score(session)
+  const wrong = wrongAnswers(session)
 
   useEffect(() => {
     const name = isExam ? 'exam_finish' : isLesson ? 'lesson_complete' : 'session_finish'
@@ -59,7 +60,7 @@ export function ResultsScreen() {
         </div>
         {isExam && examResult && (
           <p className="mt-2 text-sm text-sand-400">
-            Pro úspěch {examResult.passThreshold} z {total}.
+            Pro úspěch {examResult.passThreshold} z {total} bodů.
           </p>
         )}
       </div>

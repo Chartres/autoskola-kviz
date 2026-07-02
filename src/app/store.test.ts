@@ -3,6 +3,8 @@ import { reducer, initialState, type AppState } from './store'
 import { makeRng } from '@/domain/rng'
 import { emptyProgress, recordAnswer, statFor } from '@/domain/progress'
 import { currentQuestion, score } from '@/domain/session'
+import { byCategory } from '@/domain/questions'
+import { LESSON_SIZE } from '@/domain/lesson'
 
 function start(overrides: Partial<AppState> = {}): AppState {
   return { ...initialState(), ...overrides }
@@ -15,7 +17,7 @@ describe('app store', () => {
     s = reducer(s, { type: 'startPractice', rng: makeRng(1) })
     expect(s.view).toBe('quiz')
     expect(s.mode).toBe('practice')
-    expect(s.session?.questions.length).toBe(1)
+    expect(s.session?.questions.length).toBe(byCategory('Související předpisy').length)
     expect(s.session?.questions.every((q) => q.cat === 'Související předpisy')).toBe(true)
   })
 
@@ -46,7 +48,7 @@ describe('app store', () => {
     let s = start()
     s = reducer(s, { type: 'startExam', rng: makeRng(7), now: 0 })
     expect(s.mode).toBe('exam')
-    expect(s.session?.questions.length).toBe(7)
+    expect(s.session?.questions.length).toBe(25)
     expect(s.examEndsAt).toBe(30 * 60 * 1000)
     // answer everything correctly
     const total = s.session!.questions.length
@@ -56,9 +58,9 @@ describe('app store', () => {
       s = reducer(s, { type: 'next' })
     }
     expect(s.view).toBe('results')
-    expect(s.examResult?.score).toBe(total)
-    // placeholder bank is smaller than the pass threshold → honest fail
-    expect(s.examResult?.passed).toBe(total >= s.examResult!.passThreshold)
+    // all correct → full 50 points, a pass under the official model
+    expect(s.examResult?.score).toBe(50)
+    expect(s.examResult?.passed).toBe(true)
   })
 
   it('finishExam (time up) evaluates the partial session', () => {
@@ -89,7 +91,7 @@ describe('app store', () => {
     let s = start()
     s = reducer(s, { type: 'startLesson', rng: makeRng(2) })
     expect(s.mode).toBe('lesson')
-    expect(s.session?.questions.length).toBe(7)
+    expect(s.session?.questions.length).toBe(LESSON_SIZE)
     const total = s.session!.questions.length
     for (let i = 0; i < total; i++) {
       const cur = currentQuestion(s.session!)!

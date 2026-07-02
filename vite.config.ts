@@ -46,11 +46,11 @@ export default defineConfig({
         cleanupOutdatedCaches: true,
         runtimeCaching: [
           {
-            urlPattern: ({ url }) => url.pathname.startsWith('/img/'),
+            urlPattern: ({ url }) => url.pathname.startsWith('/media/'),
             handler: 'CacheFirst',
             options: {
               cacheName: 'question-images',
-              expiration: { maxEntries: 900, maxAgeSeconds: 60 * 60 * 24 * 60 },
+              expiration: { maxEntries: 1200, maxAgeSeconds: 60 * 60 * 24 * 60 },
               cacheableResponse: { statuses: [0, 200] },
             },
           },

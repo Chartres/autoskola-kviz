@@ -16,7 +16,11 @@ export interface QuestionCardProps {
   onToggleBookmark: () => void
 }
 
-const OPTIONS: Choice[] = ['a', 'b', 'c']
+const ALL_OPTIONS: Choice[] = ['a', 'b', 'c']
+/** Some official questions have only two answers (c is null). */
+function optionsFor(question: Question): Choice[] {
+  return ALL_OPTIONS.filter((o) => question[o] !== null)
+}
 const KEY_TO_CHOICE: Record<string, Choice> = {
   '1': 'a',
   '2': 'b',
@@ -64,15 +68,17 @@ export function QuestionCard({
 }: QuestionCardProps) {
   const answered = chosen !== undefined
   const isCorrect = answered && chosen === question.correct
+  const options = optionsFor(question)
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if (e.target instanceof HTMLInputElement) return
       if (e.metaKey || e.ctrlKey || e.altKey) return
       const key = e.key.length === 1 ? e.key.toLowerCase() : e.key
-      if (!answered && KEY_TO_CHOICE[key]) {
+      const choice = KEY_TO_CHOICE[key]
+      if (!answered && choice && options.includes(choice)) {
         e.preventDefault()
-        onAnswer(KEY_TO_CHOICE[key])
+        onAnswer(choice)
       } else if (answered && (e.key === 'Enter' || e.key === ' ')) {
         e.preventDefault()
         onNext()
@@ -80,7 +86,7 @@ export function QuestionCard({
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [answered, onAnswer, onNext])
+  }, [answered, onAnswer, onNext, options])
 
   return (
     <article className="mx-auto w-full max-w-2xl">
@@ -121,7 +127,7 @@ export function QuestionCard({
       </h2>
 
       <div role="group" aria-label="Možnosti odpovědi" className="flex flex-col gap-3">
-        {OPTIONS.map((opt) => {
+        {options.map((opt) => {
           const state = optionState(opt, question, chosen, reveal)
           return (
             <button
@@ -136,6 +142,14 @@ export function QuestionCard({
                 {opt}
               </span>
               <span className="min-w-0 flex-1 leading-relaxed">
+                {question[`${opt}Img`] && (
+                  <img
+                    src={imageUrl(question[`${opt}Img`]!)}
+                    alt={`Možnost ${opt.toUpperCase()}`}
+                    loading="lazy"
+                    className="max-h-24 w-auto rounded-[2px] bg-white p-1"
+                  />
+                )}
                 {question[opt]}
                 {reveal && state === 'correct' && (
                   <span className="ml-2 whitespace-nowrap text-xs font-semibold text-moss-400">
@@ -150,7 +164,7 @@ export function QuestionCard({
 
       {!answered && (
         <p className="mt-3 font-mono text-xs text-sand-600">
-          Klávesy A · B · C nebo 1 · 2 · 3
+          {options.length === 3 ? 'Klávesy A · B · C nebo 1 · 2 · 3' : 'Klávesy A · B nebo 1 · 2'}
         </p>
       )}
 

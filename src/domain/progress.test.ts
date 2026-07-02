@@ -19,7 +19,7 @@ import {
 } from './progress'
 
 function q(id: number, cat: Question['cat'] = 'Pravidla provozu'): Question {
-  return { id, cat, q: `q${id}`, a: 'a', b: 'b', c: 'c', correct: 'a', image: null }
+  return { id, cat, q: `q${id}`, a: 'a', b: 'b', c: 'c', correct: 'a', image: null, points: 2, sourceId: id }
 }
 
 describe('recordAnswer & mastery', () => {
