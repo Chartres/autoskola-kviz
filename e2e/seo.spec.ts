@@ -14,6 +14,14 @@ test('topic page /okruh/dopravni-znacky/ serves unique meta and starts the topic
     'href',
     'https://autoskola.dravec.org/okruh/dopravni-znacky/',
   )
+  // Social cards carry the topic-specific title/description/url, not the root's.
+  await expect(page.locator('meta[property="og:title"]')).toHaveAttribute('content', /Dopravní značky/)
+  await expect(page.locator('meta[property="og:description"]')).toHaveAttribute('content', /značky/)
+  await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
+    'content',
+    'https://autoskola.dravec.org/okruh/dopravni-znacky/',
+  )
+  await expect(page.locator('meta[name="twitter:title"]')).toHaveAttribute('content', /Dopravní značky/)
   // The app takes over and starts sign practice (222 questions).
   await expect(page.getByText('01 / 222')).toBeVisible()
   await page.screenshot({ path: 'test-results/seo-topic-page.png' })

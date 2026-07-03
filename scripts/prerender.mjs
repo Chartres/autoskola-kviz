@@ -57,6 +57,11 @@ for (const t of topics) {
       /<link rel="canonical" href="[^"]*" \/>/,
       `<link rel="canonical" href="${url}" />`,
     )
+    .replace(/(<meta\s+property="og:url"\s+content=")[^"]*(")/, `$1${url}$2`)
+    .replace(/(<meta\s+property="og:title"\s+content=")[^"]*(")/, `$1${esc(fill(t.title))}$2`)
+    .replace(/(<meta\s+property="og:description"\s+content=")[^"]*(")/, `$1${esc(fill(t.description))}$2`)
+    .replace(/(<meta\s+name="twitter:title"\s+content=")[^"]*(")/, `$1${esc(fill(t.title))}$2`)
+    .replace(/(<meta\s+name="twitter:description"\s+content=")[^"]*(")/, `$1${esc(fill(t.description))}$2`)
     .replace(/<!--seo-->[\s\S]*<!--\/seo-->/, `<!--seo-->${body}<!--/seo-->`)
   mkdirSync(`${root}dist/okruh/${t.slug}`, { recursive: true })
   writeFileSync(`${root}dist/okruh/${t.slug}/index.html`, html)
