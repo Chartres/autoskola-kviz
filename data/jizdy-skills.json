@@ -1,0 +1,25 @@
+{
+  "_provisional": "PROVISIONAL — common Czech autoškola practice skills compiled from standard autoškola curricula. Awaits Pavol's confirmation against Vyhláška MD 167/2002 Sb. (or its current successor) before Stage 3 launch. This file is a data file — list and requiredReps can be updated without code changes.",
+  "skills": [
+    { "id": "kontrola-vozidla",     "label": "Kontrola vozidla před jízdou",          "requiredReps": 2 },
+    { "id": "rozjezd",              "label": "Rozjezd a zastavení",                    "requiredReps": 3 },
+    { "id": "rozjezd-kopec",        "label": "Rozjezd do kopce",                       "requiredReps": 3 },
+    { "id": "razeni",               "label": "Řazení rychlostních stupňů",              "requiredReps": 3 },
+    { "id": "otaceni",              "label": "Otáčení (3bodový obrat)",                 "requiredReps": 3 },
+    { "id": "couvani-primo",        "label": "Couvání přímo",                           "requiredReps": 3 },
+    { "id": "couvani-odboceni",     "label": "Couvání s odbočením",                     "requiredReps": 3 },
+    { "id": "parkovani-podélné",    "label": "Parkování podélné",                       "requiredReps": 3 },
+    { "id": "parkovani-kolmé",      "label": "Parkování kolmé / šikmé",                 "requiredReps": 3 },
+    { "id": "krizovatkaz-prednost", "label": "Křižovatka — přednost v jízdě",           "requiredReps": 4 },
+    { "id": "krizovatkaz-svetly",   "label": "Křižovatka — řízená světly",              "requiredReps": 3 },
+    { "id": "kruhovy-objezd",       "label": "Kruhový objezd",                          "requiredReps": 3 },
+    { "id": "predjizd",             "label": "Předjíždění",                              "requiredReps": 3 },
+    { "id": "zmena-pruhu",          "label": "Změna jízdního pruhu",                    "requiredReps": 3 },
+    { "id": "jizda-obec",           "label": "Jízda v obci",                            "requiredReps": 4 },
+    { "id": "jizda-mimo-obec",      "label": "Jízda mimo obec (silnice I/II/III. tř.)", "requiredReps": 3 },
+    { "id": "dalnice",              "label": "Jízda po dálnici",                         "requiredReps": 2 },
+    { "id": "nouzove-brzdeni",      "label": "Nouzové brzdění",                          "requiredReps": 3 },
+    { "id": "snizena-viditelnost",  "label": "Jízda za snížené viditelnosti",            "requiredReps": 2 },
+    { "id": "jizda-za-mokra",       "label": "Jízda za mokra / nepříznivých podmínek",  "requiredReps": 2 }
+  ]
+}

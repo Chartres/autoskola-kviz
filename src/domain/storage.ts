@@ -4,6 +4,7 @@ import {
   PROGRESS_VERSION,
   type ProgressData,
 } from './progress'
+import { emptyJizdyState, type JizdyState } from './jizdy'
 
 export const STORAGE_KEY = 'autoskola-kviz:progress:v1'
 
@@ -40,6 +41,32 @@ export function saveProgress(data: ProgressData): void {
   if (!s) return
   try {
     s.setItem(STORAGE_KEY, JSON.stringify(data))
+  } catch {
+    // private mode / quota exceeded — degrade gracefully to in-memory only
+  }
+}
+
+const JIZDY_KEY = 'jizdy-v1'
+
+export function loadJizdy(): JizdyState {
+  const s = storage()
+  if (!s) return emptyJizdyState()
+  try {
+    const raw = s.getItem(JIZDY_KEY)
+    if (!raw) return emptyJizdyState()
+    const parsed = JSON.parse(raw) as Partial<JizdyState>
+    if (parsed.version !== 1) return emptyJizdyState()
+    return { version: 1, lessons: parsed.lessons ?? [] }
+  } catch {
+    return emptyJizdyState()
+  }
+}
+
+export function saveJizdy(state: JizdyState): void {
+  const s = storage()
+  if (!s) return
+  try {
+    s.setItem(JIZDY_KEY, JSON.stringify(state))
   } catch {
     // private mode / quota exceeded — degrade gracefully to in-memory only
   }
