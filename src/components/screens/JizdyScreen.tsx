@@ -3,6 +3,7 @@ import { useApp } from '@/app/AppContext'
 import { skillCoverage, isReady } from '@/domain/jizdy'
 import type { LessonRecord } from '@/domain/jizdy'
 import rawSkillsData from '@data/jizdy-skills.json'
+import { track } from '@/analytics'
 
 // ponytail: provisional wrapper per referee ruling — import .skills only
 const SKILLS = rawSkillsData.skills
@@ -60,6 +61,7 @@ export function JizdyScreen() {
       skills: Array.from(selected),
     }
     dispatch({ type: 'logLesson', record })
+    track('key_action', { feature: 'jizdy' })
     setDate(todayDate())
     setDuration('')
     setSelected(new Set())

@@ -80,3 +80,25 @@ test('cross-promo: home shows jizdy CTA at 70% theory mastery', async ({ page })
   await page.getByTestId('jizdy-cta').click()
   await expect(page.getByRole('heading', { name: 'Jízdy' })).toBeVisible()
 })
+
+// Nav-clearance guard: JizdyScreen content must not be occluded by the bottom nav.
+// Mirrors the home-screen guard in mobile-ux.spec.ts (same pattern, same assertion).
+test.describe('jizdy mobile layout', () => {
+  test.use({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true })
+
+  test('jizdy content clears the bottom nav at scroll end', async ({ page }) => {
+    await page.goto('/')
+    await page.getByRole('button', { name: 'Jízdy', exact: true }).click()
+    await expect(page.getByRole('heading', { name: 'Jízdy' })).toBeVisible()
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight))
+    const { lastBottom, navTop } = await page.evaluate(() => {
+      const cards = [...document.querySelectorAll('main > div > *')]
+      const nav = document.querySelector('nav')!
+      return {
+        lastBottom: cards[cards.length - 1].getBoundingClientRect().bottom,
+        navTop: nav.getBoundingClientRect().top,
+      }
+    })
+    expect(lastBottom).toBeLessThanOrEqual(navTop)
+  })
+})

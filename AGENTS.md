@@ -24,8 +24,9 @@ push + PR). Block only on these. Playwright is a local pre-push check — the pe
 write committed screenshots to `e2e/shots/` for visual review (Standard: persona testing is visual).
 
 ## Run / verify a change in the real app
-`npm run dev` → http://localhost:5173. Primary journey to eyeball: home → okruh tile →
-answer → immediate feedback → summary. The "Dopravní značky" question has an image.
+`npm run dev` → http://localhost:5173. Primary journeys to eyeball:
+- **Theory**: home → okruh tile → answer → immediate feedback → summary. "Dopravní značky" has an image.
+- **Jízdy**: Jízdy tab → log-lesson form (date + duration + skill chips) → submit → "Jízda zaznamenána" + checklist updates → navigate away + back → state persists. Cross-promo CTA on HomeScreen when theory mastery ≥ 70%.
 
 ## Release (the finish line — produces a storefront link)
 - **Web** → GitHub Pages at `autoskola.dravec.org`. The `deploy` job in `.github/workflows/ci.yml`
