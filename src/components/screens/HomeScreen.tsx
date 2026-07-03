@@ -17,6 +17,7 @@ export function HomeScreen() {
   )
   const streak = state.progress.streak.current
   const rng = () => makeRng(timeSeed())
+  const showJizdyCta = sum.total > 0 && sum.mastered / sum.total >= 0.7
 
   // Free topic choice from day 1 — no locked path (Montessori).
   function startTopic(name: CategoryName) {
@@ -114,6 +115,23 @@ export function HomeScreen() {
           })}
         </div>
       </section>
+
+      {/* Cross-promo: nudge strong theory learners to start practical lessons */}
+      {showJizdyCta && (
+        <button
+          type="button"
+          data-testid="jizdy-cta"
+          onClick={() => dispatch({ type: 'navigate', view: 'jizdy' })}
+          className="mb-3 block w-full rounded-card border border-terra-500/50 bg-terra-500/10 p-5 text-left transition-colors hover:bg-terra-500/20"
+        >
+          <div className="font-mono text-xs uppercase tracking-[0.2em] text-terra-400">
+            Praktická jízda
+          </div>
+          <div className="mt-1 font-display text-lg font-bold text-sand-50">
+            Teorie zvládnutá? Přejdi na jízdy →
+          </div>
+        </button>
+      )}
 
       {/* Compact progress — details live under Postup */}
       <button

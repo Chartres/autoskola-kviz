@@ -1,5 +1,6 @@
 import type { CategoryName, Choice } from '@/domain/types'
 import type { Rng } from '@/domain/rng'
+import { emptyJizdyState, logLesson as jizdyLogLesson, type JizdyState, type LessonRecord } from '@/domain/jizdy'
 import {
   createSession,
   answerCurrent,
@@ -25,11 +26,11 @@ import { buildLesson } from '@/domain/lesson'
 import { shuffle } from '@/domain/rng'
 
 // Bottom-tab destinations (persistent nav) + focused full-screen flows.
-export type TabView = 'home' | 'practice' | 'stats' | 'guide'
+export type TabView = 'home' | 'practice' | 'stats' | 'guide' | 'jizdy'
 export type View = TabView | 'quiz' | 'exam' | 'results'
 export type Mode = 'practice' | 'review' | 'bookmarks' | 'exam' | 'lesson'
 
-export const TAB_VIEWS: TabView[] = ['home', 'practice', 'stats', 'guide']
+export const TAB_VIEWS: TabView[] = ['home', 'practice', 'stats', 'guide', 'jizdy']
 export function isTabView(v: View): v is TabView {
   return (TAB_VIEWS as string[]).includes(v)
 }
@@ -43,6 +44,7 @@ export interface AppState {
   progress: ProgressData
   selectedCategories: Set<CategoryName>
   search: string
+  jizdyState: JizdyState
 }
 
 export function initialState(): AppState {
@@ -55,6 +57,7 @@ export function initialState(): AppState {
     progress: emptyProgress(),
     selectedCategories: new Set(),
     search: '',
+    jizdyState: emptyJizdyState(),
   }
 }
 
@@ -73,6 +76,8 @@ export type Action =
   | { type: 'toggleBookmark'; id: number }
   | { type: 'goMenu' }
   | { type: 'navigate'; view: TabView }
+  | { type: 'logLesson'; record: LessonRecord }
+  | { type: 'hydrateJizdy'; state: JizdyState }
 
 function begin(state: AppState, mode: Mode, questions: SessionState): AppState {
   return {
@@ -186,6 +191,12 @@ export function reducer(state: AppState, action: Action): AppState {
 
     case 'navigate':
       return { ...state, view: action.view }
+
+    case 'hydrateJizdy':
+      return { ...state, jizdyState: action.state }
+
+    case 'logLesson':
+      return { ...state, jizdyState: jizdyLogLesson(state.jizdyState, action.record) }
 
     default:
       return state

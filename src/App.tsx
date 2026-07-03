@@ -4,6 +4,7 @@ import { AuthProvider } from '@/auth/AuthContext'
 import { AuthPanel } from '@/components/AuthPanel'
 import { BottomNav } from '@/components/BottomNav'
 import { HomeScreen } from '@/components/screens/HomeScreen'
+import { JizdyScreen } from '@/components/screens/JizdyScreen'
 import { PracticeScreen } from '@/components/screens/PracticeScreen'
 import { QuizScreen } from '@/components/screens/QuizScreen'
 import { ResultsScreen } from '@/components/screens/ResultsScreen'
@@ -19,6 +20,8 @@ function CurrentView() {
       return <StatsScreen />
     case 'guide':
       return <StudyScreen />
+    case 'jizdy':
+      return <JizdyScreen />
     case 'quiz':
     case 'exam':
       return <QuizScreen />

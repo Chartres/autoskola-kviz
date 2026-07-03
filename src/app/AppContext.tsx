@@ -6,7 +6,7 @@ import {
   type ReactNode,
 } from 'react'
 import { reducer, initialState, type AppState, type Action } from './store'
-import { loadProgress, saveProgress } from '@/domain/storage'
+import { loadProgress, saveProgress, loadJizdy, saveJizdy } from '@/domain/storage'
 import { topicFromPath } from '@/lib/topics'
 import { makeRng, timeSeed } from '@/domain/rng'
 import { useAuth } from '@/auth/AuthContext'
@@ -28,6 +28,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   // Hydrate persisted progress once on mount.
   useEffect(() => {
     dispatch({ type: 'hydrate', progress: loadProgress() })
+    dispatch({ type: 'hydrateJizdy', state: loadJizdy() })
     // SEO topic page (/okruh/<slug>/): start that okruh's practice directly.
     const topic = topicFromPath(window.location.pathname)
     if (topic) {
@@ -42,6 +43,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     saveProgress(state.progress)
   }, [state.progress])
+
+  // Persist jizdy state locally whenever it changes.
+  useEffect(() => {
+    saveJizdy(state.jizdyState)
+  }, [state.jizdyState])
 
   // On sign-in: reconcile local progress with the cloud and adopt the merge.
   useEffect(() => {

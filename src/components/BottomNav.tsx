@@ -17,6 +17,13 @@ const ICONS: Record<TabView, ReactNode> = {
   guide: (
     <path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM4 5v14M9 7h6M9 11h6" />
   ),
+  jizdy: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <circle cx="12" cy="12" r="2.5" />
+      <path d="M12 9.5V3M9.8 13.3 4.2 16.5M14.2 13.3 19.8 16.5" />
+    </>
+  ),
 }
 
 const LABELS: Record<TabView, string> = {
@@ -24,6 +31,7 @@ const LABELS: Record<TabView, string> = {
   practice: 'Procvičovat',
   stats: 'Postup',
   guide: 'Průvodce',
+  jizdy: 'Jízdy',
 }
 
 export function BottomNav() {
