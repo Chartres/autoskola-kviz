@@ -6,21 +6,21 @@ import { test, expect } from '@playwright/test'
 test('topic journey: home tile → answer → feedback → summary', async ({ page }) => {
   await page.goto('/')
   await expect(page.getByRole('heading', { name: 'Autoškola kvíz' })).toBeVisible()
-  await page.screenshot({ path: 'test-results/home.png', fullPage: true })
+  await page.screenshot({ path: 'e2e/shots/home.png', fullPage: true })
 
   // Free topic choice: the "Dopravní značky" tile (222 sign questions).
   await page.getByRole('button', { name: /Dopravní značky/ }).click()
   await expect(page.getByText('01 / 222')).toBeVisible()
-  await page.screenshot({ path: 'test-results/question-image.png', fullPage: true })
+  await page.screenshot({ path: 'e2e/shots/question-image.png', fullPage: true })
 
   await page.locator('button[data-state="idle"]').first().click()
   await expect(page.locator('button[data-state="correct"]')).toBeVisible()
-  await page.screenshot({ path: 'test-results/feedback.png', fullPage: true })
+  await page.screenshot({ path: 'e2e/shots/feedback.png', fullPage: true })
 
   // real bank: 222 sign questions → the journey continues to the next one
   await page.getByRole('button', { name: /Další/ }).click()
   await expect(page.getByText('02 / 222')).toBeVisible()
-  await page.screenshot({ path: 'test-results/summary.png', fullPage: true })
+  await page.screenshot({ path: 'e2e/shots/summary.png', fullPage: true })
 })
 
 test('daily set from home: finishable, with completion + streak', async ({ page }) => {

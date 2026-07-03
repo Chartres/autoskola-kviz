@@ -24,7 +24,7 @@ test('topic page /okruh/dopravni-znacky/ serves unique meta and starts the topic
   await expect(page.locator('meta[name="twitter:title"]')).toHaveAttribute('content', /Dopravní značky/)
   // The app takes over and starts sign practice (222 questions).
   await expect(page.getByText('01 / 222')).toBeVisible()
-  await page.screenshot({ path: 'test-results/seo-topic-page.png' })
+  await page.screenshot({ path: 'e2e/shots/seo-topic-page.png' })
 })
 
 test('landing page has honest title, description and canonical', async ({ page }) => {

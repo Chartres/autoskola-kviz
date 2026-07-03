@@ -15,20 +15,20 @@ test('home content clears the bottom nav at scroll end', async ({ page }) => {
     }
   })
   expect(lastBottom).toBeLessThanOrEqual(navTop)
-  await page.screenshot({ path: 'test-results/m-home-bottom.png' })
+  await page.screenshot({ path: 'e2e/shots/m-home-bottom.png' })
 })
 
 test('mobile UX walkthrough with screenshots', async ({ page }) => {
   await page.goto('/')
-  await page.screenshot({ path: 'test-results/m-menu.png', fullPage: true })
+  await page.screenshot({ path: 'e2e/shots/m-menu.png', fullPage: true })
 
   // Practise the rules section (longest questions) to stress the layout.
   await page.getByRole('button', { name: 'Procvičovat' }).click()
-  await page.screenshot({ path: 'test-results/m-practice.png', fullPage: true })
+  await page.screenshot({ path: 'e2e/shots/m-practice.png', fullPage: true })
   await page.getByRole('button', { name: /Pravidla provozu/ }).click()
   await page.getByRole('button', { name: 'Spustit procvičování' }).click()
   await expect(page.getByText(/01 \//)).toBeVisible()
-  await page.screenshot({ path: 'test-results/m-question.png', fullPage: true })
+  await page.screenshot({ path: 'e2e/shots/m-question.png', fullPage: true })
 
   // Answer the first option (locks + reveals verdict).
   await page.locator('button[data-state="idle"]').first().click()
@@ -38,13 +38,13 @@ test('mobile UX walkthrough with screenshots', async ({ page }) => {
   await page.evaluate(() => window.scrollTo(0, 0))
   const nextBtn = page.getByRole('button', { name: /Další|Dokončit/ })
   await expect(nextBtn).toBeInViewport()
-  await page.screenshot({ path: 'test-results/m-answered-top.png' })
+  await page.screenshot({ path: 'e2e/shots/m-answered-top.png' })
 
   // Full page too, to inspect the reflow of the correct-answer label.
-  await page.screenshot({ path: 'test-results/m-answered-full.png', fullPage: true })
+  await page.screenshot({ path: 'e2e/shots/m-answered-full.png', fullPage: true })
 
   await nextBtn.click()
   // real bank: the next question loads
   await expect(page.getByText(/02 \//)).toBeVisible()
-  await page.screenshot({ path: 'test-results/m-next-question.png', fullPage: true })
+  await page.screenshot({ path: 'e2e/shots/m-next-question.png', fullPage: true })
 })
