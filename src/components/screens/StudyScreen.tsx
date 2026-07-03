@@ -76,6 +76,19 @@ export function StudyScreen() {
           </p>
         </section>
       ))}
+
+      <footer className="mt-10 border-t border-sand-800 pt-4 text-sm text-sand-500">
+        Autoškola kvíz je zdarma a bez reklam.{' '}
+        <a
+          href="https://github.com/sponsors/Chartres"
+          target="_blank"
+          rel="noreferrer"
+          className="text-terra-400 underline"
+        >
+          Podpořit
+        </a>{' '}
+        vývoj.
+      </footer>
     </div>
   )
 }
