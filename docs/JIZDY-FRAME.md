@@ -43,8 +43,10 @@ pop-up.
 
 ## Kill criteria
 
-Statement: Fewer than 20 lessons logged per week (aggregate, all users) by week 4 post-launch,
-AND fewer than 30% of Jízdy users log ≥3 lessons → remove the tab, archive the feature.
+Statement: <15% of weekly active users open Jízdy, OR <30% of Jízdy triers log a 2nd lesson,
+by 4 weeks post-launch → remove the tab, archive the feature.
+(Rates are among-exposed: denominator is weekly active users for the first criterion,
+Jízdy openers for the second. Absolute volume alone is not the gate.)
 Deadline: 2026-09-28 (4 weeks after target launch 2026-08-31)
 Locked: true
 
