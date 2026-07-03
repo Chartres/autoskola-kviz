@@ -16,19 +16,22 @@ npm run build
 ## Test (TDD required; persona-journey test per primary journey)
 ```bash
 npm run typecheck
-npm test
-npx playwright test   # e2e journeys (Chromium)
+npm test              # Vitest (unit + RTL)
+npx playwright test   # e2e journeys (Chromium); run locally, not in CI
 ```
-Gate: typecheck · test · build must pass (CI: `.github/workflows/ci.yml`). Block only on these.
+Gate: typecheck · test · build must pass (CI: `.github/workflows/ci.yml` runs these three on
+push + PR). Block only on these. Playwright is a local pre-push check — the persona journeys
+write committed screenshots to `e2e/shots/` for visual review (Standard: persona testing is visual).
 
 ## Run / verify a change in the real app
 `npm run dev` → http://localhost:5173. Primary journey to eyeball: home → okruh tile →
 answer → immediate feedback → summary. The "Dopravní značky" question has an image.
 
 ## Release (the finish line — produces a storefront link)
-- **Web** → GitHub Pages at `autoskola.dravec.org` (re-add the Pages deploy job to
-  `.github/workflows/ci.yml` + repo secrets); platform env: `VITE_SUPABASE_URL`,
-  `VITE_SUPABASE_PUBLISHABLE_KEY`. App works fully without them (local progress only).
+- **Web** → GitHub Pages at `autoskola.dravec.org`. The `deploy` job in `.github/workflows/ci.yml`
+  auto-deploys on every push to `main` (after the test/build gate). Build reads platform env
+  `VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY` from repo secrets; the app works fully
+  without them (local progress only).
 Adoption is read from web KPIs — no extra telemetry needed.
 
 ## Analytics (Common Platform)
