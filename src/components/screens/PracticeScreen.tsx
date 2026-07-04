@@ -5,6 +5,7 @@ import { missedIds } from '@/domain/progress'
 import { filterQuestions } from '@/domain/selection'
 import { timeSeed, makeRng } from '@/domain/rng'
 import { track } from '@/analytics'
+import { AuthPanel } from '@/components/AuthPanel'
 import type { CategoryName } from '@/domain/types'
 
 export function PracticeScreen() {
@@ -37,9 +38,12 @@ export function PracticeScreen() {
 
   return (
     <div className="mx-auto w-full max-w-xl px-4 pt-2">
-      <h1 className="mb-4 font-display text-2xl font-bold tracking-tight text-sand-50">
-        Procvičovat
-      </h1>
+      <div className="mb-4 flex items-center justify-between gap-2">
+        <h1 className="font-display text-2xl font-bold tracking-tight text-sand-50">
+          Procvičovat
+        </h1>
+        <AuthPanel />
+      </div>
 
       {/* MODE 1 — exam simulation */}
       <button

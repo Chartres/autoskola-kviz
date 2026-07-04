@@ -1,7 +1,6 @@
 import { AppProvider, useApp } from '@/app/AppContext'
 import { isTabView } from '@/app/store'
 import { AuthProvider } from '@/auth/AuthContext'
-import { AuthPanel } from '@/components/AuthPanel'
 import { BottomNav } from '@/components/BottomNav'
 import { HomeScreen } from '@/components/screens/HomeScreen'
 import { JizdyScreen } from '@/components/screens/JizdyScreen'
@@ -45,11 +44,6 @@ function Shell() {
         paddingRight: 'env(safe-area-inset-right)',
       }}
     >
-      {tabbed && (
-        <header className="flex items-center justify-end px-4 py-2">
-          <AuthPanel />
-        </header>
-      )}
       {/* pb-8 keeps a breathing gap between the last card and the nav; the nav
           itself is sticky (in flow), so content can never end up beneath it. */}
       <main className={`flex-1 ${tabbed ? 'pb-8' : ''}`}>

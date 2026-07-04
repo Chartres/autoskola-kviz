@@ -4,6 +4,7 @@ import { skillCoverage, isReady } from '@/domain/jizdy'
 import type { LessonRecord } from '@/domain/jizdy'
 import rawSkillsData from '@data/jizdy-skills.json'
 import { track } from '@/analytics'
+import { AuthPanel } from '@/components/AuthPanel'
 
 // ponytail: provisional wrapper per referee ruling — import .skills only
 const SKILLS = rawSkillsData.skills
@@ -72,9 +73,12 @@ export function JizdyScreen() {
   return (
     <div className="mx-auto w-full max-w-xl px-4 pt-2">
       <header className="mb-4">
-        <h1 className="font-display text-2xl font-bold tracking-tight text-sand-50">
-          Jízdy
-        </h1>
+        <div className="flex items-center justify-between gap-2">
+          <h1 className="font-display text-2xl font-bold tracking-tight text-sand-50">
+            Jízdy
+          </h1>
+          <AuthPanel />
+        </div>
         <p className="mt-1 font-mono text-sm text-sand-400">
           Připraveno:{' '}
           <span className="text-terra-400">

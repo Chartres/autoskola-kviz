@@ -1,13 +1,17 @@
 import { META } from '@/domain/questions'
 import { LESSONS } from '@/content/studyGuide'
 import { imageUrl } from '@/lib/assets'
+import { AuthPanel } from '@/components/AuthPanel'
 
 export function StudyScreen() {
   return (
     <div className="mx-auto w-full max-w-3xl px-4 pt-2">
-      <h1 className="font-display text-2xl font-bold tracking-tight text-sand-50">
-        Studijní průvodce
-      </h1>
+      <div className="flex items-center justify-between gap-2">
+        <h1 className="font-display text-2xl font-bold tracking-tight text-sand-50">
+          Studijní průvodce
+        </h1>
+        <AuthPanel />
+      </div>
       <p className="mt-1 text-sm text-sand-400">
         Lekce postupně pokryjí látku všech okruhů zkoušky. Oficiální otázky:{' '}
         <a
