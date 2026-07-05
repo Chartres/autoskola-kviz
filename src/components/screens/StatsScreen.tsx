@@ -2,6 +2,7 @@ import { useMemo } from 'react'
 import { useApp } from '@/app/AppContext'
 import { ALL_QUESTIONS, META } from '@/domain/questions'
 import { summary } from '@/domain/progress'
+import { AuthPanel } from '@/components/AuthPanel'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import { InfoDot } from '@/components/ui/InfoDot'
 
@@ -32,9 +33,12 @@ export function StatsScreen() {
 
   return (
     <div className="mx-auto w-full max-w-2xl px-4 pt-2">
-      <h1 className="mb-5 font-display text-2xl font-bold tracking-tight text-sand-50">
-        Postup
-      </h1>
+      <div className="mb-5 flex items-center justify-between gap-2">
+        <h1 className="font-display text-2xl font-bold tracking-tight text-sand-50">
+          Postup
+        </h1>
+        <AuthPanel />
+      </div>
 
       <div className="mb-8 grid grid-cols-3 gap-4 rounded-card border border-sand-700 bg-sand-800/40 p-5 text-center">
         {stats.map((s) => (

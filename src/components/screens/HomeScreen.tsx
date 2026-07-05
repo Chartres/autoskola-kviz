@@ -5,6 +5,7 @@ import { summary, missedIds } from '@/domain/progress'
 import { LESSON_SIZE } from '@/domain/lesson'
 import { timeSeed, makeRng } from '@/domain/rng'
 import { track } from '@/analytics'
+import { AuthPanel } from '@/components/AuthPanel'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import type { CategoryName } from '@/domain/types'
 
@@ -28,20 +29,23 @@ export function HomeScreen() {
 
   return (
     <div className="mx-auto w-full max-w-xl px-4 pt-2">
-      <header className="mb-4 flex items-center justify-between">
+      <header className="mb-4 flex flex-wrap items-center justify-between gap-x-2 gap-y-2">
         <h1 className="font-display text-2xl font-bold tracking-tight text-sand-50">
           Autoškola kvíz
         </h1>
-        <div className="flex items-center gap-2 rounded-card border border-sand-700 px-3 py-1.5">
-          <span aria-hidden className="text-terra-400">
-            ▲
-          </span>
-          <span className="font-mono text-lg font-semibold tabular-nums text-terra-300">
-            {streak}
-          </span>
-          <span className="font-mono text-[0.65rem] uppercase tracking-wide text-sand-500">
-            {streak === 1 ? 'den' : 'dní'} v řadě
-          </span>
+        <div className="ml-auto flex items-center gap-2">
+          <div className="flex items-center gap-2 rounded-card border border-sand-700 px-3 py-1.5">
+            <span aria-hidden className="text-terra-400">
+              ▲
+            </span>
+            <span className="font-mono text-lg font-semibold tabular-nums text-terra-300">
+              {streak}
+            </span>
+            <span className="font-mono text-[0.65rem] uppercase tracking-wide text-sand-500">
+              {streak === 1 ? 'den' : 'dní'} v řadě
+            </span>
+          </div>
+          <AuthPanel />
         </div>
       </header>
 
