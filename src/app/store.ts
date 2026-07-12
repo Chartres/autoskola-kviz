@@ -162,8 +162,9 @@ export function reducer(state: AppState, action: Action): AppState {
           session,
           view: 'results',
           examResult: result,
+          // examResult doubles as the "already recorded" flag (reset by begin/goMenu).
           examHistory:
-            state.mode === 'exam' && result
+            state.mode === 'exam' && result && !state.examResult
               ? recordExam(state.examHistory, result, action.now ?? Date.now())
               : state.examHistory,
           progress:
@@ -176,7 +177,8 @@ export function reducer(state: AppState, action: Action): AppState {
     }
 
     case 'finishExam': {
-      if (!state.session) return state
+      // examResult set ⇒ this session is already finished and recorded; no-op.
+      if (!state.session || state.examResult) return state
       const result = evaluateExam(state.session)
       return {
         ...state,

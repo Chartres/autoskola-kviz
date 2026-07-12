@@ -130,4 +130,19 @@ describe('app store', () => {
     expect(s.examHistory.exams).toHaveLength(1)
     expect(s.examHistory.exams[0].at).toBe(9)
   })
+
+  it('records each finished exam exactly once (timer expiry racing final click)', () => {
+    let s = reducer(initialState(), { type: 'startExam', rng: makeRng(1), now: 0 })
+    while (!isFinished(s.session!)) {
+      const q = currentQuestion(s.session!)!
+      s = reducer(s, { type: 'answer', choice: q.correct, now: 1 })
+      s = reducer(s, { type: 'next', now: 2 })
+    }
+    const finished = s
+    s = reducer(finished, { type: 'finishExam', now: 3 })
+    expect(s.examHistory.exams).toHaveLength(1)
+    expect(s.examResult).toBe(finished.examResult) // not recomputed/overwritten
+    s = reducer(finished, { type: 'next', now: 4 })
+    expect(s.examHistory.exams).toHaveLength(1)
+  })
 })
