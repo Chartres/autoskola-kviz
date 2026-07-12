@@ -6,7 +6,14 @@ import {
   type ReactNode,
 } from 'react'
 import { reducer, initialState, type AppState, type Action } from './store'
-import { loadProgress, saveProgress, loadJizdy, saveJizdy } from '@/domain/storage'
+import {
+  loadProgress,
+  saveProgress,
+  loadJizdy,
+  saveJizdy,
+  loadExamHistory,
+  saveExamHistory,
+} from '@/domain/storage'
 import { topicFromPath } from '@/lib/topics'
 import { makeRng, timeSeed } from '@/domain/rng'
 import { useAuth } from '@/auth/AuthContext'
@@ -29,6 +36,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     dispatch({ type: 'hydrate', progress: loadProgress() })
     dispatch({ type: 'hydrateJizdy', state: loadJizdy() })
+    dispatch({ type: 'hydrateExamHistory', history: loadExamHistory() })
     // SEO topic page (/okruh/<slug>/): start that okruh's practice directly.
     const topic = topicFromPath(window.location.pathname)
     if (topic) {
@@ -48,6 +56,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     saveJizdy(state.jizdyState)
   }, [state.jizdyState])
+
+  // Persist exam history locally whenever it changes.
+  useEffect(() => {
+    saveExamHistory(state.examHistory)
+  }, [state.examHistory])
 
   // On sign-in: reconcile local progress with the cloud and adopt the merge.
   useEffect(() => {

@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { reducer, initialState, type AppState } from './store'
 import { makeRng } from '@/domain/rng'
 import { emptyProgress, recordAnswer, statFor } from '@/domain/progress'
-import { currentQuestion, score } from '@/domain/session'
+import { currentQuestion, isFinished, score } from '@/domain/session'
 import { byCategory } from '@/domain/questions'
 import { LESSON_SIZE } from '@/domain/lesson'
 
@@ -66,7 +66,7 @@ describe('app store', () => {
   it('finishExam (time up) evaluates the partial session', () => {
     let s = start()
     s = reducer(s, { type: 'startExam', rng: makeRng(7), now: 0 })
-    s = reducer(s, { type: 'finishExam' })
+    s = reducer(s, { type: 'finishExam', now: 5 })
     expect(s.view).toBe('results')
     expect(s.examResult?.passed).toBe(false)
   })
@@ -110,5 +110,24 @@ describe('app store', () => {
     expect(s.view).toBe('home')
     expect(s.session).toBeNull()
     expect(s.examEndsAt).toBeNull()
+  })
+
+  it('records finished exams into examHistory', () => {
+    let s = reducer(initialState(), { type: 'startExam', rng: makeRng(1), now: 0 })
+    while (!isFinished(s.session!)) {
+      const q = currentQuestion(s.session!)!
+      s = reducer(s, { type: 'answer', choice: q.correct, now: 1 })
+      s = reducer(s, { type: 'next', now: 2 })
+    }
+    expect(s.view).toBe('results')
+    expect(s.examHistory.exams).toHaveLength(1)
+    expect(s.examHistory.exams[0]).toMatchObject({ passed: true, total: 50, at: 2 })
+  })
+
+  it('finishExam (timer expiry) also records history', () => {
+    let s = reducer(initialState(), { type: 'startExam', rng: makeRng(1), now: 0 })
+    s = reducer(s, { type: 'finishExam', now: 9 })
+    expect(s.examHistory.exams).toHaveLength(1)
+    expect(s.examHistory.exams[0].at).toBe(9)
   })
 })

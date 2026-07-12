@@ -1,7 +1,16 @@
 import { describe, it, expect, beforeEach } from 'vitest'
-import { loadProgress, saveProgress, loadJizdy, saveJizdy, STORAGE_KEY } from './storage'
+import {
+  loadProgress,
+  saveProgress,
+  loadJizdy,
+  saveJizdy,
+  loadExamHistory,
+  saveExamHistory,
+  STORAGE_KEY,
+} from './storage'
 import { emptyProgress, recordAnswer, toggleBookmark } from './progress'
 import { logLesson, emptyJizdyState, type LessonRecord } from './jizdy'
+import { emptyExamHistory, recordExam } from './examHistory'
 
 function lesson(id: string): LessonRecord {
   return { id, date: '2026-07-01', durationMin: 60, skills: ['rozjezd'] }
@@ -72,5 +81,18 @@ describe('jizdy persistence', () => {
     Storage.prototype.setItem = () => { throw new Error('quota') }
     expect(() => saveJizdy(emptyJizdyState())).not.toThrow()
     Storage.prototype.setItem = orig
+  })
+})
+
+describe('exam history persistence', () => {
+  it('round-trips exam history', () => {
+    const h = recordExam(emptyExamHistory(), { score: 45, total: 50, passed: true, passThreshold: 43, byCategory: {} }, 7)
+    saveExamHistory(h)
+    expect(loadExamHistory()).toEqual(h)
+  })
+
+  it('returns empty exam history on bad payloads', () => {
+    localStorage.setItem('exam-history-v1', '{"version":99}')
+    expect(loadExamHistory()).toEqual(emptyExamHistory())
   })
 })

@@ -20,7 +20,7 @@ const MODE_LABEL: Record<string, string> = {
 export function QuizScreen() {
   const { state, dispatch } = useApp()
   const { session, mode } = state
-  const onExpire = useCallback(() => dispatch({ type: 'finishExam' }), [dispatch])
+  const onExpire = useCallback(() => dispatch({ type: 'finishExam', now: Date.now() }), [dispatch])
 
   // Warm the cache for the next question's image so it shows without a flash.
   const nextImage = session ? session.questions[session.index + 1]?.image : null
@@ -80,7 +80,7 @@ export function QuizScreen() {
         index={session.index}
         total={session.questions.length}
         onAnswer={(choice) => dispatch({ type: 'answer', choice, now: Date.now() })}
-        onNext={() => dispatch({ type: 'next', today: todayStr() })}
+        onNext={() => dispatch({ type: 'next', today: todayStr(), now: Date.now() })}
         onToggleBookmark={() =>
           dispatch({ type: 'toggleBookmark', id: question.id })
         }

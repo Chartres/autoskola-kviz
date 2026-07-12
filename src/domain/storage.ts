@@ -5,6 +5,7 @@ import {
   type ProgressData,
 } from './progress'
 import { emptyJizdyState, type JizdyState } from './jizdy'
+import { emptyExamHistory, type ExamHistory } from './examHistory'
 
 export const STORAGE_KEY = 'autoskola-kviz:progress:v1'
 
@@ -67,6 +68,32 @@ export function saveJizdy(state: JizdyState): void {
   if (!s) return
   try {
     s.setItem(JIZDY_KEY, JSON.stringify(state))
+  } catch {
+    // private mode / quota exceeded — degrade gracefully to in-memory only
+  }
+}
+
+const EXAM_HISTORY_KEY = 'exam-history-v1'
+
+export function loadExamHistory(): ExamHistory {
+  const s = storage()
+  if (!s) return emptyExamHistory()
+  try {
+    const raw = s.getItem(EXAM_HISTORY_KEY)
+    if (!raw) return emptyExamHistory()
+    const parsed = JSON.parse(raw) as Partial<ExamHistory>
+    if (parsed.version !== 1) return emptyExamHistory()
+    return { version: 1, exams: parsed.exams ?? [] }
+  } catch {
+    return emptyExamHistory()
+  }
+}
+
+export function saveExamHistory(h: ExamHistory): void {
+  const s = storage()
+  if (!s) return
+  try {
+    s.setItem(EXAM_HISTORY_KEY, JSON.stringify(h))
   } catch {
     // private mode / quota exceeded — degrade gracefully to in-memory only
   }

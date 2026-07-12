@@ -1,6 +1,7 @@
 import type { CategoryName, Choice } from '@/domain/types'
 import type { Rng } from '@/domain/rng'
 import { emptyJizdyState, logLesson as jizdyLogLesson, type JizdyState, type LessonRecord } from '@/domain/jizdy'
+import { emptyExamHistory, recordExam, type ExamHistory } from '@/domain/examHistory'
 import {
   createSession,
   answerCurrent,
@@ -45,6 +46,7 @@ export interface AppState {
   selectedCategories: Set<CategoryName>
   search: string
   jizdyState: JizdyState
+  examHistory: ExamHistory
 }
 
 export function initialState(): AppState {
@@ -58,6 +60,7 @@ export function initialState(): AppState {
     selectedCategories: new Set(),
     search: '',
     jizdyState: emptyJizdyState(),
+    examHistory: emptyExamHistory(),
   }
 }
 
@@ -71,13 +74,14 @@ export type Action =
   | { type: 'startBookmarks'; rng: Rng }
   | { type: 'startExam'; rng: Rng; now: number }
   | { type: 'answer'; choice: Choice; now: number }
-  | { type: 'next'; today?: string }
-  | { type: 'finishExam' }
+  | { type: 'next'; today?: string; now?: number }
+  | { type: 'finishExam'; now: number }
   | { type: 'toggleBookmark'; id: number }
   | { type: 'goMenu' }
   | { type: 'navigate'; view: TabView }
   | { type: 'logLesson'; record: LessonRecord }
   | { type: 'hydrateJizdy'; state: JizdyState }
+  | { type: 'hydrateExamHistory'; history: ExamHistory }
 
 function begin(state: AppState, mode: Mode, questions: SessionState): AppState {
   return {
@@ -152,11 +156,16 @@ export function reducer(state: AppState, action: Action): AppState {
       if (!state.session) return state
       const session = advance(state.session)
       if (isFinished(session)) {
+        const result = state.mode === 'exam' ? evaluateExam(session) : null
         return {
           ...state,
           session,
           view: 'results',
-          examResult: state.mode === 'exam' ? evaluateExam(session) : null,
+          examResult: result,
+          examHistory:
+            state.mode === 'exam' && result
+              ? recordExam(state.examHistory, result, action.now ?? Date.now())
+              : state.examHistory,
           progress:
             state.mode === 'lesson' && action.today
               ? recordLessonComplete(state.progress, action.today)
@@ -168,11 +177,13 @@ export function reducer(state: AppState, action: Action): AppState {
 
     case 'finishExam': {
       if (!state.session) return state
+      const result = evaluateExam(state.session)
       return {
         ...state,
         view: 'results',
-        examResult: evaluateExam(state.session),
+        examResult: result,
         examEndsAt: null,
+        examHistory: recordExam(state.examHistory, result, action.now ?? Date.now()),
       }
     }
 
@@ -194,6 +205,9 @@ export function reducer(state: AppState, action: Action): AppState {
 
     case 'hydrateJizdy':
       return { ...state, jizdyState: action.state }
+
+    case 'hydrateExamHistory':
+      return { ...state, examHistory: action.history }
 
     case 'logLesson':
       return { ...state, jizdyState: jizdyLogLesson(state.jizdyState, action.record) }
