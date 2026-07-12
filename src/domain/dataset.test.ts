@@ -66,6 +66,16 @@ describe('dataset invariants', () => {
     }
   })
 
+  it('video references exist under public/media', () => {
+    const withVideo = ALL_QUESTIONS.filter((q) => q.video)
+    expect(withVideo.length).toBeGreaterThanOrEqual(200)
+    for (const q of withVideo) expect(MEDIA_FILES, `q ${q.id}`).toContain(q.video!)
+  })
+
+  it('meta carries the dataset generation date', () => {
+    expect(META.generatedAt).toMatch(/^\d{4}-\d{2}-\d{2}$/)
+  })
+
   it('video questions keep the source url and fall back to a still image', () => {
     const withVideo = ALL_QUESTIONS.filter((q) => q.videoUrl)
     expect(withVideo.length).toBeGreaterThan(0)
