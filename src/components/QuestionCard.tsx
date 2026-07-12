@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import type { Choice, Question } from '@/domain/types'
 import { imageUrl } from '@/lib/assets'
 
@@ -69,6 +69,9 @@ export function QuestionCard({
   const answered = chosen !== undefined
   const isCorrect = answered && chosen === question.correct
   const options = optionsFor(question)
+  const [videoFailed, setVideoFailed] = useState(false)
+  useEffect(() => setVideoFailed(false), [question.id])
+  const showVideo = Boolean(question.video) && !videoFailed
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
@@ -111,16 +114,37 @@ export function QuestionCard({
         </button>
       </header>
 
-      {question.image && (
+      {(question.image || question.video) && (
         /* min-h-64 = image cap (max-h-56) + p-4 padding — the box height is
            reserved up front so the arriving image never shifts the layout. */
         <div className="mb-5 flex min-h-64 items-center justify-center rounded-card border border-sand-700 bg-white p-4">
-          <img
-            src={imageUrl(question.image)}
-            alt={`Obrázek k otázce ${question.id}`}
-            className="max-h-56 w-auto object-contain"
-          />
+          {showVideo ? (
+            <video
+              data-testid="question-video"
+              controls
+              playsInline
+              preload="metadata"
+              poster={question.image ? imageUrl(question.image) : undefined}
+              onError={() => setVideoFailed(true)}
+              className="max-h-56 w-auto"
+            >
+              <source src={imageUrl(question.video!)} type="video/mp4" />
+            </video>
+          ) : question.image ? (
+            <img
+              src={imageUrl(question.image)}
+              alt={`Obrázek k otázce ${question.id}`}
+              className="max-h-56 w-auto object-contain"
+            />
+          ) : null}
         </div>
+      )}
+      {question.video && (
+        <p className="-mt-3 mb-4 font-mono text-xs text-sand-500">
+          {videoFailed
+            ? 'Animace nedostupná — zobrazen náhled situace.'
+            : 'Spusťte animaci a pozorně sledujte situaci.'}
+        </p>
       )}
 
       <h2 className="mb-5 text-balance text-xl font-semibold leading-relaxed text-sand-50">

@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { QuestionCard } from './QuestionCard'
 import type { Question } from '@/domain/types'
@@ -118,5 +118,30 @@ describe('QuestionCard', () => {
     expect(img).toHaveAccessibleName()
     // The media box reserves its height up front (no layout flash on load).
     expect(img.parentElement).toHaveClass('min-h-64')
+  })
+
+  it('renders a video with the still as poster for animated questions', () => {
+    setup({ question: { ...Q, video: 'anim.mp4', image: 'still.webp' } })
+    const video = screen.getByTestId('question-video')
+    expect(video).toHaveAttribute('poster', expect.stringContaining('still.webp'))
+    expect(video.querySelector('source')).toHaveAttribute(
+      'src',
+      expect.stringContaining('anim.mp4'),
+    )
+    expect(screen.getByText(/Spusťte animaci/)).toBeInTheDocument()
+  })
+
+  it('falls back to the still when the video fails to load', () => {
+    setup({ question: { ...Q, video: 'anim.mp4', image: 'still.webp' } })
+    fireEvent.error(screen.getByTestId('question-video'))
+    expect(screen.queryByTestId('question-video')).not.toBeInTheDocument()
+    expect(screen.getByRole('img', { name: /Obrázek k otázce/ })).toBeInTheDocument()
+    expect(screen.getByText(/Animace nedostupná/)).toBeInTheDocument()
+  })
+
+  it('renders a plain image for non-video questions (unchanged)', () => {
+    setup({ question: { ...Q, image: 'still.webp' } })
+    expect(screen.queryByTestId('question-video')).not.toBeInTheDocument()
+    expect(screen.getByRole('img', { name: /Obrázek k otázce/ })).toBeInTheDocument()
   })
 })
