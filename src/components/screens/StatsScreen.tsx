@@ -2,6 +2,7 @@ import { useMemo } from 'react'
 import { useApp } from '@/app/AppContext'
 import { ALL_QUESTIONS, META } from '@/domain/questions'
 import { summary } from '@/domain/progress'
+import { readiness } from '@/domain/examHistory'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import { InfoDot } from '@/components/ui/InfoDot'
 
@@ -76,6 +77,41 @@ export function StatsScreen() {
           )
         })}
       </div>
+
+      {state.examHistory.exams.length > 0 && (
+        <section className="mt-10">
+          <h2 className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.2em] text-sand-400">
+            Ostré testy
+          </h2>
+          <p className="mb-3 text-sm text-sand-300">
+            Uspěl(a) jsi v {readiness(state.examHistory).passed} z posledních{' '}
+            {readiness(state.examHistory).total} ostrých testů.
+          </p>
+          <ul className="space-y-2">
+            {state.examHistory.exams
+              .slice(-10)
+              .reverse()
+              .map((e) => (
+                <li
+                  key={e.at}
+                  className="flex items-center justify-between rounded-card border border-sand-700 bg-sand-900/50 px-4 py-2 text-sm"
+                >
+                  <span className="text-sand-400">
+                    {new Date(e.at).toLocaleDateString('cs-CZ')}
+                  </span>
+                  <span className="font-mono tabular-nums text-sand-200">
+                    <span>{e.score}</span>
+                    <span className="text-sand-500"> / </span>
+                    <span>{e.total}</span>
+                  </span>
+                  <span className={e.passed ? 'text-moss-400' : 'text-rust-400'}>
+                    {e.passed ? 'Prospěl(a)' : 'Neprospěl(a)'}
+                  </span>
+                </li>
+              ))}
+          </ul>
+        </section>
+      )}
     </div>
   )
 }

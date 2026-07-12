@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useApp } from '@/app/AppContext'
 import { track } from '@/analytics'
 import { score, wrongAnswers } from '@/domain/session'
+import { readiness } from '@/domain/examHistory'
 import { getQuestion } from '@/domain/questions'
 import { makeRng, timeSeed } from '@/domain/rng'
 import { ProgressBar } from '@/components/ui/ProgressBar'
@@ -62,6 +63,12 @@ export function ResultsScreen() {
         {isExam && examResult && (
           <p className="mt-2 text-sm text-sand-400">
             Pro úspěch {examResult.passThreshold} z {total} bodů.
+          </p>
+        )}
+        {isExam && examResult && state.examHistory.exams.length > 1 && (
+          <p className="mt-1 text-sm text-sand-500">
+            Uspěl(a) jsi v {readiness(state.examHistory).passed} z posledních{' '}
+            {readiness(state.examHistory).total} ostrých testů.
           </p>
         )}
       </div>
