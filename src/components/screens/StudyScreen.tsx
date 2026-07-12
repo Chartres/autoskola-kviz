@@ -18,7 +18,8 @@ export function StudyScreen() {
         >
           eTesty Ministerstva dopravy
         </a>
-        .
+        . · Otázky aktualizovány k{' '}
+        {new Date(META.generatedAt).toLocaleDateString('cs-CZ')}.
       </p>
 
       {/* Table of contents */}

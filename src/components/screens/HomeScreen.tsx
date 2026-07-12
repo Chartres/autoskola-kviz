@@ -116,6 +116,10 @@ export function HomeScreen() {
         </div>
       </section>
 
+      <p className="mt-8 text-center font-mono text-xs text-sand-600">
+        Otázky aktualizovány k {new Date(META.generatedAt).toLocaleDateString('cs-CZ')}
+      </p>
+
       {/* Cross-promo: nudge strong theory learners to start practical lessons */}
       {showJizdyCta && (
         <button
