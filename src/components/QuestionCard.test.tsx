@@ -139,6 +139,19 @@ describe('QuestionCard', () => {
     expect(screen.getByText(/Animace nedostupná/)).toBeInTheDocument()
   })
 
+  it('ignores answer keys originating from the video element', () => {
+    const { onNext } = setup({
+      question: { ...Q, video: 'anim.mp4', image: 'still.webp' },
+      chosen: 'b',
+    })
+    // Space on the focused video toggles play/pause — must NOT also advance.
+    fireEvent.keyDown(screen.getByTestId('question-video'), { key: ' ' })
+    expect(onNext).not.toHaveBeenCalled()
+    // Control: Space anywhere else still advances.
+    fireEvent.keyDown(document.body, { key: ' ' })
+    expect(onNext).toHaveBeenCalledTimes(1)
+  })
+
   it('renders a plain image for non-video questions (unchanged)', () => {
     setup({ question: { ...Q, image: 'still.webp' } })
     expect(screen.queryByTestId('question-video')).not.toBeInTheDocument()

@@ -75,7 +75,8 @@ export function QuestionCard({
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
-      if (e.target instanceof HTMLInputElement) return
+      // Video controls own their keys (Space = play/pause) — don't also answer/advance.
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLVideoElement) return
       if (e.metaKey || e.ctrlKey || e.altKey) return
       const key = e.key.length === 1 ? e.key.toLowerCase() : e.key
       const choice = KEY_TO_CHOICE[key]
@@ -116,7 +117,7 @@ export function QuestionCard({
 
       {(question.image || question.video) && (
         /* min-h-64 = image cap (max-h-56) + p-4 padding — the box height is
-           reserved up front so the arriving image never shifts the layout. */
+           reserved up front so the arriving media never shifts the layout. */
         <div className="mb-5 flex min-h-64 items-center justify-center rounded-card border border-sand-700 bg-white p-4">
           {showVideo ? (
             <video
