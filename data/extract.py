@@ -19,6 +19,7 @@ Usage: uv run data/extract.py            (fetch + transform)
 
 from __future__ import annotations
 
+import datetime
 import json
 import re
 import shutil
@@ -164,6 +165,27 @@ def publish_media(name: str) -> str:
     return dst.name
 
 
+def publish_video(name: str) -> str | None:
+    """Re-encode a cached mp4 into public/media (H.264, ≤720px wide, silent).
+
+    Official animations are short silent clips; CRF 30 keeps them legible at
+    the ~450px the app renders. ponytail: without ffmpeg, videos are skipped
+    (app falls back to the still image).
+    """
+    if not shutil.which("ffmpeg"):
+        return None
+    src = CACHE_M / name
+    dst = PUBLIC_MEDIA / name
+    if not dst.exists():
+        subprocess.run(
+            ["ffmpeg", "-loglevel", "error", "-i", str(src), "-an",
+             "-vf", "scale='min(720,iw)':-2", "-c:v", "libx264", "-crf", "30",
+             "-preset", "slow", "-movflags", "+faststart", str(dst)],
+            check=True, capture_output=True,
+        )
+    return dst.name
+
+
 def norm_text(q: dict) -> str:
     """Dedupe key: question text + sorted answer texts, whitespace-normalized."""
     parts = [q["questionText"]] + sorted(
@@ -226,6 +248,7 @@ def transform(lists: dict[int, list[int]], questions: dict[int, dict]) -> None:
             stats["two_answer"] += 1
 
         image: str | None = None
+        video: str | None = None
         video_url: str | None = None
         mc = q.get("mediaContent")
         if mc:
@@ -236,6 +259,7 @@ def transform(lists: dict[int, list[int]], questions: dict[int, dict]) -> None:
                 videos.append(main)
                 video_bytes += main.stat().st_size
                 video_url = f"{BASE}{mc['mediaUrl']}"
+                video = publish_video(main.name)
                 still = mc.get("printMediaName")
                 if still and (CACHE_M / still).exists():
                     image = still
@@ -277,6 +301,8 @@ def transform(lists: dict[int, list[int]], questions: dict[int, dict]) -> None:
         for key, img in zip(("aImg", "bImg", "cImg"), answer_imgs):
             if img:
                 rec[key] = img
+        if video:
+            rec["video"] = video
         if video_url:
             rec["videoUrl"] = video_url
         if qid in groups_by_qid:
@@ -302,6 +328,7 @@ def transform(lists: dict[int, list[int]], questions: dict[int, dict]) -> None:
         )
     cat_name = {g: c for g, c in CAT_ORDER}
     meta = {
+        "generatedAt": datetime.date.today().isoformat(),
         "source": "Ministerstvo dopravy ČR — eTesty (oficiální zkušební otázky)",
         "sourceUrl": "https://etesty.md.gov.cz/",
         "totalQuestions": len(out),
