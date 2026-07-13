@@ -21,7 +21,7 @@ export default defineConfig({
         name: 'Autoškola kvíz — procvičování testových otázek',
         short_name: 'Autoškola kvíz',
         description:
-          'Procvičování testových otázek k teoretické zkoušce v autoškole (řidičský průkaz). Zdarma, offline, bez reklam.',
+          'Procvičování testových otázek k teoretické zkoušce v autoškole (řidičský průkaz skupiny B). Zdarma, offline, bez reklam.',
         lang: 'cs',
         dir: 'ltr',
         start_url: '/',

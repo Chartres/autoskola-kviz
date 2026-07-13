@@ -45,6 +45,10 @@ export function HomeScreen() {
         </div>
       </header>
 
+      <p className="-mt-2 mb-4 text-sm text-sand-400">
+        Příprava na teoretickou zkoušku — řidičský průkaz skupiny B
+      </p>
+
       {/* Primary job: today's short set */}
       <button
         type="button"
