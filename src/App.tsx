@@ -65,8 +65,9 @@ function Shell() {
 export function App() {
   useEffect(() => {
     if (!isNative) return
+    // Style.Light = dark status-bar text, for this app's light (#faf6ee) theme.
     import('@capacitor/status-bar').then(({ StatusBar, Style }) =>
-      StatusBar.setStyle({ style: Style.Dark }).catch(() => {}),
+      StatusBar.setStyle({ style: Style.Light }).catch(() => {}),
     )
   }, [])
 
