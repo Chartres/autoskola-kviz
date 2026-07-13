@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import type { Choice, Question } from '@/domain/types'
 import { imageUrl } from '@/lib/assets'
+import { answerHaptic } from '@/lib/haptics'
 
 export interface QuestionCardProps {
   question: Question
@@ -73,6 +74,11 @@ export function QuestionCard({
   useEffect(() => setVideoFailed(false), [question.id])
   const showVideo = Boolean(question.video) && !videoFailed
 
+  const choose = (opt: Choice) => {
+    answerHaptic(opt === question.correct)
+    onAnswer(opt)
+  }
+
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       // Video controls own their keys (Space = play/pause) — don't also answer/advance.
@@ -82,7 +88,7 @@ export function QuestionCard({
       const choice = KEY_TO_CHOICE[key]
       if (!answered && choice && options.includes(choice)) {
         e.preventDefault()
-        onAnswer(choice)
+        choose(choice)
       } else if (answered && (e.key === 'Enter' || e.key === ' ')) {
         e.preventDefault()
         onNext()
@@ -161,7 +167,7 @@ export function QuestionCard({
               type="button"
               data-state={state}
               disabled={answered}
-              onClick={() => !answered && onAnswer(opt)}
+              onClick={() => !answered && choose(opt)}
               className={`flex items-start gap-3 rounded-card border px-4 py-3 text-left transition-colors disabled:cursor-default ${STATE_CLASS[state]}`}
             >
               <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center border border-sand-500/60 font-mono text-xs font-semibold uppercase">

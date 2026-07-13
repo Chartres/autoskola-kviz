@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { AppProvider, useApp } from '@/app/AppContext'
 import { isTabView } from '@/app/store'
 import { AuthProvider } from '@/auth/AuthContext'
@@ -10,6 +11,7 @@ import { QuizScreen } from '@/components/screens/QuizScreen'
 import { ResultsScreen } from '@/components/screens/ResultsScreen'
 import { StudyScreen } from '@/components/screens/StudyScreen'
 import { StatsScreen } from '@/components/screens/StatsScreen'
+import { isNative } from '@/lib/native'
 
 function CurrentView() {
   const { state } = useApp()
@@ -61,6 +63,13 @@ function Shell() {
 }
 
 export function App() {
+  useEffect(() => {
+    if (!isNative) return
+    import('@capacitor/status-bar').then(({ StatusBar, Style }) =>
+      StatusBar.setStyle({ style: Style.Dark }).catch(() => {}),
+    )
+  }, [])
+
   return (
     <AuthProvider>
       <AppProvider>

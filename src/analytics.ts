@@ -3,6 +3,7 @@ import {
   createFlywheelClient,
   type SupabaseLike,
 } from './platform/flywheel-client'
+import { platform } from './lib/native'
 
 /**
  * Usage tracking via the Flywheel Common Platform client (shared across all
@@ -19,7 +20,7 @@ const fw = createFlywheelClient({
 
 /** Backward-compatible: existing call sites keep calling track(event, props). */
 export function track(event: string, props?: Record<string, unknown>): void {
-  fw.track(event, props)
+  fw.track(event, { platform, ...props })
 }
 
 /** Tie subsequent events to the cross-product identity (call on auth change). */
