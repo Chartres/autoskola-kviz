@@ -12,6 +12,13 @@ const config: CapacitorConfig = {
     SocialLogin: {
       providers: { google: true, apple: true, facebook: false, twitter: false },
     },
+    // Hold the native splash until React mounts (App.tsx hides it) — the
+    // 500ms auto-hide default leaves a white gap on cold start while the
+    // webview parses the bundle.
+    SplashScreen: {
+      launchAutoHide: false,
+      backgroundColor: '#faf6ee',
+    },
   },
 }
 

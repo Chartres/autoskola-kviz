@@ -69,6 +69,10 @@ export function App() {
     import('@capacitor/status-bar').then(({ StatusBar, Style }) =>
       StatusBar.setStyle({ style: Style.Light }).catch(() => {}),
     )
+    // React is mounted — drop the native splash (launchAutoHide is off).
+    import('@capacitor/splash-screen').then(({ SplashScreen }) =>
+      SplashScreen.hide().catch(() => {}),
+    )
   }, [])
 
   return (
