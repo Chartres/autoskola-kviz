@@ -26,6 +26,38 @@ interface AuthContextValue {
 
 const AuthContext = createContext<AuthContextValue | null>(null)
 
+/**
+ * Native idToken sign-in (Apple on iOS, Google on Android) via
+ * @capgo/capacitor-social-login — no redirect-URL auth on native (flywheel
+ * PR 15). Rejections resolve silently: cancelling the native sheet is a
+ * routine action, and an unconfigured provider must not surface as an
+ * unhandled rejection (main.tsx logs those as error events).
+ */
+async function nativeIdTokenSignIn(provider: 'apple' | 'google'): Promise<void> {
+  if (!supabase) return
+  try {
+    const { SocialLogin } = await import('@capgo/capacitor-social-login')
+    if (provider === 'apple') {
+      await SocialLogin.initialize({ apple: { clientId: 'org.dravec.autoskola' } })
+    } else {
+      // ponytail: webClientId is the only Android requirement; until
+      // VITE_GOOGLE_WEB_CLIENT_ID is set (human setup, docs/store checklist)
+      // login() rejects and we land in the catch below.
+      await SocialLogin.initialize({
+        google: { webClientId: import.meta.env.VITE_GOOGLE_WEB_CLIENT_ID },
+      })
+    }
+    const { result } =
+      provider === 'apple'
+        ? await SocialLogin.login({ provider: 'apple', options: { scopes: ['email', 'name'] } })
+        : await SocialLogin.login({ provider: 'google', options: {} })
+    const token = result && 'idToken' in result ? result.idToken : null
+    if (token) await supabase.auth.signInWithIdToken({ provider, token })
+  } catch {
+    // user cancelled, or provider not configured — not an error
+  }
+}
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<AuthUser | null>(null)
   const [loading, setLoading] = useState(isAuthConfigured)
@@ -52,34 +84,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     user,
     async signInWithGoogle() {
       if (!supabase) return
-      if (isNative) {
-        // Android only (see AuthPanel) — iOS uses Apple. No redirect-URL auth
-        // on native (flywheel PR 15): idToken flow only.
-        const { SocialLogin } = await import('@capgo/capacitor-social-login')
-        // ponytail: webClientId is the only Android requirement; VITE_GOOGLE_WEB_CLIENT_ID
-        // isn't set yet (human setup, see task-10 checklist) — login() then no-ops/errors.
-        await SocialLogin.initialize({
-          google: { webClientId: import.meta.env.VITE_GOOGLE_WEB_CLIENT_ID },
-        })
-        const { result } = await SocialLogin.login({ provider: 'google', options: {} })
-        const token = 'idToken' in result ? result.idToken : null
-        if (token) await supabase.auth.signInWithIdToken({ provider: 'google', token })
-        return
-      }
+      if (isNative) return nativeIdTokenSignIn('google')
       await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: { redirectTo: window.location.href },
       })
     },
     async signInWithApple() {
-      if (!supabase) return
-      const { SocialLogin } = await import('@capgo/capacitor-social-login')
-      await SocialLogin.initialize({ apple: { clientId: 'org.dravec.autoskola' } })
-      const { result } = await SocialLogin.login({
-        provider: 'apple',
-        options: { scopes: ['email', 'name'] },
-      })
-      if (result.idToken) await supabase.auth.signInWithIdToken({ provider: 'apple', token: result.idToken })
+      return nativeIdTokenSignIn('apple')
     },
     async signInWithEmail(email: string) {
       if (!supabase) return { ok: false, error: 'Přihlášení není nakonfigurováno.' }

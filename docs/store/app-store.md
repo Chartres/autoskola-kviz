@@ -83,6 +83,6 @@ No ads, no tracking across apps → "Data Not Used to Track You".
 7. [ ] Build: ensure `.env.local` present (analytics + auth env) → `npm run build && npx cap sync ios`.
 8. [ ] Xcode: open `ios/App/App.xcodeproj` → Signing & Capabilities → select your team, automatic signing.
 9. [ ] Product → Archive → Distribute App → App Store Connect. (Export compliance already answered via `ITSAppUsesNonExemptEncryption=NO`.)
-10. [ ] Optional: TestFlight internal test on your iPhone (no beta review needed).
+10. [ ] TestFlight internal test on your iPhone (no beta review needed) — **specifically verify Sign in with Apple end-to-end**: if Supabase rejects with a nonce mismatch, the social-login plugin auto-generates a nonce and we must pass it through to `signInWithIdToken` (flagged in final review; config-dependent, only testable on a real device).
 11. [ ] **Submit for review — only after final sign-off.** Expect 24–72 h; first apps bounce once in ~half of cases (usual causes: offline blank screen — ours works offline; privacy label mismatch — see table).
 12. [ ] Post-approval: set availability CZ+SK, then flywheel portfolio record gets the store link.

@@ -4,6 +4,7 @@ import { ALL_QUESTIONS, META } from '@/domain/questions'
 import { summary, missedIds } from '@/domain/progress'
 import { LESSON_SIZE } from '@/domain/lesson'
 import { timeSeed, makeRng } from '@/domain/rng'
+import { formatDateCs } from '@/lib/date'
 import { track } from '@/analytics'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import type { CategoryName } from '@/domain/types'
@@ -121,7 +122,7 @@ export function HomeScreen() {
       </section>
 
       <p className="mt-8 text-center font-mono text-xs text-sand-600">
-        Otázky aktualizovány k {new Date(META.generatedAt).toLocaleDateString('cs-CZ')}
+        Otázky aktualizovány k {formatDateCs(META.generatedAt)}
       </p>
 
       {/* Cross-promo: nudge strong theory learners to start practical lessons */}

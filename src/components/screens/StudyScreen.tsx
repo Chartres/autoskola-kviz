@@ -1,3 +1,4 @@
+import { formatDateCs } from '@/lib/date'
 import { META } from '@/domain/questions'
 import { LESSONS } from '@/content/studyGuide'
 import { imageUrl } from '@/lib/assets'
@@ -19,7 +20,7 @@ export function StudyScreen() {
           eTesty Ministerstva dopravy
         </a>
         . · Otázky aktualizovány k{' '}
-        {new Date(META.generatedAt).toLocaleDateString('cs-CZ')}.
+        {formatDateCs(META.generatedAt)}.
       </p>
 
       {/* Table of contents */}

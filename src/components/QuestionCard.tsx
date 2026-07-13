@@ -149,7 +149,9 @@ export function QuestionCard({
       {question.video && (
         <p className="-mt-3 mb-4 font-mono text-xs text-sand-500">
           {videoFailed
-            ? 'Animace nedostupná — zobrazen náhled situace.'
+            ? question.image
+        ? 'Animace nedostupná — zobrazen náhled situace.'
+        : 'Animace nedostupná.'
             : 'Spusťte animaci a pozorně sledujte situaci.'}
         </p>
       )}
