@@ -33,6 +33,13 @@ write committed screenshots to `e2e/shots/` for visual review (Standard: persona
   auto-deploys on every push to `main` (after the test/build gate). Build reads platform env
   `VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY` from repo secrets; the app works fully
   without them (local progress only).
+- **iOS (App Store)** → Capacitor 8 shell (`ios/`, bundle `org.dravec.autoskola`). Local build:
+  ensure `.env.local` (VITE_* values are baked at build time — CI secrets don't reach local builds)
+  → `npm run build && npx cap sync ios` → Xcode Archive → Distribute. Metadata, screenshots and the
+  human submission checklist: `docs/store/app-store.md`; process standard:
+  `flywheel/docs/standards/ios-app.md` (incl. the September "2026→2027" rename ritual).
+  Submission only after Pavol's sign-off. Android stays portable (`npx cap run android`), no Play
+  submission implied.
 Adoption is read from web KPIs — no extra telemetry needed.
 
 ## Analytics (Common Platform)
