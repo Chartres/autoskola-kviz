@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
 import { useAuth } from '@/auth/AuthContext'
+import { platform } from '@/lib/native'
 
 /** Compact account control: a small avatar that opens a sign-in / account popover. */
 export function AuthPanel() {
-  const { configured, user, signInWithEmail, signOut } = useAuth()
+  const { configured, user, signInWithApple, signInWithGoogle, signInWithEmail, signOut } =
+    useAuth()
   const [open, setOpen] = useState(false)
   const [email, setEmail] = useState('')
   const [sent, setSent] = useState(false)
@@ -71,6 +73,31 @@ export function AuthPanel() {
                 className="w-full rounded-card border border-sand-600 px-4 py-2 text-sm font-semibold text-sand-200 hover:border-sand-400"
               >
                 Odhlásit
+              </button>
+            </>
+          ) : platform === 'ios' ? (
+            // Native shells can't receive the email OTP redirect (fleet auth
+            // hardening — flywheel PR 15), so only the platform's native
+            // button is shown; the email form stays web-only.
+            <>
+              <p className="mb-3 text-sm text-sand-300">Synchronizujte pokrok mezi zařízeními.</p>
+              <button
+                type="button"
+                onClick={() => signInWithApple()}
+                className="w-full rounded-card border border-sand-500 bg-sand-100 px-4 py-2 text-sm font-semibold text-sand-950 hover:bg-white"
+              >
+                Pokračovat přes Apple
+              </button>
+            </>
+          ) : platform === 'android' ? (
+            <>
+              <p className="mb-3 text-sm text-sand-300">Synchronizujte pokrok mezi zařízeními.</p>
+              <button
+                type="button"
+                onClick={() => signInWithGoogle()}
+                className="w-full rounded-card border border-sand-500 bg-sand-100 px-4 py-2 text-sm font-semibold text-sand-950 hover:bg-white"
+              >
+                Pokračovat přes Google
               </button>
             </>
           ) : (
