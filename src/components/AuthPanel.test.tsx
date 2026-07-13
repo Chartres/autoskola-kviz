@@ -1,19 +1,23 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
-import { AuthPanel } from './AuthPanel'
-import { AuthProvider } from '@/auth/AuthContext'
 
-// With no VITE_SUPABASE_* env vars (the default), auth is disabled: the account
-// control renders nothing and the app stays usable with local-only progress.
+// When auth is not configured (no Supabase client), the account control renders
+// nothing and the app stays usable with local-only progress. Mocked explicitly —
+// a developer .env.local would otherwise configure auth during tests.
 describe('AuthPanel (auth not configured)', () => {
-  it('renders no account control when auth is not configured', () => {
+  it('renders no account control when auth is not configured', async () => {
+    vi.resetModules()
+    vi.doMock('@/auth/supabase', () => ({ isAuthConfigured: false, supabase: null }))
+    const { AuthPanel: Panel } = await import('./AuthPanel')
+    const { AuthProvider: Provider } = await import('@/auth/AuthContext')
     const { container } = render(
-      <AuthProvider>
-        <AuthPanel />
-      </AuthProvider>,
+      <Provider>
+        <Panel />
+      </Provider>,
     )
     expect(container).toBeEmptyDOMElement()
     expect(screen.queryByRole('button')).not.toBeInTheDocument()
+    vi.doUnmock('@/auth/supabase')
   })
 })
 
