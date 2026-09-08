@@ -1,0 +1,40 @@
+# Autoškola kvíz
+
+> Bezplatný trenažér testů autoškoly pro Českou republiku: všech 1136 oficiálních zkušebních
+> otázek Ministerstva dopravy (eTesty), procvičování podle okruhů, krátká denní dávka,
+> opakování chyb a zkušební test ve formátu skutečné zkoušky (25 otázek, 30 minut).
+> Bez registrace, bez reklam, bez cookies; funguje offline (PWA) i na mobilu. Česky.
+
+## What it is
+- A practice app for the Czech driving-licence theory exam ("testy autoškoly").
+- Question bank: the official public exam questions of the Ministry of Transport
+  (https://etesty.md.gov.cz/), 1136 questions in the official wording, grouped by okruh
+  (pravidla provozu, dopravní značky, dopravní situace, zásady bezpečné jízdy, zdravotnická
+  příprava, …) plus a timed mock exam.
+- Learning design: free topic choice, mastery per okruh instead of grades, immediate
+  self-correcting feedback, missed questions resurface via spaced repetition. No streak guilt,
+  no paywall, no lives.
+- Free forever, no account needed; optional Google / magic-link sign-in only to sync progress
+  between devices. Only first-party anonymous usage counts, no third-party trackers.
+
+## How to use it
+- https://autoskola.dravec.org/ — pick an okruh, run the daily set, or start a mock exam;
+  progress is kept on the device.
+- Topic pages are real URLs, e.g. https://autoskola.dravec.org/okruh/dopravni-znacky/
+  (all of them are listed in the sitemap).
+
+## Data & provenance
+- Questions and answer keys are the official public bank; the app shows the official wording
+  unchanged. Bank source and counts: https://autoskola.dravec.org/ (footer) and
+  https://github.com/Chartres/autoskola-kviz/blob/main/data/README.md
+- A study aid, not the exam: the official test is taken at the driving school / municipal office.
+
+## Links
+- App: https://autoskola.dravec.org/
+- Source code: https://github.com/Chartres/autoskola-kviz
+- Sitemap: https://autoskola.dravec.org/sitemap.xml
+- Sibling app for the firearms-licence exam: https://zbrojnikviz.dravec.org/
+- More from the author: https://flywheel.dravec.org/
+
+## Contact
+- Issues: https://github.com/Chartres/autoskola-kviz/issues

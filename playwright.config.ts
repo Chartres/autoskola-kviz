@@ -11,7 +11,17 @@ export default defineConfig({
     trace: 'on-first-retry',
   },
   projects: [
-    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
+    {
+      name: 'chromium',
+      use: {
+        ...devices['Desktop Chrome'],
+        // Sandboxes with a system Chromium and no playwright-managed download
+        // (bohosluzby/metro pattern): PW_CHROMIUM=/path/to/chromium npx playwright test
+        ...(process.env.PW_CHROMIUM
+          ? { launchOptions: { executablePath: process.env.PW_CHROMIUM } }
+          : {}),
+      },
+    },
   ],
   webServer: {
     command: 'npm run build && npm run preview -- --port 4173',
