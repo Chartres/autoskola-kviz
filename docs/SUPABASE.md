@@ -15,9 +15,11 @@ Open **SQL Editor** and run:
 
 ```sql
 create table public.progress (
-  user_id    uuid primary key references auth.users (id) on delete cascade,
+  user_id    uuid references auth.users (id) on delete cascade,
+  app        text not null,              -- 'zbrojni' | 'autoskola' | 'epso' — one row per app
   data       jsonb not null,
-  updated_at timestamptz not null default now()
+  updated_at timestamptz not null default now(),
+  primary key (user_id, app)
 );
 
 alter table public.progress enable row level security;
