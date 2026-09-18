@@ -1,3 +1,4 @@
+import { AuthPanel } from '@/components/AuthPanel'
 import { useMemo } from 'react'
 import { useApp } from '@/app/AppContext'
 import { ALL_QUESTIONS, META } from '@/domain/questions'
@@ -33,16 +34,19 @@ export function HomeScreen() {
         <h1 className="font-display text-2xl font-bold tracking-tight text-sand-50">
           Autoškola kvíz
         </h1>
-        <div className="flex items-center gap-2 rounded-card border border-sand-700 px-3 py-1.5">
-          <span aria-hidden className="text-terra-400">
-            ▲
-          </span>
-          <span className="font-mono text-lg font-semibold tabular-nums text-terra-300">
-            {streak}
-          </span>
-          <span className="font-mono text-[0.65rem] uppercase tracking-wide text-sand-500">
-            {streak === 1 ? 'den' : 'dní'} v řadě
-          </span>
+        <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 rounded-card border border-sand-700 px-3 py-1.5">
+            <span aria-hidden className="text-terra-400">
+              ▲
+            </span>
+            <span className="font-mono text-lg font-semibold tabular-nums text-terra-300">
+              {streak}
+            </span>
+            <span className="font-mono text-[0.65rem] uppercase tracking-wide text-sand-500">
+              {streak === 1 ? 'den' : 'dní'} v řadě
+            </span>
+          </div>
+          <AuthPanel />
         </div>
       </header>
 
