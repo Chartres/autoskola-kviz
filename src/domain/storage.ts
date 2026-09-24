@@ -23,7 +23,17 @@ export function loadProgress(): ProgressData {
     const raw = s.getItem(STORAGE_KEY)
     if (!raw) return emptyProgress()
     const parsed = JSON.parse(raw) as Partial<ProgressData>
-    if (parsed.version !== PROGRESS_VERSION) return emptyProgress()
+    if (parsed.version !== PROGRESS_VERSION) {
+      // Migrate forward: preserve data, adopt current version. Losing the
+      // version-mismatch data is permanent and unrecoverable — keep it.
+      return {
+        version: PROGRESS_VERSION,
+        stats: parsed.stats ?? {},
+        bookmarks: parsed.bookmarks ?? [],
+        streak: parsed.streak ?? emptyStreak(),
+        updatedAt: parsed.updatedAt ?? 0,
+      }
+    }
     return {
       version: PROGRESS_VERSION,
       stats: parsed.stats ?? {},
