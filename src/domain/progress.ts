@@ -219,7 +219,9 @@ export function mergeProgress(
   }
   const sa = a.streak ?? emptyStreak()
   const sb = b.streak ?? emptyStreak()
-  const latest = sb.lastDate >= sa.lastDate ? sb : sa
+  // On a date tie, keep the longer current streak (not the remote by default).
+  const latest =
+    sb.lastDate > sa.lastDate ? sb : sb.lastDate < sa.lastDate ? sa : (sb.current > sa.current ? sb : sa)
   return {
     version: PROGRESS_VERSION,
     stats,
