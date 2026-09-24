@@ -2,6 +2,7 @@ import {
   createContext,
   useContext,
   useEffect,
+  useMemo,
   useState,
   type ReactNode,
 } from 'react'
@@ -35,6 +36,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(u ? { id: u.id, email: u.email ?? undefined } : null)
       identify(u?.id ?? null) // cross-product identity on the shared platform
       setLoading(false)
+    }).catch(() => {
+      setLoading(false)
     })
     const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
       const u = session?.user
@@ -44,7 +47,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return () => sub.subscription.unsubscribe()
   }, [])
 
-  const value: AuthContextValue = {
+  const value: AuthContextValue = useMemo(() => ({
     configured: isAuthConfigured,
     loading,
     user,
@@ -67,7 +70,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (!supabase) return
       await supabase.auth.signOut()
     },
-  }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }), [user, loading])
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
