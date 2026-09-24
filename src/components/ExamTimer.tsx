@@ -16,8 +16,14 @@ export function ExamTimer({ endsAt, onExpire }: ExamTimerProps) {
   const [now, setNow] = useState(() => Date.now())
 
   useEffect(() => {
-    const id = setInterval(() => setNow(Date.now()), 1000)
-    return () => clearInterval(id)
+    const tick = () => setNow(Date.now())
+    const id = setInterval(tick, 1000)
+    // Correct for throttled/suspended intervals when the tab is backgrounded.
+    document.addEventListener('visibilitychange', tick)
+    return () => {
+      clearInterval(id)
+      document.removeEventListener('visibilitychange', tick)
+    }
   }, [])
 
   const remaining = endsAt - now
