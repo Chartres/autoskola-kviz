@@ -19,7 +19,17 @@ export const supabaseStore: RemoteProgressStore = {
       .maybeSingle()
     if (error) throw error
     const stored = data?.data as ProgressData | undefined
-    if (!stored || stored.version !== PROGRESS_VERSION) return null
+    if (!stored) return null
+    if (stored.version !== PROGRESS_VERSION) {
+      // Migrate forward rather than discarding remote data.
+      return {
+        version: PROGRESS_VERSION,
+        stats: stored.stats ?? {},
+        bookmarks: stored.bookmarks ?? [],
+        streak: stored.streak ?? { current: 0, best: 0, lastDate: '' },
+        updatedAt: stored.updatedAt ?? 0,
+      }
+    }
     return stored
   },
 
