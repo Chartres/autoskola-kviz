@@ -62,7 +62,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     return () => {
       cancelled = true
     }
-  }, [user?.id])
+  }, [user])
 
   // While signed in, push progress changes to the cloud (debounced).
   useEffect(() => {
@@ -71,7 +71,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       supabaseStore.save(user.id, state.progress).catch(() => {})
     }, 1500)
     return () => clearTimeout(t)
-  }, [state.progress, user?.id])
+  }, [state.progress, user])
 
   return (
     <AppContext.Provider value={{ state, dispatch }}>
