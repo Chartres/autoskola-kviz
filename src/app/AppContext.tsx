@@ -22,14 +22,17 @@ interface AppContextValue {
 const AppContext = createContext<AppContextValue | null>(null)
 
 export function AppProvider({ children }: { children: ReactNode }) {
-  const [state, dispatch] = useReducer(reducer, undefined, initialState)
+  // Load from storage in the lazy initializer so persist effects never see
+  // emptyProgress() on first render (fixes mount-order overwrite).
+  const [state, dispatch] = useReducer(reducer, undefined, () => ({
+    ...initialState(),
+    progress: loadProgress(),
+    jizdyState: loadJizdy(),
+  }))
   const { user } = useAuth()
 
-  // Hydrate persisted progress once on mount.
+  // SEO topic page (/okruh/<slug>/): start that okruh's practice directly.
   useEffect(() => {
-    dispatch({ type: 'hydrate', progress: loadProgress() })
-    dispatch({ type: 'hydrateJizdy', state: loadJizdy() })
-    // SEO topic page (/okruh/<slug>/): start that okruh's practice directly.
     const topic = topicFromPath(window.location.pathname)
     if (topic) {
       dispatch({ type: 'setCategories', categories: new Set([topic.category]) })
