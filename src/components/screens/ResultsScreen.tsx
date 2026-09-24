@@ -10,21 +10,23 @@ import { FeedbackCard } from '@/components/FeedbackCard'
 export function ResultsScreen() {
   const { state, dispatch } = useApp()
   const { session, examResult, mode } = state
-  if (!session) return null
 
   const isExam = mode === 'exam'
   const isLesson = mode === 'lesson'
   // Exams score in points (official model, 50 max); practice counts questions.
-  const total = isExam && examResult ? examResult.total : session.questions.length
-  const correct = isExam && examResult ? examResult.score : score(session)
-  const wrong = wrongAnswers(session)
+  const total = isExam && examResult ? examResult.total : (session?.questions.length ?? 0)
+  const correct = isExam && examResult ? examResult.score : (session ? score(session) : 0)
+  const wrong = session ? wrongAnswers(session) : []
 
   useEffect(() => {
+    if (!session) return
     const name = isExam ? 'exam_finish' : isLesson ? 'lesson_complete' : 'session_finish'
     track(name, { mode, score: correct, total, passed: examResult?.passed })
     // fire once per results view
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  if (!session) return null
 
   return (
     <div className="mx-auto w-full max-w-2xl px-4 py-10">
