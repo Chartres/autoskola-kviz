@@ -65,6 +65,7 @@ export function recordLessonComplete(
   return {
     ...p,
     streak: { current, best: Math.max(s.best, current), lastDate: today },
+    updatedAt: Math.max(p.updatedAt, Date.now()),
   }
 }
 
@@ -128,7 +129,7 @@ export function toggleBookmark(p: ProgressData, id: number): ProgressData {
   const set = new Set(p.bookmarks)
   if (set.has(id)) set.delete(id)
   else set.add(id)
-  return { ...p, bookmarks: [...set] }
+  return { ...p, bookmarks: [...set], updatedAt: Math.max(p.updatedAt, Date.now()) }
 }
 
 export function isBookmarked(p: ProgressData, id: number): boolean {
