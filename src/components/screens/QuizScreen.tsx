@@ -68,7 +68,7 @@ export function QuizScreen() {
       </header>
 
       <div className="mb-6">
-        <ProgressBar value={session.index} max={session.questions.length} />
+        <ProgressBar value={Object.keys(session.chosen).length} max={session.questions.length} />
       </div>
 
       <QuestionCard
