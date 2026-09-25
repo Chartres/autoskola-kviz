@@ -32,8 +32,8 @@ const GROUP_CATEGORIES: Record<ExamGroup, CategoryName[]> = {
 }
 
 export function questionsForGroup(group: ExamGroup): Question[] {
-  const cats = new Set<CategoryName>(GROUP_CATEGORIES[group])
-  return ALL_QUESTIONS.filter((q) => cats.has(q.cat))
+  const cats = GROUP_CATEGORIES[group]
+  return ALL_QUESTIONS.filter((q) => cats.includes(q.cat))
 }
 
 export const CATEGORY_NAMES: CategoryName[] = META.categories.map((c) => c.name)
