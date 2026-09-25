@@ -1,5 +1,5 @@
 import { supabase } from './supabase'
-import { PROGRESS_VERSION, type ProgressData } from '@/domain/progress'
+import { emptyStreak, PROGRESS_VERSION, type ProgressData } from '@/domain/progress'
 import type { RemoteProgressStore } from './sync'
 
 /**
@@ -26,7 +26,7 @@ export const supabaseStore: RemoteProgressStore = {
         version: PROGRESS_VERSION,
         stats: stored.stats ?? {},
         bookmarks: stored.bookmarks ?? [],
-        streak: stored.streak ?? { current: 0, best: 0, lastDate: '' },
+        streak: stored.streak ?? emptyStreak(),
         updatedAt: stored.updatedAt ?? 0,
       }
     }
