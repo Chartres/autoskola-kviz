@@ -34,7 +34,7 @@ export function buildLesson(
   // 1) Review: due weak-spots, capped.
   const reviewCap = Math.floor(size * REVIEW_FRACTION)
   const review: Question[] = []
-  for (const id of dueForReview(progress, 0)) {
+  for (const id of dueForReview(progress)) {
     if (review.length >= reviewCap) break
     const q = getQuestion(id)
     if (q && take(q)) review.push(q)

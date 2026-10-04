@@ -159,7 +159,7 @@ export function needsReviewIds(p: ProgressData): number[] {
  * least-recently-seen. This is the lightweight spaced-repetition signal —
  * drill the weak spots (Montessori "isolation of difficulty").
  */
-export function dueForReview(p: ProgressData, _now: number): number[] {
+export function dueForReview(p: ProgressData): number[] {
   return needsReviewIds(p).sort((a, b) => {
     const sa = statFor(p, a)
     const sb = statFor(p, b)

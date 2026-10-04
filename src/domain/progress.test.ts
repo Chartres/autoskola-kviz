@@ -91,7 +91,7 @@ describe('review selection (spaced repetition)', () => {
     p = recordAnswer(p, 1, true, 100) // correct, recent
     p = recordAnswer(p, 2, false, 50) // wrong, older
     p = recordAnswer(p, 3, false, 90) // wrong, newer
-    const ids = dueForReview(p, 200)
+    const ids = dueForReview(p)
     // both wrong come before the merely-unmastered correct one;
     // among wrong, the older (id 2) comes first
     expect(ids.slice(0, 2)).toEqual([2, 3])
