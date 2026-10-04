@@ -28,7 +28,7 @@ export function sample<T>(items: readonly T[], n: number, rng: Rng): T[] {
 }
 
 /** A seed derived from the current time, for non-deterministic production use. */
-export function timeSeed(): number {
+function timeSeed(): number {
   return (Date.now() ^ (Math.random() * 0xffffffff)) >>> 0
 }
 
