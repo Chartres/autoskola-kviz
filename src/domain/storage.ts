@@ -54,7 +54,7 @@ export function saveProgress(data: ProgressData): void {
 // sign-out never overwrites another user's lessons.
 const JIZDY_KEY = 'jizdy-v1'
 function jizdyKey(uid?: string): string {
-  return uid ? `jizdy-v1:${uid}` : JIZDY_KEY
+  return uid ? `${JIZDY_KEY}:${uid}` : JIZDY_KEY
 }
 
 export function loadJizdy(uid?: string): JizdyState {
