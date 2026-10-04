@@ -45,8 +45,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const justHydratedRef = useRef(false)
   // M5: detect transition from signed-in → signed-out to clear local progress.
   const wasSignedInRef = useRef(false)
-  // H2: track last signed-in uid so sign-out can flush any pending progress.
-  const prevUidRef = useRef<string | null>(null)
 
   // SEO topic page (/okruh/<slug>/): start that okruh's practice directly.
   useEffect(() => {
@@ -88,7 +86,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
     if (!user) {
       if (wasSignedInRef.current) {
         // H2: flush now handled by registerBeforeSignOut (runs before session expires).
-        prevUidRef.current = null
         // C3H2: no jizdy wipe — lessons live under the user-scoped key; just reset
         // in-memory state so the next account (or anonymous) starts clean.
         dispatch({ type: 'hydrateJizdy', state: emptyJizdyState() })
@@ -101,7 +98,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
     wasSignedInRef.current = true
     const uid = user.id
-    prevUidRef.current = uid
     // C3H2: load this user's jizdy lessons from their scoped key.
     dispatch({ type: 'hydrateJizdy', state: loadJizdy(uid) })
     let cancelled = false
