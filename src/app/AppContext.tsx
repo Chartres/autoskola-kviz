@@ -64,10 +64,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
     saveProgress(state.progress)
   }, [state.progress])
 
-  // Persist jizdy state locally whenever it changes.
+  // Persist jizdy state to the user-scoped key (or anonymous key when signed out).
+  // C3H2: use uid-scoped key so sign-out never overwrites a signed-in user's lessons.
   useEffect(() => {
-    saveJizdy(state.jizdyState)
-  }, [state.jizdyState])
+    saveJizdy(state.jizdyState, user?.id)
+  }, [state.jizdyState, user?.id]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Register a flush callback so signOut can persist progress before the session expires.
   useEffect(() => {
@@ -88,8 +89,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
       if (wasSignedInRef.current) {
         // H2: flush now handled by registerBeforeSignOut (runs before session expires).
         prevUidRef.current = null
-        // L2: also wipe jizdyState so the next account on this device starts fresh
-        saveJizdy(emptyJizdyState())
+        // C3H2: no jizdy wipe — lessons live under the user-scoped key; just reset
+        // in-memory state so the next account (or anonymous) starts clean.
         dispatch({ type: 'hydrateJizdy', state: emptyJizdyState() })
         // M5: sign-out — wipe local progress so the next account starts fresh
         saveProgress(emptyProgress())
@@ -101,6 +102,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
     wasSignedInRef.current = true
     const uid = user.id
     prevUidRef.current = uid
+    // C3H2: load this user's jizdy lessons from their scoped key.
+    dispatch({ type: 'hydrateJizdy', state: loadJizdy(uid) })
     let cancelled = false
     syncingRef.current = true // H1: block debounced save while fetch is in flight
     syncProgress(supabaseStore, uid, loadProgress())

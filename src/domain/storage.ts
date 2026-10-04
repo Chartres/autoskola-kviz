@@ -50,13 +50,18 @@ export function saveProgress(data: ProgressData): void {
   writeJson(STORAGE_KEY, data)
 }
 
+// ponytail: anonymous key kept as-is; signed-in users get a uid-scoped key so
+// sign-out never overwrites another user's lessons.
 const JIZDY_KEY = 'jizdy-v1'
+function jizdyKey(uid?: string): string {
+  return uid ? `jizdy-v1:${uid}` : JIZDY_KEY
+}
 
-export function loadJizdy(): JizdyState {
+export function loadJizdy(uid?: string): JizdyState {
   const s = storage()
   if (!s) return emptyJizdyState()
   try {
-    const raw = s.getItem(JIZDY_KEY)
+    const raw = s.getItem(jizdyKey(uid))
     if (!raw) return emptyJizdyState()
     const parsed = JSON.parse(raw) as Partial<JizdyState>
     // L2: only wipe genuinely unknown/absent versions. A future version (> 1)
@@ -69,6 +74,6 @@ export function loadJizdy(): JizdyState {
   }
 }
 
-export function saveJizdy(state: JizdyState): void {
-  writeJson(JIZDY_KEY, state)
+export function saveJizdy(state: JizdyState, uid?: string): void {
+  writeJson(jizdyKey(uid), state)
 }
