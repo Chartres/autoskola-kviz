@@ -103,6 +103,21 @@ describe('app store', () => {
     expect(s.progress.streak.current).toBe(1)
   })
 
+  it('next through all exam questions sets examResult and clears examEndsAt', () => {
+    let s = start()
+    s = reducer(s, { type: 'startExam', rng: makeRng(7), now: 0 })
+    expect(s.examEndsAt).not.toBeNull()
+    const total = s.session!.questions.length
+    for (let i = 0; i < total; i++) {
+      const cur = currentQuestion(s.session!)!
+      s = reducer(s, { type: 'answer', choice: cur.correct, now: i })
+      s = reducer(s, { type: 'next' })
+    }
+    expect(s.view).toBe('results')
+    expect(s.examResult).not.toBeNull()
+    expect(s.examEndsAt).toBeNull()
+  })
+
   it('returns to the menu and clears the active session', () => {
     let s = start()
     s = reducer(s, { type: 'startExam', rng: makeRng(1), now: 0 })
