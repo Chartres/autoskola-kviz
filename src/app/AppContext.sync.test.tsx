@@ -1,8 +1,9 @@
 /**
- * H2: Tests for sign-in sync, hydrate wiring, fetch-failure safety (H1), and
- * in-flight-answer preservation (M2).
+ * H2: Tests for sign-in sync, hydrate wiring, fetch-failure safety (H1),
+ * in-flight-answer preservation (M2), sign-out wipe (C2M2), and debounced
+ * cloud save (C2M3).
  */
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { render, screen, waitFor, act } from '@testing-library/react'
 import { AppProvider, useApp } from './AppContext'
 import { emptyProgress, recordAnswer } from '@/domain/progress'
@@ -146,5 +147,88 @@ describe('AppContext sign-in sync', () => {
       'user-3',
       expect.anything(),
     )
+  })
+})
+
+describe('AppContext sign-out', () => {
+  it('clears progress and jizdyState on sign-out (C2M2)', async () => {
+    let local = emptyProgress()
+    local = recordAnswer(local, 11, true, 500)
+    localStorage.setItem('autoskola-kviz:progress:v1', JSON.stringify(local))
+
+    mockUserHolder.user = { id: 'sign-out-user' }
+    const { rerender } = render(
+      <AppProvider>
+        <Spy />
+      </AppProvider>,
+    )
+
+    // Complete sync with the local progress.
+    await act(async () => {
+      syncResolvers.resolve(local)
+    })
+    await waitFor(() =>
+      expect(screen.getByTestId('answered').textContent).toBe('1'),
+    )
+
+    // Sign out — change user to null and re-render so the effect sees the change.
+    mockUserHolder.user = null
+    rerender(
+      <AppProvider>
+        <Spy />
+      </AppProvider>,
+    )
+
+    await waitFor(() =>
+      expect(screen.getByTestId('answered').textContent).toBe('0'),
+    )
+  })
+})
+
+describe('AppContext debounced cloud save', () => {
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+
+  it('fires after a progress change; skipped right after hydrate (C2M3)', async () => {
+    vi.useFakeTimers()
+    mockUserHolder.user = { id: 'debounce-user' }
+
+    let capturedDispatch: ReturnType<typeof useApp>['dispatch'] | null = null
+    function DispatchCapture() {
+      const { dispatch } = useApp()
+      capturedDispatch = dispatch
+      return null
+    }
+
+    render(
+      <AppProvider>
+        <Spy />
+        <DispatchCapture />
+      </AppProvider>,
+    )
+
+    // Complete sync — hydrate fires, justHydratedRef=true.
+    await act(async () => {
+      syncResolvers.resolve(emptyProgress())
+    })
+
+    // Advance past debounce: post-hydrate save is skipped (justHydratedRef).
+    act(() => { vi.advanceTimersByTime(2000) })
+    expect(fakeSave).not.toHaveBeenCalled()
+
+    // Subsequent progress change (not from sync) — justHydratedRef is now false.
+    const newProg = recordAnswer(emptyProgress(), 99, true, 1000)
+    await act(async () => {
+      capturedDispatch!({ type: 'hydrate', progress: newProg })
+    })
+
+    // Debounce has not elapsed yet.
+    expect(fakeSave).not.toHaveBeenCalled()
+
+    // Advance past debounce — save fires.
+    act(() => { vi.advanceTimersByTime(2000) })
+    expect(fakeSave).toHaveBeenCalledTimes(1)
+    expect(fakeSave).toHaveBeenCalledWith('debounce-user', newProg)
   })
 })
