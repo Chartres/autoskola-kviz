@@ -157,6 +157,9 @@ export function reducer(state: AppState, action: Action): AppState {
           session,
           view: 'results',
           examResult: state.mode === 'exam' ? evaluateExam(session) : null,
+          // L1: also clear examEndsAt when the exam ends via question-by-question
+          // navigation (finishExam and goMenu already clear it; this path did not).
+          examEndsAt: null,
           progress:
             state.mode === 'lesson' && action.today
               ? recordLessonComplete(state.progress, action.today)
