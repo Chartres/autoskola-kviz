@@ -13,7 +13,7 @@ import type { ProgressData } from '@/domain/progress'
 
 // vitest hoists vi.mock factories above imports, so top-level variables are not
 // yet initialised when the factory runs.  vi.hoisted() is the escape hatch.
-const { mockUserHolder, syncResolvers, fakeSave } = vi.hoisted(() => {
+const { mockUserHolder, syncResolvers, fakeSave, registeredFlush } = vi.hoisted(() => {
   const mockUserHolder: { user: { id: string } | null } = { user: null }
   const syncResolvers: {
     resolve: (v: ProgressData) => void
@@ -23,7 +23,9 @@ const { mockUserHolder, syncResolvers, fakeSave } = vi.hoisted(() => {
     reject: () => {},
   }
   const fakeSave = vi.fn(async () => {})
-  return { mockUserHolder, syncResolvers, fakeSave }
+  // Captures the flush callback AppContext registers via registerBeforeSignOut.
+  const registeredFlush: { current: (() => Promise<void>) | null } = { current: null }
+  return { mockUserHolder, syncResolvers, fakeSave, registeredFlush }
 })
 
 vi.mock('@/auth/supabase', () => ({ supabase: null, isAuthConfigured: false }))
@@ -38,6 +40,10 @@ vi.mock('@/auth/AuthContext', () => ({
     signInWithEmail: vi.fn(),
     signOut: vi.fn(),
   }),
+  registerBeforeSignOut: (cb: () => Promise<void>) => {
+    registeredFlush.current = cb
+    return () => { registeredFlush.current = null }
+  },
 }))
 
 vi.mock('@/auth/sync', () => ({
@@ -182,6 +188,37 @@ describe('AppContext sign-out', () => {
     await waitFor(() =>
       expect(screen.getByTestId('answered').textContent).toBe('0'),
     )
+  })
+
+  it('registers a flush callback while signed in; callback saves progress (C3M2)', async () => {
+    let local = emptyProgress()
+    local = recordAnswer(local, 22, true, 500)
+    localStorage.setItem('autoskola-kviz:progress:v1', JSON.stringify(local))
+
+    mockUserHolder.user = { id: 'flush-user' }
+    render(
+      <AppProvider>
+        <Spy />
+      </AppProvider>,
+    )
+
+    await act(async () => {
+      syncResolvers.resolve(local)
+    })
+    await waitFor(() =>
+      expect(screen.getByTestId('answered').textContent).toBe('1'),
+    )
+
+    // The flush callback should have been registered by now.
+    expect(registeredFlush.current).not.toBeNull()
+
+    // Simulate signOut calling the flush before invalidating the session.
+    fakeSave.mockClear()
+    await act(async () => {
+      await registeredFlush.current!()
+    })
+
+    expect(fakeSave).toHaveBeenCalledWith('flush-user', expect.objectContaining({ stats: expect.any(Object) }))
   })
 })
 

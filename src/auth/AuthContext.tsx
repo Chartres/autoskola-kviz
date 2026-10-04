@@ -25,6 +25,16 @@ interface AuthContextValue {
 
 const AuthContext = createContext<AuthContextValue | null>(null)
 
+// Module-level slot: AppContext registers a flush callback here; signOut calls
+// it with an active session before auth.signOut() invalidates the token.
+// ponytail: module-level mutable — safe because there is exactly one AuthProvider per app.
+let _beforeSignOut: (() => Promise<void>) | null = null
+
+export function registerBeforeSignOut(cb: () => Promise<void>): () => void {
+  _beforeSignOut = cb
+  return () => { _beforeSignOut = null }
+}
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<AuthUser | null>(null)
   const [loading, setLoading] = useState(isAuthConfigured)
@@ -68,6 +78,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     },
     async signOut() {
       if (!supabase) return
+      // Flush pending progress while the session is still valid.
+      await _beforeSignOut?.().catch(() => {})
       await supabase.auth.signOut()
     },
   // eslint-disable-next-line react-hooks/exhaustive-deps
