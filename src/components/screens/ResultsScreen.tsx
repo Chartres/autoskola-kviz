@@ -3,7 +3,7 @@ import { useApp } from '@/app/AppContext'
 import { track, conversion } from '@/analytics'
 import { score, wrongAnswers } from '@/domain/session'
 import { getQuestion } from '@/domain/questions'
-import { makeRng, timeSeed } from '@/domain/rng'
+import { freshRng } from '@/domain/rng'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import { FeedbackCard } from '@/components/FeedbackCard'
 
@@ -114,7 +114,7 @@ export function ResultsScreen() {
         {isLesson && (
           <button
             type="button"
-            onClick={() => dispatch({ type: 'startLesson', rng: makeRng(timeSeed()) })}
+            onClick={() => dispatch({ type: 'startLesson', rng: freshRng() })}
             className="glow-terra rounded-card bg-terra-500 px-5 py-2.5 font-display font-semibold text-sand-950 hover:bg-terra-400"
           >
             Další lekce

@@ -3,7 +3,7 @@ import { useApp } from '@/app/AppContext'
 import { META } from '@/domain/questions'
 import { missedIds } from '@/domain/progress'
 import { filterQuestions } from '@/domain/selection'
-import { timeSeed, makeRng } from '@/domain/rng'
+import { freshRng } from '@/domain/rng'
 import { track } from '@/analytics'
 import { AuthPanel } from '@/components/AuthPanel'
 import type { CategoryName } from '@/domain/types'
@@ -34,8 +34,6 @@ export function PracticeScreen() {
     dispatch({ type: 'setCategories', categories: next })
   }
 
-  const rng = () => makeRng(timeSeed())
-
   return (
     <div className="mx-auto w-full max-w-xl px-4 pt-2">
       <div className="mb-4 flex items-center justify-between gap-2">
@@ -50,7 +48,7 @@ export function PracticeScreen() {
         type="button"
         onClick={() => {
           track('start_exam')
-          dispatch({ type: 'startExam', rng: rng(), now: Date.now() })
+          dispatch({ type: 'startExam', rng: freshRng(), now: Date.now() })
         }}
         className="mb-5 flex w-full items-center justify-between gap-3 rounded-card border border-sand-700 bg-sand-800/40 p-4 text-left transition-colors hover:border-sand-500"
       >
@@ -121,7 +119,7 @@ export function PracticeScreen() {
           disabled={practiceCount === 0}
           onClick={() => {
             track('start_practice')
-            dispatch({ type: 'startPractice', rng: rng() })
+            dispatch({ type: 'startPractice', rng: freshRng() })
           }}
           className="glow-terra mt-3 w-full rounded-card bg-terra-500 px-5 py-3 font-display font-semibold text-sand-950 transition-colors hover:bg-terra-400 disabled:cursor-not-allowed disabled:opacity-50"
         >
@@ -151,7 +149,7 @@ export function PracticeScreen() {
         disabled={bookmarkCount === 0}
         onClick={() => {
           track('start_bookmarks')
-          dispatch({ type: 'startBookmarks', rng: rng() })
+          dispatch({ type: 'startBookmarks', rng: freshRng() })
         }}
         className="mt-4 flex w-full items-center justify-between rounded-card border border-sand-700 bg-sand-800/40 px-5 py-3.5 text-left transition-colors hover:border-sand-500 disabled:cursor-not-allowed disabled:opacity-50"
       >
