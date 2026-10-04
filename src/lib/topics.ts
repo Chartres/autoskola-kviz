@@ -12,5 +12,12 @@ export const TOPICS = rawTopics as Topic[]
 /** Resolve /okruh/<slug> (with or without trailing slash) to its topic. */
 export function topicFromPath(pathname: string): Topic | undefined {
   const m = /^\/okruh\/([^/]+)\/?$/.exec(pathname)
-  return m ? TOPICS.find((t) => t.slug === decodeURIComponent(m[1])) : undefined
+  if (!m) return undefined
+  let slug: string
+  try {
+    slug = decodeURIComponent(m[1])
+  } catch {
+    return undefined
+  }
+  return TOPICS.find((t) => t.slug === slug)
 }
