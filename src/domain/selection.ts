@@ -10,6 +10,18 @@ export function normalizeForSearch(text: string): string {
     .toLowerCase()
 }
 
+// L4: cache normalized question text so filterQuestions doesn't re-normalize
+// all 1136 questions on every search keystroke.
+const _normalizedHayCache = new Map<number, string>()
+function normalizedHay(q: { id: number; q: string; a: string; b: string; c?: string | null }): string {
+  let h = _normalizedHayCache.get(q.id)
+  if (h === undefined) {
+    h = normalizeForSearch(q.q + ' ' + q.a + ' ' + q.b + ' ' + (q.c ?? ''))
+    _normalizedHayCache.set(q.id, h)
+  }
+  return h
+}
+
 export interface FilterOptions {
   categories?: Set<CategoryName>
   search?: string
@@ -21,8 +33,7 @@ export function filterQuestions(opts: FilterOptions): Question[] {
     if (opts.categories && opts.categories.size > 0 && !opts.categories.has(q.cat))
       return false
     if (term) {
-      const hay = normalizeForSearch(q.q + ' ' + q.a + ' ' + q.b + ' ' + (q.c ?? ''))
-      if (!hay.includes(term)) return false
+      if (!normalizedHay(q).includes(term)) return false
     }
     return true
   })
