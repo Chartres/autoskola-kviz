@@ -94,7 +94,7 @@ describe('AppContext sign-in sync', () => {
     )
   })
 
-  it('preserves local progress on fetch failure (H1: debounced save blocked during sync)', async () => {
+  it('preserves local progress on fetch failure (H1: debounced save blocked after failed sync)', async () => {
     let local = emptyProgress()
     local = recordAnswer(local, 7, true, 500)
     localStorage.setItem('autoskola-kviz:progress:v1', JSON.stringify(local))
@@ -106,19 +106,20 @@ describe('AppContext sign-in sync', () => {
       </AppProvider>,
     )
 
-    // Reject the sync fetch (network failure).
+    // syncProgress resolves with local on fetch failure — it never rejects.
+    // Resolving with local triggers the .then() path, which sets justHydratedRef=true
+    // and dispatches hydrate.  The debounced save effect fires but justHydratedRef
+    // blocks it before any setTimeout is scheduled.
     await act(async () => {
-      syncResolvers.reject(new Error('network'))
+      syncResolvers.resolve(local)
     })
 
-    // Local progress must still be visible (not wiped by an errant debounced save).
+    // Local progress must still be visible after hydrate.
     await waitFor(() =>
       expect(screen.getByTestId('answered').textContent).toBe('1'),
     )
 
-    // syncProgress handles the fetch error internally and returns local — it never
-    // rejects the outer promise.  If it did reach the debounced save, fakeSave
-    // would have been called, which would be the H1 bug.
+    // justHydratedRef blocked the post-hydrate debounced save — no cloud write.
     expect(fakeSave).not.toHaveBeenCalled()
   })
 
