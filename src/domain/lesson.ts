@@ -14,7 +14,8 @@ const REVIEW_FRACTION = 0.4
  *  - up to ~40 % review of due weak spots (spaced repetition), then
  *  - fresh, unseen questions weighted to the real exam composition
  *    (legal-heavy), falling back to seen-but-unmastered if a group runs out.
- * Always returns exactly LESSON_SIZE distinct questions (shuffled).
+ * Returns up to LESSON_SIZE distinct questions (shuffled); may return fewer
+ * when nearly all questions have been mastered and the question pool is exhausted.
  */
 export function buildLesson(
   progress: ProgressData,
