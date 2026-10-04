@@ -8,6 +8,7 @@ import {
 } from 'react'
 import { reducer, initialState, type AppState, type Action } from './store'
 import { loadProgress, saveProgress, loadJizdy, saveJizdy } from '@/domain/storage'
+import { emptyJizdyState } from '@/domain/jizdy'
 import { topicFromPath } from '@/lib/topics'
 import { freshRng } from '@/domain/rng'
 import { useAuth } from '@/auth/AuthContext'
@@ -44,6 +45,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const justHydratedRef = useRef(false)
   // M5: detect transition from signed-in → signed-out to clear local progress.
   const wasSignedInRef = useRef(false)
+  // H2: track last signed-in uid so sign-out can flush any pending progress.
+  const prevUidRef = useRef<string | null>(null)
 
   // SEO topic page (/okruh/<slug>/): start that okruh's practice directly.
   useEffect(() => {
@@ -74,6 +77,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!user) {
       if (wasSignedInRef.current) {
+        // H2: flush any unsaved progress before wiping (debounced save may be pending)
+        const prevUid = prevUidRef.current
+        if (prevUid) {
+          supabaseStore.save(prevUid, progressRef.current).catch(() => {})
+        }
+        prevUidRef.current = null
+        // L2: also wipe jizdyState so the next account on this device starts fresh
+        saveJizdy(emptyJizdyState())
+        dispatch({ type: 'hydrateJizdy', state: emptyJizdyState() })
         // M5: sign-out — wipe local progress so the next account starts fresh
         saveProgress(emptyProgress())
         dispatch({ type: 'hydrate', progress: emptyProgress() })
@@ -83,6 +95,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
     wasSignedInRef.current = true
     const uid = user.id
+    prevUidRef.current = uid
     let cancelled = false
     syncingRef.current = true // H1: block debounced save while fetch is in flight
     syncProgress(supabaseStore, uid, loadProgress())
