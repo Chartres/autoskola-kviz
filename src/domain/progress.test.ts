@@ -194,4 +194,33 @@ describe('mergeProgress (offline ↔ cloud sync)', () => {
     p = recordAnswer(p, 1, true, 100)
     expect(mergeProgress(p, p)).toEqual(p)
   })
+
+  // L12: streak tie-break and best merging
+  it('on same lastDate, keeps the longer current streak', () => {
+    let a = recordLessonComplete(emptyProgress(), '2026-06-10')
+    a = recordLessonComplete(a, '2026-06-11') // current 2
+    let b = recordLessonComplete(emptyProgress(), '2026-06-11') // current 1
+    const merged = mergeProgress(a, b)
+    expect(merged.streak.current).toBe(2) // a wins the tie
+    expect(merged.streak.lastDate).toBe('2026-06-11')
+  })
+
+  it('picks the later lastDate regardless of which side has the higher current', () => {
+    let a = recordLessonComplete(emptyProgress(), '2026-06-10') // current 1
+    let b = recordLessonComplete(emptyProgress(), '2026-06-11') // current 1
+    // inflate a.current artificially (simulate partial sync gap)
+    a = { ...a, streak: { ...a.streak, current: 5 } }
+    const merged = mergeProgress(a, b)
+    expect(merged.streak.lastDate).toBe('2026-06-11') // b's date is more recent
+    expect(merged.streak.current).toBe(1) // b wins by date
+  })
+
+  it('always takes the maximum best from either side', () => {
+    let a = emptyProgress()
+    a = { ...a, streak: { current: 1, best: 10, lastDate: '2026-06-10' } }
+    let b = emptyProgress()
+    b = { ...b, streak: { current: 3, best: 7, lastDate: '2026-06-11' } }
+    const merged = mergeProgress(a, b)
+    expect(merged.streak.best).toBe(10) // max(10, 7)
+  })
 })
