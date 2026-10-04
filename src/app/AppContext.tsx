@@ -3,6 +3,7 @@ import {
   useContext,
   useEffect,
   useReducer,
+  useRef,
   type ReactNode,
 } from 'react'
 import { reducer, initialState, type AppState, type Action } from './store'
@@ -12,6 +13,7 @@ import { makeRng, timeSeed } from '@/domain/rng'
 import { useAuth } from '@/auth/AuthContext'
 import { supabaseStore } from '@/auth/supabaseStore'
 import { syncProgress } from '@/auth/sync'
+import { mergeProgress, emptyProgress } from '@/domain/progress'
 import { track } from '@/analytics'
 
 interface AppContextValue {
@@ -30,6 +32,18 @@ export function AppProvider({ children }: { children: ReactNode }) {
     jizdyState: loadJizdy(),
   }))
   const { user } = useAuth()
+
+  // Always-current progress snapshot for in-flight-answer recovery (M2).
+  const progressRef = useRef(state.progress)
+  progressRef.current = state.progress
+
+  // H1: block debounced save while a cloud fetch is outstanding.
+  const syncingRef = useRef(false)
+  // M4: set to true after hydrate so the immediately-following debounced save is skipped
+  // (syncProgress already wrote the same blob to the cloud).
+  const justHydratedRef = useRef(false)
+  // M5: detect transition from signed-in → signed-out to clear local progress.
+  const wasSignedInRef = useRef(false)
 
   // SEO topic page (/okruh/<slug>/): start that okruh's practice directly.
   useEffect(() => {
@@ -53,25 +67,63 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, [state.jizdyState])
 
   // On sign-in: reconcile local progress with the cloud and adopt the merge.
+  // M3: depend on user.id (stable string), not the object — AuthContext recreates
+  //     the object on every auth event (getSession, TOKEN_REFRESHED, INITIAL_SESSION,
+  //     SIGNED_IN on tab refocus), causing at least 2 full syncs per page load.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
-    if (!user) return
+    if (!user) {
+      if (wasSignedInRef.current) {
+        // M5: sign-out — wipe local progress so the next account starts fresh
+        saveProgress(emptyProgress())
+        dispatch({ type: 'hydrate', progress: emptyProgress() })
+        wasSignedInRef.current = false
+      }
+      return
+    }
+    wasSignedInRef.current = true
+    const uid = user.id
     let cancelled = false
-    syncProgress(supabaseStore, user.id, loadProgress()).then((merged) => {
-      if (!cancelled) dispatch({ type: 'hydrate', progress: merged })
-    })
+    syncingRef.current = true // H1: block debounced save while fetch is in flight
+    syncProgress(supabaseStore, uid, loadProgress())
+      .then((merged) => {
+        if (!cancelled) {
+          // M2: re-merge with any answers given while the fetch was in flight
+          const withInFlight = mergeProgress(progressRef.current, merged)
+          justHydratedRef.current = true // M4: next debounced save would be redundant
+          syncingRef.current = false
+          dispatch({ type: 'hydrate', progress: withInFlight })
+        }
+      })
+      .catch(() => {
+        // syncProgress handles fetch errors internally; this is a safety net.
+        if (!cancelled) syncingRef.current = false
+      })
     return () => {
       cancelled = true
+      syncingRef.current = false
     }
-  }, [user])
+  }, [user?.id]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // While signed in, push progress changes to the cloud (debounced).
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!user) return
+    // H1: skip while a sync fetch is outstanding (failure would overwrite cloud row
+    //     with local-only, possibly empty, progress).
+    if (syncingRef.current) return
+    // M4: the progress change that triggers this effect right after hydrate is already
+    //     persisted by syncProgress — skip the redundant write.
+    if (justHydratedRef.current) {
+      justHydratedRef.current = false
+      return
+    }
+    const uid = user.id
     const t = setTimeout(() => {
-      supabaseStore.save(user.id, state.progress).catch(() => {})
+      supabaseStore.save(uid, state.progress).catch(() => {})
     }, 1500)
     return () => clearTimeout(t)
-  }, [state.progress, user])
+  }, [state.progress, user?.id]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <AppContext.Provider value={{ state, dispatch }}>
