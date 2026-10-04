@@ -11,7 +11,7 @@ import { loadProgress, saveProgress, loadJizdy, saveJizdy } from '@/domain/stora
 import { emptyJizdyState } from '@/domain/jizdy'
 import { topicFromPath } from '@/lib/topics'
 import { freshRng } from '@/domain/rng'
-import { useAuth } from '@/auth/AuthContext'
+import { useAuth, registerBeforeSignOut } from '@/auth/AuthContext'
 import { supabaseStore } from '@/auth/supabaseStore'
 import { syncProgress } from '@/auth/sync'
 import { mergeProgress, emptyProgress } from '@/domain/progress'
@@ -69,6 +69,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
     saveJizdy(state.jizdyState)
   }, [state.jizdyState])
 
+  // Register a flush callback so signOut can persist progress before the session expires.
+  useEffect(() => {
+    if (!user) return
+    const uid = user.id
+    return registerBeforeSignOut(() =>
+      supabaseStore.save(uid, progressRef.current).catch(() => {}),
+    )
+  }, [user?.id]) // eslint-disable-line react-hooks/exhaustive-deps
+
   // On sign-in: reconcile local progress with the cloud and adopt the merge.
   // M3: depend on user.id (stable string), not the object — AuthContext recreates
   //     the object on every auth event (getSession, TOKEN_REFRESHED, INITIAL_SESSION,
@@ -77,11 +86,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!user) {
       if (wasSignedInRef.current) {
-        // H2: flush any unsaved progress before wiping (debounced save may be pending)
-        const prevUid = prevUidRef.current
-        if (prevUid) {
-          supabaseStore.save(prevUid, progressRef.current).catch(() => {})
-        }
+        // H2: flush now handled by registerBeforeSignOut (runs before session expires).
         prevUidRef.current = null
         // L2: also wipe jizdyState so the next account on this device starts fresh
         saveJizdy(emptyJizdyState())
