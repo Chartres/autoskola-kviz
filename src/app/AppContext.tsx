@@ -38,6 +38,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const progressRef = useRef(state.progress)
   progressRef.current = state.progress
 
+  // Always-current user ref so the jizdy persist effect reads the correct uid
+  // without taking user?.id as a dependency (which would fire at sign-in/sign-out
+  // before hydrateJizdy runs, writing stale jizdyState to the wrong key — C4H1/C4H2).
+  const userRef = useRef(user)
+  userRef.current = user
+
   // H1: block debounced save while a cloud fetch is outstanding.
   const syncingRef = useRef(false)
   // M4: set to true after hydrate so the immediately-following debounced save is skipped
@@ -63,10 +69,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, [state.progress])
 
   // Persist jizdy state to the user-scoped key (or anonymous key when signed out).
-  // C3H2: use uid-scoped key so sign-out never overwrites a signed-in user's lessons.
+  // C4H1/C4H2: depend only on jizdyState, not user — userRef gives the always-current
+  // uid without triggering this effect on sign-in/sign-out (where jizdyState is still
+  // stale and would overwrite the correct uid-scoped data).
   useEffect(() => {
-    saveJizdy(state.jizdyState, user?.id)
-  }, [state.jizdyState, user?.id]) // eslint-disable-line react-hooks/exhaustive-deps
+    saveJizdy(state.jizdyState, userRef.current?.id)
+  }, [state.jizdyState]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Register a flush callback so signOut can persist progress before the session expires.
   useEffect(() => {
