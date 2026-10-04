@@ -135,7 +135,7 @@ export function PracticeScreen() {
         disabled={missedCount === 0}
         onClick={() => {
           track('start_review')
-          dispatch({ type: 'startReview', rng: rng() })
+          dispatch({ type: 'startReview' })
         }}
         className="mt-4 flex w-full items-center justify-between rounded-card border border-sand-700 bg-sand-800/40 px-5 py-3.5 text-left transition-colors hover:border-sand-500 disabled:cursor-not-allowed disabled:opacity-50"
       >

@@ -123,7 +123,7 @@ export function ResultsScreen() {
         {wrong.length > 0 && (
           <button
             type="button"
-            onClick={() => dispatch({ type: 'startReview', rng: makeRng(timeSeed()) })}
+            onClick={() => dispatch({ type: 'startReview' })}
             className="rounded-card border border-sand-600 px-5 py-2.5 font-semibold text-sand-200 hover:border-sand-400"
           >
             Opakovat chyby

@@ -76,7 +76,7 @@ describe('app store', () => {
     p = recordAnswer(p, 6, false, 10)
     p = recordAnswer(p, 7, false, 20)
     let s = start({ progress: p })
-    s = reducer(s, { type: 'startReview', rng: makeRng(1) })
+    s = reducer(s, { type: 'startReview' })
     expect(s.mode).toBe('review')
     // same points (both Pravidla, 2 b) → the more recently missed (7) first
     expect(s.session?.questions.map((q) => q.id)).toEqual([7, 6])
