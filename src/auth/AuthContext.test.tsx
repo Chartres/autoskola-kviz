@@ -4,7 +4,7 @@
  */
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, act, waitFor } from '@testing-library/react'
-import { AuthProvider, useAuth } from './AuthContext'
+import { AuthProvider, useAuth, registerBeforeSignOut } from './AuthContext'
 
 // ── Fake supabase client ──────────────────────────────────────────────────────
 
@@ -153,6 +153,30 @@ describe('AuthContext (auth configured)', () => {
     await waitFor(() => expect(client.auth.getSession).toHaveBeenCalled())
     await signOut()
     expect(client.auth.signOut).toHaveBeenCalledTimes(1)
+  })
+
+  it('signOut awaits the registered flush before supabase.auth.signOut (C4M1)', async () => {
+    const client = makeClient('eve')
+    clientHolder.client = client
+    let signOut!: () => Promise<void>
+
+    function Capture() {
+      signOut = useAuth().signOut
+      return null
+    }
+
+    render(<AuthProvider><Capture /></AuthProvider>)
+    await waitFor(() => expect(client.auth.getSession).toHaveBeenCalled())
+
+    const order: string[] = []
+    registerBeforeSignOut(vi.fn(async () => { order.push('flush') }))
+    const origSignOut = client.auth.signOut
+    client.auth.signOut = vi.fn(async () => { order.push('signOut'); return {} })
+
+    await signOut()
+
+    expect(order).toEqual(['flush', 'signOut'])
+    client.auth.signOut = origSignOut
   })
 })
 
