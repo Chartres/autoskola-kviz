@@ -36,14 +36,18 @@ export function loadProgress(): ProgressData {
   }
 }
 
-export function saveProgress(data: ProgressData): void {
+function writeJson(key: string, value: unknown): void {
   const s = storage()
   if (!s) return
   try {
-    s.setItem(STORAGE_KEY, JSON.stringify(data))
+    s.setItem(key, JSON.stringify(value))
   } catch {
     // private mode / quota exceeded — degrade gracefully to in-memory only
   }
+}
+
+export function saveProgress(data: ProgressData): void {
+  writeJson(STORAGE_KEY, data)
 }
 
 const JIZDY_KEY = 'jizdy-v1'
@@ -66,11 +70,5 @@ export function loadJizdy(): JizdyState {
 }
 
 export function saveJizdy(state: JizdyState): void {
-  const s = storage()
-  if (!s) return
-  try {
-    s.setItem(JIZDY_KEY, JSON.stringify(state))
-  } catch {
-    // private mode / quota exceeded — degrade gracefully to in-memory only
-  }
+  writeJson(JIZDY_KEY, state)
 }
