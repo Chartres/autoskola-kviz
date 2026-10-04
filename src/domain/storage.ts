@@ -55,7 +55,10 @@ export function loadJizdy(): JizdyState {
     const raw = s.getItem(JIZDY_KEY)
     if (!raw) return emptyJizdyState()
     const parsed = JSON.parse(raw) as Partial<JizdyState>
-    if (parsed.version !== 1) return emptyJizdyState()
+    // L2: only wipe genuinely unknown/absent versions. A future version (> 1)
+    // should preserve whatever lessons are stored rather than silently erasing
+    // them (AppContext would immediately save the empty state back).
+    if (!parsed.version) return emptyJizdyState()
     return { version: 1, lessons: parsed.lessons ?? [] }
   } catch {
     return emptyJizdyState()
