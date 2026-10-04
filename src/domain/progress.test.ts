@@ -16,6 +16,7 @@ import {
   summary,
   mergeProgress,
   recordLessonComplete,
+  isStreakActive,
   MASTERY_STREAK,
 } from './progress'
 
@@ -169,6 +170,27 @@ describe('daily streak', () => {
     let p = recordLessonComplete(emptyProgress(), '2026-06-30')
     p = recordLessonComplete(p, '2026-07-01')
     expect(p.streak.current).toBe(2)
+  })
+})
+
+describe('isStreakActive', () => {
+  it('returns true when last lesson was today', () => {
+    const p = recordLessonComplete(emptyProgress(), '2026-06-10')
+    expect(isStreakActive(p.streak, '2026-06-10')).toBe(true)
+  })
+
+  it('returns true when last lesson was yesterday', () => {
+    const p = recordLessonComplete(emptyProgress(), '2026-06-09')
+    expect(isStreakActive(p.streak, '2026-06-10')).toBe(true)
+  })
+
+  it('returns false when last lesson was 2+ days ago', () => {
+    const p = recordLessonComplete(emptyProgress(), '2026-06-08')
+    expect(isStreakActive(p.streak, '2026-06-10')).toBe(false)
+  })
+
+  it('returns false when streak is 0', () => {
+    expect(isStreakActive(emptyProgress().streak, '2026-06-10')).toBe(false)
   })
 })
 
