@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useApp } from '@/app/AppContext'
-import { track } from '@/analytics'
+import { track, conversion } from '@/analytics'
 import { score, wrongAnswers } from '@/domain/session'
 import { getQuestion } from '@/domain/questions'
 import { makeRng, timeSeed } from '@/domain/rng'
@@ -22,6 +22,8 @@ export function ResultsScreen() {
     if (!session) return
     const name = isExam ? 'exam_finish' : isLesson ? 'lesson_complete' : 'session_finish'
     track(name, { mode, score: correct, total, passed: examResult?.passed })
+    // M8: fire the canonical activation KPI at the aha moment (lesson complete).
+    if (isLesson) conversion({ score: correct, total })
     // fire once per results view
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
