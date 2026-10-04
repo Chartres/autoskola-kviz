@@ -1,7 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
-import { AuthProvider } from '@/auth/AuthContext'
-import { AppProvider } from '@/app/AppContext'
 import { App } from '@/App'
 import { saveProgress } from '@/domain/storage'
 import {
@@ -26,13 +24,9 @@ beforeEach(() => localStorage.clear())
 describe('cross-screen data consistency', () => {
   it('the same progress yields identical numbers on the menu and in statistics', async () => {
     saveProgress(seededProgress())
-    render(
-      <AuthProvider>
-        <AppProvider>
-          <App />
-        </AppProvider>
-      </AuthProvider>,
-    )
+    // L14: App already contains AuthProvider + AppProvider; wrapping it in another
+    // pair caused persistence effects to run twice. Render just <App />.
+    render(<App />)
 
     const num = (el: HTMLElement | null) => parseInt(el?.textContent ?? '', 10)
 
