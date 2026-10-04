@@ -10,7 +10,10 @@ import { AuthProvider, useAuth } from './AuthContext'
 
 type AuthStateHandler = (event: string, session: { user?: { id: string; email?: string } } | null) => void
 
-function makeClient(initialUserId: string | null = null) {
+function makeClient(
+  initialUserId: string | null = null,
+  opts: { signInWithOtpResult?: { error: { message: string } | null } } = {},
+) {
   let authStateHandler: AuthStateHandler | null = null
   return {
     _fire(event: string, userId: string | null) {
@@ -29,6 +32,7 @@ function makeClient(initialUserId: string | null = null) {
         return { data: { subscription: { unsubscribe: vi.fn() } } }
       }),
       signOut: vi.fn(async () => ({})),
+      signInWithOtp: vi.fn(async () => opts.signInWithOtpResult ?? { error: null }),
     },
   }
 }
@@ -149,5 +153,43 @@ describe('AuthContext (auth configured)', () => {
     await waitFor(() => expect(client.auth.getSession).toHaveBeenCalled())
     await signOut()
     expect(client.auth.signOut).toHaveBeenCalledTimes(1)
+  })
+})
+
+describe('AuthContext signInWithEmail (C2M4)', () => {
+  it('returns { ok: true } when signInWithOtp succeeds', async () => {
+    const client = makeClient(null, { signInWithOtpResult: { error: null } })
+    clientHolder.client = client
+    let signInWithEmail!: (email: string) => Promise<{ ok: boolean; error?: string }>
+    function Capture() {
+      signInWithEmail = useAuth().signInWithEmail
+      return null
+    }
+    render(<AuthProvider><Capture /></AuthProvider>)
+    await waitFor(() => expect(client.auth.getSession).toHaveBeenCalled())
+
+    const result = await signInWithEmail('user@example.com')
+    expect(result).toEqual({ ok: true })
+    expect(client.auth.signInWithOtp).toHaveBeenCalledWith({
+      email: 'user@example.com',
+      options: { emailRedirectTo: window.location.href },
+    })
+  })
+
+  it('returns { ok: false, error } when signInWithOtp returns an error', async () => {
+    const client = makeClient(null, {
+      signInWithOtpResult: { error: { message: 'Rate limit exceeded' } },
+    })
+    clientHolder.client = client
+    let signInWithEmail!: (email: string) => Promise<{ ok: boolean; error?: string }>
+    function Capture() {
+      signInWithEmail = useAuth().signInWithEmail
+      return null
+    }
+    render(<AuthProvider><Capture /></AuthProvider>)
+    await waitFor(() => expect(client.auth.getSession).toHaveBeenCalled())
+
+    const result = await signInWithEmail('bad@example.com')
+    expect(result).toEqual({ ok: false, error: 'Rate limit exceeded' })
   })
 })
