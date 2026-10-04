@@ -123,4 +123,16 @@ describe('supabaseStore.save', () => {
     mockSupabaseHolder.client = null
     await expect(supabaseStore.save('u', emptyProgress())).resolves.toBeUndefined()
   })
+
+  it('throws when the underlying upsert returns an error (C2L4)', async () => {
+    const saveError = new Error('upsert failed')
+    const client = {
+      from: (_table: string) => ({
+        select: () => ({ eq: () => ({ maybeSingle: async () => ({ data: null, error: null }) }) }),
+        upsert: async (_row: unknown, _opts: unknown) => ({ error: saveError }),
+      }),
+    }
+    mockSupabaseHolder.client = client as unknown as ReturnType<typeof fakeSupabase>
+    await expect(supabaseStore.save('user-1', emptyProgress())).rejects.toThrow('upsert failed')
+  })
 })
