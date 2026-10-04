@@ -31,3 +31,8 @@ export function sample<T>(items: readonly T[], n: number, rng: Rng): T[] {
 export function timeSeed(): number {
   return (Date.now() ^ (Math.random() * 0xffffffff)) >>> 0
 }
+
+/** A time-seeded generator for production call sites. */
+export function freshRng(): Rng {
+  return makeRng(timeSeed())
+}
