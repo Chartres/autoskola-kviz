@@ -54,6 +54,17 @@ function isNextDay(prev: string, today: string): boolean {
   return b - a === 86_400_000
 }
 
+/**
+ * True when the streak is still live on `today` (YYYY-MM-DD) — i.e. the last
+ * lesson was completed today or yesterday. Returns false when the user hasn't
+ * done a lesson for 2+ days so the UI doesn't show a broken streak as active.
+ */
+export function isStreakActive(streak: Streak, today: string): boolean {
+  if (!streak.lastDate || streak.current === 0) return false
+  if (streak.lastDate === today) return true
+  return isNextDay(streak.lastDate, today)
+}
+
 /** Record that the learner completed a lesson on `today` (YYYY-MM-DD). */
 export function recordLessonComplete(
   p: ProgressData,

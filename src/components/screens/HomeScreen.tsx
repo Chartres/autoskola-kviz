@@ -1,10 +1,11 @@
 import { useMemo } from 'react'
 import { useApp } from '@/app/AppContext'
 import { ALL_QUESTIONS, META } from '@/domain/questions'
-import { summary, missedIds } from '@/domain/progress'
+import { summary, missedIds, isStreakActive } from '@/domain/progress'
 import { LESSON_SIZE } from '@/domain/lesson'
 import { timeSeed, makeRng } from '@/domain/rng'
 import { track } from '@/analytics'
+import { todayStr } from '@/lib/date'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import type { CategoryName } from '@/domain/types'
 
@@ -15,7 +16,12 @@ export function HomeScreen() {
     () => missedIds(state.progress).length,
     [state.progress],
   )
-  const streak = state.progress.streak.current
+  // M7: only show the stored current value when the streak is still alive.
+  // If lastDate is 2+ days ago the streak is broken but still shows as current
+  // in storage — display 0 until the user completes a lesson to reset it.
+  const streak = isStreakActive(state.progress.streak, todayStr())
+    ? state.progress.streak.current
+    : 0
   const rng = () => makeRng(timeSeed())
   const showJizdyCta = sum.total > 0 && sum.mastered / sum.total >= 0.7
 
