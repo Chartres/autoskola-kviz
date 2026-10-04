@@ -80,7 +80,7 @@ export function HomeScreen() {
           type="button"
           onClick={() => {
             track('start_review')
-            dispatch({ type: 'startReview', rng: rng() })
+            dispatch({ type: 'startReview' })
           }}
           className="mb-3 flex w-full items-center justify-between rounded-card border border-sand-700 bg-sand-800/40 px-5 py-3.5 text-left transition-colors hover:border-sand-500"
         >
