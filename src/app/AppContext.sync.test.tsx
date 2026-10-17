@@ -190,6 +190,44 @@ describe('AppContext sign-out', () => {
     )
   })
 
+  it('keeps jizdy lessons logged before the per-user key existed across sign-in and sign-out', async () => {
+    const lesson = { id: 'pre', date: '2026-09-01', durationMin: 60, skills: [] }
+    localStorage.setItem('jizdy-v1', JSON.stringify({ version: 1, lessons: [lesson] }))
+
+    function LessonCount() {
+      const { state } = useApp()
+      return <div data-testid="lessons">{state.jizdyState.lessons.length}</div>
+    }
+
+    // Real auth resolves after mount (getSession is async), so start signed out.
+    const { rerender } = render(
+      <AppProvider>
+        <LessonCount />
+      </AppProvider>,
+    )
+    expect(screen.getByTestId('lessons').textContent).toBe('1')
+
+    mockUserHolder.user = { id: 'legacy-user' }
+    rerender(
+      <AppProvider>
+        <LessonCount />
+      </AppProvider>,
+    )
+    await act(async () => {
+      syncResolvers.resolve(emptyProgress())
+    })
+    expect(screen.getByTestId('lessons').textContent).toBe('1')
+
+    mockUserHolder.user = null
+    rerender(
+      <AppProvider>
+        <LessonCount />
+      </AppProvider>,
+    )
+    await waitFor(() => expect(screen.getByTestId('lessons').textContent).toBe('0'))
+    expect(JSON.parse(localStorage.getItem('jizdy-v1:legacy-user')!).lessons).toEqual([lesson])
+  })
+
   it('registers a flush callback while signed in; callback saves progress (C3M2)', async () => {
     let local = emptyProgress()
     local = recordAnswer(local, 22, true, 500)

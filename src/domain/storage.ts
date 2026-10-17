@@ -61,7 +61,10 @@ export function loadJizdy(uid?: string): JizdyState {
   const s = storage()
   if (!s) return emptyJizdyState()
   try {
-    const raw = s.getItem(jizdyKey(uid))
+    // First sign-in with no per-user key yet: adopt the anonymous lessons (pre-C3H2
+    // data, or lessons logged before signing in), same as progress merges on sign-in.
+    // ponytail: adopt only, no merge — later anonymous lessons stay in the anonymous key.
+    const raw = s.getItem(jizdyKey(uid)) ?? (uid ? s.getItem(JIZDY_KEY) : null)
     if (!raw) return emptyJizdyState()
     const parsed = JSON.parse(raw) as Partial<JizdyState>
     // L2: only wipe genuinely unknown/absent versions. A future version (> 1)
