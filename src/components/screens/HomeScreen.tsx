@@ -1,11 +1,12 @@
 import { useMemo } from 'react'
 import { useApp } from '@/app/AppContext'
 import { ALL_QUESTIONS, META } from '@/domain/questions'
-import { summary, missedIds } from '@/domain/progress'
+import { summary, missedIds, isStreakActive } from '@/domain/progress'
 import { LESSON_SIZE } from '@/domain/lesson'
-import { timeSeed, makeRng } from '@/domain/rng'
+import { freshRng } from '@/domain/rng'
 import { track } from '@/analytics'
 import { AuthPanel } from '@/components/AuthPanel'
+import { todayStr } from '@/lib/date'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import type { CategoryName } from '@/domain/types'
 
@@ -16,15 +17,19 @@ export function HomeScreen() {
     () => missedIds(state.progress).length,
     [state.progress],
   )
-  const streak = state.progress.streak.current
-  const rng = () => makeRng(timeSeed())
+  // M7: only show the stored current value when the streak is still alive.
+  // If lastDate is 2+ days ago the streak is broken but still shows as current
+  // in storage — display 0 until the user completes a lesson to reset it.
+  const streak = isStreakActive(state.progress.streak, todayStr())
+    ? state.progress.streak.current
+    : 0
   const showJizdyCta = sum.total > 0 && sum.mastered / sum.total >= 0.7
 
   // Free topic choice from day 1 — no locked path (Montessori).
   function startTopic(name: CategoryName) {
     track('start_topic', { topic: name })
     dispatch({ type: 'setCategories', categories: new Set([name]) })
-    dispatch({ type: 'startPractice', rng: rng() })
+    dispatch({ type: 'startPractice', rng: freshRng() })
   }
 
   return (
@@ -54,7 +59,7 @@ export function HomeScreen() {
         type="button"
         onClick={() => {
           track('start_lesson')
-          dispatch({ type: 'startLesson', rng: rng() })
+          dispatch({ type: 'startLesson', rng: freshRng() })
         }}
         className="glow-terra mb-3 block w-full rounded-card border border-terra-500/50 bg-terra-500/10 p-5 text-left transition-colors hover:bg-terra-500/20"
       >
@@ -78,7 +83,7 @@ export function HomeScreen() {
           type="button"
           onClick={() => {
             track('start_review')
-            dispatch({ type: 'startReview', rng: rng() })
+            dispatch({ type: 'startReview' })
           }}
           className="mb-3 flex w-full items-center justify-between rounded-card border border-sand-700 bg-sand-800/40 px-5 py-3.5 text-left transition-colors hover:border-sand-500"
         >

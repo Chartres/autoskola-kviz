@@ -54,6 +54,17 @@ function isNextDay(prev: string, today: string): boolean {
   return b - a === 86_400_000
 }
 
+/**
+ * True when the streak is still live on `today` (YYYY-MM-DD) — i.e. the last
+ * lesson was completed today or yesterday. Returns false when the user hasn't
+ * done a lesson for 2+ days so the UI doesn't show a broken streak as active.
+ */
+export function isStreakActive(streak: Streak, today: string): boolean {
+  if (!streak.lastDate || streak.current === 0) return false
+  if (streak.lastDate === today) return true
+  return isNextDay(streak.lastDate, today)
+}
+
 /** Record that the learner completed a lesson on `today` (YYYY-MM-DD). */
 export function recordLessonComplete(
   p: ProgressData,
@@ -65,6 +76,7 @@ export function recordLessonComplete(
   return {
     ...p,
     streak: { current, best: Math.max(s.best, current), lastDate: today },
+    updatedAt: Math.max(p.updatedAt, Date.now()),
   }
 }
 
@@ -128,7 +140,7 @@ export function toggleBookmark(p: ProgressData, id: number): ProgressData {
   const set = new Set(p.bookmarks)
   if (set.has(id)) set.delete(id)
   else set.add(id)
-  return { ...p, bookmarks: [...set] }
+  return { ...p, bookmarks: [...set], updatedAt: Math.max(p.updatedAt, Date.now()) }
 }
 
 export function isBookmarked(p: ProgressData, id: number): boolean {
@@ -147,7 +159,7 @@ export function needsReviewIds(p: ProgressData): number[] {
  * least-recently-seen. This is the lightweight spaced-repetition signal —
  * drill the weak spots (Montessori "isolation of difficulty").
  */
-export function dueForReview(p: ProgressData, _now: number): number[] {
+export function dueForReview(p: ProgressData): number[] {
   return needsReviewIds(p).sort((a, b) => {
     const sa = statFor(p, a)
     const sb = statFor(p, b)
@@ -219,7 +231,10 @@ export function mergeProgress(
   }
   const sa = a.streak ?? emptyStreak()
   const sb = b.streak ?? emptyStreak()
-  const latest = sb.lastDate >= sa.lastDate ? sb : sa
+  let latest: Streak
+  if (sb.lastDate !== sa.lastDate) latest = sb.lastDate > sa.lastDate ? sb : sa
+  // On a date tie, keep the longer current streak (not the remote by default).
+  else latest = sb.current > sa.current ? sb : sa
   return {
     version: PROGRESS_VERSION,
     stats,

@@ -23,7 +23,7 @@ export function loadProgress(): ProgressData {
     const raw = s.getItem(STORAGE_KEY)
     if (!raw) return emptyProgress()
     const parsed = JSON.parse(raw) as Partial<ProgressData>
-    if (parsed.version !== PROGRESS_VERSION) return emptyProgress()
+    // ponytail: migrate forward — both version and non-version paths produce the same shape
     return {
       version: PROGRESS_VERSION,
       stats: parsed.stats ?? {},
@@ -36,38 +36,56 @@ export function loadProgress(): ProgressData {
   }
 }
 
-export function saveProgress(data: ProgressData): void {
+function writeJson(key: string, value: unknown): void {
   const s = storage()
   if (!s) return
   try {
-    s.setItem(STORAGE_KEY, JSON.stringify(data))
+    s.setItem(key, JSON.stringify(value))
   } catch {
     // private mode / quota exceeded — degrade gracefully to in-memory only
   }
 }
 
-const JIZDY_KEY = 'jizdy-v1'
+export function saveProgress(data: ProgressData): void {
+  writeJson(STORAGE_KEY, data)
+}
 
-export function loadJizdy(): JizdyState {
-  const s = storage()
-  if (!s) return emptyJizdyState()
+// ponytail: anonymous key kept as-is; signed-in users get a uid-scoped key so
+// sign-out never overwrites another user's lessons.
+const JIZDY_KEY = 'jizdy-v1'
+function jizdyKey(uid?: string): string {
+  return uid ? `${JIZDY_KEY}:${uid}` : JIZDY_KEY
+}
+
+function readJizdy(s: Storage, key: string): JizdyState {
   try {
-    const raw = s.getItem(JIZDY_KEY)
+    const raw = s.getItem(key)
     if (!raw) return emptyJizdyState()
     const parsed = JSON.parse(raw) as Partial<JizdyState>
-    if (parsed.version !== 1) return emptyJizdyState()
+    // L2: only wipe genuinely unknown/absent versions. A future version (> 1)
+    // should preserve whatever lessons are stored rather than silently erasing
+    // them (AppContext would immediately save the empty state back).
+    if (!parsed.version) return emptyJizdyState()
     return { version: 1, lessons: parsed.lessons ?? [] }
   } catch {
     return emptyJizdyState()
   }
 }
 
-export function saveJizdy(state: JizdyState): void {
+export function loadJizdy(uid?: string): JizdyState {
   const s = storage()
-  if (!s) return
-  try {
-    s.setItem(JIZDY_KEY, JSON.stringify(state))
-  } catch {
-    // private mode / quota exceeded — degrade gracefully to in-memory only
-  }
+  if (!s) return emptyJizdyState()
+  const anon = readJizdy(s, JIZDY_KEY)
+  if (!uid) return anon
+  // On sign-in, merge lessons logged while signed out (and pre-C3H2 data) into the
+  // user's log, same as progress merges on sign-in. Sign-out empties the anonymous
+  // key, so it only holds lessons logged on this device since the last sign-out.
+  // Lessons are append-only, so dedup by id is enough.
+  const own = readJizdy(s, jizdyKey(uid))
+  const seen = new Set(own.lessons.map((l) => l.id))
+  return { version: 1, lessons: [...own.lessons, ...anon.lessons.filter((l) => !seen.has(l.id))] }
+}
+
+export function saveJizdy(state: JizdyState, uid?: string): void {
+  writeJson(jizdyKey(uid), state)
 }

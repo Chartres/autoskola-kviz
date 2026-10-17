@@ -1,5 +1,5 @@
 import { supabase } from './supabase'
-import { PROGRESS_VERSION, type ProgressData } from '@/domain/progress'
+import { emptyStreak, PROGRESS_VERSION, type ProgressData } from '@/domain/progress'
 import type { RemoteProgressStore } from './sync'
 
 /**
@@ -19,7 +19,17 @@ export const supabaseStore: RemoteProgressStore = {
       .maybeSingle()
     if (error) throw error
     const stored = data?.data as ProgressData | undefined
-    if (!stored || stored.version !== PROGRESS_VERSION) return null
+    if (!stored) return null
+    if (stored.version !== PROGRESS_VERSION) {
+      // Migrate forward rather than discarding remote data.
+      return {
+        version: PROGRESS_VERSION,
+        stats: stored.stats ?? {},
+        bookmarks: stored.bookmarks ?? [],
+        streak: stored.streak ?? emptyStreak(),
+        updatedAt: stored.updatedAt ?? 0,
+      }
+    }
     return stored
   },
 

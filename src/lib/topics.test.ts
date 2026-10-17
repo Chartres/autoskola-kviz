@@ -19,4 +19,9 @@ describe('topics', () => {
     expect(topicFromPath('/okruh/neexistuje')).toBeUndefined()
     expect(topicFromPath('/okruh/dopravni-znacky/extra')).toBeUndefined()
   })
+
+  it('returns undefined for malformed percent-encoded paths (C2L1)', () => {
+    expect(topicFromPath('/okruh/%E0/')).toBeUndefined()
+    expect(topicFromPath('/okruh/%/extra')).toBeUndefined()
+  })
 })

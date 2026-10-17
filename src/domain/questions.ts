@@ -21,19 +21,18 @@ export function byCategory(cat: CategoryName): Question[] {
 }
 
 // Each okruh is its own exam group (the official test draws per okruh).
-const GROUP_CATEGORIES: Record<ExamGroup, CategoryName[]> = {
-  pravidla: ['Pravidla provozu'],
-  znacky: ['Dopravní značky'],
-  situace: ['Dopravní situace'],
-  zasady: ['Zásady bezpečné jízdy'],
-  podminky: ['Podmínky provozu vozidel'],
-  predpisy: ['Související předpisy'],
-  zdravoveda: ['Zdravotnická příprava'],
+const GROUP_CATEGORY: Record<ExamGroup, CategoryName> = {
+  pravidla: 'Pravidla provozu',
+  znacky: 'Dopravní značky',
+  situace: 'Dopravní situace',
+  zasady: 'Zásady bezpečné jízdy',
+  podminky: 'Podmínky provozu vozidel',
+  predpisy: 'Související předpisy',
+  zdravoveda: 'Zdravotnická příprava',
 }
 
 export function questionsForGroup(group: ExamGroup): Question[] {
-  const cats = new Set<CategoryName>(GROUP_CATEGORIES[group])
-  return ALL_QUESTIONS.filter((q) => cats.has(q.cat))
+  return byCategory(GROUP_CATEGORY[group])
 }
 
 export const CATEGORY_NAMES: CategoryName[] = META.categories.map((c) => c.name)

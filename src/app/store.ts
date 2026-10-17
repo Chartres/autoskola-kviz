@@ -5,7 +5,6 @@ import {
   createSession,
   answerCurrent,
   advance,
-  currentQuestion,
   isFinished,
   type SessionState,
 } from '@/domain/session'
@@ -67,7 +66,7 @@ export type Action =
   | { type: 'setSearch'; search: string }
   | { type: 'startLesson'; rng: Rng }
   | { type: 'startPractice'; rng: Rng }
-  | { type: 'startReview'; rng: Rng }
+  | { type: 'startReview' }
   | { type: 'startBookmarks'; rng: Rng }
   | { type: 'startExam'; rng: Rng; now: number }
   | { type: 'answer'; choice: Choice; now: number }
@@ -137,14 +136,13 @@ export function reducer(state: AppState, action: Action): AppState {
 
     case 'answer': {
       if (!state.session) return state
-      const cur = currentQuestion(state.session)
-      if (!cur || state.session.chosen[cur.id] !== undefined) return state
       const session = answerCurrent(state.session, action.choice)
-      const correct = action.choice === cur.correct
+      if (session === state.session) return state // nothing to answer, or already answered
+      const { id, correct } = session.records[session.records.length - 1]
       return {
         ...state,
         session,
-        progress: recordAnswer(state.progress, cur.id, correct, action.now),
+        progress: recordAnswer(state.progress, id, correct, action.now),
       }
     }
 
@@ -157,6 +155,9 @@ export function reducer(state: AppState, action: Action): AppState {
           session,
           view: 'results',
           examResult: state.mode === 'exam' ? evaluateExam(session) : null,
+          // L1: also clear examEndsAt when the exam ends via question-by-question
+          // navigation (finishExam and goMenu already clear it; this path did not).
+          examEndsAt: null,
           progress:
             state.mode === 'lesson' && action.today
               ? recordLessonComplete(state.progress, action.today)

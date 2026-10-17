@@ -10,6 +10,11 @@ export function AuthPanel() {
   const [error, setError] = useState<string | null>(null)
   const rootRef = useRef<HTMLDivElement>(null)
 
+  // Reset sent state when the popover closes so reopening shows a fresh form.
+  useEffect(() => {
+    if (!open) setSent(false)
+  }, [open])
+
   // Dismiss the popover on Escape or a click/tap outside it.
   useEffect(() => {
     if (!open) return
@@ -33,9 +38,13 @@ export function AuthPanel() {
   async function submitEmail(e: React.FormEvent) {
     e.preventDefault()
     setError(null)
-    const res = await signInWithEmail(email)
-    if (res.ok) setSent(true)
-    else setError(res.error ?? 'Něco se nepovedlo.')
+    try {
+      const res = await signInWithEmail(email)
+      if (res.ok) setSent(true)
+      else setError(res.error ?? 'Něco se nepovedlo.')
+    } catch {
+      setError('Nepodařilo se odeslat odkaz. Zkuste to znovu.')
+    }
   }
 
   return (

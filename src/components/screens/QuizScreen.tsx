@@ -1,13 +1,12 @@
 import { useCallback, useEffect } from 'react'
 import { useApp } from '@/app/AppContext'
-import { currentQuestion } from '@/domain/session'
+import { currentChoice, currentQuestion } from '@/domain/session'
 import { isBookmarked } from '@/domain/progress'
 import { imageUrl } from '@/lib/assets'
 import { QuestionCard } from '@/components/QuestionCard'
 import { ExamTimer } from '@/components/ExamTimer'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import { todayStr } from '@/lib/date'
-import type { Choice } from '@/domain/types'
 
 const MODE_LABEL: Record<string, string> = {
   lesson: 'Denní dávka',
@@ -68,14 +67,14 @@ export function QuizScreen() {
       </header>
 
       <div className="mb-6">
-        <ProgressBar value={session.index} max={session.questions.length} />
+        <ProgressBar value={Object.keys(session.chosen).length} max={session.questions.length} />
       </div>
 
       <QuestionCard
         key={question.id}
         question={question}
         reveal={!isExam}
-        chosen={session.chosen[question.id] as Choice | undefined}
+        chosen={currentChoice(session)}
         bookmarked={isBookmarked(state.progress, question.id)}
         index={session.index}
         total={session.questions.length}

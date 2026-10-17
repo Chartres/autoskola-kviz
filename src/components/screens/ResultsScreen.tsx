@@ -1,30 +1,34 @@
 import { useEffect } from 'react'
 import { useApp } from '@/app/AppContext'
-import { track } from '@/analytics'
+import { track, conversion } from '@/analytics'
 import { score, wrongAnswers } from '@/domain/session'
 import { getQuestion } from '@/domain/questions'
-import { makeRng, timeSeed } from '@/domain/rng'
+import { freshRng } from '@/domain/rng'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import { FeedbackCard } from '@/components/FeedbackCard'
 
 export function ResultsScreen() {
   const { state, dispatch } = useApp()
   const { session, examResult, mode } = state
-  if (!session) return null
 
   const isExam = mode === 'exam'
   const isLesson = mode === 'lesson'
   // Exams score in points (official model, 50 max); practice counts questions.
-  const total = isExam && examResult ? examResult.total : session.questions.length
-  const correct = isExam && examResult ? examResult.score : score(session)
-  const wrong = wrongAnswers(session)
+  const total = isExam && examResult ? examResult.total : (session?.questions.length ?? 0)
+  const correct = isExam && examResult ? examResult.score : (session ? score(session) : 0)
+  const wrong = session ? wrongAnswers(session) : []
 
   useEffect(() => {
+    if (!session) return
     const name = isExam ? 'exam_finish' : isLesson ? 'lesson_complete' : 'session_finish'
     track(name, { mode, score: correct, total, passed: examResult?.passed })
+    // M8: fire the canonical activation KPI at the aha moment (lesson complete).
+    if (isLesson) conversion({ score: correct, total })
     // fire once per results view
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  if (!session) return null
 
   return (
     <div className="mx-auto w-full max-w-2xl px-4 py-10">
@@ -110,7 +114,7 @@ export function ResultsScreen() {
         {isLesson && (
           <button
             type="button"
-            onClick={() => dispatch({ type: 'startLesson', rng: makeRng(timeSeed()) })}
+            onClick={() => dispatch({ type: 'startLesson', rng: freshRng() })}
             className="glow-terra rounded-card bg-terra-500 px-5 py-2.5 font-display font-semibold text-sand-950 hover:bg-terra-400"
           >
             Další lekce
@@ -119,7 +123,7 @@ export function ResultsScreen() {
         {wrong.length > 0 && (
           <button
             type="button"
-            onClick={() => dispatch({ type: 'startReview', rng: makeRng(timeSeed()) })}
+            onClick={() => dispatch({ type: 'startReview' })}
             className="rounded-card border border-sand-600 px-5 py-2.5 font-semibold text-sand-200 hover:border-sand-400"
           >
             Opakovat chyby

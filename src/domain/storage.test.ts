@@ -27,12 +27,18 @@ describe('progress persistence', () => {
     expect(loadProgress()).toEqual(emptyProgress())
   })
 
-  it('ignores data from an incompatible version', () => {
+  it('migrates data from an incompatible version instead of wiping it', () => {
+    const stats = { 1: { seen: 5, correct: 3, streak: 1, lastSeen: 100, lastCorrect: true } }
     localStorage.setItem(
       STORAGE_KEY,
-      JSON.stringify({ version: 999, stats: { 1: {} }, bookmarks: [] }),
+      JSON.stringify({ version: 999, stats, bookmarks: [42], streak: { current: 3, best: 5, lastDate: '2026-01-01' }, updatedAt: 500 }),
     )
-    expect(loadProgress()).toEqual(emptyProgress())
+    const result = loadProgress()
+    expect(result.version).toBe(1)
+    expect(result.stats).toEqual(stats)
+    expect(result.bookmarks).toEqual([42])
+    expect(result.streak.current).toBe(3)
+    expect(result.updatedAt).toBe(500)
   })
 
   it('survives a thrown setItem (e.g. private mode) silently', () => {
@@ -72,5 +78,11 @@ describe('jizdy persistence', () => {
     Storage.prototype.setItem = () => { throw new Error('quota') }
     expect(() => saveJizdy(emptyJizdyState())).not.toThrow()
     Storage.prototype.setItem = orig
+  })
+
+  it('merges anonymous lessons into an existing per-user log, deduped by id', () => {
+    saveJizdy({ version: 1, lessons: [lesson('mine'), lesson('both')] }, 'u1')
+    saveJizdy({ version: 1, lessons: [lesson('both'), lesson('anon')] })
+    expect(loadJizdy('u1').lessons.map((l) => l.id)).toEqual(['mine', 'both', 'anon'])
   })
 })

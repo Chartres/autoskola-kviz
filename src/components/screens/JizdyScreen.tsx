@@ -5,13 +5,10 @@ import type { LessonRecord } from '@/domain/jizdy'
 import rawSkillsData from '@data/jizdy-skills.json'
 import { track } from '@/analytics'
 import { AuthPanel } from '@/components/AuthPanel'
+import { todayStr } from '@/lib/date'
 
 // ponytail: provisional wrapper per referee ruling — import .skills only
 const SKILLS = rawSkillsData.skills
-
-function todayDate(): string {
-  return new Date().toISOString().slice(0, 10)
-}
 
 export function JizdyScreen() {
   const { state, dispatch } = useApp()
@@ -28,7 +25,7 @@ export function JizdyScreen() {
 
   // skills practiced in a lesson today (for "fresh-today" highlight)
   const freshToday = useMemo(() => {
-    const today = todayDate()
+    const today = todayStr()
     const ids = new Set<string>()
     for (const lesson of state.jizdyState.lessons) {
       if (lesson.date === today) lesson.skills.forEach((id) => ids.add(id))
@@ -37,7 +34,7 @@ export function JizdyScreen() {
   }, [state.jizdyState])
 
   const [formOpen, setFormOpen] = useState(true)
-  const [date, setDate] = useState(todayDate)
+  const [date, setDate] = useState(todayStr)
   const [duration, setDuration] = useState('')
   const [selected, setSelected] = useState<Set<string>>(new Set())
   const [confirmed, setConfirmed] = useState(false)
@@ -63,7 +60,7 @@ export function JizdyScreen() {
     }
     dispatch({ type: 'logLesson', record })
     track('key_action', { feature: 'jizdy' })
-    setDate(todayDate())
+    setDate(todayStr())
     setDuration('')
     setSelected(new Set())
     setConfirmed(true)

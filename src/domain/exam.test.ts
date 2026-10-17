@@ -85,6 +85,39 @@ describe('evaluateExam (point-weighted)', () => {
     expect(all.score - 8).toBeLessThan(43) // two situace wrong → 42
   })
 
+  it('exact 43-point threshold: one 4-pt wrong (46 → pass), two 4-pt wrong (42 → fail) (C2L5)', () => {
+    const exam = buildExam(makeRng(3))
+    const fourPtIndices = exam.reduce<number[]>(
+      (acc, q, i) => (q.points === 4 ? [...acc, i] : acc),
+      [],
+    )
+    expect(fourPtIndices.length).toBeGreaterThanOrEqual(2)
+
+    function answerWith(wrongIndices: number[]): SessionState {
+      let s: SessionState = createSession(exam)
+      let i = 0
+      while (currentQuestion(s)) {
+        const cur = currentQuestion(s)!
+        const wrong = (['a', 'b'] as const).find((o) => o !== cur.correct) ?? 'b'
+        s = answerCurrent(s, wrongIndices.includes(i) ? wrong : cur.correct)
+        s = advance(s)
+        i++
+      }
+      return s
+    }
+
+    // One 4-pt wrong → score = 50 - 4 = 46 → passes
+    const r46 = evaluateExam(answerWith([fourPtIndices[0]]))
+    expect(r46.score).toBe(46)
+    expect(r46.passed).toBe(true)
+    expect(r46.passThreshold).toBe(43)
+
+    // Two 4-pt wrong → score = 50 - 8 = 42 → fails
+    const r42 = evaluateExam(answerWith([fourPtIndices[0], fourPtIndices[1]]))
+    expect(r42.score).toBe(42)
+    expect(r42.passed).toBe(false)
+  })
+
   it('breaks the score down by category (question counts)', () => {
     const exam = buildExam(makeRng(4))
     const result = evaluateExam(answerAll(exam, exam.length))

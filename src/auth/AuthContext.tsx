@@ -2,6 +2,7 @@ import {
   createContext,
   useContext,
   useEffect,
+  useMemo,
   useState,
   type ReactNode,
 } from 'react'
@@ -24,6 +25,16 @@ interface AuthContextValue {
 
 const AuthContext = createContext<AuthContextValue | null>(null)
 
+// Module-level slot: AppContext registers a flush callback here; signOut calls
+// it with an active session before auth.signOut() invalidates the token.
+// ponytail: module-level mutable — safe because there is exactly one AuthProvider per app.
+let _beforeSignOut: (() => Promise<void>) | null = null
+
+export function registerBeforeSignOut(cb: () => Promise<void>): () => void {
+  _beforeSignOut = cb
+  return () => { _beforeSignOut = null }
+}
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<AuthUser | null>(null)
   const [loading, setLoading] = useState(isAuthConfigured)
@@ -35,6 +46,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(u ? { id: u.id, email: u.email ?? undefined } : null)
       identify(u?.id ?? null) // cross-product identity on the shared platform
       setLoading(false)
+    }).catch(() => {
+      setLoading(false)
     })
     const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
       const u = session?.user
@@ -44,7 +57,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return () => sub.subscription.unsubscribe()
   }, [])
 
-  const value: AuthContextValue = {
+  const value: AuthContextValue = useMemo(() => ({
     configured: isAuthConfigured,
     loading,
     user,
@@ -65,9 +78,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     },
     async signOut() {
       if (!supabase) return
+      // Flush pending progress while the session is still valid.
+      await _beforeSignOut?.().catch(() => {})
       await supabase.auth.signOut()
     },
-  }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }), [user, loading])
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
