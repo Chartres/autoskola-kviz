@@ -68,6 +68,17 @@ function Spy() {
   return <div data-testid="answered">{answered}</div>
 }
 
+function LessonCount() {
+  const { state } = useApp()
+  return <div data-testid="lessons">{state.jizdyState.lessons.length}</div>
+}
+
+function lessonRec(id: string) {
+  return { id, date: '2026-09-01', durationMin: 60, skills: [] }
+}
+
+const storedLessons = (key: string) => JSON.parse(localStorage.getItem(key)!).lessons
+
 beforeEach(() => {
   localStorage.clear()
   fakeSave.mockClear()
@@ -191,13 +202,8 @@ describe('AppContext sign-out', () => {
   })
 
   it('keeps jizdy lessons logged before the per-user key existed across sign-in and sign-out', async () => {
-    const lesson = { id: 'pre', date: '2026-09-01', durationMin: 60, skills: [] }
+    const lesson = lessonRec('pre')
     localStorage.setItem('jizdy-v1', JSON.stringify({ version: 1, lessons: [lesson] }))
-
-    function LessonCount() {
-      const { state } = useApp()
-      return <div data-testid="lessons">{state.jizdyState.lessons.length}</div>
-    }
 
     // Real auth resolves after mount (getSession is async), so start signed out.
     const { rerender } = render(
@@ -226,6 +232,68 @@ describe('AppContext sign-out', () => {
     )
     await waitFor(() => expect(screen.getByTestId('lessons').textContent).toBe('0'))
     expect(JSON.parse(localStorage.getItem('jizdy-v1:legacy-user')!).lessons).toEqual([lesson])
+  })
+
+  it('keeps a lesson logged while signed out when a returning user signs in and out', async () => {
+    const mine = lessonRec('mine')
+    const anon = lessonRec('anon')
+    localStorage.setItem('jizdy-v1:u1', JSON.stringify({ version: 1, lessons: [mine] }))
+    localStorage.setItem('jizdy-v1', JSON.stringify({ version: 1, lessons: [anon] }))
+
+    // Fresh element per render: an identical element lets React bail out of the re-render.
+    const ui = () => (
+      <AppProvider>
+        <LessonCount />
+      </AppProvider>
+    )
+    const { rerender } = render(ui())
+    mockUserHolder.user = { id: 'u1' }
+    rerender(ui())
+    await act(async () => {
+      syncResolvers.resolve(emptyProgress())
+    })
+    expect(screen.getByTestId('lessons').textContent).toBe('2')
+
+    mockUserHolder.user = null
+    rerender(ui())
+    await waitFor(() => expect(screen.getByTestId('lessons').textContent).toBe('0'))
+    expect(storedLessons('jizdy-v1:u1')).toEqual([mine, anon])
+  })
+
+  it("does not overwrite a returning user's lessons with the anonymous state on sign-in (C4H1)", async () => {
+    const mine = lessonRec('mine')
+    localStorage.setItem('jizdy-v1:u1', JSON.stringify({ version: 1, lessons: [mine] }))
+    localStorage.setItem('jizdy-v1', JSON.stringify({ version: 1, lessons: [] }))
+
+    // Fresh element per render: an identical element lets React bail out of the re-render.
+    const ui = () => (
+      <AppProvider>
+        <LessonCount />
+      </AppProvider>
+    )
+    const { rerender } = render(ui())
+    mockUserHolder.user = { id: 'u1' }
+    rerender(ui())
+    await act(async () => {
+      syncResolvers.resolve(emptyProgress())
+    })
+    expect(screen.getByTestId('lessons').textContent).toBe('1')
+    expect(storedLessons('jizdy-v1:u1')).toEqual([mine])
+  })
+
+  it('sign-out flush skips the cloud save while the sign-in sync is still in flight', async () => {
+    mockUserHolder.user = { id: 'u1' }
+    render(
+      <AppProvider>
+        <Spy />
+      </AppProvider>,
+    )
+    // Sync left unresolved: the local (empty) progress must not overwrite the cloud row.
+    expect(registeredFlush.current).not.toBeNull()
+    await act(async () => {
+      await registeredFlush.current!()
+    })
+    expect(fakeSave).not.toHaveBeenCalled()
   })
 
   it('registers a flush callback while signed in; callback saves progress (C3M2)', async () => {

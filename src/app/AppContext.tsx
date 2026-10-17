@@ -81,7 +81,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
     if (!user) return
     const uid = user.id
     return registerBeforeSignOut(() =>
-      supabaseStore.save(uid, progressRef.current).catch(() => {}),
+      // While the sign-in sync is in flight, local progress is not merged with the cloud
+      // yet: saving it would overwrite the cloud row. The sync saves the merge itself.
+      syncingRef.current
+        ? Promise.resolve()
+        : supabaseStore.save(uid, progressRef.current).catch(() => {}),
     )
   }, [user?.id]) // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -134,8 +138,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!user) return
-    // H1: skip while a sync fetch is outstanding (failure would overwrite cloud row
-    //     with local-only, possibly empty, progress).
+    // H1: skip while a sync fetch is outstanding, so local-only progress cannot overwrite
+    //     the cloud row before the merge lands. A failed fetch still falls back to local
+    //     progress and the next save overwrites the cloud row (deferred M1, last-write-wins).
     if (syncingRef.current) return
     // M4: the progress change that triggers this effect right after hydrate is already
     //     persisted by syncProgress — skip the redundant write.

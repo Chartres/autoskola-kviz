@@ -57,14 +57,9 @@ function jizdyKey(uid?: string): string {
   return uid ? `${JIZDY_KEY}:${uid}` : JIZDY_KEY
 }
 
-export function loadJizdy(uid?: string): JizdyState {
-  const s = storage()
-  if (!s) return emptyJizdyState()
+function readJizdy(s: Storage, key: string): JizdyState {
   try {
-    // First sign-in with no per-user key yet: adopt the anonymous lessons (pre-C3H2
-    // data, or lessons logged before signing in), same as progress merges on sign-in.
-    // ponytail: adopt only, no merge — later anonymous lessons stay in the anonymous key.
-    const raw = s.getItem(jizdyKey(uid)) ?? (uid ? s.getItem(JIZDY_KEY) : null)
+    const raw = s.getItem(key)
     if (!raw) return emptyJizdyState()
     const parsed = JSON.parse(raw) as Partial<JizdyState>
     // L2: only wipe genuinely unknown/absent versions. A future version (> 1)
@@ -75,6 +70,20 @@ export function loadJizdy(uid?: string): JizdyState {
   } catch {
     return emptyJizdyState()
   }
+}
+
+export function loadJizdy(uid?: string): JizdyState {
+  const s = storage()
+  if (!s) return emptyJizdyState()
+  const anon = readJizdy(s, JIZDY_KEY)
+  if (!uid) return anon
+  // On sign-in, merge lessons logged while signed out (and pre-C3H2 data) into the
+  // user's log, same as progress merges on sign-in. Sign-out empties the anonymous
+  // key, so it only holds lessons logged on this device since the last sign-out.
+  // Lessons are append-only, so dedup by id is enough.
+  const own = readJizdy(s, jizdyKey(uid))
+  const seen = new Set(own.lessons.map((l) => l.id))
+  return { version: 1, lessons: [...own.lessons, ...anon.lessons.filter((l) => !seen.has(l.id))] }
 }
 
 export function saveJizdy(state: JizdyState, uid?: string): void {

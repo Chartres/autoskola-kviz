@@ -79,4 +79,10 @@ describe('jizdy persistence', () => {
     expect(() => saveJizdy(emptyJizdyState())).not.toThrow()
     Storage.prototype.setItem = orig
   })
+
+  it('merges anonymous lessons into an existing per-user log, deduped by id', () => {
+    saveJizdy({ version: 1, lessons: [lesson('mine'), lesson('both')] }, 'u1')
+    saveJizdy({ version: 1, lessons: [lesson('both'), lesson('anon')] })
+    expect(loadJizdy('u1').lessons.map((l) => l.id)).toEqual(['mine', 'both', 'anon'])
+  })
 })
