@@ -78,8 +78,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     },
     async signOut() {
       if (!supabase) return
-      // Flush pending progress while the session is still valid.
-      await _beforeSignOut?.().catch(() => {})
+      // Flush pending progress while the session is still valid. A failed or slow flush
+      // does not block sign-out: AppContext keeps unconfirmed local progress instead of
+      // wiping it. ponytail: fixed 3 s cap; make it configurable if slow networks complain.
+      if (_beforeSignOut) {
+        await Promise.race([
+          _beforeSignOut().catch(() => {}),
+          new Promise((r) => setTimeout(r, 3000)),
+        ])
+      }
       await supabase.auth.signOut()
     },
   // eslint-disable-next-line react-hooks/exhaustive-deps

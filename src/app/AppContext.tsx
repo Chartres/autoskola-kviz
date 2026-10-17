@@ -14,7 +14,7 @@ import { freshRng } from '@/domain/rng'
 import { useAuth, registerBeforeSignOut } from '@/auth/AuthContext'
 import { supabaseStore } from '@/auth/supabaseStore'
 import { syncProgress } from '@/auth/sync'
-import { mergeProgress, emptyProgress } from '@/domain/progress'
+import { mergeProgress, emptyProgress, type ProgressData } from '@/domain/progress'
 import { track } from '@/analytics'
 
 interface AppContextValue {
@@ -49,8 +49,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
   // M4: set to true after hydrate so the immediately-following debounced save is skipped
   // (syncProgress already wrote the same blob to the cloud).
   const justHydratedRef = useRef(false)
-  // M5: detect transition from signed-in → signed-out to clear local progress.
-  const wasSignedInRef = useRef(false)
+  // M5: uid of the signed-in user, to detect the signed-in → signed-out transition.
+  const signedInUidRef = useRef<string | null>(null)
+  // Last progress the cloud confirmed saving, per user. Sign-out wipes local progress only
+  // when it matches, so answers that never reached the cloud are never deleted.
+  const cloudRef = useRef<{ uid: string; json: string } | null>(null)
+  const cloudSave = (uid: string, data: ProgressData) =>
+    supabaseStore.save(uid, data).then(() => {
+      cloudRef.current = { uid, json: JSON.stringify(data) }
+    })
 
   // SEO topic page (/okruh/<slug>/): start that okruh's practice directly.
   useEffect(() => {
@@ -85,7 +92,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       // yet: saving it would overwrite the cloud row. The sync saves the merge itself.
       syncingRef.current
         ? Promise.resolve()
-        : supabaseStore.save(uid, progressRef.current).catch(() => {}),
+        : cloudSave(uid, progressRef.current).catch(() => {}),
     )
   }, [user?.id]) // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -96,25 +103,31 @@ export function AppProvider({ children }: { children: ReactNode }) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!user) {
-      if (wasSignedInRef.current) {
+      const uid = signedInUidRef.current
+      if (uid) {
         // H2: flush now handled by registerBeforeSignOut (runs before session expires).
         // C3H2: no jizdy wipe — lessons live under the user-scoped key; just reset
         // in-memory state so the next account (or anonymous) starts clean.
         dispatch({ type: 'hydrateJizdy', state: emptyJizdyState() })
-        // M5: sign-out — wipe local progress so the next account starts fresh
-        saveProgress(emptyProgress())
-        dispatch({ type: 'hydrate', progress: emptyProgress() })
-        wasSignedInRef.current = false
+        // M5: sign-out — wipe local progress so the next account starts fresh, but only
+        // when the cloud holds it (flush failed, sync in flight, or an involuntary
+        // SIGNED_OUT → keep it; it merges into the next sign-in).
+        const c = cloudRef.current
+        if (c?.uid === uid && c.json === JSON.stringify(progressRef.current)) {
+          saveProgress(emptyProgress())
+          dispatch({ type: 'hydrate', progress: emptyProgress() })
+        }
+        signedInUidRef.current = null
       }
       return
     }
-    wasSignedInRef.current = true
     const uid = user.id
+    signedInUidRef.current = uid
     // C3H2: load this user's jizdy lessons from their scoped key.
     dispatch({ type: 'hydrateJizdy', state: loadJizdy(uid) })
     let cancelled = false
     syncingRef.current = true // H1: block debounced save while fetch is in flight
-    syncProgress(supabaseStore, uid, loadProgress())
+    syncProgress({ fetch: supabaseStore.fetch, save: cloudSave }, uid, loadProgress())
       .then((merged) => {
         if (!cancelled) {
           // M2: re-merge with any answers given while the fetch was in flight
@@ -150,7 +163,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
     const uid = user.id
     const t = setTimeout(() => {
-      supabaseStore.save(uid, state.progress).catch(() => {})
+      cloudSave(uid, state.progress).catch(() => {})
     }, 1500)
     return () => clearTimeout(t)
   }, [state.progress, user?.id]) // eslint-disable-line react-hooks/exhaustive-deps

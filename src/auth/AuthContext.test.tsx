@@ -180,6 +180,32 @@ describe('AuthContext (auth configured)', () => {
   })
 })
 
+describe('AuthContext signOut flush timeout', () => {
+  it('signs out after ~3 s even when the flush never settles', async () => {
+    const client = makeClient('frank')
+    clientHolder.client = client
+    let signOut!: () => Promise<void>
+    function Capture() {
+      signOut = useAuth().signOut
+      return null
+    }
+    render(<AuthProvider><Capture /></AuthProvider>)
+    await waitFor(() => expect(client.auth.getSession).toHaveBeenCalled())
+
+    vi.useFakeTimers()
+    const unregister = registerBeforeSignOut(() => new Promise<void>(() => {}))
+    try {
+      const done = signOut()
+      await vi.advanceTimersByTimeAsync(3000)
+      await done
+      expect(client.auth.signOut).toHaveBeenCalledTimes(1)
+    } finally {
+      unregister()
+      vi.useRealTimers()
+    }
+  })
+})
+
 describe('AuthContext signInWithEmail (C2M4)', () => {
   it('returns { ok: true } when signInWithOtp succeeds', async () => {
     const client = makeClient(null, { signInWithOtpResult: { error: null } })
