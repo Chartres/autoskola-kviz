@@ -188,6 +188,11 @@ describe('AppContext sign-out', () => {
       expect(screen.getByTestId('answered').textContent).toBe('1'),
     )
 
+    // Real signOut flushes first; the wipe requires that confirmed cloud save.
+    await act(async () => {
+      await registeredFlush.current!()
+    })
+
     // Sign out — change user to null and re-render so the effect sees the change.
     mockUserHolder.user = null
     rerender(
@@ -199,6 +204,53 @@ describe('AppContext sign-out', () => {
     await waitFor(() =>
       expect(screen.getByTestId('answered').textContent).toBe('0'),
     )
+  })
+
+  it('keeps local progress on sign-out when the flush save fails', async () => {
+    const local = recordAnswer(emptyProgress(), 11, true, 500)
+    localStorage.setItem('autoskola-kviz:progress:v1', JSON.stringify(local))
+    const ui = () => (
+      <AppProvider>
+        <Spy />
+      </AppProvider>
+    )
+    mockUserHolder.user = { id: 'u-fail' }
+    const { rerender } = render(ui())
+    await act(async () => {
+      syncResolvers.resolve(local)
+    })
+    await waitFor(() => expect(screen.getByTestId('answered').textContent).toBe('1'))
+
+    fakeSave.mockRejectedValueOnce(new Error('500'))
+    await act(async () => {
+      await registeredFlush.current!().catch(() => {})
+    })
+    mockUserHolder.user = null
+    rerender(ui())
+
+    await act(async () => {})
+    expect(screen.getByTestId('answered').textContent).toBe('1')
+    expect(Object.keys(JSON.parse(localStorage.getItem('autoskola-kviz:progress:v1')!).stats)).toEqual(['11'])
+  })
+
+  it('keeps local progress when signed out while the sign-in sync is still in flight', async () => {
+    const local = recordAnswer(emptyProgress(), 12, true, 500)
+    localStorage.setItem('autoskola-kviz:progress:v1', JSON.stringify(local))
+    const ui = () => (
+      <AppProvider>
+        <Spy />
+      </AppProvider>
+    )
+    mockUserHolder.user = { id: 'u-race' }
+    const { rerender } = render(ui())
+    await act(async () => {
+      await registeredFlush.current!()
+    })
+    mockUserHolder.user = null
+    rerender(ui())
+
+    await act(async () => {})
+    expect(screen.getByTestId('answered').textContent).toBe('1')
   })
 
   it('keeps jizdy lessons logged before the per-user key existed across sign-in and sign-out', async () => {
