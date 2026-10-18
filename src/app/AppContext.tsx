@@ -60,9 +60,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
     if (topic) {
       dispatch({ type: 'setCategories', categories: new Set([topic.category]) })
       dispatch({ type: 'startPractice', rng: freshRng() })
-      track('start_topic', { topic: topic.category, from: 'seo-page' })
+      track('key_action', { action: 'start_topic', topic: topic.category, from: 'seo-page' })
     }
-    track('app_open')
+    track('page_view')
   }, [])
 
   // Persist progress locally whenever it changes (offline-first source of truth).
