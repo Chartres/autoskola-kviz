@@ -51,13 +51,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const justHydratedRef = useRef(false)
   // M5: uid of the signed-in user, to detect the signed-in → signed-out transition.
   const signedInUidRef = useRef<string | null>(null)
-  // Last progress the cloud confirmed saving, per user. Sign-out wipes local progress only
-  // when it matches, so answers that never reached the cloud are never deleted.
-  const cloudRef = useRef<{ uid: string; json: string } | null>(null)
   const cloudSave = (uid: string, data: ProgressData) =>
-    supabaseStore.save(uid, data).then(() => {
-      cloudRef.current = { uid, json: JSON.stringify(data) }
-    })
+    supabaseStore.save(uid, data)
 
   // SEO topic page (/okruh/<slug>/): start that okruh's practice directly.
   useEffect(() => {
@@ -109,14 +104,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
         // C3H2: no jizdy wipe — lessons live under the user-scoped key; just reset
         // in-memory state so the next account (or anonymous) starts clean.
         dispatch({ type: 'hydrateJizdy', state: emptyJizdyState() })
-        // M5: sign-out — wipe local progress so the next account starts fresh, but only
-        // when the cloud holds it (flush failed, sync in flight, or an involuntary
-        // SIGNED_OUT → keep it; it merges into the next sign-in).
-        const c = cloudRef.current
-        if (c?.uid === uid && c.json === JSON.stringify(progressRef.current)) {
-          saveProgress(emptyProgress())
-          dispatch({ type: 'hydrate', progress: emptyProgress() })
-        }
+        // Always wipe local progress on sign-out so the next account (or anonymous
+        // session) on this device cannot inherit the previous user's answers.
+        // ponytail: unconditional wipe — security beats "preserve on flush failure"
+        saveProgress(emptyProgress())
+        dispatch({ type: 'hydrate', progress: emptyProgress() })
         signedInUidRef.current = null
       }
       return

@@ -206,7 +206,7 @@ describe('AppContext sign-out', () => {
     )
   })
 
-  it('keeps local progress on sign-out when the flush save fails', async () => {
+  it('clears local progress on sign-out even when the flush save fails (shared-device safety)', async () => {
     const local = recordAnswer(emptyProgress(), 11, true, 500)
     localStorage.setItem('autoskola-kviz:progress:v1', JSON.stringify(local))
     const ui = () => (
@@ -228,12 +228,12 @@ describe('AppContext sign-out', () => {
     mockUserHolder.user = null
     rerender(ui())
 
-    await act(async () => {})
-    expect(screen.getByTestId('answered').textContent).toBe('1')
-    expect(Object.keys(JSON.parse(localStorage.getItem('autoskola-kviz:progress:v1')!).stats)).toEqual(['11'])
+    // Progress is always wiped on sign-out to prevent data leaking to the next user.
+    await waitFor(() => expect(screen.getByTestId('answered').textContent).toBe('0'))
+    expect(JSON.parse(localStorage.getItem('autoskola-kviz:progress:v1')!).stats).toEqual({})
   })
 
-  it('keeps local progress when signed out while the sign-in sync is still in flight', async () => {
+  it('clears local progress when signed out while the sign-in sync is still in flight (shared-device safety)', async () => {
     const local = recordAnswer(emptyProgress(), 12, true, 500)
     localStorage.setItem('autoskola-kviz:progress:v1', JSON.stringify(local))
     const ui = () => (
@@ -249,8 +249,8 @@ describe('AppContext sign-out', () => {
     mockUserHolder.user = null
     rerender(ui())
 
-    await act(async () => {})
-    expect(screen.getByTestId('answered').textContent).toBe('1')
+    // Progress is always wiped on sign-out regardless of sync state.
+    await waitFor(() => expect(screen.getByTestId('answered').textContent).toBe('0'))
   })
 
   it('keeps jizdy lessons logged before the per-user key existed across sign-in and sign-out', async () => {
