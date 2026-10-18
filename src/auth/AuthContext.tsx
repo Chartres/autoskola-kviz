@@ -41,7 +41,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (!supabase) return
+    // Guard: if onAuthStateChange fires before getSession resolves, skip the
+    // stale getSession result so it cannot overwrite newer auth state.
+    let authEventFired = false
     supabase.auth.getSession().then(({ data }) => {
+      if (authEventFired) return // onAuthStateChange already set the latest state
       const u = data.session?.user
       setUser(u ? { id: u.id, email: u.email ?? undefined } : null)
       identify(u?.id ?? null) // cross-product identity on the shared platform
@@ -50,9 +54,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setLoading(false)
     })
     const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
+      authEventFired = true
       const u = session?.user
       setUser(u ? { id: u.id, email: u.email ?? undefined } : null)
       identify(u?.id ?? null)
+      setLoading(false)
     })
     return () => sub.subscription.unsubscribe()
   }, [])
