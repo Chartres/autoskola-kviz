@@ -18,7 +18,6 @@ interface AuthContextValue {
   configured: boolean
   loading: boolean
   user: AuthUser | null
-  signInWithGoogle: () => Promise<void>
   signInWithEmail: (email: string) => Promise<{ ok: boolean; error?: string }>
   signOut: () => Promise<void>
 }
@@ -67,13 +66,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     configured: isAuthConfigured,
     loading,
     user,
-    async signInWithGoogle() {
-      if (!supabase) return
-      await supabase.auth.signInWithOAuth({
-        provider: 'google',
-        options: { redirectTo: window.location.href },
-      })
-    },
     async signInWithEmail(email: string) {
       if (!supabase) return { ok: false, error: 'Přihlášení není nakonfigurováno.' }
       const { error } = await supabase.auth.signInWithOtp({

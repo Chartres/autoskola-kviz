@@ -36,7 +36,6 @@ vi.mock('@/auth/AuthContext', () => ({
     user: mockUserHolder.user,
     loading: false,
     configured: false,
-    signInWithGoogle: vi.fn(),
     signInWithEmail: vi.fn(),
     signOut: vi.fn(),
   }),
