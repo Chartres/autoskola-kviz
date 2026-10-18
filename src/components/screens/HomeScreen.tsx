@@ -101,8 +101,7 @@ export function HomeScreen() {
         </h2>
         <div className="grid grid-cols-2 gap-2">
           {META.categories.map((c) => {
-            const b = sum.byCategory[c.name]
-            const mastered = b ? b.mastered : 0
+            const mastered = sum.byCategory[c.name]?.mastered ?? 0
             return (
               <button
                 key={c.id}
