@@ -141,6 +141,43 @@ describe('AppContext sign-in sync', () => {
     expect(fakeSave).not.toHaveBeenCalled()
   })
 
+  it('merges answers given during the sync into the final hydrated state (M2)', async () => {
+    // Cloud has question 42 answered correctly.
+    let remote = emptyProgress()
+    remote = recordAnswer(remote, 42, true, 1000)
+
+    mockUserHolder.user = { id: 'user-m2' }
+    let capturedDispatch: ReturnType<typeof useApp>['dispatch'] | null = null
+    function DispatchCapture() {
+      const { dispatch } = useApp()
+      capturedDispatch = dispatch
+      return null
+    }
+
+    render(
+      <AppProvider>
+        <Spy />
+        <DispatchCapture />
+      </AppProvider>,
+    )
+
+    // Sync is in-flight; answer question 99 locally while it is running.
+    await act(async () => {
+      capturedDispatch!({ type: 'hydrate', progress: recordAnswer(emptyProgress(), 99, true, 500) })
+    })
+    expect(screen.getByTestId('answered').textContent).toBe('1') // q99 only
+
+    // Sync resolves with cloud progress (q42).
+    await act(async () => {
+      syncResolvers.resolve(remote)
+    })
+
+    // Final state must contain BOTH q42 (from cloud) and q99 (in-flight).
+    await waitFor(() =>
+      expect(screen.getByTestId('answered').textContent).toBe('2'),
+    )
+  })
+
   it('calls syncProgress once per sign-in (M3: stable user.id dep prevents duplicate syncs)', async () => {
     const { syncProgress } = await import('@/auth/sync')
     const spy = vi.mocked(syncProgress)
