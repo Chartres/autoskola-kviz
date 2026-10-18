@@ -117,6 +117,7 @@ export function JizdyScreen() {
                   onChange={(e) => setDuration(e.target.value)}
                   min={1}
                   max={300}
+                  step={1}
                   placeholder="60"
                   required
                   className="rounded border border-sand-700 bg-sand-900 px-2 py-1.5 text-sm text-sand-100 focus:border-terra-500 focus:outline-none"
