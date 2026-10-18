@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import type { Choice, Question } from '@/domain/types'
 import { imageUrl } from '@/lib/assets'
 
@@ -68,7 +68,9 @@ export function QuestionCard({
 }: QuestionCardProps) {
   const answered = chosen !== undefined
   const isCorrect = answered && chosen === question.correct
-  const options = optionsFor(question)
+  // Memoize so the array reference is stable across re-renders with the same question,
+  // preventing the keydown effect from re-registering on every render (F22).
+  const options = useMemo(() => optionsFor(question), [question])
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
