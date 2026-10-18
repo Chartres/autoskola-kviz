@@ -63,9 +63,8 @@ export function StatsScreen() {
       </h2>
       <div className="space-y-5">
         {META.categories.map((c) => {
-          const b = sum.byCategory[c.name]
-          const seen = b ? b.seen : 0
-          const mastered = b ? b.mastered : 0
+          const seen = sum.byCategory[c.name]?.seen ?? 0
+          const mastered = sum.byCategory[c.name]?.mastered ?? 0
           return (
             <div key={c.id}>
               <div className="mb-1 flex items-baseline justify-between gap-2 text-sm">

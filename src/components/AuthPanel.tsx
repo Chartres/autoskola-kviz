@@ -8,6 +8,8 @@ export function AuthPanel() {
   const [email, setEmail] = useState('')
   const [sent, setSent] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [submitting, setSubmitting] = useState(false)
+  const [signingOut, setSigningOut] = useState(false)
   const rootRef = useRef<HTMLDivElement>(null)
 
   // Reset sent state when the popover closes so reopening shows a fresh form.
@@ -38,12 +40,15 @@ export function AuthPanel() {
   async function submitEmail(e: React.FormEvent) {
     e.preventDefault()
     setError(null)
+    setSubmitting(true)
     try {
       const res = await signInWithEmail(email)
       if (res.ok) setSent(true)
       else setError(res.error ?? 'Něco se nepovedlo.')
     } catch {
       setError('Nepodařilo se odeslat odkaz. Zkuste to znovu.')
+    } finally {
+      setSubmitting(false)
     }
   }
 
@@ -76,10 +81,14 @@ export function AuthPanel() {
               <p className="mb-3 truncate text-sm text-sand-200">{user.email}</p>
               <button
                 type="button"
-                onClick={() => signOut()}
-                className="w-full rounded-card border border-sand-600 px-4 py-2 text-sm font-semibold text-sand-200 hover:border-sand-400"
+                disabled={signingOut}
+                onClick={async () => {
+                  setSigningOut(true)
+                  try { await signOut() } finally { setSigningOut(false) }
+                }}
+                className="w-full rounded-card border border-sand-600 px-4 py-2 text-sm font-semibold text-sand-200 hover:border-sand-400 disabled:opacity-60"
               >
-                Odhlásit
+                {signingOut ? 'Odhlašuji…' : 'Odhlásit'}
               </button>
             </>
           ) : (
@@ -102,9 +111,10 @@ export function AuthPanel() {
                   />
                   <button
                     type="submit"
-                    className="w-full rounded-card bg-terra-500 px-4 py-2 text-sm font-semibold text-sand-950 hover:bg-terra-400"
+                    disabled={submitting}
+                    className="w-full rounded-card bg-terra-500 px-4 py-2 text-sm font-semibold text-sand-950 hover:bg-terra-400 disabled:opacity-60"
                   >
-                    Poslat přihlašovací odkaz
+                    {submitting ? 'Odesílám…' : 'Poslat přihlašovací odkaz'}
                   </button>
                   {error && <p className="mt-2 text-xs text-rust-400">{error}</p>}
                 </form>

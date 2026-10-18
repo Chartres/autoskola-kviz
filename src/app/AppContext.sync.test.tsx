@@ -36,7 +36,6 @@ vi.mock('@/auth/AuthContext', () => ({
     user: mockUserHolder.user,
     loading: false,
     configured: false,
-    signInWithGoogle: vi.fn(),
     signInWithEmail: vi.fn(),
     signOut: vi.fn(),
   }),
@@ -141,6 +140,43 @@ describe('AppContext sign-in sync', () => {
     expect(fakeSave).not.toHaveBeenCalled()
   })
 
+  it('merges answers given during the sync into the final hydrated state (M2)', async () => {
+    // Cloud has question 42 answered correctly.
+    let remote = emptyProgress()
+    remote = recordAnswer(remote, 42, true, 1000)
+
+    mockUserHolder.user = { id: 'user-m2' }
+    let capturedDispatch: ReturnType<typeof useApp>['dispatch'] | null = null
+    function DispatchCapture() {
+      const { dispatch } = useApp()
+      capturedDispatch = dispatch
+      return null
+    }
+
+    render(
+      <AppProvider>
+        <Spy />
+        <DispatchCapture />
+      </AppProvider>,
+    )
+
+    // Sync is in-flight; answer question 99 locally while it is running.
+    await act(async () => {
+      capturedDispatch!({ type: 'hydrate', progress: recordAnswer(emptyProgress(), 99, true, 500) })
+    })
+    expect(screen.getByTestId('answered').textContent).toBe('1') // q99 only
+
+    // Sync resolves with cloud progress (q42).
+    await act(async () => {
+      syncResolvers.resolve(remote)
+    })
+
+    // Final state must contain BOTH q42 (from cloud) and q99 (in-flight).
+    await waitFor(() =>
+      expect(screen.getByTestId('answered').textContent).toBe('2'),
+    )
+  })
+
   it('calls syncProgress once per sign-in (M3: stable user.id dep prevents duplicate syncs)', async () => {
     const { syncProgress } = await import('@/auth/sync')
     const spy = vi.mocked(syncProgress)
@@ -206,7 +242,7 @@ describe('AppContext sign-out', () => {
     )
   })
 
-  it('keeps local progress on sign-out when the flush save fails', async () => {
+  it('clears local progress on sign-out even when the flush save fails (shared-device safety)', async () => {
     const local = recordAnswer(emptyProgress(), 11, true, 500)
     localStorage.setItem('autoskola-kviz:progress:v1', JSON.stringify(local))
     const ui = () => (
@@ -228,12 +264,12 @@ describe('AppContext sign-out', () => {
     mockUserHolder.user = null
     rerender(ui())
 
-    await act(async () => {})
-    expect(screen.getByTestId('answered').textContent).toBe('1')
-    expect(Object.keys(JSON.parse(localStorage.getItem('autoskola-kviz:progress:v1')!).stats)).toEqual(['11'])
+    // Progress is always wiped on sign-out to prevent data leaking to the next user.
+    await waitFor(() => expect(screen.getByTestId('answered').textContent).toBe('0'))
+    expect(JSON.parse(localStorage.getItem('autoskola-kviz:progress:v1')!).stats).toEqual({})
   })
 
-  it('keeps local progress when signed out while the sign-in sync is still in flight', async () => {
+  it('clears local progress when signed out while the sign-in sync is still in flight (shared-device safety)', async () => {
     const local = recordAnswer(emptyProgress(), 12, true, 500)
     localStorage.setItem('autoskola-kviz:progress:v1', JSON.stringify(local))
     const ui = () => (
@@ -249,8 +285,8 @@ describe('AppContext sign-out', () => {
     mockUserHolder.user = null
     rerender(ui())
 
-    await act(async () => {})
-    expect(screen.getByTestId('answered').textContent).toBe('1')
+    // Progress is always wiped on sign-out regardless of sync state.
+    await waitFor(() => expect(screen.getByTestId('answered').textContent).toBe('0'))
   })
 
   it('keeps jizdy lessons logged before the per-user key existed across sign-in and sign-out', async () => {

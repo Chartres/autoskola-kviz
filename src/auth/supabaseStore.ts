@@ -20,17 +20,15 @@ export const supabaseStore: RemoteProgressStore = {
     if (error) throw error
     const stored = data?.data as ProgressData | undefined
     if (!stored) return null
-    if (stored.version !== PROGRESS_VERSION) {
-      // Migrate forward rather than discarding remote data.
-      return {
-        version: PROGRESS_VERSION,
-        stats: stored.stats ?? {},
-        bookmarks: stored.bookmarks ?? [],
-        streak: stored.streak ?? emptyStreak(),
-        updatedAt: stored.updatedAt ?? 0,
-      }
+    // Normalize shape regardless of version: a row missing stats/bookmarks/streak
+    // would crash mergeProgress on Object.entries(undefined) / spread of undefined.
+    return {
+      version: PROGRESS_VERSION,
+      stats: stored.stats ?? {},
+      bookmarks: stored.bookmarks ?? [],
+      streak: stored.streak ?? emptyStreak(),
+      updatedAt: stored.updatedAt ?? 0,
     }
-    return stored
   },
 
   async save(userId: string, data: ProgressData): Promise<void> {

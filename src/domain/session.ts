@@ -32,10 +32,6 @@ export function currentChoice(s: SessionState): Choice | undefined {
   return cur ? s.chosen[cur.id] : undefined
 }
 
-export function isCurrentAnswered(s: SessionState): boolean {
-  return currentChoice(s) !== undefined
-}
-
 /** Record the answer for the current question. No-op if already answered. */
 export function answerCurrent(s: SessionState, choice: Choice): SessionState {
   const cur = currentQuestion(s)
@@ -59,9 +55,4 @@ export function score(s: SessionState): number {
 
 export function wrongAnswers(s: SessionState): AnswerRecord[] {
   return s.records.filter((r) => !r.correct)
-}
-
-export function progressRatio(s: SessionState): number {
-  if (s.questions.length === 0) return 0
-  return s.records.length / s.questions.length
 }

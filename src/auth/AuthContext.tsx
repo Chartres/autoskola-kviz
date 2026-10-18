@@ -18,7 +18,6 @@ interface AuthContextValue {
   configured: boolean
   loading: boolean
   user: AuthUser | null
-  signInWithGoogle: () => Promise<void>
   signInWithEmail: (email: string) => Promise<{ ok: boolean; error?: string }>
   signOut: () => Promise<void>
 }
@@ -41,7 +40,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (!supabase) return
+    // Guard: if onAuthStateChange fires before getSession resolves, skip the
+    // stale getSession result so it cannot overwrite newer auth state.
+    let authEventFired = false
     supabase.auth.getSession().then(({ data }) => {
+      if (authEventFired) return // onAuthStateChange already set the latest state
       const u = data.session?.user
       setUser(u ? { id: u.id, email: u.email ?? undefined } : null)
       identify(u?.id ?? null) // cross-product identity on the shared platform
@@ -50,9 +53,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setLoading(false)
     })
     const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
+      authEventFired = true
       const u = session?.user
       setUser(u ? { id: u.id, email: u.email ?? undefined } : null)
       identify(u?.id ?? null)
+      setLoading(false)
     })
     return () => sub.subscription.unsubscribe()
   }, [])
@@ -61,13 +66,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     configured: isAuthConfigured,
     loading,
     user,
-    async signInWithGoogle() {
-      if (!supabase) return
-      await supabase.auth.signInWithOAuth({
-        provider: 'google',
-        options: { redirectTo: window.location.href },
-      })
-    },
     async signInWithEmail(email: string) {
       if (!supabase) return { ok: false, error: 'Přihlášení není nakonfigurováno.' }
       const { error } = await supabase.auth.signInWithOtp({
@@ -79,13 +77,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     async signOut() {
       if (!supabase) return
       // Flush pending progress while the session is still valid. A failed or slow flush
-      // does not block sign-out: AppContext keeps unconfirmed local progress instead of
-      // wiping it. ponytail: fixed 3 s cap; make it configurable if slow networks complain.
+      // does not block sign-out: AppContext always wipes local progress afterwards.
+      // ponytail: fixed 3 s cap; make it configurable if slow networks complain.
       if (_beforeSignOut) {
+        let tid: ReturnType<typeof setTimeout>
         await Promise.race([
           _beforeSignOut().catch(() => {}),
-          new Promise((r) => setTimeout(r, 3000)),
+          new Promise((r) => { tid = setTimeout(r, 3000) }),
         ])
+        clearTimeout(tid!)
       }
       await supabase.auth.signOut()
     },

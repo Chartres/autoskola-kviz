@@ -1,5 +1,6 @@
 import { useCallback, useEffect } from 'react'
 import { useApp } from '@/app/AppContext'
+import type { Mode } from '@/app/store'
 import { currentChoice, currentQuestion } from '@/domain/session'
 import { isBookmarked } from '@/domain/progress'
 import { imageUrl } from '@/lib/assets'
@@ -8,7 +9,7 @@ import { ExamTimer } from '@/components/ExamTimer'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import { todayStr } from '@/lib/date'
 
-const MODE_LABEL: Record<string, string> = {
+const MODE_LABEL: Record<Mode, string> = {
   lesson: 'Denní dávka',
   practice: 'Procvičování',
   review: 'Moje chyby',

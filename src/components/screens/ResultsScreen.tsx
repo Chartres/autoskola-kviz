@@ -17,6 +17,11 @@ export function ResultsScreen() {
   const total = isExam && examResult ? examResult.total : (session?.questions.length ?? 0)
   const correct = isExam && examResult ? examResult.score : (session ? score(session) : 0)
   const wrong = session ? wrongAnswers(session) : []
+  // For timed exams, unanswered questions cost points but are absent from records;
+  // show them alongside wrong answers so the learner sees every gap.
+  const unanswered = isExam && session
+    ? session.questions.filter((q) => session.chosen[q.id] === undefined)
+    : []
 
   useEffect(() => {
     if (!session) return
@@ -84,10 +89,10 @@ export function ResultsScreen() {
         </section>
       )}
 
-      {wrong.length > 0 && (
+      {(wrong.length > 0 || unanswered.length > 0) && (
         <section className="mt-8">
           <h2 className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.2em] text-rust-400">
-            Chybné odpovědi ({wrong.length})
+            Chybné odpovědi ({wrong.length + unanswered.length})
           </h2>
           <ul className="space-y-3">
             {wrong.map((r) => {
@@ -106,6 +111,19 @@ export function ResultsScreen() {
                 </li>
               )
             })}
+            {unanswered.map((q) => (
+              <li
+                key={q.id}
+                className="rounded-card border border-sand-700 bg-sand-900/50 p-4"
+              >
+                <p className="mb-1 font-mono text-xs text-sand-500 uppercase tracking-wide">Nezodpovězeno</p>
+                <p className="mb-2 text-sm text-sand-200">{q.q}</p>
+                <p className="text-sm text-moss-400">
+                  <span className="font-semibold uppercase">{q.correct})</span>{' '}
+                  {q[q.correct]}
+                </p>
+              </li>
+            ))}
           </ul>
         </section>
       )}

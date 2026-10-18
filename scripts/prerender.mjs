@@ -26,7 +26,7 @@ for (const t of topics) {
       <div class="mx-auto w-full max-w-xl px-4 py-6">
         <h1 class="font-display text-2xl font-bold tracking-tight text-sand-50">${esc(fill(t.h1))}</h1>
         <p class="mt-3 text-sand-300">${esc(fill(t.intro))}</p>
-        <p class="mt-3 text-sand-300"><a class="text-terra-400 hover:underline" href="${url}">Spustit test zdarma</a> — bez reklam a bez registrace, funguje offline i na mobilu.</p>
+        <p class="mt-3 text-sand-300"><a class="text-terra-400 hover:underline" href="${ORIGIN}/">Spustit test zdarma</a> — bez reklam a bez registrace, funguje offline i na mobilu.</p>
         <h2 class="mt-6 font-display text-lg font-semibold text-sand-50">Časté otázky</h2>
         <dl class="mt-2 text-sand-300">${t.faq
           .map(
