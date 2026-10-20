@@ -3,8 +3,9 @@ import { useAuth } from '@/auth/AuthContext'
 
 /** Compact account control: a small avatar that opens a sign-in / account popover. */
 export function AuthPanel() {
-  const { configured, user, signInWithEmail, signOut } = useAuth()
-  const [open, setOpen] = useState(false)
+  const { configured, user, signInWithEmail, signOut, linkError, dismissLinkError } = useAuth()
+  // A failed magic link opens the popover so the message is seen.
+  const [open, setOpen] = useState(() => linkError !== null)
   const [email, setEmail] = useState('')
   const [sent, setSent] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -12,8 +13,11 @@ export function AuthPanel() {
 
   // Reset sent state when the popover closes so reopening shows a fresh form.
   useEffect(() => {
-    if (!open) setSent(false)
-  }, [open])
+    if (!open) {
+      setSent(false)
+      dismissLinkError()
+    }
+  }, [open]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Dismiss the popover on Escape or a click/tap outside it.
   useEffect(() => {
@@ -84,6 +88,7 @@ export function AuthPanel() {
             </>
           ) : (
             <>
+              {linkError && <p role="alert" className="mb-3 text-sm text-rust-400">{linkError}</p>}
               <p className="mb-3 text-sm text-sand-300">
                 Synchronizujte pokrok mezi zařízeními. Pošleme vám přihlašovací
                 odkaz na e-mail.

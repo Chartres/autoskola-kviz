@@ -245,4 +245,18 @@ describe('AuthContext signInWithEmail (C2M4)', () => {
     const result = await signInWithEmail('bad@example.com')
     expect(result).toEqual({ ok: false, error: expected })
   })
+
+  it('surfaces an expired magic link error and strips it from the URL', async () => {
+    window.history.replaceState(null, '', '/#error=access_denied&error_code=otp_expired&error_description=Email+link+is+invalid+or+has+expired')
+    clientHolder.client = makeClient(null)
+    function Show() {
+      const { linkError, dismissLinkError } = useAuth()
+      return <button onClick={dismissLinkError}>{linkError ?? 'no-error'}</button>
+    }
+    render(<AuthProvider><Show /></AuthProvider>)
+    expect(screen.getByRole('button').textContent).toMatch(/vypršel/)
+    expect(window.location.hash).toBe('')
+    act(() => screen.getByRole('button').click())
+    expect(screen.getByRole('button').textContent).toBe('no-error')
+  })
 })
