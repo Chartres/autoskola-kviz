@@ -63,6 +63,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
     supabaseStore.save(uid, data).then(() => {
       cloudRef.current = { uid, json: canonical(data) }
     })
+  // Fold `incoming` into the in-memory progress; dispatch only if it changed anything.
+  const adopt = (incoming: ProgressData) => {
+    const next = mergeProgress(progressRef.current, incoming)
+    if (canonical(next) !== canonical(progressRef.current)) {
+      progressRef.current = next
+      dispatch({ type: 'hydrate', progress: next })
+    }
+  }
+
   // Cloud write that never drops newer remote answers (another device or tab may have
   // saved since our sign-in sync): fetch, merge, save, then adopt what the merge brought in.
   const cloudMerge = async (uid: string, local: ProgressData) => {
@@ -83,11 +92,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     // Fetched and nothing to upload: the cloud already equals the merge.
     if (fetched && !attempted) cloudRef.current = { uid, json: canonical(merged) }
     if (signedInUidRef.current !== uid) return
-    const next = mergeProgress(progressRef.current, merged)
-    if (canonical(next) !== canonical(progressRef.current)) {
-      progressRef.current = next
-      dispatch({ type: 'hydrate', progress: next })
-    }
+    adopt(merged)
   }
 
   // Another tab on this device saved: fold its progress and lessons into ours, so our next
@@ -95,11 +100,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const onStorage = (e: StorageEvent) => {
       if (e.key === STORAGE_KEY) {
-        const next = mergeProgress(progressRef.current, loadProgress())
-        if (canonical(next) !== canonical(progressRef.current)) {
-          progressRef.current = next
-          dispatch({ type: 'hydrate', progress: next })
-        }
+        adopt(loadProgress())
       } else if (e.key?.startsWith(JIZDY_KEY)) {
         const ours = jizdyRef.current
         const seen = new Set(ours.lessons.map((l) => l.id))
