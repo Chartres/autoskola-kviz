@@ -13,7 +13,7 @@ import { topicFromPath } from '@/lib/topics'
 import { freshRng } from '@/domain/rng'
 import { useAuth, registerBeforeSignOut } from '@/auth/AuthContext'
 import { supabaseStore } from '@/auth/supabaseStore'
-import { syncProgress } from '@/auth/sync'
+import { syncProgress, canonical } from '@/auth/sync'
 import { mergeProgress, emptyProgress, type ProgressData } from '@/domain/progress'
 import { track } from '@/analytics'
 
@@ -59,8 +59,34 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const cloudRef = useRef<{ uid: string; json: string } | null>(null)
   const cloudSave = (uid: string, data: ProgressData) =>
     supabaseStore.save(uid, data).then(() => {
-      cloudRef.current = { uid, json: JSON.stringify(data) }
+      cloudRef.current = { uid, json: canonical(data) }
     })
+  // Cloud write that never drops newer remote answers (another device or tab may have
+  // saved since our sign-in sync): fetch, merge, save, then adopt what the merge brought in.
+  const cloudMerge = async (uid: string, local: ProgressData) => {
+    let fetched = false
+    let attempted = false
+    const merged = await syncProgress(
+      {
+        fetch: async (id) => {
+          const r = await supabaseStore.fetch(id)
+          fetched = true
+          return r
+        },
+        save: (id, d) => ((attempted = true), cloudSave(id, d)),
+      },
+      uid,
+      local,
+    )
+    // Fetched and nothing to upload: the cloud already equals the merge.
+    if (fetched && !attempted) cloudRef.current = { uid, json: canonical(merged) }
+    if (signedInUidRef.current !== uid) return
+    const next = mergeProgress(progressRef.current, merged)
+    if (canonical(next) !== canonical(progressRef.current)) {
+      progressRef.current = next
+      dispatch({ type: 'hydrate', progress: next })
+    }
+  }
 
   // SEO topic page (/okruh/<slug>/): start that okruh's practice directly.
   useEffect(() => {
@@ -107,7 +133,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       // yet: saving it would overwrite the cloud row. The sync saves the merge itself.
       syncingRef.current || cloudStaleRef.current
         ? Promise.resolve()
-        : cloudSave(uid, progressRef.current).catch(() => {}),
+        : cloudMerge(uid, progressRef.current).catch(() => {}),
     )
   }, [user?.id]) // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -128,7 +154,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         // when the cloud holds it (flush failed, sync in flight, or an involuntary
         // SIGNED_OUT → keep it; it merges into the next sign-in).
         const c = cloudRef.current
-        if (c?.uid === uid && c.json === JSON.stringify(progressRef.current)) {
+        if (c?.uid === uid && c.json === canonical(progressRef.current)) {
           saveProgress(emptyProgress())
           dispatch({ type: 'hydrate', progress: emptyProgress() })
         }
@@ -184,7 +210,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
     const uid = user.id
     const t = setTimeout(() => {
-      cloudSave(uid, state.progress).catch(() => {})
+      cloudMerge(uid, state.progress).catch(() => {})
     }, 1500)
     return () => clearTimeout(t)
   }, [state.progress, user?.id]) // eslint-disable-line react-hooks/exhaustive-deps

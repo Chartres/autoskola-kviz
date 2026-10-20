@@ -46,15 +46,23 @@ vi.mock('@/auth/AuthContext', () => ({
   },
 }))
 
-vi.mock('@/auth/sync', () => ({
-  syncProgress: vi.fn(
-    (_store: unknown, _uid: string, _local: ProgressData) =>
-      new Promise<ProgressData>((res, rej) => {
+// The first call per test is the sign-in sync, resolved by hand; later calls (debounced
+// save, sign-out flush) run the real fetch-merge-save against the mocked store.
+vi.mock('@/auth/sync', async (importActual) => {
+  const actual = await importActual<typeof import('@/auth/sync')>()
+  let calls = 0
+  return {
+    ...actual,
+    syncProgress: vi.fn((store: never, uid: string, local: ProgressData) => {
+      if (calls++ > 0) return actual.syncProgress(store, uid, local)
+      return new Promise<ProgressData>((res, rej) => {
         syncResolvers.resolve = res
         syncResolvers.reject = rej
-      }),
-  ),
-}))
+      })
+    }),
+    __resetCalls: () => { calls = 0 },
+  }
+})
 
 vi.mock('@/auth/supabaseStore', () => ({
   supabaseStore: { fetch: vi.fn(), save: fakeSave },
@@ -79,7 +87,8 @@ function lessonRec(id: string) {
 
 const storedLessons = (key: string) => JSON.parse(localStorage.getItem(key)!).lessons
 
-beforeEach(() => {
+beforeEach(async () => {
+  ;((await import('@/auth/sync')) as unknown as { __resetCalls: () => void }).__resetCalls()
   localStorage.clear()
   fakeSave.mockClear()
   mockUserHolder.user = null
@@ -421,10 +430,44 @@ describe('AppContext debounced cloud save', () => {
     // Debounce has not elapsed yet.
     expect(fakeSave).not.toHaveBeenCalled()
 
-    // Advance past debounce — save fires.
-    act(() => { vi.advanceTimersByTime(2000) })
+    // Advance past debounce — save fires (after the fetch-merge step).
+    await act(async () => { vi.advanceTimersByTime(2000) })
     expect(fakeSave).toHaveBeenCalledTimes(1)
     expect(fakeSave).toHaveBeenCalledWith('debounce-user', newProg)
+  })
+
+  it('merges newer remote answers before saving instead of overwriting them', async () => {
+    vi.useFakeTimers()
+    const { supabaseStore } = await import('@/auth/supabaseStore')
+    mockUserHolder.user = { id: 'two-devices' }
+    let capturedDispatch: ReturnType<typeof useApp>['dispatch'] | null = null
+    function DispatchCapture() {
+      capturedDispatch = useApp().dispatch
+      return null
+    }
+    render(
+      <AppProvider>
+        <Spy />
+        <DispatchCapture />
+      </AppProvider>,
+    )
+    await act(async () => {
+      syncResolvers.resolve(emptyProgress())
+    })
+
+    // Device A answered question 2 after this tab's sign-in sync.
+    const remote = recordAnswer(emptyProgress(), 2, true, 2000)
+    vi.mocked(supabaseStore.fetch).mockResolvedValueOnce(remote)
+    // This tab answers question 1.
+    const mine = recordAnswer(emptyProgress(), 1, true, 3000)
+    await act(async () => {
+      capturedDispatch!({ type: 'hydrate', progress: mine })
+    })
+    await act(async () => { vi.advanceTimersByTime(2000) })
+
+    const saved = fakeSave.mock.calls[0] as unknown as [string, ProgressData]
+    expect(Object.keys(saved[1].stats).sort()).toEqual(['1', '2'])
+    expect(screen.getByTestId('answered').textContent).toBe('2')
   })
 
   it('never writes local-only progress over the cloud row after a failed sign-in fetch', async () => {
