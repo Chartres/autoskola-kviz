@@ -53,19 +53,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (!supabase) return
-    supabase.auth.getSession().then(({ data }) => {
-      const u = data.session?.user
+    const apply = (u?: { id: string; email?: string | null }) => {
       setUser(u ? { id: u.id, email: u.email ?? undefined } : null)
       identify(u?.id ?? null) // cross-product identity on the shared platform
+    }
+    supabase.auth.getSession().then(({ data }) => {
+      apply(data.session?.user)
       setLoading(false)
     }).catch(() => {
       setLoading(false)
     })
-    const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
-      const u = session?.user
-      setUser(u ? { id: u.id, email: u.email ?? undefined } : null)
-      identify(u?.id ?? null)
-    })
+    const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => apply(session?.user))
     return () => sub.subscription.unsubscribe()
   }, [])
 
