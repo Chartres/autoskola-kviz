@@ -7,7 +7,7 @@ import {
   type ReactNode,
 } from 'react'
 import { reducer, initialState, type AppState, type Action } from './store'
-import { loadProgress, saveProgress, loadJizdy, saveJizdy } from '@/domain/storage'
+import { loadProgress, saveProgress, loadJizdy, saveJizdy, STORAGE_KEY, JIZDY_KEY } from '@/domain/storage'
 import { emptyJizdyState } from '@/domain/jizdy'
 import { topicFromPath } from '@/lib/topics'
 import { freshRng } from '@/domain/rng'
@@ -43,6 +43,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
   // before hydrateJizdy runs, writing stale jizdyState to the wrong key — C4H1/C4H2).
   const userRef = useRef(user)
   userRef.current = user
+  const jizdyRef = useRef(state.jizdyState)
+  jizdyRef.current = state.jizdyState
 
   // H1: block debounced save while a cloud fetch is outstanding.
   const syncingRef = useRef(false)
@@ -87,6 +89,31 @@ export function AppProvider({ children }: { children: ReactNode }) {
       dispatch({ type: 'hydrate', progress: next })
     }
   }
+
+  // Another tab on this device saved: fold its progress and lessons into ours, so our next
+  // save (which overwrites localStorage with our whole copy) cannot erase them.
+  useEffect(() => {
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === STORAGE_KEY) {
+        const next = mergeProgress(progressRef.current, loadProgress())
+        if (canonical(next) !== canonical(progressRef.current)) {
+          progressRef.current = next
+          dispatch({ type: 'hydrate', progress: next })
+        }
+      } else if (e.key?.startsWith(JIZDY_KEY)) {
+        const ours = jizdyRef.current
+        const seen = new Set(ours.lessons.map((l) => l.id))
+        const added = loadJizdy(userRef.current?.id).lessons.filter((l) => !seen.has(l.id))
+        if (added.length) {
+          const state = { ...ours, lessons: [...ours.lessons, ...added] }
+          jizdyRef.current = state
+          dispatch({ type: 'hydrateJizdy', state })
+        }
+      }
+    }
+    window.addEventListener('storage', onStorage)
+    return () => window.removeEventListener('storage', onStorage)
+  }, [])
 
   // SEO topic page (/okruh/<slug>/): start that okruh's practice directly.
   useEffect(() => {
