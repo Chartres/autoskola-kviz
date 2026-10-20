@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import type { Choice, Question } from '@/domain/types'
 import { imageUrl } from '@/lib/assets'
 
@@ -55,6 +55,14 @@ const STATE_CLASS: Record<OptionState, string> = {
   muted: 'border-sand-800 bg-sand-900/50 text-sand-400 opacity-60',
 }
 
+function ImageFailed() {
+  return (
+    <span role="alert" className="text-sm text-rust-400">
+      Obrázek se nenačetl — jste offline?
+    </span>
+  )
+}
+
 export function QuestionCard({
   question,
   reveal,
@@ -69,6 +77,9 @@ export function QuestionCard({
   const answered = chosen !== undefined
   const isCorrect = answered && chosen === question.correct
   const options = optionsFor(question)
+  // Images that failed to load (e.g. offline, not yet in the runtime cache).
+  const [failed, setFailed] = useState<ReadonlySet<string>>(new Set())
+  const markFailed = (src: string) => setFailed((f) => new Set(f).add(src))
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
@@ -117,11 +128,16 @@ export function QuestionCard({
         /* min-h-64 = image cap (max-h-56) + p-4 padding — the box height is
            reserved up front so the arriving image never shifts the layout. */
         <div className="mb-5 flex min-h-64 items-center justify-center rounded-card border border-sand-700 bg-white p-4">
-          <img
-            src={imageUrl(question.image)}
-            alt={`Obrázek k otázce ${question.id}`}
-            className="max-h-56 w-auto object-contain"
-          />
+          {failed.has(imageUrl(question.image)) ? (
+            <ImageFailed />
+          ) : (
+            <img
+              src={imageUrl(question.image)}
+              alt={`Obrázek k otázce ${question.id}`}
+              className="max-h-56 w-auto object-contain"
+              onError={() => markFailed(imageUrl(question.image!))}
+            />
+          )}
         </div>
       )}
 
@@ -145,13 +161,17 @@ export function QuestionCard({
                 {opt}
               </span>
               <span className="min-w-0 flex-1 leading-relaxed">
-                {question[`${opt}Img`] && (
-                  <img
-                    src={imageUrl(question[`${opt}Img`]!)}
-                    alt={`Možnost ${opt.toUpperCase()}`}
-                    className="max-h-24 w-auto rounded-[2px] bg-white p-1"
-                  />
-                )}
+                {question[`${opt}Img`] &&
+                  (failed.has(imageUrl(question[`${opt}Img`]!)) ? (
+                    <ImageFailed />
+                  ) : (
+                    <img
+                      src={imageUrl(question[`${opt}Img`]!)}
+                      alt={`Možnost ${opt.toUpperCase()}`}
+                      className="max-h-24 w-auto rounded-[2px] bg-white p-1"
+                      onError={() => markFailed(imageUrl(question[`${opt}Img`]!))}
+                    />
+                  ))}
                 {question[opt]}
                 {reveal && state === 'correct' && (
                   <span className="ml-2 whitespace-nowrap text-xs font-semibold text-moss-400">

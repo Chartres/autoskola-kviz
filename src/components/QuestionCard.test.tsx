@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { QuestionCard } from './QuestionCard'
 import type { Question } from '@/domain/types'
@@ -128,5 +128,17 @@ describe('QuestionCard', () => {
     await user.keyboard(' ')
     expect(onToggleBookmark).toHaveBeenCalledTimes(2)
     expect(onNext).not.toHaveBeenCalled()
+  })
+
+  it('says so when an option image fails to load', () => {
+    setup({ question: { ...Q, a: '', aImg: 'media/x.png' } as Question })
+    fireEvent.error(screen.getByAltText('Možnost A'))
+    expect(screen.getByText(/Obrázek se nenačetl/)).toBeTruthy()
+  })
+
+  it('says so when the question image fails to load', () => {
+    setup({ question: { ...Q, image: 'media/x.png' } })
+    fireEvent.error(screen.getByAltText('Obrázek k otázce 1'))
+    expect(screen.getByText(/Obrázek se nenačetl/)).toBeTruthy()
   })
 })
