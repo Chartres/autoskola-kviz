@@ -229,11 +229,11 @@ describe('mergeProgress (offline ↔ cloud sync)', () => {
 
   it('picks the later lastDate regardless of which side has the higher current', () => {
     let a = recordLessonComplete(emptyProgress(), '2026-06-10') // current 1
-    let b = recordLessonComplete(emptyProgress(), '2026-06-11') // current 1
+    let b = recordLessonComplete(emptyProgress(), '2026-06-12') // current 1, after a gap
     // inflate a.current artificially (simulate partial sync gap)
     a = { ...a, streak: { ...a.streak, current: 5 } }
     const merged = mergeProgress(a, b)
-    expect(merged.streak.lastDate).toBe('2026-06-11') // b's date is more recent
+    expect(merged.streak.lastDate).toBe('2026-06-12') // b's date is more recent
     expect(merged.streak.current).toBe(1) // b wins by date
   })
 
@@ -244,5 +244,37 @@ describe('mergeProgress (offline ↔ cloud sync)', () => {
     b = { ...b, streak: { current: 3, best: 7, lastDate: '2026-06-11' } }
     const merged = mergeProgress(a, b)
     expect(merged.streak.best).toBe(10) // max(10, 7)
+  })
+})
+
+describe('mergeProgress streak across devices', () => {
+  const withStreak = (current: number, lastDate: string) => ({
+    ...emptyProgress(),
+    streak: { current, best: current, lastDate },
+  })
+  const cur = (x: ReturnType<typeof withStreak>, y: ReturnType<typeof withStreak>) =>
+    mergeProgress(x, y).streak
+
+  it('extends the earlier streak when the later one is a single next-day lesson', () => {
+    const cloud = withStreak(10, '2026-06-09')
+    const local = withStreak(1, '2026-06-10')
+    expect(cur(local, cloud)).toMatchObject({ current: 11, best: 11, lastDate: '2026-06-10' })
+    expect(cur(cloud, local)).toMatchObject({ current: 11, lastDate: '2026-06-10' })
+  })
+
+  it('keeps the later streak when it already spans the earlier last day', () => {
+    expect(cur(withStreak(3, '2026-06-10'), withStreak(10, '2026-06-09')).current).toBe(3)
+  })
+
+  it('does not extend across a gap', () => {
+    expect(cur(withStreak(1, '2026-06-11'), withStreak(10, '2026-06-09')).current).toBe(1)
+  })
+
+  it('keeps the longer streak on the same day', () => {
+    expect(cur(withStreak(2, '2026-06-10'), withStreak(5, '2026-06-10')).current).toBe(5)
+  })
+
+  it('ignores an empty streak', () => {
+    expect(cur(emptyProgress() as never, withStreak(4, '2026-06-10')).current).toBe(4)
   })
 })

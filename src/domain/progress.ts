@@ -232,14 +232,21 @@ export function mergeProgress(
   const sa = a.streak ?? emptyStreak()
   const sb = b.streak ?? emptyStreak()
   let latest: Streak
-  if (sb.lastDate !== sa.lastDate) latest = sb.lastDate > sa.lastDate ? sb : sa
+  if (sb.lastDate !== sa.lastDate) {
+    const [early, late] = sb.lastDate > sa.lastDate ? [sa, sb] : [sb, sa]
+    // A lone lesson the day after the other device's last one continues its streak.
+    latest =
+      late.current === 1 && early.current > 0 && isNextDay(early.lastDate, late.lastDate)
+        ? { ...late, current: early.current + 1 }
+        : late
+  }
   // On a date tie, keep the longer current streak (not the remote by default).
   else latest = sb.current > sa.current ? sb : sa
   return {
     version: PROGRESS_VERSION,
     stats,
     bookmarks: [...new Set([...a.bookmarks, ...b.bookmarks])],
-    streak: { ...latest, best: Math.max(sa.best, sb.best) },
+    streak: { ...latest, best: Math.max(sa.best, sb.best, latest.current) },
     updatedAt: Math.max(a.updatedAt, b.updatedAt),
   }
 }
