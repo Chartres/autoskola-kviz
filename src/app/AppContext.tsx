@@ -46,6 +46,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   // H1: block debounced save while a cloud fetch is outstanding.
   const syncingRef = useRef(false)
+  // True when the sign-in fetch failed: local progress is not merged with the cloud, so
+  // no write may replace the cloud row until the next sign-in sync succeeds.
+  const cloudStaleRef = useRef(false)
   // M4: set to true after hydrate so the immediately-following debounced save is skipped
   // (syncProgress already wrote the same blob to the cloud).
   const justHydratedRef = useRef(false)
@@ -90,7 +93,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     return registerBeforeSignOut(() =>
       // While the sign-in sync is in flight, local progress is not merged with the cloud
       // yet: saving it would overwrite the cloud row. The sync saves the merge itself.
-      syncingRef.current
+      syncingRef.current || cloudStaleRef.current
         ? Promise.resolve()
         : cloudSave(uid, progressRef.current).catch(() => {}),
     )
@@ -127,7 +130,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
     dispatch({ type: 'hydrateJizdy', state: loadJizdy(uid) })
     let cancelled = false
     syncingRef.current = true // H1: block debounced save while fetch is in flight
-    syncProgress({ fetch: supabaseStore.fetch, save: cloudSave }, uid, loadProgress())
+    cloudStaleRef.current = false
+    const fetch = (id: string) =>
+      supabaseStore.fetch(id).catch((e) => {
+        if (!cancelled) cloudStaleRef.current = true
+        throw e
+      })
+    syncProgress({ fetch, save: cloudSave }, uid, loadProgress())
       .then((merged) => {
         if (!cancelled) {
           // M2: re-merge with any answers given while the fetch was in flight
@@ -152,9 +161,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!user) return
     // H1: skip while a sync fetch is outstanding, so local-only progress cannot overwrite
-    //     the cloud row before the merge lands. A failed fetch still falls back to local
-    //     progress and the next save overwrites the cloud row (deferred M1, last-write-wins).
-    if (syncingRef.current) return
+    //     the cloud row before the merge lands. A failed fetch keeps local progress
+    //     but blocks cloud writes (cloudStaleRef) until the next sign-in sync.
+    if (syncingRef.current || cloudStaleRef.current) return
     // M4: the progress change that triggers this effect right after hydrate is already
     //     persisted by syncProgress — skip the redundant write.
     if (justHydratedRef.current) {

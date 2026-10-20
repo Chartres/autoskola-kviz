@@ -426,4 +426,37 @@ describe('AppContext debounced cloud save', () => {
     expect(fakeSave).toHaveBeenCalledTimes(1)
     expect(fakeSave).toHaveBeenCalledWith('debounce-user', newProg)
   })
+
+  it('never writes local-only progress over the cloud row after a failed sign-in fetch', async () => {
+    vi.useFakeTimers()
+    const { syncProgress } = await import('@/auth/sync')
+    const { supabaseStore } = await import('@/auth/supabaseStore')
+    vi.mocked(supabaseStore.fetch).mockRejectedValueOnce(new Error('offline'))
+    vi.mocked(syncProgress).mockImplementationOnce(async (store, uid, local) => {
+      await store.fetch(uid).catch(() => {})
+      return local
+    })
+    mockUserHolder.user = { id: 'offline-user' }
+
+    let capturedDispatch: ReturnType<typeof useApp>['dispatch'] | null = null
+    function DispatchCapture() {
+      capturedDispatch = useApp().dispatch
+      return null
+    }
+    render(
+      <AppProvider>
+        <DispatchCapture />
+      </AppProvider>,
+    )
+    await act(async () => {})
+    await act(async () => {
+      capturedDispatch!({ type: 'hydrate', progress: recordAnswer(emptyProgress(), 5, true, 1000) })
+    })
+    act(() => { vi.advanceTimersByTime(2000) })
+    expect(fakeSave).not.toHaveBeenCalled()
+    await act(async () => {
+      await registeredFlush.current!()
+    })
+    expect(fakeSave).not.toHaveBeenCalled()
+  })
 })
