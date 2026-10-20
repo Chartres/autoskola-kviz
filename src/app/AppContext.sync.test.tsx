@@ -470,6 +470,33 @@ describe('AppContext debounced cloud save', () => {
     expect(screen.getByTestId('answered').textContent).toBe('2')
   })
 
+  it('uploads answers given while the sign-in fetch was in flight', async () => {
+    vi.useFakeTimers()
+    mockUserHolder.user = { id: 'inflight-user' }
+    let capturedDispatch: ReturnType<typeof useApp>['dispatch'] | null = null
+    function DispatchCapture() {
+      capturedDispatch = useApp().dispatch
+      return null
+    }
+    render(
+      <AppProvider>
+        <DispatchCapture />
+      </AppProvider>,
+    )
+    // Answer 3 while the sync is still pending, then let the sync resolve without it.
+    const mine = recordAnswer(emptyProgress(), 3, true, 3000)
+    await act(async () => {
+      capturedDispatch!({ type: 'hydrate', progress: mine })
+    })
+    await act(async () => {
+      syncResolvers.resolve(recordAnswer(emptyProgress(), 4, true, 1000))
+    })
+    await act(async () => { vi.advanceTimersByTime(2000) })
+
+    const saved = fakeSave.mock.calls[0] as unknown as [string, ProgressData]
+    expect(Object.keys(saved[1].stats).sort()).toEqual(['3', '4'])
+  })
+
   it('never writes local-only progress over the cloud row after a failed sign-in fetch', async () => {
     vi.useFakeTimers()
     const { syncProgress } = await import('@/auth/sync')

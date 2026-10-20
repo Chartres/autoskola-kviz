@@ -202,12 +202,20 @@ export function AppProvider({ children }: { children: ReactNode }) {
         if (!cancelled) cloudStaleRef.current = true
         throw e
       })
-    syncProgress({ fetch, save: cloudSave }, uid, loadProgress())
+    let uploadFailed = false
+    const save = (id: string, d: ProgressData) =>
+      cloudSave(id, d).catch((e) => {
+        uploadFailed = true
+        throw e
+      })
+    syncProgress({ fetch, save }, uid, loadProgress())
       .then((merged) => {
         if (!cancelled) {
           // M2: re-merge with any answers given while the fetch was in flight
           const withInFlight = mergeProgress(progressRef.current, merged)
-          justHydratedRef.current = true // M4: next debounced save would be redundant
+          // M4: next debounced save is redundant only if the cloud already holds exactly this.
+          // Answers given mid-fetch or a failed upload leave it behind: let that save run.
+          justHydratedRef.current = !uploadFailed && canonical(withInFlight) === canonical(merged)
           syncingRef.current = false
           dispatch({ type: 'hydrate', progress: withInFlight })
         }
