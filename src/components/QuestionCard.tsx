@@ -73,13 +73,15 @@ export function QuestionCard({
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if (e.target instanceof HTMLInputElement) return
+      // A focused button/link handles Enter/Space itself (bookmark, back, "Další").
+      const onControl = e.target instanceof HTMLButtonElement || e.target instanceof HTMLAnchorElement
       if (e.metaKey || e.ctrlKey || e.altKey) return
       const key = e.key.length === 1 ? e.key.toLowerCase() : e.key
       const choice = KEY_TO_CHOICE[key]
       if (!answered && choice && options.includes(choice)) {
         e.preventDefault()
         onAnswer(choice)
-      } else if (answered && (e.key === 'Enter' || e.key === ' ')) {
+      } else if (answered && !onControl && (e.key === 'Enter' || e.key === ' ')) {
         e.preventDefault()
         onNext()
       }

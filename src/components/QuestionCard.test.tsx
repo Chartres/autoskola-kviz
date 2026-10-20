@@ -119,4 +119,14 @@ describe('QuestionCard', () => {
     // The media box reserves its height up front (no layout flash on load).
     expect(img.parentElement).toHaveClass('min-h-64')
   })
+
+  it('does not advance when Enter/Space is pressed on the focused bookmark button', async () => {
+    const user = userEvent.setup()
+    const { onNext, onToggleBookmark } = setup({ chosen: 'a' })
+    screen.getByRole('button', { name: /záložek/ }).focus()
+    await user.keyboard('{Enter}')
+    await user.keyboard(' ')
+    expect(onToggleBookmark).toHaveBeenCalledTimes(2)
+    expect(onNext).not.toHaveBeenCalled()
+  })
 })
