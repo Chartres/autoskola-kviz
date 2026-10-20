@@ -8,6 +8,9 @@ import { fileURLToPath } from 'node:url'
 // Served at the custom domain root https://autoskola.dravec.org/ (and locally at /).
 const base = '/'
 
+// Static files at the site root must not be replaced by the app shell.
+export const navigateFallbackDenylist = [/^\/[^/]+\.(?:xml|txt)$/, /^\/\.well-known\//]
+
 export default defineConfig({
   base,
   plugins: [
@@ -43,6 +46,7 @@ export default defineConfig({
         globPatterns: ['**/*.{js,css,html,svg,woff2}'],
         maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
         navigateFallback: '/index.html',
+        navigateFallbackDenylist,
         cleanupOutdatedCaches: true,
         runtimeCaching: [
           {
