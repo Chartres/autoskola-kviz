@@ -73,6 +73,18 @@ export function AppProvider({ children }: { children: ReactNode }) {
     track('app_open')
   }, [])
 
+  // Once practice started from an SEO page ends, leave the topic URL so a reload or an
+  // auth redirect returns to the app instead of restarting that practice.
+  const seoPracticeRef = useRef(false)
+  useEffect(() => {
+    if (state.view === 'quiz') {
+      seoPracticeRef.current = !!topicFromPath(window.location.pathname)
+    } else if (seoPracticeRef.current) {
+      seoPracticeRef.current = false
+      window.history.replaceState(null, '', '/' + window.location.search)
+    }
+  }, [state.view])
+
   // Persist progress locally whenever it changes (offline-first source of truth).
   useEffect(() => {
     saveProgress(state.progress)
