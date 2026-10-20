@@ -91,6 +91,7 @@ beforeEach(async () => {
   ;((await import('@/auth/sync')) as unknown as { __resetCalls: () => void }).__resetCalls()
   localStorage.clear()
   fakeSave.mockClear()
+  vi.mocked((await import('@/auth/supabaseStore')).supabaseStore.fetch).mockReset()
   mockUserHolder.user = null
 })
 
@@ -501,7 +502,7 @@ describe('AppContext debounced cloud save', () => {
     vi.useFakeTimers()
     const { syncProgress } = await import('@/auth/sync')
     const { supabaseStore } = await import('@/auth/supabaseStore')
-    vi.mocked(supabaseStore.fetch).mockRejectedValueOnce(new Error('offline'))
+    vi.mocked(supabaseStore.fetch).mockRejectedValue(new Error('offline'))
     vi.mocked(syncProgress).mockImplementationOnce(async (store, uid, local) => {
       await store.fetch(uid).catch(() => {})
       return local
@@ -528,5 +529,41 @@ describe('AppContext debounced cloud save', () => {
       await registeredFlush.current!()
     })
     expect(fakeSave).not.toHaveBeenCalled()
+  })
+
+  it('syncs again once the cloud is reachable after a failed sign-in fetch', async () => {
+    vi.useFakeTimers()
+    const { syncProgress } = await import('@/auth/sync')
+    const actual = await vi.importActual<typeof import('@/auth/sync')>('@/auth/sync')
+    const { supabaseStore } = await import('@/auth/supabaseStore')
+    vi.mocked(supabaseStore.fetch).mockReset()
+    vi.mocked(supabaseStore.fetch).mockRejectedValueOnce(new Error('offline'))
+    vi.mocked(syncProgress).mockImplementationOnce(async (store, uid, local) => {
+      await store.fetch(uid).catch(() => {})
+      return local
+    })
+    // The harness hands only the first real call to the manual resolver; the retry is real.
+    vi.mocked(syncProgress).mockImplementationOnce(actual.syncProgress)
+    mockUserHolder.user = { id: 'blip-user' }
+    let capturedDispatch: ReturnType<typeof useApp>['dispatch'] | null = null
+    function DispatchCapture() {
+      capturedDispatch = useApp().dispatch
+      return null
+    }
+    render(
+      <AppProvider>
+        <DispatchCapture />
+      </AppProvider>,
+    )
+    await act(async () => {})
+    await act(async () => {
+      capturedDispatch!({ type: 'hydrate', progress: recordAnswer(emptyProgress(), 1, true, 3000) })
+    })
+    // Back online: the other device's answer is merged in and our offline answer uploaded.
+    vi.mocked(supabaseStore.fetch).mockResolvedValueOnce(recordAnswer(emptyProgress(), 2, true, 2000))
+    await act(async () => {
+      window.dispatchEvent(new Event('online'))
+    })
+    expect(fakeSave).toHaveBeenCalledTimes(1)
   })
 })
