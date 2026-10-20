@@ -138,7 +138,7 @@ export function JizdyScreen() {
                         checked
                           ? 'border-terra-400 text-terra-400 ring-1 ring-terra-400/60'
                           : 'border-sand-700 text-sand-400 hover:border-sand-500'
-                      }`}
+                      } has-focus-visible:ring-2 has-focus-visible:ring-terra-500`}
                     >
                       <input
                         type="checkbox"

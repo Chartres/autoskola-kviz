@@ -77,4 +77,10 @@ describe('JizdyScreen', () => {
       expect(within(skillItem(first.label)).getByText(`1 / ${first.requiredReps}`)).toBeInTheDocument(),
     )
   })
+
+  it('skill chips show a focus ring on the label when the hidden checkbox is focused', () => {
+    renderJizdy()
+    const chip = screen.getAllByLabelText(SKILLS[0].label)[0]
+    expect(chip.closest('label')?.className).toMatch(/has-focus-visible:/)
+  })
 })
