@@ -226,9 +226,12 @@ describe('AuthContext signInWithEmail (C2M4)', () => {
     })
   })
 
-  it('returns { ok: false, error } when signInWithOtp returns an error', async () => {
+  it.each([
+    ['email rate limit exceeded', 'Odkaz jste si už vyžádali. Zkuste to za chvíli.'],
+    ['Failed to fetch', 'Nepodařilo se odeslat odkaz. Zkontrolujte připojení a zkuste to znovu.'],
+  ])('maps signInWithOtp error %j to Czech copy', async (message, expected) => {
     const client = makeClient(null, {
-      signInWithOtpResult: { error: { message: 'Rate limit exceeded' } },
+      signInWithOtpResult: { error: { message } },
     })
     clientHolder.client = client
     let signInWithEmail!: (email: string) => Promise<{ ok: boolean; error?: string }>
@@ -240,6 +243,6 @@ describe('AuthContext signInWithEmail (C2M4)', () => {
     await waitFor(() => expect(client.auth.getSession).toHaveBeenCalled())
 
     const result = await signInWithEmail('bad@example.com')
-    expect(result).toEqual({ ok: false, error: 'Rate limit exceeded' })
+    expect(result).toEqual({ ok: false, error: expected })
   })
 })

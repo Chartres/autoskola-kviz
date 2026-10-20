@@ -74,7 +74,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         email,
         options: { emailRedirectTo: window.location.href },
       })
-      return error ? { ok: false, error: error.message } : { ok: true }
+      if (!error) return { ok: true }
+      return {
+        ok: false,
+        error: /rate limit/i.test(error.message)
+          ? 'Odkaz jste si už vyžádali. Zkuste to za chvíli.'
+          : 'Nepodařilo se odeslat odkaz. Zkontrolujte připojení a zkuste to znovu.',
+      }
     },
     async signOut() {
       if (!supabase) return
