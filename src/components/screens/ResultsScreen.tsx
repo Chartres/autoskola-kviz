@@ -3,6 +3,7 @@ import { useApp } from '@/app/AppContext'
 import { track, conversion } from '@/analytics'
 import { score, wrongAnswers } from '@/domain/session'
 import { getQuestion } from '@/domain/questions'
+import { imageUrl } from '@/lib/assets'
 import { freshRng } from '@/domain/rng'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import { FeedbackCard } from '@/components/FeedbackCard'
@@ -103,6 +104,13 @@ export function ResultsScreen() {
                     <span className="font-semibold uppercase">{q.correct})</span>{' '}
                     {q[q.correct]}
                   </p>
+                  {q[`${q.correct}Img`] && (
+                    <img
+                      src={imageUrl(q[`${q.correct}Img`]!)}
+                      alt={`Správná odpověď ${q.correct.toUpperCase()}`}
+                      className="mt-2 max-h-24 w-auto rounded-[2px] bg-white p-1"
+                    />
+                  )}
                 </li>
               )
             })}
