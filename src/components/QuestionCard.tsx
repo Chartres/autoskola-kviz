@@ -148,6 +148,7 @@ export function QuestionCard({
       <div role="group" aria-label="Možnosti odpovědi" className="flex flex-col gap-3">
         {options.map((opt) => {
           const state = optionState(opt, question, chosen, reveal)
+          const optImg = question[`${opt}Img`]
           return (
             <button
               key={opt}
@@ -161,15 +162,15 @@ export function QuestionCard({
                 {opt}
               </span>
               <span className="min-w-0 flex-1 leading-relaxed">
-                {question[`${opt}Img`] &&
-                  (failed.has(imageUrl(question[`${opt}Img`]!)) ? (
+                {optImg &&
+                  (failed.has(imageUrl(optImg)) ? (
                     <ImageFailed />
                   ) : (
                     <img
-                      src={imageUrl(question[`${opt}Img`]!)}
+                      src={imageUrl(optImg)}
                       alt={`Možnost ${opt.toUpperCase()}`}
                       className="max-h-24 w-auto rounded-[2px] bg-white p-1"
-                      onError={() => markFailed(imageUrl(question[`${opt}Img`]!))}
+                      onError={() => markFailed(imageUrl(optImg))}
                     />
                   ))}
                 {question[opt]}
