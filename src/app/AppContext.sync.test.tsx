@@ -1,6 +1,6 @@
 /**
  * H2: Tests for sign-in sync, hydrate wiring, fetch-failure safety (H1),
- * in-flight-answer preservation (M2), sign-out wipe (C2M2), and debounced
+ * in-flight-answer preservation (M2), sign-out wipe after a confirmed flush (C2M2), and debounced
  * cloud save (C2M3).
  */
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
@@ -178,7 +178,7 @@ describe('AppContext sign-in sync', () => {
 })
 
 describe('AppContext sign-out', () => {
-  it('clears progress and jizdyState on sign-out (C2M2)', async () => {
+  it('clears local progress on sign-out once the flush reached the cloud (C2M2)', async () => {
     let local = emptyProgress()
     local = recordAnswer(local, 11, true, 500)
     localStorage.setItem('autoskola-kviz:progress:v1', JSON.stringify(local))
