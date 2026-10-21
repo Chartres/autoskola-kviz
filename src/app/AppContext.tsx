@@ -61,8 +61,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
       cloudRef.current = { uid, json: canonical(data) }
     })
   // Fold `incoming` into the in-memory progress; dispatch only if it changed anything.
+  // ponytail: bookmarks stay as this copy has them (a union would undo removals); true
+  // cross-device removal needs deletion markers.
   const adopt = (incoming: ProgressData) => {
-    const next = mergeProgress(progressRef.current, incoming)
+    const next = { ...mergeProgress(progressRef.current, incoming), bookmarks: progressRef.current.bookmarks }
     if (canonical(next) !== canonical(progressRef.current)) {
       progressRef.current = next
       dispatch({ type: 'hydrate', progress: next })
@@ -72,22 +74,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
   // Cloud write that never drops newer remote answers (another device or tab may have
   // saved since our sign-in sync): fetch, merge, save, then adopt what the merge brought in.
   const cloudMerge = async (uid: string, local: ProgressData) => {
-    let fetched = false
-    let attempted = false
-    const merged = await syncProgress(
-      {
-        fetch: async (id) => {
-          const r = await supabaseStore.fetch(id)
-          fetched = true
-          return r
-        },
-        save: (id, d) => ((attempted = true), cloudSave(id, d)),
-      },
-      uid,
-      local,
-    )
-    // Fetched and nothing to upload: the cloud already equals the merge.
-    if (fetched && !attempted) cloudRef.current = { uid, json: canonical(merged) }
+    const remote = await supabaseStore.fetch(uid)
+    const merged = remote ? { ...mergeProgress(local, remote), bookmarks: local.bookmarks } : local
+    // Equal to the cloud (bookmarks included): nothing to upload.
+    if (remote && canonical(merged) === canonical(remote)) cloudRef.current = { uid, json: canonical(merged) }
+    else await cloudSave(uid, merged).catch(() => {})
     if (signedInUidRef.current !== uid) return
     adopt(merged)
   }

@@ -471,6 +471,38 @@ describe('AppContext debounced cloud save', () => {
     expect(screen.getByTestId('answered').textContent).toBe('2')
   })
 
+  it('a removed bookmark stays removed after a save (cloud and screen)', async () => {
+    vi.useFakeTimers()
+    const { supabaseStore } = await import('@/auth/supabaseStore')
+    mockUserHolder.user = { id: 'unbookmark' }
+    let captured: ReturnType<typeof useApp> | null = null
+    function Capture() {
+      captured = useApp()
+      return null
+    }
+    render(
+      <AppProvider>
+        <Capture />
+      </AppProvider>,
+    )
+    const withSeven: ProgressData = { ...recordAnswer(emptyProgress(), 1, true, 1000), bookmarks: [7] }
+    await act(async () => {
+      syncResolvers.resolve(withSeven)
+    })
+
+    // The cloud still holds bookmark 7; the user removes it here.
+    vi.mocked(supabaseStore.fetch).mockResolvedValueOnce(withSeven)
+    await act(async () => {
+      captured!.dispatch({ type: 'hydrate', progress: { ...withSeven, bookmarks: [] } })
+    })
+    await act(async () => { vi.advanceTimersByTime(2000) })
+
+    expect(fakeSave).toHaveBeenCalledTimes(1)
+    const saved = fakeSave.mock.calls[0] as unknown as [string, ProgressData]
+    expect(saved[1].bookmarks).toEqual([])
+    expect(captured!.state.progress.bookmarks).toEqual([])
+  })
+
   it('uploads answers given while the sign-in fetch was in flight', async () => {
     vi.useFakeTimers()
     mockUserHolder.user = { id: 'inflight-user' }
