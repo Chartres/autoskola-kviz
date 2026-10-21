@@ -3,6 +3,7 @@ import { useApp } from '@/app/AppContext'
 import { track, conversion } from '@/analytics'
 import { score, wrongAnswers } from '@/domain/session'
 import { getQuestion } from '@/domain/questions'
+import { imageUrl } from '@/lib/assets'
 import { freshRng } from '@/domain/rng'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import { FeedbackCard } from '@/components/FeedbackCard'
@@ -17,6 +18,8 @@ export function ResultsScreen() {
   const total = isExam && examResult ? examResult.total : (session?.questions.length ?? 0)
   const correct = isExam && examResult ? examResult.score : (session ? score(session) : 0)
   const wrong = session ? wrongAnswers(session) : []
+  // Left blank when the exam timer ran out.
+  const unanswered = session ? session.questions.filter((q) => session.chosen[q.id] === undefined) : []
 
   useEffect(() => {
     if (!session) return
@@ -84,30 +87,43 @@ export function ResultsScreen() {
         </section>
       )}
 
-      {wrong.length > 0 && (
-        <section className="mt-8">
-          <h2 className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.2em] text-rust-400">
-            Chybné odpovědi ({wrong.length})
-          </h2>
-          <ul className="space-y-3">
-            {wrong.map((r) => {
-              const q = getQuestion(r.id)
-              if (!q) return null
-              return (
-                <li
-                  key={r.id}
-                  className="rounded-card border border-sand-700 bg-sand-900/50 p-4"
-                >
-                  <p className="mb-2 text-sm text-sand-200">{q.q}</p>
-                  <p className="text-sm text-moss-400">
-                    <span className="font-semibold uppercase">{q.correct})</span>{' '}
-                    {q[q.correct]}
-                  </p>
-                </li>
-              )
-            })}
-          </ul>
-        </section>
+      {[
+        { title: 'Chybné odpovědi', ids: wrong.map((r) => r.id) },
+        { title: 'Nezodpovězené', ids: unanswered.map((u) => u.id) },
+      ].map(
+        ({ title, ids }) =>
+          ids.length > 0 && (
+            <section key={title} className="mt-8">
+              <h2 className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.2em] text-rust-400">
+                {title} ({ids.length})
+              </h2>
+              <ul className="space-y-3">
+                {ids.map((id) => {
+                  const q = getQuestion(id)
+                  if (!q) return null
+                  return (
+                    <li
+                      key={id}
+                      className="rounded-card border border-sand-700 bg-sand-900/50 p-4"
+                    >
+                      <p className="mb-2 text-sm text-sand-200">{q.q}</p>
+                      <p className="text-sm text-moss-400">
+                        <span className="font-semibold uppercase">{q.correct})</span>{' '}
+                        {q[q.correct]}
+                      </p>
+                      {q[`${q.correct}Img`] && (
+                        <img
+                          src={imageUrl(q[`${q.correct}Img`]!)}
+                          alt={`Správná odpověď ${q.correct.toUpperCase()}`}
+                          className="mt-2 max-h-24 w-auto rounded-[2px] bg-white p-1"
+                        />
+                      )}
+                    </li>
+                  )
+                })}
+              </ul>
+            </section>
+          ),
       )}
 
       <div className="mt-8 flex flex-wrap justify-center gap-3">

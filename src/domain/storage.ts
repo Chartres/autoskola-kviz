@@ -52,7 +52,7 @@ export function saveProgress(data: ProgressData): void {
 
 // ponytail: anonymous key kept as-is; signed-in users get a uid-scoped key so
 // sign-out never overwrites another user's lessons.
-const JIZDY_KEY = 'jizdy-v1'
+export const JIZDY_KEY = 'jizdy-v1'
 function jizdyKey(uid?: string): string {
   return uid ? `${JIZDY_KEY}:${uid}` : JIZDY_KEY
 }

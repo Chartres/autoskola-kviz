@@ -1,7 +1,8 @@
 import { describe, it, expect } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render, screen, act, fireEvent } from '@testing-library/react'
+import { useEffect } from 'react'
 import { AuthProvider } from '@/auth/AuthContext'
-import { AppProvider } from '@/app/AppContext'
+import { AppProvider, useApp } from '@/app/AppContext'
 import { HomeScreen } from './HomeScreen'
 import { emptyProgress } from '@/domain/progress'
 import { STORAGE_KEY } from '@/domain/storage'
@@ -31,5 +32,31 @@ describe('HomeScreen streak (M7)', () => {
 
   it('shows the stored streak when the last lesson was today', () => {
     expect(streakShown(todayStr())).toBe('5')
+  })
+})
+
+describe('HomeScreen okruh tile', () => {
+  it('ignores a search term typed earlier on the Procvičovat tab', () => {
+    let seen: { search: string; n: number } = { search: 'x', n: -1 }
+    function Probe() {
+      const { state, dispatch } = useApp()
+      useEffect(() => dispatch({ type: 'setSearch', search: 'zzzzzz' }), [dispatch])
+      seen = { search: state.search, n: state.session?.questions.length ?? -1 }
+      return null
+    }
+    render(
+      <AuthProvider>
+        <AppProvider>
+          <Probe />
+          <HomeScreen />
+        </AppProvider>
+      </AuthProvider>,
+    )
+    expect(seen.search).toBe('zzzzzz')
+    act(() => {
+      fireEvent.click(screen.getAllByText(/zvládnuto/)[0].closest('button')!)
+    })
+    expect(seen.search).toBe('')
+    expect(seen.n).toBeGreaterThan(0)
   })
 })

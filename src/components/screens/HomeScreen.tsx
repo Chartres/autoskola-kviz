@@ -29,6 +29,7 @@ export function HomeScreen() {
   function startTopic(name: CategoryName) {
     track('start_topic', { topic: name })
     dispatch({ type: 'setCategories', categories: new Set([name]) })
+    dispatch({ type: 'setSearch', search: '' })
     dispatch({ type: 'startPractice', rng: freshRng() })
   }
 

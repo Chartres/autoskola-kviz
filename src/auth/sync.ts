@@ -6,6 +6,14 @@ export interface RemoteProgressStore {
   save(userId: string, data: ProgressData): Promise<void>
 }
 
+/** JSON with sorted keys: Postgres jsonb does not preserve key order. */
+export const canonical = (v: unknown) =>
+  JSON.stringify(v, (_k, x) =>
+    x && typeof x === 'object' && !Array.isArray(x)
+      ? Object.fromEntries(Object.entries(x).sort(([a], [b]) => (a < b ? -1 : 1)))
+      : x,
+  )
+
 /**
  * Reconcile local and cloud progress: pull remote, merge (last-write-wins per
  * question, union bookmarks), push the merged result, and return it. On any
@@ -23,6 +31,7 @@ export async function syncProgress(
     return local
   }
   const merged = remote ? mergeProgress(local, remote) : local
+  if (remote && canonical(merged) === canonical(remote)) return merged // nothing new to upload
   try {
     await store.save(userId, merged)
   } catch {

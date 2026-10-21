@@ -7,13 +7,13 @@ import {
   type ReactNode,
 } from 'react'
 import { reducer, initialState, type AppState, type Action } from './store'
-import { loadProgress, saveProgress, loadJizdy, saveJizdy } from '@/domain/storage'
+import { loadProgress, saveProgress, loadJizdy, saveJizdy, STORAGE_KEY, JIZDY_KEY } from '@/domain/storage'
 import { emptyJizdyState } from '@/domain/jizdy'
 import { topicFromPath } from '@/lib/topics'
 import { freshRng } from '@/domain/rng'
 import { useAuth, registerBeforeSignOut } from '@/auth/AuthContext'
 import { supabaseStore } from '@/auth/supabaseStore'
-import { syncProgress } from '@/auth/sync'
+import { syncProgress, canonical } from '@/auth/sync'
 import { mergeProgress, emptyProgress, type ProgressData } from '@/domain/progress'
 import { track } from '@/analytics'
 
@@ -43,6 +43,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
   // before hydrateJizdy runs, writing stale jizdyState to the wrong key — C4H1/C4H2).
   const userRef = useRef(user)
   userRef.current = user
+  const jizdyRef = useRef(state.jizdyState)
+  jizdyRef.current = state.jizdyState
 
   // H1: block debounced save while a cloud fetch is outstanding.
   const syncingRef = useRef(false)
@@ -56,8 +58,51 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const cloudRef = useRef<{ uid: string; json: string } | null>(null)
   const cloudSave = (uid: string, data: ProgressData) =>
     supabaseStore.save(uid, data).then(() => {
-      cloudRef.current = { uid, json: JSON.stringify(data) }
+      cloudRef.current = { uid, json: canonical(data) }
     })
+  // Fold `incoming` into the in-memory progress; dispatch only if it changed anything.
+  // ponytail: bookmarks stay as this copy has them (a union would undo removals); true
+  // cross-device removal needs deletion markers.
+  const adopt = (incoming: ProgressData) => {
+    const next = { ...mergeProgress(progressRef.current, incoming), bookmarks: progressRef.current.bookmarks }
+    if (canonical(next) !== canonical(progressRef.current)) {
+      progressRef.current = next
+      dispatch({ type: 'hydrate', progress: next })
+    }
+  }
+
+  // Cloud write that never drops newer remote answers (another device or tab may have
+  // saved since our sign-in sync): fetch, merge, save, then adopt what the merge brought in.
+  const cloudMerge = async (uid: string, local: ProgressData) => {
+    const remote = await supabaseStore.fetch(uid)
+    const merged = remote ? { ...mergeProgress(local, remote), bookmarks: local.bookmarks } : local
+    // Equal to the cloud (bookmarks included): nothing to upload.
+    if (remote && canonical(merged) === canonical(remote)) cloudRef.current = { uid, json: canonical(merged) }
+    else await cloudSave(uid, merged).catch(() => {})
+    if (signedInUidRef.current !== uid) return
+    adopt(merged)
+  }
+
+  // Another tab on this device saved: fold its progress and lessons into ours, so our next
+  // save (which overwrites localStorage with our whole copy) cannot erase them.
+  useEffect(() => {
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === STORAGE_KEY) {
+        adopt(loadProgress())
+      } else if (e.key?.startsWith(JIZDY_KEY)) {
+        const ours = jizdyRef.current
+        const seen = new Set(ours.lessons.map((l) => l.id))
+        const added = loadJizdy(userRef.current?.id).lessons.filter((l) => !seen.has(l.id))
+        if (added.length) {
+          const state = { ...ours, lessons: [...ours.lessons, ...added] }
+          jizdyRef.current = state
+          dispatch({ type: 'hydrateJizdy', state })
+        }
+      }
+    }
+    window.addEventListener('storage', onStorage)
+    return () => window.removeEventListener('storage', onStorage)
+  }, [])
 
   // SEO topic page (/okruh/<slug>/): start that okruh's practice directly.
   useEffect(() => {
@@ -69,6 +114,18 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
     track('app_open')
   }, [])
+
+  // Once practice started from an SEO page ends, leave the topic URL so a reload or an
+  // auth redirect returns to the app instead of restarting that practice.
+  const seoPracticeRef = useRef(false)
+  useEffect(() => {
+    if (state.view === 'quiz') {
+      seoPracticeRef.current = !!topicFromPath(window.location.pathname)
+    } else if (seoPracticeRef.current) {
+      seoPracticeRef.current = false
+      window.history.replaceState(null, '', '/' + window.location.search)
+    }
+  }, [state.view])
 
   // Persist progress locally whenever it changes (offline-first source of truth).
   useEffect(() => {
@@ -92,7 +149,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       // yet: saving it would overwrite the cloud row. The sync saves the merge itself.
       syncingRef.current
         ? Promise.resolve()
-        : cloudSave(uid, progressRef.current).catch(() => {}),
+        : cloudMerge(uid, progressRef.current).catch(() => {}),
     )
   }, [user?.id]) // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -113,7 +170,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         // when the cloud holds it (flush failed, sync in flight, or an involuntary
         // SIGNED_OUT → keep it; it merges into the next sign-in).
         const c = cloudRef.current
-        if (c?.uid === uid && c.json === JSON.stringify(progressRef.current)) {
+        if (c?.uid === uid && c.json === canonical(progressRef.current)) {
           saveProgress(emptyProgress())
           dispatch({ type: 'hydrate', progress: emptyProgress() })
         }
@@ -127,12 +184,20 @@ export function AppProvider({ children }: { children: ReactNode }) {
     dispatch({ type: 'hydrateJizdy', state: loadJizdy(uid) })
     let cancelled = false
     syncingRef.current = true // H1: block debounced save while fetch is in flight
-    syncProgress({ fetch: supabaseStore.fetch, save: cloudSave }, uid, loadProgress())
+    let uploadFailed = false
+    const save = (id: string, d: ProgressData) =>
+      cloudSave(id, d).catch((e) => {
+        uploadFailed = true
+        throw e
+      })
+    syncProgress({ fetch: supabaseStore.fetch, save }, uid, loadProgress())
       .then((merged) => {
         if (!cancelled) {
           // M2: re-merge with any answers given while the fetch was in flight
           const withInFlight = mergeProgress(progressRef.current, merged)
-          justHydratedRef.current = true // M4: next debounced save would be redundant
+          // M4: next debounced save is redundant only if the cloud already holds exactly this.
+          // Answers given mid-fetch or a failed upload leave it behind: let that save run.
+          justHydratedRef.current = !uploadFailed && canonical(withInFlight) === canonical(merged)
           syncingRef.current = false
           dispatch({ type: 'hydrate', progress: withInFlight })
         }
@@ -147,13 +212,25 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
   }, [user?.id]) // eslint-disable-line react-hooks/exhaustive-deps
 
+  // Back online: retry the upload a failed fetch or save left behind (nothing else would
+  // trigger it until the next answer).
+  useEffect(() => {
+    if (!user) return
+    const uid = user.id
+    const onOnline = () => {
+      if (!syncingRef.current) cloudMerge(uid, progressRef.current).catch(() => {})
+    }
+    window.addEventListener('online', onOnline)
+    return () => window.removeEventListener('online', onOnline)
+  }, [user?.id]) // eslint-disable-line react-hooks/exhaustive-deps
+
   // While signed in, push progress changes to the cloud (debounced).
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!user) return
     // H1: skip while a sync fetch is outstanding, so local-only progress cannot overwrite
-    //     the cloud row before the merge lands. A failed fetch still falls back to local
-    //     progress and the next save overwrites the cloud row (deferred M1, last-write-wins).
+    //     the cloud row before the merge lands. After a failed fetch, cloudMerge re-fetches
+    //     and writes nothing until the cloud answers, so later saves retry on their own.
     if (syncingRef.current) return
     // M4: the progress change that triggers this effect right after hydrate is already
     //     persisted by syncProgress — skip the redundant write.
@@ -163,7 +240,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
     const uid = user.id
     const t = setTimeout(() => {
-      cloudSave(uid, state.progress).catch(() => {})
+      cloudMerge(uid, state.progress).catch(() => {})
     }, 1500)
     return () => clearTimeout(t)
   }, [state.progress, user?.id]) // eslint-disable-line react-hooks/exhaustive-deps

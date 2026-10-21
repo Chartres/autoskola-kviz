@@ -1,9 +1,10 @@
 import { describe, it, expect, beforeEach } from 'vitest'
-import { render, screen, waitFor, within } from '@testing-library/react'
+import { render, fireEvent, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { AuthProvider } from '@/auth/AuthContext'
 import { AppProvider } from '@/app/AppContext'
 import { JizdyScreen } from './JizdyScreen'
+import { todayStr } from '@/lib/date'
 import rawSkillsData from '@data/jizdy-skills.json'
 
 const SKILLS = rawSkillsData.skills
@@ -42,6 +43,18 @@ describe('JizdyScreen', () => {
     expect(within(item).getByText(`0 / ${first.requiredReps}`)).toBeInTheDocument()
   })
 
+  it('rejects a lesson dated in the future', async () => {
+    const user = userEvent.setup()
+    renderJizdy()
+    const date = screen.getByLabelText('Datum') as HTMLInputElement
+    expect(date.max).toBe(todayStr())
+    fireEvent.change(date, { target: { value: '2999-01-01' } })
+    await user.type(screen.getByLabelText('Délka (min)'), '60')
+    await user.click(screen.getAllByLabelText(SKILLS[0].label)[0])
+    await user.click(screen.getByRole('button', { name: /Uložit jízdu/ }))
+    expect(screen.queryByRole('status')).not.toBeInTheDocument()
+  })
+
   it('submitting the log form calls dispatch with the correct record', async () => {
     const user = userEvent.setup()
     renderJizdy()
@@ -76,5 +89,11 @@ describe('JizdyScreen', () => {
     await waitFor(() =>
       expect(within(skillItem(first.label)).getByText(`1 / ${first.requiredReps}`)).toBeInTheDocument(),
     )
+  })
+
+  it('skill chips show a focus ring on the label when the hidden checkbox is focused', () => {
+    renderJizdy()
+    const chip = screen.getAllByLabelText(SKILLS[0].label)[0]
+    expect(chip.closest('label')?.className).toMatch(/has-focus-visible:/)
   })
 })

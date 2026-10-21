@@ -6,11 +6,9 @@ import {
   advance,
   currentQuestion,
   currentChoice,
-  isCurrentAnswered,
   isFinished,
   score,
   wrongAnswers,
-  progressRatio,
 } from './session'
 
 function q(id: number, correct: 'a' | 'b' | 'c'): Question {
@@ -34,7 +32,7 @@ describe('quiz session', () => {
   it('starts at the first question, unanswered', () => {
     const s = createSession(QS)
     expect(currentQuestion(s)?.id).toBe(1)
-    expect(isCurrentAnswered(s)).toBe(false)
+    expect(currentChoice(s)).toBeUndefined()
     expect(isFinished(s)).toBe(false)
     expect(score(s)).toBe(0)
   })
@@ -42,7 +40,6 @@ describe('quiz session', () => {
   it('records a correct answer and increments score', () => {
     let s = createSession(QS)
     s = answerCurrent(s, 'a')
-    expect(isCurrentAnswered(s)).toBe(true)
     expect(currentChoice(s)).toBe('a')
     expect(score(s)).toBe(1)
   })
@@ -75,13 +72,6 @@ describe('quiz session', () => {
     expect(currentQuestion(s)).toBeUndefined()
     expect(score(s)).toBe(2)
     expect(wrongAnswers(s).map((a) => a.id)).toEqual([3])
-  })
-
-  it('reports progress ratio', () => {
-    let s = createSession(QS)
-    expect(progressRatio(s)).toBe(0)
-    s = answerCurrent(s, 'a')
-    expect(progressRatio(s)).toBeCloseTo(1 / 3)
   })
 
   it('an empty session is immediately finished', () => {

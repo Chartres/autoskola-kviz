@@ -58,4 +58,14 @@ describe('syncProgress', () => {
     expect(merged).toEqual(local)
     expect(store.save).not.toHaveBeenCalled()
   })
+
+  it('skips the upload when the merge equals the remote row (key order may differ)', async () => {
+    const remote = recordAnswer(emptyProgress(), 3, true, 100)
+    // jsonb round-trips reorder object keys
+    const reordered = { ...remote, streak: Object.fromEntries(Object.entries(remote.streak).reverse()) } as typeof remote
+    const store = fakeStore(reordered)
+    const merged = await syncProgress(store, 'u', remote)
+    expect(merged.stats[3]?.seen).toBe(1)
+    expect(store.save).not.toHaveBeenCalled()
+  })
 })

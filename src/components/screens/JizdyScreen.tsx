@@ -51,7 +51,7 @@ export function JizdyScreen() {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     const dur = parseInt(duration, 10)
-    if (!dur || selected.size === 0) return
+    if (!dur || selected.size === 0 || !date || date > todayStr()) return
     const record: LessonRecord = {
       id: `${date}-${Date.now()}`,
       date,
@@ -105,6 +105,7 @@ export function JizdyScreen() {
                   type="date"
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
+                  max={todayStr()}
                   required
                   className="rounded border border-sand-700 bg-sand-900 px-2 py-1.5 text-sm text-sand-100 focus:border-terra-500 focus:outline-none"
                 />
@@ -138,7 +139,7 @@ export function JizdyScreen() {
                         checked
                           ? 'border-terra-400 text-terra-400 ring-1 ring-terra-400/60'
                           : 'border-sand-700 text-sand-400 hover:border-sand-500'
-                      }`}
+                      } has-focus-visible:ring-2 has-focus-visible:ring-terra-500`}
                     >
                       <input
                         type="checkbox"

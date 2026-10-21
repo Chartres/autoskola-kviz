@@ -1,6 +1,6 @@
 /**
  * H2: Tests for sign-in sync, hydrate wiring, fetch-failure safety (H1),
- * in-flight-answer preservation (M2), sign-out wipe (C2M2), and debounced
+ * in-flight-answer preservation (M2), sign-out wipe after a confirmed flush (C2M2), and debounced
  * cloud save (C2M3).
  */
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
@@ -46,15 +46,23 @@ vi.mock('@/auth/AuthContext', () => ({
   },
 }))
 
-vi.mock('@/auth/sync', () => ({
-  syncProgress: vi.fn(
-    (_store: unknown, _uid: string, _local: ProgressData) =>
-      new Promise<ProgressData>((res, rej) => {
+// The first call per test is the sign-in sync, resolved by hand; later calls (debounced
+// save, sign-out flush) run the real fetch-merge-save against the mocked store.
+vi.mock('@/auth/sync', async (importActual) => {
+  const actual = await importActual<typeof import('@/auth/sync')>()
+  let calls = 0
+  return {
+    ...actual,
+    syncProgress: vi.fn((store: never, uid: string, local: ProgressData) => {
+      if (calls++ > 0) return actual.syncProgress(store, uid, local)
+      return new Promise<ProgressData>((res, rej) => {
         syncResolvers.resolve = res
         syncResolvers.reject = rej
-      }),
-  ),
-}))
+      })
+    }),
+    __resetCalls: () => { calls = 0 },
+  }
+})
 
 vi.mock('@/auth/supabaseStore', () => ({
   supabaseStore: { fetch: vi.fn(), save: fakeSave },
@@ -79,9 +87,11 @@ function lessonRec(id: string) {
 
 const storedLessons = (key: string) => JSON.parse(localStorage.getItem(key)!).lessons
 
-beforeEach(() => {
+beforeEach(async () => {
+  ;((await import('@/auth/sync')) as unknown as { __resetCalls: () => void }).__resetCalls()
   localStorage.clear()
   fakeSave.mockClear()
+  vi.mocked((await import('@/auth/supabaseStore')).supabaseStore.fetch).mockReset()
   mockUserHolder.user = null
 })
 
@@ -168,7 +178,7 @@ describe('AppContext sign-in sync', () => {
 })
 
 describe('AppContext sign-out', () => {
-  it('clears progress and jizdyState on sign-out (C2M2)', async () => {
+  it('clears local progress on sign-out once the flush reached the cloud (C2M2)', async () => {
     let local = emptyProgress()
     local = recordAnswer(local, 11, true, 500)
     localStorage.setItem('autoskola-kviz:progress:v1', JSON.stringify(local))
@@ -421,9 +431,171 @@ describe('AppContext debounced cloud save', () => {
     // Debounce has not elapsed yet.
     expect(fakeSave).not.toHaveBeenCalled()
 
-    // Advance past debounce — save fires.
-    act(() => { vi.advanceTimersByTime(2000) })
+    // Advance past debounce — save fires (after the fetch-merge step).
+    await act(async () => { vi.advanceTimersByTime(2000) })
     expect(fakeSave).toHaveBeenCalledTimes(1)
     expect(fakeSave).toHaveBeenCalledWith('debounce-user', newProg)
+  })
+
+  it('merges newer remote answers before saving instead of overwriting them', async () => {
+    vi.useFakeTimers()
+    const { supabaseStore } = await import('@/auth/supabaseStore')
+    mockUserHolder.user = { id: 'two-devices' }
+    let capturedDispatch: ReturnType<typeof useApp>['dispatch'] | null = null
+    function DispatchCapture() {
+      capturedDispatch = useApp().dispatch
+      return null
+    }
+    render(
+      <AppProvider>
+        <Spy />
+        <DispatchCapture />
+      </AppProvider>,
+    )
+    await act(async () => {
+      syncResolvers.resolve(emptyProgress())
+    })
+
+    // Device A answered question 2 after this tab's sign-in sync.
+    const remote = recordAnswer(emptyProgress(), 2, true, 2000)
+    vi.mocked(supabaseStore.fetch).mockResolvedValueOnce(remote)
+    // This tab answers question 1.
+    const mine = recordAnswer(emptyProgress(), 1, true, 3000)
+    await act(async () => {
+      capturedDispatch!({ type: 'hydrate', progress: mine })
+    })
+    await act(async () => { vi.advanceTimersByTime(2000) })
+
+    const saved = fakeSave.mock.calls[0] as unknown as [string, ProgressData]
+    expect(Object.keys(saved[1].stats).sort()).toEqual(['1', '2'])
+    expect(screen.getByTestId('answered').textContent).toBe('2')
+  })
+
+  it('a removed bookmark stays removed after a save (cloud and screen)', async () => {
+    vi.useFakeTimers()
+    const { supabaseStore } = await import('@/auth/supabaseStore')
+    mockUserHolder.user = { id: 'unbookmark' }
+    let captured: ReturnType<typeof useApp> | null = null
+    function Capture() {
+      captured = useApp()
+      return null
+    }
+    render(
+      <AppProvider>
+        <Capture />
+      </AppProvider>,
+    )
+    const withSeven: ProgressData = { ...recordAnswer(emptyProgress(), 1, true, 1000), bookmarks: [7] }
+    await act(async () => {
+      syncResolvers.resolve(withSeven)
+    })
+
+    // The cloud still holds bookmark 7; the user removes it here.
+    vi.mocked(supabaseStore.fetch).mockResolvedValueOnce(withSeven)
+    await act(async () => {
+      captured!.dispatch({ type: 'hydrate', progress: { ...withSeven, bookmarks: [] } })
+    })
+    await act(async () => { vi.advanceTimersByTime(2000) })
+
+    expect(fakeSave).toHaveBeenCalledTimes(1)
+    const saved = fakeSave.mock.calls[0] as unknown as [string, ProgressData]
+    expect(saved[1].bookmarks).toEqual([])
+    expect(captured!.state.progress.bookmarks).toEqual([])
+  })
+
+  it('uploads answers given while the sign-in fetch was in flight', async () => {
+    vi.useFakeTimers()
+    mockUserHolder.user = { id: 'inflight-user' }
+    let capturedDispatch: ReturnType<typeof useApp>['dispatch'] | null = null
+    function DispatchCapture() {
+      capturedDispatch = useApp().dispatch
+      return null
+    }
+    render(
+      <AppProvider>
+        <DispatchCapture />
+      </AppProvider>,
+    )
+    // Answer 3 while the sync is still pending, then let the sync resolve without it.
+    const mine = recordAnswer(emptyProgress(), 3, true, 3000)
+    await act(async () => {
+      capturedDispatch!({ type: 'hydrate', progress: mine })
+    })
+    await act(async () => {
+      syncResolvers.resolve(recordAnswer(emptyProgress(), 4, true, 1000))
+    })
+    await act(async () => { vi.advanceTimersByTime(2000) })
+
+    const saved = fakeSave.mock.calls[0] as unknown as [string, ProgressData]
+    expect(Object.keys(saved[1].stats).sort()).toEqual(['3', '4'])
+  })
+
+  it('never writes local-only progress over the cloud row after a failed sign-in fetch', async () => {
+    vi.useFakeTimers()
+    const { syncProgress } = await import('@/auth/sync')
+    const { supabaseStore } = await import('@/auth/supabaseStore')
+    vi.mocked(supabaseStore.fetch).mockRejectedValue(new Error('offline'))
+    vi.mocked(syncProgress).mockImplementationOnce(async (store, uid, local) => {
+      await store.fetch(uid).catch(() => {})
+      return local
+    })
+    mockUserHolder.user = { id: 'offline-user' }
+
+    let capturedDispatch: ReturnType<typeof useApp>['dispatch'] | null = null
+    function DispatchCapture() {
+      capturedDispatch = useApp().dispatch
+      return null
+    }
+    render(
+      <AppProvider>
+        <DispatchCapture />
+      </AppProvider>,
+    )
+    await act(async () => {})
+    await act(async () => {
+      capturedDispatch!({ type: 'hydrate', progress: recordAnswer(emptyProgress(), 5, true, 1000) })
+    })
+    act(() => { vi.advanceTimersByTime(2000) })
+    expect(fakeSave).not.toHaveBeenCalled()
+    await act(async () => {
+      await registeredFlush.current!()
+    })
+    expect(fakeSave).not.toHaveBeenCalled()
+  })
+
+  it('syncs again once the cloud is reachable after a failed sign-in fetch', async () => {
+    vi.useFakeTimers()
+    const { syncProgress } = await import('@/auth/sync')
+    const actual = await vi.importActual<typeof import('@/auth/sync')>('@/auth/sync')
+    const { supabaseStore } = await import('@/auth/supabaseStore')
+    vi.mocked(supabaseStore.fetch).mockReset()
+    vi.mocked(supabaseStore.fetch).mockRejectedValueOnce(new Error('offline'))
+    vi.mocked(syncProgress).mockImplementationOnce(async (store, uid, local) => {
+      await store.fetch(uid).catch(() => {})
+      return local
+    })
+    // The harness hands only the first real call to the manual resolver; the retry is real.
+    vi.mocked(syncProgress).mockImplementationOnce(actual.syncProgress)
+    mockUserHolder.user = { id: 'blip-user' }
+    let capturedDispatch: ReturnType<typeof useApp>['dispatch'] | null = null
+    function DispatchCapture() {
+      capturedDispatch = useApp().dispatch
+      return null
+    }
+    render(
+      <AppProvider>
+        <DispatchCapture />
+      </AppProvider>,
+    )
+    await act(async () => {})
+    await act(async () => {
+      capturedDispatch!({ type: 'hydrate', progress: recordAnswer(emptyProgress(), 1, true, 3000) })
+    })
+    // Back online: the other device's answer is merged in and our offline answer uploaded.
+    vi.mocked(supabaseStore.fetch).mockResolvedValueOnce(recordAnswer(emptyProgress(), 2, true, 2000))
+    await act(async () => {
+      window.dispatchEvent(new Event('online'))
+    })
+    expect(fakeSave).toHaveBeenCalledTimes(1)
   })
 })
