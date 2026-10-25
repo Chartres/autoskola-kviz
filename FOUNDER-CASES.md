@@ -6,8 +6,8 @@ Commit SHAs are the pre-squash commits on the PR branches (#7, #8 and #11 were s
 
 | # | Situation | Known right answer | Source | Confirmed |
 |---|---|---|---|---|
-| 1 | Mock exam (skupina B) is built and graded | 25 questions (10×2 pravidla, 3×1 značky, 3×4 situace, 4×2 zásady, 2×1 podmínky, 2×2 předpisy, 1×1 zdravověda) = 50 points, 30 minutes; 43 points passes, 42 fails | data/README.md:34-38, data/meta.json (source: MD ČR eTesty, etesty.md.gov.cz); test commit ed5488e, PR #7 | no |
-| 2 | Streak is 10 with the last lesson yesterday; the user finishes a lesson today on another device and the two progress records merge | Merged streak is 11, not 1 | commit a69b586, PR #11 (C3-3) | no |
+| 1 | Mock exam (skupina B) is built and graded | 25 questions (10×2 pravidla, 3×1 značky, 3×4 situace, 4×2 zásady, 2×1 podmínky, 2×2 předpisy, 1×1 zdravověda) = 50 points, 30 minutes; 43 points passes, 42 fails | data/README.md "Exam model", data/meta.json `exam` (source: MD ČR eTesty, etesty.md.gov.cz); test commit ed5488e, PR #7 | no |
+| 2 | Streak is 10 with the last lesson yesterday; the user finishes a lesson today on another device and the two progress records merge | Merged streak is 11, not 1 | commit a69b586, PR #11 (C3-3); src/domain/progress.test.ts "extends the earlier streak…" | no |
 | 3 | Two signed-in devices: device A answers questions, then device B's debounced save runs | Cloud row keeps A's newer answers and B's; every write is fetch → merge → save | commit 8b11f7e, PR #11 (C3-1) | no |
 | 4 | Two tabs open; the stale tab saves after the other tab recorded answers or a Jízdy lesson | The other tab's answers and lessons survive (storage listener merges) | commit 96b2fde, PR #11 (C3-2) | no |
 | 5 | User signs out while the cloud flush fails (5xx or RLS) or the sign-in sync is still running | Local progress is not wiped; it merges into the next sign-in. Sign-out finishes within ~3 s even if the flush hangs | PR #8 (tests "keeps local progress on sign-out when the flush save fails", "signs out after ~3 s…") | no |
