@@ -7,14 +7,14 @@ import {
   type ReactNode,
 } from 'react'
 import { reducer, initialState, type AppState, type Action } from './store'
-import { loadProgress, saveProgress, loadJizdy, saveJizdy, STORAGE_KEY, JIZDY_KEY } from '@/domain/storage'
+import { loadProgress, saveProgress, loadJizdy, saveJizdy, claimAnonymousProgress, progressKey, JIZDY_KEY } from '@/domain/storage'
 import { emptyJizdyState } from '@/domain/jizdy'
 import { topicFromPath } from '@/lib/topics'
 import { freshRng } from '@/domain/rng'
 import { useAuth, registerBeforeSignOut } from '@/auth/AuthContext'
 import { supabaseStore } from '@/auth/supabaseStore'
 import { syncProgress, canonical } from '@/auth/sync'
-import { mergeProgress, emptyProgress, type ProgressData } from '@/domain/progress'
+import { mergeProgress, type ProgressData } from '@/domain/progress'
 import { track } from '@/analytics'
 
 interface AppContextValue {
@@ -43,6 +43,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
   // before hydrateJizdy runs, writing stale jizdyState to the wrong key — C4H1/C4H2).
   const userRef = useRef(user)
   userRef.current = user
+  // Whose progress is in memory: the account it was loaded for, or undefined (anonymous).
+  // Local saves go under this account's key. It changes together with the progress, at
+  // sign-in and sign-out; the auth user changes a render earlier.
+  const ownerRef = useRef<string | undefined>(undefined)
   const jizdyRef = useRef(state.jizdyState)
   jizdyRef.current = state.jizdyState
 
@@ -53,13 +57,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const justHydratedRef = useRef(false)
   // M5: uid of the signed-in user, to detect the signed-in → signed-out transition.
   const signedInUidRef = useRef<string | null>(null)
-  // Last progress the cloud confirmed saving, per user. Sign-out wipes local progress only
-  // when it matches, so answers that never reached the cloud are never deleted.
-  const cloudRef = useRef<{ uid: string; json: string } | null>(null)
-  const cloudSave = (uid: string, data: ProgressData) =>
-    supabaseStore.save(uid, data).then(() => {
-      cloudRef.current = { uid, json: canonical(data) }
-    })
+  const cloudSave = (uid: string, data: ProgressData) => supabaseStore.save(uid, data)
   // Fold `incoming` into the in-memory progress; dispatch only if it changed anything.
   // ponytail: bookmarks stay as this copy has them (a union would undo removals); true
   // cross-device removal needs deletion markers.
@@ -77,8 +75,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     const remote = await supabaseStore.fetch(uid)
     const merged = remote ? { ...mergeProgress(local, remote), bookmarks: local.bookmarks } : local
     // Equal to the cloud (bookmarks included): nothing to upload.
-    if (remote && canonical(merged) === canonical(remote)) cloudRef.current = { uid, json: canonical(merged) }
-    else await cloudSave(uid, merged).catch(() => {})
+    if (!remote || canonical(merged) !== canonical(remote)) await cloudSave(uid, merged).catch(() => {})
     if (signedInUidRef.current !== uid) return
     adopt(merged)
   }
@@ -87,8 +84,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
   // save (which overwrites localStorage with our whole copy) cannot erase them.
   useEffect(() => {
     const onStorage = (e: StorageEvent) => {
-      if (e.key === STORAGE_KEY) {
-        adopt(loadProgress())
+      if (e.key === progressKey(ownerRef.current)) {
+        adopt(loadProgress(ownerRef.current))
       } else if (e.key?.startsWith(JIZDY_KEY)) {
         const ours = jizdyRef.current
         const seen = new Set(ours.lessons.map((l) => l.id))
@@ -127,9 +124,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
   }, [state.view])
 
-  // Persist progress locally whenever it changes (offline-first source of truth).
+  // Persist progress locally whenever it changes (offline-first source of truth), under the
+  // key of the account it belongs to.
   useEffect(() => {
-    saveProgress(state.progress)
+    saveProgress(state.progress, ownerRef.current)
   }, [state.progress])
 
   // Persist jizdy state to the user-scoped key (or anonymous key when signed out).
@@ -166,14 +164,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
         // C3H2: no jizdy wipe — lessons live under the user-scoped key; just reset
         // in-memory state so the next account (or anonymous) starts clean.
         dispatch({ type: 'hydrateJizdy', state: emptyJizdyState() })
-        // M5: sign-out — wipe local progress so the next account starts fresh, but only
-        // when the cloud holds it (flush failed, sync in flight, or an involuntary
-        // SIGNED_OUT → keep it; it merges into the next sign-in).
-        const c = cloudRef.current
-        if (c?.uid === uid && c.json === canonical(progressRef.current)) {
-          saveProgress(emptyProgress())
-          dispatch({ type: 'hydrate', progress: emptyProgress() })
-        }
+        // Sign-out: show the anonymous progress. The account's own copy stays under its key,
+        // so answers the cloud never confirmed upload on that account's next sign-in.
+        const anon = loadProgress()
+        ownerRef.current = undefined
+        progressRef.current = anon
+        dispatch({ type: 'hydrate', progress: anon })
         signedInUidRef.current = null
       }
       return
@@ -182,6 +178,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
     signedInUidRef.current = uid
     // C3H2: load this user's jizdy lessons from their scoped key.
     dispatch({ type: 'hydrateJizdy', state: loadJizdy(uid) })
+    // Switch the in-memory progress to this account's local copy (plus anonymous progress,
+    // which moves into the first account that signs in) before anything else reads it.
+    // Without this, the previous account's progress (a direct A → B switch) or answers
+    // given during the fetch would merge into this account.
+    const local = claimAnonymousProgress(uid)
+    ownerRef.current = uid
+    progressRef.current = local
+    dispatch({ type: 'hydrate', progress: local })
     let cancelled = false
     syncingRef.current = true // H1: block debounced save while fetch is in flight
     let uploadFailed = false
@@ -190,7 +194,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         uploadFailed = true
         throw e
       })
-    syncProgress({ fetch: supabaseStore.fetch, save }, uid, loadProgress())
+    syncProgress({ fetch: supabaseStore.fetch, save }, uid, local)
       .then((merged) => {
         if (!cancelled) {
           // M2: re-merge with any answers given while the fetch was in flight
