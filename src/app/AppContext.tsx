@@ -6,8 +6,8 @@ import {
   useRef,
   type ReactNode,
 } from 'react'
-import { reducer, initialState, type AppState, type Action } from './store'
-import { loadProgress, saveProgress, loadJizdy, saveJizdy, STORAGE_KEY, JIZDY_KEY } from '@/domain/storage'
+import { reducer, initialState, resumeExam, type AppState, type Action } from './store'
+import { loadProgress, saveProgress, loadJizdy, saveJizdy, loadExam, saveExam, STORAGE_KEY, JIZDY_KEY } from '@/domain/storage'
 import { emptyJizdyState } from '@/domain/jizdy'
 import { topicFromPath } from '@/lib/topics'
 import { freshRng } from '@/domain/rng'
@@ -27,11 +27,13 @@ const AppContext = createContext<AppContextValue | null>(null)
 export function AppProvider({ children }: { children: ReactNode }) {
   // Load from storage in the lazy initializer so persist effects never see
   // emptyProgress() on first render (fixes mount-order overwrite).
-  const [state, dispatch] = useReducer(reducer, undefined, () => ({
-    ...initialState(),
-    progress: loadProgress(),
-    jizdyState: loadJizdy(),
-  }))
+  const [state, dispatch] = useReducer(reducer, undefined, () =>
+    resumeExam(
+      { ...initialState(), progress: loadProgress(), jizdyState: loadJizdy() },
+      loadExam(),
+      Date.now(),
+    ),
+  )
   const { user } = useAuth()
 
   // Always-current progress snapshot for in-flight-answer recovery (M2).
@@ -107,7 +109,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
   // SEO topic page (/okruh/<slug>/): start that okruh's practice directly.
   useEffect(() => {
     const topic = topicFromPath(window.location.pathname)
-    if (topic) {
+    // A resumed exam wins over the topic page the exam was started from.
+    if (topic && state.view === 'home') {
       dispatch({ type: 'setCategories', categories: new Set([topic.category]) })
       dispatch({ type: 'startPractice', rng: freshRng() })
       track('start_topic', { topic: topic.category, from: 'seo-page' })
@@ -126,6 +129,21 @@ export function AppProvider({ children }: { children: ReactNode }) {
       window.history.replaceState(null, '', '/' + window.location.search)
     }
   }, [state.view])
+
+  // Keep the running exam saved; drop it once it ends (results) or is quit.
+  useEffect(() => {
+    const { view, session, examEndsAt } = state
+    saveExam(
+      view === 'exam' && session && examEndsAt != null
+        ? {
+            ids: session.questions.map((q) => q.id),
+            index: session.index,
+            records: session.records,
+            endsAt: examEndsAt,
+          }
+        : null,
+    )
+  }, [state.view, state.session, state.examEndsAt]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Persist progress locally whenever it changes (offline-first source of truth).
   useEffect(() => {

@@ -22,6 +22,8 @@ import {
   type ProgressData,
 } from '@/domain/progress'
 import { buildLesson } from '@/domain/lesson'
+import { getQuestion } from '@/domain/questions'
+import type { SavedExam } from '@/domain/storage'
 import { shuffle } from '@/domain/rng'
 
 // Bottom-tab destinations (persistent nav) + focused full-screen flows.
@@ -57,6 +59,35 @@ export function initialState(): AppState {
     selectedCategories: new Set(),
     search: '',
     jizdyState: emptyJizdyState(),
+  }
+}
+
+/** An exam whose time ran out longer ago than this is dropped on load instead of shown. */
+export const STALE_EXAM_MS = 60 * 60 * 1000
+
+/**
+ * Put a saved exam back on screen at app load: still running → the same question and
+ * deadline; time ran out while away → its results; abandoned long ago → nothing.
+ */
+export function resumeExam(state: AppState, saved: SavedExam | null, now: number): AppState {
+  if (!saved) return state
+  const questions = saved.ids.map(getQuestion)
+  if (!questions.length || questions.some((q) => !q)) return state
+  const session: SessionState = {
+    questions: questions as NonNullable<(typeof questions)[number]>[],
+    index: saved.index,
+    records: saved.records,
+    chosen: Object.fromEntries(saved.records.map((r) => [r.id, r.choice])),
+  }
+  if (now < saved.endsAt) {
+    return { ...begin(state, 'exam', session), examEndsAt: saved.endsAt }
+  }
+  if (now - saved.endsAt > STALE_EXAM_MS) return state
+  return {
+    ...begin(state, 'exam', session),
+    view: 'results',
+    examResult: evaluateExam(session),
+    examEndsAt: null,
   }
 }
 
