@@ -110,10 +110,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
     if (topic) {
       dispatch({ type: 'setCategories', categories: new Set([topic.category]) })
       dispatch({ type: 'startPractice', rng: freshRng() })
-      track('start_topic', { topic: topic.category, from: 'seo-page' })
+      track('start_practice', { topic: topic.category, from: 'seo-page' })
     }
     track('app_open')
   }, [])
+
+  // One page_view per screen (tabs and full-screen flows alike); views are not URLs here.
+  useEffect(() => {
+    track('page_view', { view: state.view })
+  }, [state.view])
 
   // Once practice started from an SEO page ends, leave the topic URL so a reload or an
   // auth redirect returns to the app instead of restarting that practice.

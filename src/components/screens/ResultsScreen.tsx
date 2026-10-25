@@ -25,8 +25,9 @@ export function ResultsScreen() {
     if (!session) return
     const name = isExam ? 'exam_finish' : isLesson ? 'lesson_complete' : 'session_finish'
     track(name, { mode, score: correct, total, passed: examResult?.passed })
-    // M8: fire the canonical activation KPI at the aha moment (lesson complete).
-    if (isLesson) conversion({ score: correct, total })
+    // The canonical activation KPI: a finished set of any kind (lesson, practice, review,
+    // bookmarks, exam). Weekly distinct visitors with a conversion = the North Star.
+    conversion({ mode, score: correct, total })
     // fire once per results view
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
