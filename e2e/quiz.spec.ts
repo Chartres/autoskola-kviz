@@ -54,3 +54,19 @@ test('guide and stats tabs are reachable', async ({ page }) => {
   await page.getByRole('button', { name: 'Postup' }).click()
   await expect(page.getByRole('heading', { name: 'Postup' })).toBeVisible()
 })
+
+// Tereza meets a 4-point "dopravní situace": the official clip plays, the still is its poster.
+test('animated situation question plays its clip', async ({ page }) => {
+  await page.goto('/')
+  await page.getByRole('button', { name: 'Procvičovat' }).click()
+  await page.getByPlaceholder(/Zúžit hledáním/).fill('z výhledu v dané situaci')
+  await page.getByRole('button', { name: /Spustit procvičování/ }).click()
+  const video = page.getByTestId('question-video')
+  await expect(video).toBeVisible()
+  await expect(page.getByText(/Spusťte animaci/)).toBeVisible()
+  const src = await video.locator('source').getAttribute('src')
+  const res = await page.request.get(src!)
+  expect(res.status()).toBe(200)
+  expect(res.headers()['content-type']).toContain('video/mp4')
+  await page.screenshot({ path: 'e2e/shots/question-video.png', fullPage: true })
+})

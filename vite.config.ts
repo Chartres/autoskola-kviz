@@ -50,7 +50,9 @@ export default defineConfig({
         cleanupOutdatedCaches: true,
         runtimeCaching: [
           {
-            urlPattern: ({ url }) => url.pathname.startsWith('/media/'),
+            // Videos stay network-only: Safari plays them with range requests, which a
+            // cached full response does not answer. Offline, the still is shown instead.
+            urlPattern: ({ url }) => url.pathname.startsWith('/media/') && !url.pathname.endsWith('.mp4'),
             handler: 'CacheFirst',
             options: {
               cacheName: 'question-images',
