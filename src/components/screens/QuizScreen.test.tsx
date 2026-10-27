@@ -7,17 +7,18 @@ import { render, screen, fireEvent, act } from '@testing-library/react'
 import { App } from '@/App'
 import { byCategory } from '@/domain/questions'
 
-const { track } = vi.hoisted(() => ({ track: vi.fn() }))
+const { track, conversion } = vi.hoisted(() => ({ track: vi.fn(), conversion: vi.fn() }))
 vi.mock('@/analytics', async (importActual) => ({
   ...(await importActual<typeof import('@/analytics')>()),
   track,
-  conversion: vi.fn(),
+  conversion,
   identify: vi.fn(),
 }))
 
 beforeEach(() => {
   localStorage.clear()
   track.mockClear()
+  conversion.mockClear()
 })
 
 function startOkruh(name: RegExp) {
@@ -63,9 +64,12 @@ describe('control of error', () => {
       const opts = [...document.querySelectorAll<HTMLButtonElement>('button[data-state="idle"]')]
       const right = letters.indexOf(q.correct)
       fireEvent.click(opts[i === 0 ? (right + 1) % opts.length : right])
-      fireEvent.click(screen.getByRole('button', { name: /Další|Dokončit/ }))
+      fireEvent.click(screen.getByRole('button', { name: /Další|Dokončit|Opravit chyby/ }))
     }
     expect(screen.getByText(/Oprava chyb/)).toBeInTheDocument()
+    // Finishing the first round is a finished set: counted now, whether or not the learner stays.
+    expect(conversion).toHaveBeenCalledTimes(1)
+    expect(conversion).toHaveBeenCalledWith(expect.objectContaining({ mode: 'practice', corrections: 1 }))
     expect(screen.getByRole('heading', { level: 2 }).textContent).toBe(missed)
   })
 })

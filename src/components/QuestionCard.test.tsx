@@ -226,4 +226,16 @@ describe('QuestionCard', () => {
     setup({ question: { ...Q, video: 'anim.mp4', image: 'still.webp' } })
     expect(screen.getByLabelText('Animace k otázce 1')).toBe(screen.getByTestId('question-video'))
   })
+
+  it('the last question says the errors come next when there are some', () => {
+    setup({ chosen: 'a', index: 9, total: 10, willCorrect: true })
+    expect(screen.getByRole('button', { name: /Opravit chyby/ })).toBeInTheDocument()
+  })
+
+  it('the explanation is a region named by its heading and announced when it appears', () => {
+    const explanation = { why: 'Protože zákon.', sources: [] }
+    setup({ chosen: 'a', explanation })
+    const region = screen.getByRole('region', { name: 'Proč' })
+    expect(region).toHaveAttribute('aria-live', 'polite')
+  })
 })

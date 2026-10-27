@@ -62,3 +62,14 @@ describe('source label and link', () => {
     expect(sourceUrl(s)).toBe('https://www.zakonyprolidi.cz/cs/2015-294')
   })
 })
+
+describe('loadExplanations', () => {
+  it('retries after a failed load instead of caching the failure', async () => {
+    const mod = await import('./explanations')
+    // First call fails (e.g. the chunk vanished after a deploy), the next one succeeds.
+    const first = mod.loadExplanations(() => Promise.reject(new Error('chunk gone')))
+    await expect(first).rejects.toThrow('chunk gone')
+    const second = await mod.loadExplanations(() => Promise.resolve({ default: { 1: { why: 'x', sources: [] } } }))
+    expect(second[1].why).toBe('x')
+  })
+})

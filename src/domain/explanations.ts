@@ -50,7 +50,17 @@ export function sourceUrl(s: LawSource): string {
 
 let loading: Promise<Explanations> | null = null
 
-export function loadExplanations(): Promise<Explanations> {
-  loading ??= import('@data/explanations.json').then((m) => m.default as Explanations)
+type Importer = () => Promise<{ default: unknown }>
+const importData: Importer = () => import('@data/explanations.json')
+
+/** Loads once; a failed load (offline, or the chunk replaced by a deploy) is retried next time. */
+export function loadExplanations(load: Importer = importData): Promise<Explanations> {
+  loading ??= load().then(
+    (m) => m.default as Explanations,
+    (e) => {
+      loading = null
+      throw e
+    },
+  )
   return loading
 }

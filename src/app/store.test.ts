@@ -227,3 +227,21 @@ describe('control of error: a missed question returns until answered right', () 
     expect(s.correction).toBeNull()
   })
 })
+
+describe('control of error: timing', () => {
+  it('a lesson is credited to the day its first round ended, even if corrections run past midnight', () => {
+    const wrongOf = (c: string) => (['a', 'b', 'c'] as const).find((x) => x !== c)!
+    let s = reducer(start(), { type: 'startLesson', rng: makeRng(2) })
+    const n = s.session!.questions.length
+    for (let i = 0; i < n; i++) {
+      const cur = currentQuestion(s.session!)!
+      s = reducer(s, { type: 'answer', choice: i === 0 ? wrongOf(cur.correct) : cur.correct, now: i })
+      s = reducer(s, { type: 'next', today: '2026-06-06' })
+    }
+    const cur = currentQuestion(s.session!)!
+    s = reducer(s, { type: 'answer', choice: cur.correct, now: 99 })
+    s = reducer(s, { type: 'next', today: '2026-06-07' })
+    expect(s.view).toBe('results')
+    expect(s.progress.streak.lastDate).toBe('2026-06-06')
+  })
+})

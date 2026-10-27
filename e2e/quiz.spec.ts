@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test'
+import { answerFromMemory } from './answers'
 
 // Persona journey: Tereza (18) is preparing for the driving-theory test.
 // Montessori flow: she picks a topic freely from day 1, answers, gets
@@ -30,17 +31,10 @@ test('daily set from home: finishable, with completion + streak', async ({ page 
   await expect(page.getByText('01 / 10')).toBeVisible()
   // Control of error: missed questions come back until right, so answer them from what the
   // app revealed the first time.
-  const known = new Map<string, string>()
+  const known = new Map<string, number>()
   for (let step = 0; step < 60 && !(await page.getByText('Lekce dokončena').isVisible()); step++) {
-    const q = (await page.locator('h2').first().textContent())!
-    const want = known.get(q)
-    const option = want
-      ? page.locator('button[data-state="idle"]', { hasText: want })
-      : page.locator('button[data-state="idle"]')
-    await option.first().click()
-    const right = await page.locator('button[data-state="correct"]').first().innerText()
-    known.set(q, right.split('\n').pop()!.replace('✓ Správná odpověď', '').trim())
-    await page.getByRole('button', { name: /Další|Dokončit/ }).click()
+    await answerFromMemory(page, known)
+    await page.getByRole('button', { name: /Další|Dokončit|Opravit chyby/ }).click()
   }
   await expect(page.getByText('Lekce dokončena')).toBeVisible()
   await expect(page.getByText(/den.*v řadě|dní.*v řadě/)).toBeVisible()

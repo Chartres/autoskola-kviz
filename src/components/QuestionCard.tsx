@@ -18,6 +18,8 @@ export interface QuestionCardProps {
   /** Why the official answer is right, from the law; shown after answering outside the exam. */
   explanation?: Explanation | null
   onSourceOpen?: (source: LawSource) => void
+  /** The set has errors to put right after this question (control of error). */
+  willCorrect?: boolean
 }
 
 const ALL_OPTIONS: Choice[] = ['a', 'b', 'c']
@@ -79,6 +81,7 @@ export function QuestionCard({
   onToggleBookmark,
   explanation,
   onSourceOpen,
+  willCorrect,
 }: QuestionCardProps) {
   const answered = chosen !== undefined
   const isCorrect = answered && chosen === question.correct
@@ -237,8 +240,8 @@ export function QuestionCard({
 
       {answered && reveal && explanation && (
         /* Set like a statute book: the reasoning, then the law quoted with its paragraph. */
-        <section aria-label="Proč" className="mt-5 border-l-2 border-sand-600 pl-4">
-          <h3 className="mb-1 font-mono text-[0.7rem] uppercase tracking-[0.15em] text-sand-500">Proč</h3>
+        <section aria-labelledby="proc" aria-live="polite" className="mt-5 border-l-2 border-sand-600 pl-4">
+          <h3 id="proc" className="mb-1 font-mono text-[0.7rem] uppercase tracking-[0.15em] text-sand-500">Proč</h3>
           <p className="leading-relaxed text-sand-200">{explanation.why}</p>
           {explanation.flag && (
             <p className="mt-2 text-sm leading-relaxed text-terra-300">
@@ -257,6 +260,7 @@ export function QuestionCard({
                   className="inline-block min-h-11 py-3 font-mono text-xs text-terra-400 underline-offset-2 hover:underline"
                 >
                   {sourceLabel(s)}
+                  <span className="sr-only"> (otevře se v novém okně)</span>
                 </a>
               </figcaption>
             </figure>
@@ -287,7 +291,7 @@ export function QuestionCard({
             onClick={onNext}
             className="glow-terra inline-flex shrink-0 items-center gap-2 rounded-card bg-terra-500 px-5 py-2.5 font-display font-semibold text-sand-950 transition-colors hover:bg-terra-400"
           >
-            <span>{index + 1 === total ? 'Dokončit' : 'Další'}</span>
+            <span>{index + 1 === total ? (willCorrect ? 'Opravit chyby' : 'Dokončit') : 'Další'}</span>
             <kbd className="flex h-5 min-w-5 items-center justify-center rounded-[2px] border border-sand-950/30 px-1 font-mono text-xs leading-none">
               ↵
             </kbd>

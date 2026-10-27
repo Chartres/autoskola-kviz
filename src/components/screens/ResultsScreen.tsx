@@ -29,7 +29,8 @@ export function ResultsScreen() {
     track(name, { mode, score: correct, total, passed: examResult?.passed })
     // The canonical activation KPI: a finished set of any kind (lesson, practice, review,
     // bookmarks, exam). Weekly distinct visitors with a conversion = the North Star.
-    conversion({ mode, score: correct, total })
+    // A set with corrections was counted when its first round ended (QuizScreen).
+    if (!corrected) conversion({ mode, score: correct, total })
     if (corrected) track('key_action', { action: 'errors_corrected', count: corrected })
     // fire once per results view
     // eslint-disable-next-line react-hooks/exhaustive-deps

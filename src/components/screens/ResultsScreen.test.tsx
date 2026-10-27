@@ -50,9 +50,12 @@ describe('ResultsScreen', () => {
 
   it('after a correction round: says how many errors were put right, and reports it', () => {
     h.correction = { first: h.session, missed: 2 }
+    conversion.mockClear()
     try {
       render(<ResultsScreen />)
       expect(screen.getByText(/Opraveny 2 chyby/)).toBeTruthy()
+      // The set was already counted when its first round ended (QuizScreen); not twice.
+      expect(conversion).not.toHaveBeenCalled()
       expect(track).toHaveBeenCalledWith('key_action', { action: 'errors_corrected', count: 2 })
     } finally {
       h.correction = null
