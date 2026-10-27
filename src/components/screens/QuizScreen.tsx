@@ -1,12 +1,14 @@
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useApp } from '@/app/AppContext'
-import { currentChoice, currentQuestion } from '@/domain/session'
+import { currentChoice, currentQuestion, score } from '@/domain/session'
 import { isBookmarked } from '@/domain/progress'
 import { imageUrl } from '@/lib/assets'
 import { QuestionCard } from '@/components/QuestionCard'
 import { ExamTimer } from '@/components/ExamTimer'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import { todayStr } from '@/lib/date'
+import { loadExplanations, type Explanations } from '@/domain/explanations'
+import { track, conversion } from '@/analytics'
 
 const MODE_LABEL: Record<string, string> = {
   lesson: 'Denní dávka',
@@ -20,12 +22,33 @@ export function QuizScreen() {
   const { state, dispatch } = useApp()
   const { session, mode } = state
   const onExpire = useCallback(() => dispatch({ type: 'finishExam' }), [dispatch])
+  // Explanations load as their own chunk; practice works without them meanwhile.
+  const [explanations, setExplanations] = useState<Explanations | null>(null)
+  useEffect(() => {
+    if (mode && mode !== 'exam') loadExplanations().then(setExplanations, () => {})
+  }, [mode])
 
   // Warm the cache for the next question's image so it shows without a flash.
   const nextImage = session ? session.questions[session.index + 1]?.image : null
   useEffect(() => {
     if (nextImage) new Image().src = imageUrl(nextImage)
   }, [nextImage])
+
+  // A finished first round is a finished set (the North Star), even if the learner then leaves
+  // the correction round; ResultsScreen doesn't count it again.
+  const counted = useRef<unknown>(null)
+  const first = state.correction?.first
+  useEffect(() => {
+    if (!first || counted.current === first) return
+    counted.current = first
+    conversion({ mode, score: score(first), total: first.questions.length, corrections: state.correction!.missed })
+  }, [first]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Each question opens at the top (explanations make cards long on a phone).
+  const questionId = session ? currentQuestion(session)?.id : undefined
+  useEffect(() => {
+    document.scrollingElement?.scrollTo?.(0, 0)
+  }, [questionId])
 
   if (!session || !mode) return null
   const question = currentQuestion(session)
@@ -57,7 +80,7 @@ export function QuizScreen() {
           ← Konec
         </button>
         <span className="font-mono text-[0.7rem] uppercase tracking-[0.15em] text-sand-500">
-          {MODE_LABEL[mode]}
+          {state.correction ? `Oprava chyb · ${MODE_LABEL[mode]}` : MODE_LABEL[mode]}
         </span>
         {isExam && state.examEndsAt != null ? (
           <ExamTimer endsAt={state.examEndsAt} onExpire={onExpire} />
@@ -82,6 +105,11 @@ export function QuizScreen() {
         onNext={() => dispatch({ type: 'next', today: todayStr() })}
         onToggleBookmark={() =>
           dispatch({ type: 'toggleBookmark', id: question.id })
+        }
+        explanation={explanations?.[question.id]}
+        willCorrect={!isExam && session.questions.some((q) => session.chosen[q.id] !== undefined && session.chosen[q.id] !== q.correct)}
+        onSourceOpen={(s) =>
+          track('key_action', { action: 'source_opened', question: question.id, law: s.law, ref: s.ref })
         }
       />
     </div>

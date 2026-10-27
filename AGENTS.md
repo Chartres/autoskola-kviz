@@ -28,6 +28,15 @@ write committed screenshots to `e2e/shots/` for visual review (Standard: persona
 - **Theory**: home → okruh tile → answer → immediate feedback → summary. "Dopravní značky" has an image.
 - **Jízdy**: Jízdy tab → log-lesson form (date + duration + skill chips) → submit → "Jízda zaznamenána" + checklist updates → navigate away + back → state persists. Cross-promo CTA on HomeScreen when theory mastery ≥ 70%.
 
+## Explanations from the law (ad fontes)
+`data/explanations.json` explains every official question: `why` + `sources` quoting the law
+verbatim (`law`, `ref`, `anchor`, `quote`), optional `flag` (official answer older than current
+law/practice) and `sign` plate for sign questions. The law texts it quotes are in `data/law/*.json`
+(built by `data/law/extract.py` from zakonyprolidi.cz; refresh steps in its header).
+`src/domain/explanations.test.ts` fails if a question lacks an explanation or any quote is not
+verbatim in the cited paragraph or sign row. After a bank or law update: refresh `data/law`, run
+`npm test`, re-explain the questions it names (written in a Claude Code session — no API calls).
+
 ## Release (the finish line — produces a storefront link)
 - **Web** → GitHub Pages at `autoskola.dravec.org`. The `deploy` job in `.github/workflows/ci.yml`
   auto-deploys on every push to `main` (after the test/build gate). Build reads platform env

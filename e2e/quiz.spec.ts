@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test'
+import { answerFromMemory } from './answers'
 
 // Persona journey: Tereza (18) is preparing for the driving-theory test.
 // Montessori flow: she picks a topic freely from day 1, answers, gets
@@ -28,9 +29,12 @@ test('daily set from home: finishable, with completion + streak', async ({ page 
   await page.getByRole('button', { name: /Denní dávka/ }).click()
   // a daily lesson is always exactly 10 questions
   await expect(page.getByText('01 / 10')).toBeVisible()
-  for (let i = 0; i < 10; i++) {
-    await page.locator('button[data-state="idle"]').first().click()
-    await page.getByRole('button', { name: /Další|Dokončit/ }).click()
+  // Control of error: missed questions come back until right, so answer them from what the
+  // app revealed the first time.
+  const known = new Map<string, number>()
+  for (let step = 0; step < 60 && !(await page.getByText('Lekce dokončena').isVisible()); step++) {
+    await answerFromMemory(page, known)
+    await page.getByRole('button', { name: /Další|Dokončit|Opravit chyby/ }).click()
   }
   await expect(page.getByText('Lekce dokončena')).toBeVisible()
   await expect(page.getByText(/den.*v řadě|dní.*v řadě/)).toBeVisible()

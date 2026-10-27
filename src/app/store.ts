@@ -42,6 +42,9 @@ export interface AppState {
   session: SessionState | null
   examResult: ExamResult | null
   examEndsAt: number | null
+  /** Second attempts at a set's missed questions (control of error). `first` keeps the
+   * first-attempt round, which the results score; `missed` is how many it had. */
+  correction: { first: SessionState; missed: number; today?: string } | null
   progress: ProgressData
   selectedCategories: Set<CategoryName>
   search: string
@@ -55,6 +58,7 @@ export function initialState(): AppState {
     session: null,
     examResult: null,
     examEndsAt: null,
+    correction: null,
     progress: emptyProgress(),
     selectedCategories: new Set(),
     search: '',
@@ -125,6 +129,7 @@ function begin(state: AppState, mode: Mode, questions: SessionState): AppState {
     mode,
     session: questions,
     examResult: null,
+    correction: null,
     view: mode === 'exam' ? 'exam' : 'quiz',
   }
 }
@@ -183,7 +188,8 @@ export function reducer(state: AppState, action: Action): AppState {
       return {
         ...state,
         session,
-        progress: recordAnswer(state.progress, id, correct, action.now),
+        // A second attempt right after the explanation is practice, not evidence of mastery.
+        progress: state.correction ? state.progress : recordAnswer(state.progress, id, correct, action.now),
       }
     }
 
@@ -191,17 +197,31 @@ export function reducer(state: AppState, action: Action): AppState {
       if (!state.session) return state
       const session = advance(state.session)
       if (isFinished(session)) {
+        // Control of error: outside the exam, a set isn't over while one of its answers is wrong.
+        const missed = session.questions.filter((q) => session.chosen[q.id] !== q.correct)
+        if (state.mode !== 'exam' && missed.length) {
+          return {
+            ...state,
+            session: createSession(missed),
+            correction: {
+              first: state.correction?.first ?? session,
+              missed: state.correction?.missed ?? missed.length,
+              // The day the set was played, for the lesson streak, even if corrections run late.
+              today: state.correction?.today ?? action.today,
+            },
+          }
+        }
         return {
           ...state,
-          session,
+          session: state.correction?.first ?? session,
           view: 'results',
           examResult: state.mode === 'exam' ? evaluateExam(session) : null,
           // L1: also clear examEndsAt when the exam ends via question-by-question
           // navigation (finishExam and goMenu already clear it; this path did not).
           examEndsAt: null,
           progress:
-            state.mode === 'lesson' && action.today
-              ? recordLessonComplete(state.progress, action.today)
+            state.mode === 'lesson' && (state.correction?.today ?? action.today)
+              ? recordLessonComplete(state.progress, (state.correction?.today ?? action.today)!)
               : state.progress,
         }
       }
@@ -224,6 +244,7 @@ export function reducer(state: AppState, action: Action): AppState {
     case 'goMenu':
       return {
         ...state,
+        correction: null,
         view: 'home',
         mode: null,
         session: null,

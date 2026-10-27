@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import type { Choice, Question } from '@/domain/types'
 import { imageUrl } from '@/lib/assets'
+import { sourceLabel, sourceUrl, type Explanation, type LawSource } from '@/domain/explanations'
 
 export interface QuestionCardProps {
   question: Question
@@ -14,6 +15,11 @@ export interface QuestionCardProps {
   onAnswer: (choice: Choice) => void
   onNext: () => void
   onToggleBookmark: () => void
+  /** Why the official answer is right, from the law; shown after answering outside the exam. */
+  explanation?: Explanation | null
+  onSourceOpen?: (source: LawSource) => void
+  /** The set has errors to put right after this question (control of error). */
+  willCorrect?: boolean
 }
 
 const ALL_OPTIONS: Choice[] = ['a', 'b', 'c']
@@ -73,6 +79,9 @@ export function QuestionCard({
   onAnswer,
   onNext,
   onToggleBookmark,
+  explanation,
+  onSourceOpen,
+  willCorrect,
 }: QuestionCardProps) {
   const answered = chosen !== undefined
   const isCorrect = answered && chosen === question.correct
@@ -171,6 +180,13 @@ export function QuestionCard({
             : 'Animace nedostupná, zobrazen náhled situace.'}
         </p>
       )}
+      {answered && reveal && explanation?.sign && (
+        /* Orbis Pictus: the picture with its number and name, once the learner has answered. */
+        <p className="-mt-3 mb-4 flex items-baseline gap-2 text-sm">
+          <span className="shrink-0 whitespace-nowrap font-mono text-xs text-terra-300">{explanation.sign.code}</span>
+          <span className="text-sand-300">{explanation.sign.name}</span>
+        </p>
+      )}
 
       <h2 className="mb-5 text-balance text-xl font-semibold leading-relaxed text-sand-50">
         {question.q}
@@ -222,6 +238,36 @@ export function QuestionCard({
         </p>
       )}
 
+      {answered && reveal && explanation && (
+        /* Set like a statute book: the reasoning, then the law quoted with its paragraph. */
+        <section aria-labelledby="proc" aria-live="polite" className="mt-5 border-l-2 border-sand-600 pl-4">
+          <h3 id="proc" className="mb-1 font-mono text-[0.7rem] uppercase tracking-[0.15em] text-sand-500">Proč</h3>
+          <p className="leading-relaxed text-sand-200">{explanation.why}</p>
+          {explanation.flag && (
+            <p className="mt-2 text-sm leading-relaxed text-terra-300">
+              Pozor, oficiální odpověď je starší než dnešní stav: {explanation.flag}
+            </p>
+          )}
+          {explanation.sources.map((s) => (
+            <figure key={s.anchor + s.quote} className="mt-3">
+              <blockquote className="italic leading-relaxed text-sand-300">„{s.quote}“</blockquote>
+              <figcaption className="mt-1">
+                <a
+                  href={sourceUrl(s)}
+                  target="_blank"
+                  rel="noopener"
+                  onClick={() => onSourceOpen?.(s)}
+                  className="inline-block min-h-11 py-3 font-mono text-xs text-terra-400 underline-offset-2 hover:underline"
+                >
+                  {sourceLabel(s)}
+                  <span className="sr-only"> (otevře se v novém okně)</span>
+                </a>
+              </figcaption>
+            </figure>
+          ))}
+        </section>
+      )}
+
       {answered && (
         <footer
           className="sticky bottom-0 z-10 -mx-4 mt-5 flex items-center justify-between gap-3 border-t border-sand-700 bg-sand-950/95 px-4 py-3 backdrop-blur sm:rounded-card sm:border"
@@ -235,7 +281,7 @@ export function QuestionCard({
             >
               {isCorrect
                 ? 'Správně.'
-                : 'Nesprávně — zapamatujte si správnou odpověď výše.'}
+                : 'Nesprávně. Otázka se vrátí na konci sady.'}
             </p>
           ) : (
             <span className="text-sm text-sand-400">Uloženo</span>
@@ -245,7 +291,7 @@ export function QuestionCard({
             onClick={onNext}
             className="glow-terra inline-flex shrink-0 items-center gap-2 rounded-card bg-terra-500 px-5 py-2.5 font-display font-semibold text-sand-950 transition-colors hover:bg-terra-400"
           >
-            <span>{index + 1 === total ? 'Dokončit' : 'Další'}</span>
+            <span>{index + 1 === total ? (willCorrect ? 'Opravit chyby' : 'Dokončit') : 'Další'}</span>
             <kbd className="flex h-5 min-w-5 items-center justify-center rounded-[2px] border border-sand-950/30 px-1 font-mono text-xs leading-none">
               ↵
             </kbd>

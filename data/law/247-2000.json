@@ -1,0 +1,2580 @@
+{
+ "code": "247/2000 Sb.",
+ "fragments": [
+  {
+   "ref": "§ 1 odst. 1",
+   "anchor": "p1-1",
+   "text": "Tento zákon zapracovává příslušné předpisy Evropské unie a upravuje"
+  },
+  {
+   "ref": "§ 1 odst. 1 písm. a)",
+   "anchor": "p1-1-a",
+   "text": "a) podmínky pro provozování autoškol,"
+  },
+  {
+   "ref": "§ 1 odst. 1 písm. b)",
+   "anchor": "p1-1-b",
+   "text": "b) způsob provádění výuky a výcviku žadatelů o získání odborné způsobilosti k řízení motorového vozidla (dále jen \"získání řidičského oprávnění\") a práva a povinnosti žadatelů o získání řidičského oprávnění,"
+  },
+  {
+   "ref": "§ 1 odst. 1 písm. c)",
+   "anchor": "p1-1-c",
+   "text": "c) práva a povinnosti provozovatelů a učitelů autoškol,"
+  },
+  {
+   "ref": "§ 1 odst. 1 písm. d)",
+   "anchor": "p1-1-d",
+   "text": "d) podmínky pro udělování a odnímání osvědčení pro učitele výuky a výcviku (dále jen \"profesní osvědčení\") a průkazu zkušebního komisaře,"
+  },
+  {
+   "ref": "§ 1 odst. 1 písm. e)",
+   "anchor": "p1-1-e",
+   "text": "e) způsob provádění zkoušek k získání řidičského oprávnění,"
+  },
+  {
+   "ref": "§ 1 odst. 1 písm. f)",
+   "anchor": "p1-1-f",
+   "text": "f) způsob provádění výuky a výcviku řidičů v rámci zdokonalování odborné způsobilosti řidičů,"
+  },
+  {
+   "ref": "§ 1 odst. 1 písm. g)",
+   "anchor": "p1-1-g",
+   "text": "g) požadavky na fyzickou nebo právnickou osobu, která provádí výuku a výcvik v rámci zdokonalování odborné způsobilosti řidičů, a její práva a povinnosti,"
+  },
+  {
+   "ref": "§ 1 odst. 1 písm. h)",
+   "anchor": "p1-1-h",
+   "text": "h) vydávání průkazu profesní způsobilosti řidiče,"
+  },
+  {
+   "ref": "§ 1 odst. 1 písm. i)",
+   "anchor": "p1-1-i",
+   "text": "i) přezkoušení z odborné způsobilosti k řízení motorových vozidel v bodovém hodnocení,"
+  },
+  {
+   "ref": "§ 1 odst. 1 písm. j)",
+   "anchor": "p1-1-j",
+   "text": "j) působnost správních úřadů a státní dozor."
+  },
+  {
+   "ref": "§ 2 odst. 1",
+   "anchor": "p2-1",
+   "text": "(1) Provozováním autoškoly se rozumí poskytování výuky a výcviku k získání řidičského oprávnění. Provozovat autoškolu může právnická nebo fyzická osoba na základě živnostenského oprávnění vydaného podle zvláštního zákona a registrace k provozování autoškoly. Registraci k provozování autoškoly vydává obecní úřad obce s rozšířenou působností. Příslušný je obecní úřad obce s rozšířenou působností, podle místa provozovny žadatele. Provozovatelem autoškoly může být i organizační složka státu, která zajišťuje obranu a bezpečnost státu, (dále jen \"organizační složka státu\"). Organizační složka státu může provádět výuku a výcvik k získání řidičského oprávnění a zdokonalování odborné způsobilosti pouze svých zaměstnanců a osob ve služebním poměru nebo zaměstnanců a osob ve služebním poměru jiných organizačních složek státu zajišťujících obranu a bezpečnost státu, pokud jiný právní předpis nestanoví jinak."
+  },
+  {
+   "ref": "§ 2 odst. 2",
+   "anchor": "p2-2",
+   "text": "(2) Obecní úřad obce s rozšířenou působností vydá registraci k provozování autoškoly na základě písemné žádosti, prokáže-li žadatel, že"
+  },
+  {
+   "ref": "§ 2 odst. 2 písm. a)",
+   "anchor": "p2-2-a",
+   "text": "a) je držitelem příslušného živnostenského oprávnění, nebo v případě, kdy žadatelem je organizační složka státu, je držitelem zřizovací listiny, ze které vyplývá, že provádí výuku a výcvik k získání oprávnění k řízení vozidel,"
+  },
+  {
+   "ref": "§ 2 odst. 2 písm. b)",
+   "anchor": "p2-2-b",
+   "text": "b) splnil technické podmínky pro provozování autoškoly podle tohoto zákona."
+  },
+  {
+   "ref": "§ 2 odst. 3",
+   "anchor": "p2-3",
+   "text": "(3) Při splnění těchto podmínek má žadatel nárok na vydání registrace k provozování autoškoly."
+  },
+  {
+   "ref": "§ 2 odst. 4",
+   "anchor": "p2-4",
+   "text": "(4) Obecní úřad obce s rozšířenou působností rozhodne o registraci k provozování autoškoly ve lhůtě 60 dnů."
+  },
+  {
+   "ref": "§ 3 odst. 1",
+   "anchor": "p3-1",
+   "text": "(1) Žádost o vydání registrace k provozování autoškoly musí obsahovat"
+  },
+  {
+   "ref": "§ 3 odst. 1 písm. a)",
+   "anchor": "p3-1-a",
+   "text": "a) obchodní firmu, sídlo a právní formu právnické osoby a její identifikační číslo osoby (dále jen „identifikační číslo“), je-li žadatelem právnická osoba, nebo jméno, popřípadě jména (dále jen „jméno“), příjmení a trvalý pobyt, identifikační číslo, obchodní firmu a datum narození fyzické osoby, je-li žadatelem fyzická osoba,"
+  },
+  {
+   "ref": "§ 3 odst. 1 písm. b)",
+   "anchor": "p3-1-b",
+   "text": "b) rozsah poskytované výuky a výcviku,"
+  },
+  {
+   "ref": "§ 3 odst. 1 písm. c)",
+   "anchor": "p3-1-c",
+   "text": "c) jméno, příjmení, trvalý pobyt a datum narození fyzických osob, které budou zajišťovat výuku a výcvik,"
+  },
+  {
+   "ref": "§ 3 odst. 1 písm. d)",
+   "anchor": "p3-1-d",
+   "text": "d) jméno, příjmení, trvalý pobyt a datum narození fyzických osob, které budou zajišťovat zdravotnickou přípravu,"
+  },
+  {
+   "ref": "§ 3 odst. 1 písm. e)",
+   "anchor": "p3-1-e",
+   "text": "e) způsob zajištění výcvikových vozidel,"
+  },
+  {
+   "ref": "§ 3 odst. 1 písm. f)",
+   "anchor": "p3-1-f",
+   "text": "f) popis a umístění autocvičiště nebo jiné cvičné plochy s vyloučením provozu jiných vozidel (dále jen \"cvičná plocha\") nebo řidičského trenažéru a adresu a označení výukových a učebních prostor."
+  },
+  {
+   "ref": "§ 3 odst. 2",
+   "anchor": "p3-2",
+   "text": "(2) Žádost o vydání registrace k provozování autoškoly musí být doložena"
+  },
+  {
+   "ref": "§ 3 odst. 2 písm. a)",
+   "anchor": "p3-2-a",
+   "text": "a) dokladem osvědčujícím právní vztah žadatele k autocvičišti nebo k cvičné ploše nebo k řidičskému trenažéru, k výukovým a učebním prostorám a k výcvikovým vozidlům,"
+  },
+  {
+   "ref": "§ 3 odst. 2 písm. b)",
+   "anchor": "p3-2-b",
+   "text": "b) platnými profesními osvědčeními osob, které budou provádět výuku a výcvik k získání řidičského oprávnění,"
+  },
+  {
+   "ref": "§ 3 odst. 2 písm. c)",
+   "anchor": "p3-2-c",
+   "text": "c) živnostenským listem nebo v případě, kdy žadatelem je organizační složka státu, zřizovací listinou."
+  },
+  {
+   "ref": "§ 3 odst. 3",
+   "anchor": "p3-3",
+   "text": "(3) Doklady uvedené v odstavci 2 předkládá žadatel v ověřených kopiích nebo originálech k nahlédnutí."
+  },
+  {
+   "ref": "§ 4 odst. 1",
+   "anchor": "p4-1",
+   "text": "(1) V rozhodnutí o vydání registrace k provozování autoškoly obecní úřad obce s rozšířenou působností uvede"
+  },
+  {
+   "ref": "§ 4 odst. 1 písm. a)",
+   "anchor": "p4-1-a",
+   "text": "a) obchodní firmu, včetně právní formy, sídlo a identifikační číslo, jedná-li se o právnickou osobu, nebo jméno a příjmení provozovatele autoškoly, datum narození, identifikační číslo, obchodní jméno a jeho trvalý pobyt; je-li ustanoven odpovědný zástupce, též údaje týkající se jeho osoby,"
+  },
+  {
+   "ref": "§ 4 odst. 1 písm. b)",
+   "anchor": "p4-1-b",
+   "text": "b) označení výukových a učebních prostor,"
+  },
+  {
+   "ref": "§ 4 odst. 1 písm. c)",
+   "anchor": "p4-1-c",
+   "text": "c) rozsah poskytované výuky a výcviku,"
+  },
+  {
+   "ref": "§ 4 odst. 1 písm. d)",
+   "anchor": "p4-1-d",
+   "text": "d) lhůtu pro zahájení provozování autoškoly,"
+  },
+  {
+   "ref": "§ 4 odst. 1 písm. e)",
+   "anchor": "p4-1-e",
+   "text": "e) technické podmínky provozování autoškoly."
+  },
+  {
+   "ref": "§ 4 odst. 2",
+   "anchor": "p4-2",
+   "text": "(2) Byla-li žádost zamítnuta, obecní úřad obce s rozšířenou působností uvede v rozhodnutí důvody, pro které nebyla vydána registrace k provozování autoškoly."
+  },
+  {
+   "ref": "§ 4 odst. 3",
+   "anchor": "p4-3",
+   "text": "(3) Oprávnění k provozování autoškoly vzniká též marným uplynutím lhůty a způsobem podle § 28 až 30 zákona o volném pohybu služeb."
+  },
+  {
+   "ref": "§ 5 odst. 1",
+   "anchor": "p5-1",
+   "text": "(1) Provozovatel autoškoly je povinen oznámit obecnímu úřadu obce s rozšířenou působností všechny změny týkající se údajů a dokladů, které jsou stanoveny jako náležitosti žádosti vydání registrace k provozování autoškoly podle § 3, a předložit o nich doklady do 15 dnů od vzniku změn."
+  },
+  {
+   "ref": "§ 5 odst. 2",
+   "anchor": "p5-2",
+   "text": "(2) Obecní úřad obce s rozšířenou působností na základě oznámených změn podle odstavce 1 rozhodne o změně údajů uvedených v rozhodnutí. Obecní úřad obce s rozšířenou působností vydá novou registrační listinu, jedná-li se o změny údajů uvedených v § 4 odst. 1 písm. a) až c)."
+  },
+  {
+   "ref": "§ 6 odst. 1",
+   "anchor": "p6-1",
+   "text": "(1) Obecní úřad obce s rozšířenou působností rozhodne ve věci odnětí registrace k provozování autoškoly, jestliže provozovatel autoškoly"
+  },
+  {
+   "ref": "§ 6 odst. 1 písm. a)",
+   "anchor": "p6-1-a",
+   "text": "a) opakovaně nebo hrubým způsobem porušil povinnosti stanovené tímto zákonem nebo na jeho základě,"
+  },
+  {
+   "ref": "§ 6 odst. 1 písm. b)",
+   "anchor": "p6-1-b",
+   "text": "b) neplní podmínky stanovené v registraci k provozování autoškoly,"
+  },
+  {
+   "ref": "§ 6 odst. 1 písm. c)",
+   "anchor": "p6-1-c",
+   "text": "c) přestal splňoval podmínky stanovené v § 2 odst. 2,"
+  },
+  {
+   "ref": "§ 6 odst. 1 písm. d)",
+   "anchor": "p6-1-d",
+   "text": "d) požádal o odnětí registrace k provozování autoškoly."
+  },
+  {
+   "ref": "§ 6 odst. 2",
+   "anchor": "p6-2",
+   "text": "(2) O registraci k provozování autoškoly může provozovatel, kterému byla registrace k provozování autoškoly odejmuta podle odstavce 1 písm. a) nebo b), znovu požádat obecní úřad obce s rozšířenou působností nejdříve po uplynutí 3 let od rozhodnutí o odnětí registrace k provozování autoškoly."
+  },
+  {
+   "ref": "§ 7 odst. 1",
+   "anchor": "p7-1",
+   "text": "Registrace k provozování autoškoly pozbývá platnosti"
+  },
+  {
+   "ref": "§ 7 odst. 1 písm. a)",
+   "anchor": "p7-1-a",
+   "text": "a) dnem zániku právnické osoby, která je držitelem registrace k provozování autoškoly,"
+  },
+  {
+   "ref": "§ 7 odst. 1 písm. b)",
+   "anchor": "p7-1-b",
+   "text": "b) dnem zániku živnostenského oprávnění v případě úmrtí fyzické osoby, která je držitelem registrace k provozování autoškoly,"
+  },
+  {
+   "ref": "§ 7 odst. 1 písm. c)",
+   "anchor": "p7-1-c",
+   "text": "c) dnem, kdy rozhodnutí obecního úřadu obce s rozšířenou působností o odnětí registrace k provozování autoškoly nabylo právní moci."
+  },
+  {
+   "ref": "§ 8 odst. 1",
+   "anchor": "p8-1",
+   "text": "(1) Technickými podmínkami provozování autoškoly se rozumí"
+  },
+  {
+   "ref": "§ 8 odst. 1 písm. a)",
+   "anchor": "p8-1-a",
+   "text": "a) autocvičiště nebo cvičná plocha nebo řidičský trenažér,"
+  },
+  {
+   "ref": "§ 8 odst. 1 písm. b)",
+   "anchor": "p8-1-b",
+   "text": "b) prostory pro výuku a výcvik,"
+  },
+  {
+   "ref": "§ 8 odst. 1 písm. c)",
+   "anchor": "p8-1-c",
+   "text": "c) učební pomůcky,"
+  },
+  {
+   "ref": "§ 8 odst. 1 písm. d)",
+   "anchor": "p8-1-d",
+   "text": "d) výcvikové vozidlo."
+  },
+  {
+   "ref": "§ 8 odst. 2",
+   "anchor": "p8-2",
+   "text": "(2) Technické podmínky pro autocvičiště, cvičné plochy a učební pomůcky pro výuku praktické údržby jsou uvedeny v příloze č. 1."
+  },
+  {
+   "ref": "§ 8a odst. 1",
+   "anchor": "p8a-1",
+   "text": "(1) Jako výukové a učební prostory lze použít pouze nebytový prostor splňující podmínky pro provozovnu podle zvláštního právního předpisu."
+  },
+  {
+   "ref": "§ 8a odst. 2",
+   "anchor": "p8a-2",
+   "text": "(2) Provozovatel autoškoly musí mít po celou dobu provozování autoškoly právo k užívání výukových a učebních prostor a musí mít tyto prostory po celou dobu k dispozici."
+  },
+  {
+   "ref": "§ 9 odst. 1",
+   "anchor": "p9-1",
+   "text": "(1) V autoškole lze při výuce a výcviku k získání řidičského oprávnění provozovat výcvikové vozidlo,"
+  },
+  {
+   "ref": "§ 9 odst. 1 písm. a)",
+   "anchor": "p9-1-a",
+   "text": "a) které svojí konstrukcí a technickým stavem odpovídá požadavkům stanoveným zvláštním právním předpisem,"
+  },
+  {
+   "ref": "§ 9 odst. 1 písm. b)",
+   "anchor": "p9-1-b",
+   "text": "b) které je vybaveno dvojím zařízením schváleného provedení podle zvláštního právního předpisu umožňujícím ovládání spojky a provozní brzdy vozidla, popřípadě akcelerátoru; u vozidla s automatickou převodovkou postačí dvojí zařízení pro ovládání provozní brzdy vozidla; jedná-li se o traktor, musí být v jeho kabině navíc umístěno další sedadlo pro učitele výcviku, jehož umístění a provedení musí být schváleno podle zvláštního právního předpisu, jedná-li se o motocykl, musí být kromě dvojího zařízení umožňujícího ovládání spojky a provozní brzdy vybaven dvojím řízením schváleného provedení podle zvláštního právního předpisu, nebo elektronickým zařízením umožňujícím komunikaci učitele s žákem a ovládání zapalování motocyklu,"
+  },
+  {
+   "ref": "§ 9 odst. 1 písm. c)",
+   "anchor": "p9-1-c",
+   "text": "c) které je vybaveno doplňkovým vnitřním zrcátkem, pokud je pro daný typ vozidla předepsáno,"
+  },
+  {
+   "ref": "§ 9 odst. 1 písm. d)",
+   "anchor": "p9-1-d",
+   "text": "d) které bylo pro účely výuky a výcviku schváleno obecním úřadem obce s rozšířenou působností."
+  },
+  {
+   "ref": "§ 9 odst. 2",
+   "anchor": "p9-2",
+   "text": "(2) Druhy výcvikových vozidel pro výuku, výcvik a zkoušku z odborné způsobilosti k řízení motorových vozidel pro příslušnou skupinu motorových vozidel podle zvláštního právního předpisu (dále jen „skupina vozidel“) a technické požadavky na výcviková vozidla jsou uvedeny v příloze č. 2 k tomuto zákonu."
+  },
+  {
+   "ref": "§ 9 odst. 3",
+   "anchor": "p9-3",
+   "text": "(3) V autoškole lze použít jako výcvikové vozidlo vozidlo konstrukčně přizpůsobené tělesně postižené osobě, které není výcvikovým vozidlem."
+  },
+  {
+   "ref": "§ 9 odst. 4",
+   "anchor": "p9-4",
+   "text": "(4) Stanoví-li tak tento zákon, lze jako výcvikové vozidlo použít motocykl, který nesplňuje podmínky podle odstavce 1 písm. b)."
+  },
+  {
+   "ref": "§ 10 odst. 1",
+   "anchor": "p10-1",
+   "text": "(1) Výcvikové vozidlo schvaluje pro jeho použití k výcviku v autoškole úřad příslušný pro registraci silničního motorového vozidla podle zvláštního zákona. Úřad schválí výcvikové vozidlo na základě písemné žádosti provozovatele vozidla."
+  },
+  {
+   "ref": "§ 10 odst. 2",
+   "anchor": "p10-2",
+   "text": "(2) Žádost musí obsahovat"
+  },
+  {
+   "ref": "§ 10 odst. 2 písm. a)",
+   "anchor": "p10-2-a",
+   "text": "a) obchodní firmu, sídlo a právní formu právnické osoby a její identifikační číslo, je-li žadatelem právnická osoba, nebo jméno, příjmení, trvalý pobyt a datum narození fyzické osoby, je-li žadatelem fyzická osoba,"
+  },
+  {
+   "ref": "§ 10 odst. 2 písm. b)",
+   "anchor": "p10-2-b",
+   "text": "b) tovární značku vozidla,"
+  },
+  {
+   "ref": "§ 10 odst. 2 písm. c)",
+   "anchor": "p10-2-c",
+   "text": "c) rok výroby vozidla,"
+  },
+  {
+   "ref": "§ 10 odst. 2 písm. d)",
+   "anchor": "p10-2-d",
+   "text": "d) registrační značku vozidla."
+  },
+  {
+   "ref": "§ 10 odst. 3",
+   "anchor": "p10-3",
+   "text": "(3) Žádost musí být doložena"
+  },
+  {
+   "ref": "§ 10 odst. 3 písm. a)",
+   "anchor": "p10-3-a",
+   "text": "a) písemným souhlasem vlastníka vozidla, není-li vlastník žadatelem,"
+  },
+  {
+   "ref": "§ 10 odst. 3 písm. b)",
+   "anchor": "p10-3-b",
+   "text": "b) doklady osvědčující změnu zapisovaných údajů."
+  },
+  {
+   "ref": "§ 10 odst. 4",
+   "anchor": "p10-4",
+   "text": "(4) Úřad po schválení vozidla k výcviku provede úřední záznam do registru silničních vozidel s textem \"Schváleno jako výcvikové vozidlo\", vydá nové osvědčení o registraci silničního motorového a přípojného vozidla, ve kterém zaznamená změnu užívání vozidla do části \"Jiné záznamy\" a na tabulku státní poznávací značky vozidla vyznačí nálepkou termín příští pravidelné technické prohlídky a měření emisí."
+  },
+  {
+   "ref": "§ 10 odst. 5",
+   "anchor": "p10-5",
+   "text": "(5) Provozovatel vozidla je povinen před vyřazením výcvikového vozidla z výcviku písemně oznámit příslušnému úřadu změnu užívání vozidla. Oznámení musí být doloženo písemným souhlasem vlastníka vozidla, není-li vlastník žadatelem."
+  },
+  {
+   "ref": "§ 10 odst. 6",
+   "anchor": "p10-6",
+   "text": "(6) Při vyřazení vozidla z výcviku vyznačí úřad změnu užívání vozidla způsobem uvedeným v odstavci 4."
+  },
+  {
+   "ref": "§ 11 odst. 1",
+   "anchor": "p11-1",
+   "text": "(1) Výcvikové vozidlo s výjimkou motocyklu a osádka motocyklu musí být při výcviku v řízení vozidla a při závěrečné zkoušce řádně označeny. Označení výcvikového vozidla musí být umístěno na vozidle tak, aby bylo viditelné ostatními účastníky provozu vozidel na pozemních komunikacích ze všech stran a u osádky motocyklu zepředu a zezadu na vzdálenost nejméně 50 metrů."
+  },
+  {
+   "ref": "§ 11 odst. 2",
+   "anchor": "p11-2",
+   "text": "(2) Způsob označení výcvikového vozidla podle druhů výcvikových vozidel, způsob označení osádky motocyklu a materiál, ze kterého musí být označení vyrobeno, stanoví prováděcí předpis."
+  },
+  {
+   "ref": "§ 12 odst. 1",
+   "anchor": "p12-1",
+   "text": "Řidič výcvikového vozidla v době, kdy využívá výcvikové vozidlo pro vlastní potřeby, musí sejmout nebo zakrýt neprůhledným krytem označení výcvikového vozidla."
+  },
+  {
+   "ref": "§ 13 odst. 1",
+   "anchor": "p13-1",
+   "text": "(1) Výuku a výcvik k získání řidičského oprávnění může provádět výlučně provozovatel autoškoly. Provozovatel autoškoly přijme k výuce a výcviku k získání řidičského oprávnění osobu, která"
+  },
+  {
+   "ref": "§ 13 odst. 1 písm. a)",
+   "anchor": "p13-1-a",
+   "text": "a) podá písemnou žádost; pokud je žadatel mladší 15 let musí být žádost doložena písemným souhlasem jeho zákonného zástupce, jehož podpis byl ověřen příslušným orgánem,"
+  },
+  {
+   "ref": "§ 13 odst. 1 písm. b)",
+   "anchor": "p13-1-b",
+   "text": "b) ke dni ukončení výuky a výcviku dosáhne věku předepsaného pro udělení řidičského oprávnění příslušné skupiny podle zvláštního zákona, přičemž od zahájení výuky a výcviku k jejich ukončení nesmí uplynout doba delší než 18 měsíců,"
+  },
+  {
+   "ref": "§ 13 odst. 1 písm. c)",
+   "anchor": "p13-1-c",
+   "text": "c) není nezpůsobilá k právním úkonům,"
+  },
+  {
+   "ref": "§ 13 odst. 1 písm. d)",
+   "anchor": "p13-1-d",
+   "text": "d) je zdravotně způsobilá k řízení motorového vozidla podle zvláštního zákona,"
+  },
+  {
+   "ref": "§ 13 odst. 1 písm. e)",
+   "anchor": "p13-1-e",
+   "text": "e) splní další podmínky, pokud je pro získání řidičského oprávnění vyžaduje zvláštní zákon,"
+  },
+  {
+   "ref": "§ 13 odst. 1 písm. f)",
+   "anchor": "p13-1-f",
+   "text": "f) není ve výkonu správního trestu nebo trestu zákazu činnosti spočívajícího v zákazu řízení motorových vozidel."
+  },
+  {
+   "ref": "§ 13 odst. 2",
+   "anchor": "p13-2",
+   "text": "(2) Žáci školy, které byla vydána registrace k provozování autoškoly, u nichž je získání řidičského oprávnění kvalifikační předpoklad výkonu povolání, na které se žáci ve škole připravují, nebo pro něž je řízení motorových vozidel volitelným (nevolitelným) předmětem, mohou být zařazeni do výuky a výcviku nejdříve 2 roky před dosažením předepsaného věku pro udělení řidičského oprávnění pro příslušnou skupinu vozidel. Zkoušku odborné způsobilosti mohou pak složit po ukončení výuky a výcviku, a to i před dosažením předepsaného věku s tím, že řidičské oprávnění jim bude vydáno po jeho dosažení. Uvedené školy pak mohou výuku a výcvik provádět jako sdruženou ve smyslu § 16 odst. 1, přičemž při kombinaci skupin vozidel uvedených v § 15 odst. 1 lze přidružit i skupinu C nebo C1."
+  },
+  {
+   "ref": "§ 13 odst. 3",
+   "anchor": "p13-3",
+   "text": "(3) Žádost o přijetí k výuce a výcviku obsahuje"
+  },
+  {
+   "ref": "§ 13 odst. 3 písm. a)",
+   "anchor": "p13-3-a",
+   "text": "a) jméno, popřípadě jména a příjmení žadatele,"
+  },
+  {
+   "ref": "§ 13 odst. 3 písm. b)",
+   "anchor": "p13-3-b",
+   "text": "b) adresu bydliště žadatele,"
+  },
+  {
+   "ref": "§ 13 odst. 3 písm. c)",
+   "anchor": "p13-3-c",
+   "text": "c) datum narození žadatele,"
+  },
+  {
+   "ref": "§ 13 odst. 3 písm. d)",
+   "anchor": "p13-3-d",
+   "text": "d) skupinu vozidel, pro kterou již je žadatel držitelem řidičského oprávnění,"
+  },
+  {
+   "ref": "§ 13 odst. 3 písm. e)",
+   "anchor": "p13-3-e",
+   "text": "e) skupinu vozidel, pro kterou žadatel žádá o přijetí k výuce a výcviku."
+  },
+  {
+   "ref": "§ 13 odst. 4",
+   "anchor": "p13-4",
+   "text": "(4) K žádosti o přijetí k výuce a výcviku žadatel přikládá doklad o své zdravotní způsobilosti k řízení motorových vozidel, který ke dni podání žádosti nesmí být starší více než 3 měsíce."
+  },
+  {
+   "ref": "§ 13 odst. 5",
+   "anchor": "p13-5",
+   "text": "(5) Skutečnosti uvedené v odstavci 1 písm. e) a f) dokládá žadatel čestným prohlášením."
+  },
+  {
+   "ref": "§ 13 odst. 6",
+   "anchor": "p13-6",
+   "text": "(6) Vzor žádosti o přijetí k výuce a výcviku stanoví prováděcí předpis."
+  },
+  {
+   "ref": "§ 14 odst. 1",
+   "anchor": "p14-1",
+   "text": "(1) Provozovatel autoškoly je oprávněn poskytovat v rozsahu stanoveném v registraci k provozování autoškoly tyto druhy výuky a výcviku:"
+  },
+  {
+   "ref": "§ 14 odst. 1 písm. a)",
+   "anchor": "p14-1-a",
+   "text": "a) základní výuku a výcvik,"
+  },
+  {
+   "ref": "§ 14 odst. 1 písm. b)",
+   "anchor": "p14-1-b",
+   "text": "b) sdruženou výuku a výcvik,"
+  },
+  {
+   "ref": "§ 14 odst. 1 písm. c)",
+   "anchor": "p14-1-c",
+   "text": "c) rozšiřující výuku a výcvik,"
+  },
+  {
+   "ref": "§ 14 odst. 1 písm. d)",
+   "anchor": "p14-1-d",
+   "text": "d) výuku a výcvik podle individuálního studijního plánu,"
+  },
+  {
+   "ref": "§ 14 odst. 1 písm. e)",
+   "anchor": "p14-1-e",
+   "text": "e) doplňovací výuku a výcvik."
+  },
+  {
+   "ref": "§ 14 odst. 2",
+   "anchor": "p14-2",
+   "text": "(2) Provozovatel autoškoly dbá, aby žadatel o řidičské oprávnění získal výukou a výcvikem teoretické znalosti a praktické dovednosti tak, aby byl schopen"
+  },
+  {
+   "ref": "§ 14 odst. 2 písm. a)",
+   "anchor": "p14-2-a",
+   "text": "a) řídit vozidlo v souladu s předpisy o provozu na pozemních komunikacích,"
+  },
+  {
+   "ref": "§ 14 odst. 2 písm. b)",
+   "anchor": "p14-2-b",
+   "text": "b) ovládat vozidlo tak, aby nevytvářel nebezpečné situace a přiměřeně reagovat na jejich vznik,"
+  },
+  {
+   "ref": "§ 14 odst. 2 písm. c)",
+   "anchor": "p14-2-c",
+   "text": "c) rozpoznat provozní nebezpečí a jeho závažnost a dokázat na tyto situace včas a správně reagovat,"
+  },
+  {
+   "ref": "§ 14 odst. 2 písm. d)",
+   "anchor": "p14-2-d",
+   "text": "d) rozpoznávat u vozidel technické závady, které představují ohrožení bezpečnosti,"
+  },
+  {
+   "ref": "§ 14 odst. 2 písm. e)",
+   "anchor": "p14-2-e",
+   "text": "e) reagovat na faktory ovlivňující jednání při řízení vozidla a uchovat si schopnosti potřebné pro bezpečné řízení vozidla,"
+  },
+  {
+   "ref": "§ 14 odst. 2 písm. f)",
+   "anchor": "p14-2-f",
+   "text": "f) poskytovat účinnou první pomoc zraněným při dopravní nehodě."
+  },
+  {
+   "ref": "§ 15 odst. 1",
+   "anchor": "p15-1",
+   "text": "(1) Základní výukou a výcvikem je příprava žadatele na získání řidičského oprávnění pro skupinu AM, A1, A2, A, B1, B nebo T."
+  },
+  {
+   "ref": "§ 15 odst. 2",
+   "anchor": "p15-2",
+   "text": "(2) Minimální počet hodin základní výuky a výcviku je uveden v příloze č. 3."
+  },
+  {
+   "ref": "§ 16 odst. 1",
+   "anchor": "p16-1",
+   "text": "(1) Sdruženou výukou a výcvikem je příprava žadatele na získání řidičského oprávnění pro kombinaci 2 nebo více skupin vozidel. Sdruženou výuku a výcvik lze provádět, pokud žadatel splní podmínky stanovené zvláštním zákonem pro jednotlivé skupiny vozidel v rámci dané kombinace sdružené výuky a výcviku."
+  },
+  {
+   "ref": "§ 16 odst. 2",
+   "anchor": "p16-2",
+   "text": "(2) Žadatel o řidičské oprávnění musí získat sdruženou výukou a výcvikem takové teoretické a praktické znalosti, jako by absolvoval výuku a výcvik pro každou skupinu vozidel v rámci dané kombinace sdružené výuky a výcviku samostatně."
+  },
+  {
+   "ref": "§ 16 odst. 3",
+   "anchor": "p16-3",
+   "text": "(3) Sdružená výuka a výcvik, kromě výcviku v řízení vozidla, se provádí v rozsahu stanoveném učební osnovou pro nejvyšší počet vyučovacích hodin u skupiny vozidel v dané kombinaci sdružené výuky a výcviku. Tento rozsah vyučovacích hodin se úměrně rozšiřuje o nezbytný počet vyučovacích hodin nutných pro výuku a výcvik tématiky specifické pro každou další skupinu vozidel v dané kombinaci sdružené výuky a výcviku."
+  },
+  {
+   "ref": "§ 16 odst. 4",
+   "anchor": "p16-4",
+   "text": "(4) Výcvik v řízení vozidla se provádí v rozsahu stanoveném pro každou skupinu vozidel v dané kombinaci sdružené výuky a výcviku."
+  },
+  {
+   "ref": "§ 17 odst. 1",
+   "anchor": "p17-1",
+   "text": "(1) Rozšiřující výuka a výcvik je příprava žadatele na rozšíření již získaného řidičského oprávnění o další skupinu vozidel. Rozšiřující výuku a výcvik nelze poskytnout žadateli, který získal řidičské oprávnění výlučně pro skupinu AM nebo skupinu T a žádá o získání řidičského oprávnění pro další skupinu vozidel."
+  },
+  {
+   "ref": "§ 17 odst. 2",
+   "anchor": "p17-2",
+   "text": "(2) V rámci rozšiřující výuky a výcviku lze provádět kombinaci rozšiřující a sdružené výuky a výcviku podle § 16."
+  },
+  {
+   "ref": "§ 17 odst. 3",
+   "anchor": "p17-3",
+   "text": "(3) Minimální počet hodin rozšiřující výuky a výcviku je uveden v příloze č. 3."
+  },
+  {
+   "ref": "§ 18 odst. 1",
+   "anchor": "p18-1",
+   "text": "(1) Výuka a výcvik podle individuálního studijního plánu je příprava žadatele na získání řidičského oprávnění pro všechny skupiny vozidel s výjimkou skupin D, D+E, D1 a D1+E."
+  },
+  {
+   "ref": "§ 18 odst. 2",
+   "anchor": "p18-2",
+   "text": "(2) Teoretickou přípravu si žadatel o řidičské oprávnění osvojí samostatným studiem a povinnými konzultacemi v rozsahu stanoveném učební osnovou."
+  },
+  {
+   "ref": "§ 18 odst. 3",
+   "anchor": "p18-3",
+   "text": "(3) Při výuce podle individuálního studijního plánu musí být provedena nejméně jedna vyučovací hodina konzultací na každé čtyři hodiny výuky stanovené učební osnovou pro danou skupinu vozidel. Ve skupině může být maximálně 5 žáků."
+  },
+  {
+   "ref": "§ 18 odst. 4",
+   "anchor": "p18-4",
+   "text": "(4) Rozsah výcviku nesmí být nižší, než je počet vyučovacích hodin stanovený učební osnovou pro danou skupinu vozidel."
+  },
+  {
+   "ref": "§ 19 odst. 1",
+   "anchor": "p19-1",
+   "text": "Doplňovací výuka a výcvik mohou být poskytnuty pouze žadateli o řidičské oprávnění, který"
+  },
+  {
+   "ref": "§ 19 odst. 1 písm. a)",
+   "anchor": "p19-1-a",
+   "text": "a) ukončil výuku a výcvik k získání řidičského oprávnění, ale řidičské oprávnění mu nebylo dosud uděleno podle zvláštního zákona, nejdéle však po dobu uvedenou v ustanovení § 39 odst. 6 tohoto zákona,"
+  },
+  {
+   "ref": "§ 19 odst. 1 písm. b)",
+   "anchor": "p19-1-b",
+   "text": "b) žádá o"
+  },
+  {
+   "ref": "§ 19 odst. 1 písm. b) bod 1",
+   "anchor": "p19-1-b-1",
+   "text": "1. rozšíření řidičského oprávnění ze skupiny A1 na skupinu A2,"
+  },
+  {
+   "ref": "§ 19 odst. 1 písm. b) bod 2",
+   "anchor": "p19-1-b-2",
+   "text": "2. rozšíření řidičského oprávnění ze skupiny A2 na skupinu A, nebo"
+  },
+  {
+   "ref": "§ 19 odst. 1 písm. b) bod 3",
+   "anchor": "p19-1-b-3",
+   "text": "3. rozšíření rozsahu řidičského oprávnění pro skupinu B na jízdní soupravy složené z vozidla skupiny B a přípojného vozidla o největší povolené hmotnosti převyšující 750 kg, jejichž největší povolená hmotnost převyšuje 3500 kg, ale nepřevyšuje 4250 kg, nebo"
+  },
+  {
+   "ref": "§ 19 odst. 1 písm. c)",
+   "anchor": "p19-1-c",
+   "text": "c) žádá o rozšíření řidičského oprávnění s omezením na vozidla vybavená automatickou převodovkou na řidičské oprávnění bez tohoto omezení."
+  },
+  {
+   "ref": "§ 20 odst. 1",
+   "anchor": "p20-1",
+   "text": "(1) Předmětem výuky a výcviku žadatelů o řidičská oprávnění je získání potřebných teoretických a praktických znalostí, dovedností a návyků k řízení motorových vozidel v provozu na pozemních komunikacích."
+  },
+  {
+   "ref": "§ 20 odst. 2",
+   "anchor": "p20-2",
+   "text": "(2) Výuka obsahuje"
+  },
+  {
+   "ref": "§ 20 odst. 2 písm. a)",
+   "anchor": "p20-2-a",
+   "text": "a) výuku předpisů o provozu vozidel,"
+  },
+  {
+   "ref": "§ 20 odst. 2 písm. b)",
+   "anchor": "p20-2-b",
+   "text": "b) výuku o ovládání a údržbě vozidla,"
+  },
+  {
+   "ref": "§ 20 odst. 2 písm. c)",
+   "anchor": "p20-2-c",
+   "text": "c) výuku teorie řízení a zásad bezpečné jízdy,"
+  },
+  {
+   "ref": "§ 20 odst. 2 písm. d)",
+   "anchor": "p20-2-d",
+   "text": "d) výuku zdravotnické přípravy."
+  },
+  {
+   "ref": "§ 20 odst. 3",
+   "anchor": "p20-3",
+   "text": "(3) Výcvik obsahuje"
+  },
+  {
+   "ref": "§ 20 odst. 3 písm. a)",
+   "anchor": "p20-3-a",
+   "text": "a) výcvik v řízení vozidla,"
+  },
+  {
+   "ref": "§ 20 odst. 3 písm. b)",
+   "anchor": "p20-3-b",
+   "text": "b) výcvik praktické údržby vozidla,"
+  },
+  {
+   "ref": "§ 20 odst. 3 písm. c)",
+   "anchor": "p20-3-c",
+   "text": "c) praktický výcvik zdravotnické přípravy."
+  },
+  {
+   "ref": "§ 20 odst. 4",
+   "anchor": "p20-4",
+   "text": "(4) Rozsah výuky a výcviku je rozdělen podle druhu výuky a výcviku a podle jednotlivých skupin vozidel, pro které se výuka a výcvik provádí."
+  },
+  {
+   "ref": "§ 20 odst. 5",
+   "anchor": "p20-5",
+   "text": "(5) Obsah a rozsah jednotlivých druhů výuky a výcviku k získání řidičských oprávnění stanoví prováděcí předpis."
+  },
+  {
+   "ref": "§ 21 odst. 1",
+   "anchor": "p21-1",
+   "text": "(1) Vyučovat jednotlivé předměty, s výjimkou předmětu zdravotnické přípravy, mohou osoby, které jsou držiteli profesního osvědčení. O vydání profesního osvědčení rozhoduje Krajský úřad. V profesním osvědčení uvede Krajský úřad předměty, které je učitel oprávněn vyučovat. Krajský úřad vede evidenci o vydaných profesních osvědčeních v rozsahu údajů v něm uváděných. Vzor profesního osvědčení stanoví prováděcí předpis."
+  },
+  {
+   "ref": "§ 21 odst. 2",
+   "anchor": "p21-2",
+   "text": "(2) Držitelem profesního osvědčení může být osoba, která"
+  },
+  {
+   "ref": "§ 21 odst. 2 písm. a)",
+   "anchor": "p21-2-a",
+   "text": "a) má ukončené střední vzdělání zakončené maturitní zkouškou, nebo jde-li o učitele výcviku v řízení vozidla nebo výuky praktické údržby vozidla, ukončené střední vzdělání,"
+  },
+  {
+   "ref": "§ 21 odst. 2 písm. b)",
+   "anchor": "p21-2-b",
+   "text": "b) dosáhla věku 24 let,"
+  },
+  {
+   "ref": "§ 21 odst. 2 písm. c)",
+   "anchor": "p21-2-c",
+   "text": "c) se s kladným výsledkem podrobila dopravně psychologickému vyšetření; dopravně psychologické vyšetření provádějí fyzické osoby, které poskytují služby v oboru psychologického poradenství podle zvláštního právního předpisu nebo právnické osoby, u kterých je dopravně psychologické poradenství předmětem činnosti, (dále jen \"dopravní psycholog\"),"
+  },
+  {
+   "ref": "§ 21 odst. 2 písm. d)",
+   "anchor": "p21-2-d",
+   "text": "d) absolvovala základní školení a zkouškou prokázala znalosti předpisů o provozu na pozemních komunikacích, o podmínkách provozu vozidel na pozemních komunikacích, o získávání a zdokonalování odborné způsobilosti k řízení motorových vozidel a znalosti ovládání a údržby vozidla, řízení vozidla a zásad bezpečné jízdy vozidla, včetně vozidla konstrukčně přizpůsobeného tělesně postižené osobě; jde-li o výuku předpisů o provozu na pozemních komunikacích a teorii řízení a zásad bezpečné jízdy, musí tato osoba být držitelem řidičského oprávnění pro skupinu vozidel, k jehož získání provádí výuku,"
+  },
+  {
+   "ref": "§ 21 odst. 2 písm. e)",
+   "anchor": "p21-2-e",
+   "text": "e) která nemá soudem nebo správním orgánem uložen trest zákazu řízení motorových vozidel a které v posledních třech letech nebyl takový trest uložen."
+  },
+  {
+   "ref": "§ 21 odst. 3",
+   "anchor": "p21-3",
+   "text": "(3) Provádět výcvik může osoba, která"
+  },
+  {
+   "ref": "§ 21 odst. 3 písm. a)",
+   "anchor": "p21-3-a",
+   "text": "a) splňuje podmínky uvedené v odstavci 2 písm. a) až e), a"
+  },
+  {
+   "ref": "§ 21 odst. 3 písm. b)",
+   "anchor": "p21-3-b",
+   "text": "b) je nejméně 3 roky držitelem řidičského oprávnění pro skupinu vozidel, pro kterou provádí výcvik."
+  },
+  {
+   "ref": "§ 22 odst. 1",
+   "anchor": "p22-1",
+   "text": "Vyučovat zdravotnickou přípravu a provádět praktický výcvik v poskytování první pomoci jsou oprávněni"
+  },
+  {
+   "ref": "§ 22 odst. 1 písm. a)",
+   "anchor": "p22-1-a",
+   "text": "a) lékaři,"
+  },
+  {
+   "ref": "§ 22 odst. 1 písm. b)",
+   "anchor": "p22-1-b",
+   "text": "b) vyšší zdravotničtí pracovníci v oborech činnosti diplomovaná všeobecná sestra, diplomovaná dětská sestra a diplomovaná porodní asistentka,"
+  },
+  {
+   "ref": "§ 22 odst. 1 písm. c)",
+   "anchor": "p22-1-c",
+   "text": "c) střední zdravotničtí pracovníci v oborech činnosti zdravotnický záchranář, všeobecná sestra, dětská sestra, porodní asistentka, zdravotní sestra, ženská sestra a sestra pro intenzivní péči,"
+  },
+  {
+   "ref": "§ 22 odst. 1 písm. d)",
+   "anchor": "p22-1-d",
+   "text": "d) nižší zdravotničtí pracovníci v oboru činnosti ošetřovatel, ošetřovatelka, řidič vozidla rychlé zdravotnické pomoci a řidič vozidla rychlé lékařské pomoci,"
+  },
+  {
+   "ref": "§ 22 odst. 1 písm. e)",
+   "anchor": "p22-1-e",
+   "text": "e) učitelé odborných předmětů v oboru ošetřovatelství na středních a vyšších zdravotnických školách,"
+  },
+  {
+   "ref": "§ 22 odst. 1 písm. f)",
+   "anchor": "p22-1-f",
+   "text": "f) absolventi rekvalifikačních kursů akreditovaných Ministerstvem školství, mládeže a tělovýchovy s názvem \"člen první pomoci\" v délce minimálně 80 vyučovacích hodin,"
+  },
+  {
+   "ref": "§ 22 odst. 1 písm. g)",
+   "anchor": "p22-1-g",
+   "text": "g) instruktoři Českého červeného kříže a absolventi zdravotnické přípravy zaměřené na výuku v autoškolách."
+  },
+  {
+   "ref": "§ 23 odst. 1",
+   "anchor": "p23-1",
+   "text": "(1) Zkoušky učitelů výuky a výcviku provádí krajský úřad. Základní školení může provádět autoškola v rozsahu registrace k provozování výuky a výcviku žadatelů o řidičské oprávnění. Základní školení se provádí na náklady žadatele."
+  },
+  {
+   "ref": "§ 23 odst. 2",
+   "anchor": "p23-2",
+   "text": "(2) Před započetím samostatné učitelské činnosti musí budoucí učitel výuky a výcviku absolvovat zácvik pod vedením osoby, která je nejméně pět let učitelem se stejným nebo širším rozsahem profesního osvědčení. Rozsah zácviku musí být nejméně v rozsahu týdenní pracovní doby stanovené zvláštním právním předpisem."
+  },
+  {
+   "ref": "§ 23 odst. 3",
+   "anchor": "p23-3",
+   "text": "(3) Učební osnovu základního školení, způsob provádění a organizování zkoušky pro učitele výuky a výcviku stanoví prováděcí předpis."
+  },
+  {
+   "ref": "§ 24 odst. 1",
+   "anchor": "p24-1",
+   "text": "(1) Krajský úřad rozhodne o odnětí profesního osvědčení, jestliže jeho držitel"
+  },
+  {
+   "ref": "§ 24 odst. 1 písm. a)",
+   "anchor": "p24-1-a",
+   "text": "a) porušil opakovaně nebo hrubým způsobem učební osnovy, nebo"
+  },
+  {
+   "ref": "§ 24 odst. 1 písm. b)",
+   "anchor": "p24-1-b",
+   "text": "b) pozbyl podmínky, za kterých bylo profesní osvědčení vydáno."
+  },
+  {
+   "ref": "§ 24 odst. 2",
+   "anchor": "p24-2",
+   "text": "(2) Žádost o vrácení profesního osvědčení může žadatel podat nejdříve po uplynutí jednoho roku od právní moci rozhodnutí o jeho odnětí. Před vydáním rozhodnutí o vrácení profesního osvědčení žadatel musí zkouškou prokázat znalosti podle § 21 odst. 2 písm. d). Pokud žadatel požádá o vrácení profesního osvědčení po uplynutí dvou let od jeho odnětí, musí absolvovat základní školení podle § 21 odst. 2 písm. d)."
+  },
+  {
+   "ref": "§ 24 odst. 3",
+   "anchor": "p24-3",
+   "text": "(3) Jestliže držiteli profesního osvědčení odejme obecní úřad obce s rozšířenou působností oprávnění k řízení vozidel v důsledku ztráty zdravotní způsobilosti, může držitel profesního osvědčení požádat krajský úřad o ponechání profesního osvědčení mimo výcviku v řízení vozidla."
+  },
+  {
+   "ref": "§ 25 odst. 1",
+   "anchor": "p25-1",
+   "text": "Provozovatel autoškoly je povinen před zahájením výuky nebo výcviku zaslat obecnímu úřadu obce s rozšířenou působností příslušnému podle místa provozovny provozovatele autoškoly seznam žadatelů o řidičská oprávnění zařazených do výuky a výcviku. V seznamu uvede jméno a příjmení žadatele, jeho datum narození, adresu, číslo řidičského průkazu, pokud jej vlastní, druh výuky a výcviku a skupiny vozidel, pro které budou výuka a výcvik žadatelů prováděny, adresu učeben, kde bude prováděna výuka, seznam cvičných vozidel, na kterých bude prováděn výcvik, a den zahájení výcviku. Výuka a výcvik jsou zahájeny absolvováním první vyučovací hodiny."
+  },
+  {
+   "ref": "§ 26 odst. 1",
+   "anchor": "p26-1",
+   "text": "(1) Výcvik musí navazovat na teoretickou výuku."
+  },
+  {
+   "ref": "§ 26 odst. 2",
+   "anchor": "p26-2",
+   "text": "(2) Část výcviku v řízení vozidla může provozovatel autoškoly nahradit výcvikem na řidičském trenažéru."
+  },
+  {
+   "ref": "§ 26 odst. 3",
+   "anchor": "p26-3",
+   "text": "(3) Rozsah výcviku na řidičském trenažéru podle odstavce 2 a rozdělení řidičských trenažérů do jednotlivých skupin v závislosti na jejich technickém provedení a stupni vývoje je uveden v příloze č. 4."
+  },
+  {
+   "ref": "§ 27 odst. 1",
+   "anchor": "p27-1",
+   "text": "(1) Provozovatel autoškoly je povinen před zahájením výcviku v řízení vozidla zajistit, aby žadatel o řidičské oprávnění byl seznámen se zásadami ovládání vozidla a teorií řízení a zásadami bezpečné jízdy výcvikového vozidla."
+  },
+  {
+   "ref": "§ 27 odst. 2",
+   "anchor": "p27-2",
+   "text": "(2) Provozovatel autoškoly je dále povinen zajistit, aby"
+  },
+  {
+   "ref": "§ 27 odst. 2 písm. a)",
+   "anchor": "p27-2-a",
+   "text": "a) vyučovací hodina trvala 45 minut,"
+  },
+  {
+   "ref": "§ 27 odst. 2 písm. b)",
+   "anchor": "p27-2-b",
+   "text": "b) výcvik v řízení vozidla netrval déle než 4 vyučovací hodiny denně u jednoho žadatele; v případě výcviku žadatele o získání řidičského oprávnění pro skupinu AM, A1, A2, A, B1 nebo B nesmí v první a druhé etapě výcviku podle přílohy č. 3 trvat výcvik v řízení vozidla déle než 2 vyučovací hodiny denně,"
+  },
+  {
+   "ref": "§ 27 odst. 2 písm. c)",
+   "anchor": "p27-2-c",
+   "text": "c) při výcviku v řízení vozidla nebyla ve vozidle přítomna jiná osoba než učitelé a tlumočník výcviku, žadatelé o řidičské oprávnění, kteří se podrobují výcviku, osoba, která se účastní základního školení pro získání profesního osvědčení, držitel profesního osvědčení v době přípravy na samostatný výkon učitele výuky a výcviku nebo osoba, která provádí kontrolu výcviku."
+  },
+  {
+   "ref": "§ 27 odst. 3",
+   "anchor": "p27-3",
+   "text": "(3) Při zahájení výuky a výcviku je provozovatel autoškoly povinen vydat žadateli o řidičské oprávnění průkaz žadatele a průběžně v něm provádět záznamy o jeho účasti na praktickém výcviku. Žadatel o získání řidičského oprávnění musí mít při praktickém výcviku průkaz žadatele vždy u sebe. Průkaz žadatele může být veden i v elektronické podobě."
+  },
+  {
+   "ref": "§ 27 odst. 4",
+   "anchor": "p27-4",
+   "text": "(4) O průběhu výuky a výcviku žadatele o řidičské oprávnění a jeho účasti na hodinách výuky a výcviku musí provozovatel autoškoly vést průkaznou evidenci. Tato evidence může být vedena i v elektronické podobě."
+  },
+  {
+   "ref": "§ 27 odst. 5",
+   "anchor": "p27-5",
+   "text": "(5) Způsob vedení evidence výuky a výcviku a vedení záznamů v průkazu žadatele stanoví prováděcí předpis."
+  },
+  {
+   "ref": "§ 28 odst. 1",
+   "anchor": "p28-1",
+   "text": "Před ukončením výcviku v řízení vozidla musí být nejméně jedna vyučovací hodina věnována nácviku správného jednání v jednotlivých rizikových situacích (například intenzivní brzdění, objíždění překážky nebo náhlá změna směru jízdy spojená s ovládáním ostatních ovládacích prvků vozidla). Tato část výcviku musí být prováděna tak, aby nemohlo dojít k narušení bezpečnosti a plynulosti provozu na pozemních komunikacích."
+  },
+  {
+   "ref": "§ 29 odst. 1",
+   "anchor": "p29-1",
+   "text": "(1) Při výcviku v řízení vozidla na autocvičišti nebo cvičné ploše musí provozovatel autoškoly zajistit, aby na sedadle výcvikového vozidla, které je povinně vybaveno bezpečnostními pásy, byl s výjimkou nácviku couvání žadatel o řidičské oprávnění těmito pásy připoután a aby ve vozidle byli pouze žadatelé o získání řidičského oprávnění."
+  },
+  {
+   "ref": "§ 29 odst. 2",
+   "anchor": "p29-2",
+   "text": "(2) Na autocvičišti vybaveném radiopovelovým zařízením, které umožňuje učiteli výcviku ze stanoviště mimo vozidlo dávat žadatelům o řidičské oprávnění ve vozidlech akustické povely a zastavit vozidlo, může učitel výcviku z tohoto stanoviště řídit výcvik nejvýše tří vozidel najednou. Jestliže radiopovelové zařízení umožňuje učiteli výcviku dávat pouze akustické pokyny bez možnosti zastavit vozidlo, může ze stanoviště mimo vozidlo řídit nejvýše dvě výcviková vozidla najednou. V takovémto případě nemusí být motocykl vybaven druhým řízením a dvojím ovládáním provozní brzdy a spojky. Radiopovelové zařízení může být použito pouze na autocvičišti."
+  },
+  {
+   "ref": "§ 29a odst. 1",
+   "anchor": "p29a-1",
+   "text": "Při výcviku k získání řidičského oprávnění pro skupinu AM, A1, A2 nebo A prováděném v provozu na pozemních komunikacích lze jako výcvikové vozidlo použít motocykl, který není vybaven dvojím řízením ani dvojím zařízením umožňujícím ovládání spojky a provozní brzdy. V takovém případě musí být žadatel o získání řidičského oprávnění doprovázen učitelem výcviku na doprovodném motocyklu nebo v doprovodném osobním automobilu a komunikace mezi učitelem a žadatelem musí být zajištěna pomocí elektronického zařízení umožňujícího komunikaci učitele s žákem; takto smí učitel výcviku doprovázet pouze 1 žadatele o řidičské oprávnění a doprovodné vozidlo nesmí řídit jiný žadatel o řidičské oprávnění."
+  },
+  {
+   "ref": "§ 30 odst. 1",
+   "anchor": "p30-1",
+   "text": "(1) Výuku a výcvik žadatele o řidičské oprávnění ukončí provozovatel autoškoly za předpokladu, že žadatel o řidičské oprávnění absolvoval minimální počet hodin výuky a výcviku stanovený učební osnovou pro příslušnou skupinu vozidel, popřípadě vyšší počet hodin dohodnutých mezi žadatelem o řidičské oprávnění a provozovatelem autoškoly, a má potřebné znalosti a dovednosti požadované pro zkoušku z odborné způsobilosti k řízení motorových vozidel. Pokud žadatel trvá na ukončení výuky a výcviku a na přihlášení ke zkoušce, ačkoli potřebné znalosti a dovednosti podle předchozí věty nemá, ukončí provozovatel autoškoly výuku a výcvik na základě jeho písemné žádosti; jde-li o osobu mladší 18 let, ukončí výuku a výcvik pouze s písemným souhlasem jejího zákonného zástupce."
+  },
+  {
+   "ref": "§ 30 odst. 2",
+   "anchor": "p30-2",
+   "text": "(2) V případě předčasného ukončení výuky a výcviku žadatele u provozovatele autoškoly může žadatel pokračovat ve výuce a výcviku u jiného provozovatele autoškoly. V takovém případě je provozovatel autoškoly povinen žadateli vystavit potvrzení pro doložení údajů nezbytných pro pokračování výcviku. Podrobnosti potvrzení stanoví prováděcí právní předpis."
+  },
+  {
+   "ref": "§ 31 odst. 1",
+   "anchor": "p31-1",
+   "text": "(1) Žadatel o řidičské oprávnění, který má ukončené odborné vzdělání strojního nebo dopravního nebo autoopravárenského oboru nebo oboru zemědělské a lesnické mechanizace na střední nebo vysoké škole, se nemusí účastnit výcviku v praktické údržbě vozidel."
+  },
+  {
+   "ref": "§ 31 odst. 2",
+   "anchor": "p31-2",
+   "text": "(2) Zdravotnické přípravy se nemusí účastnit osoby uvedené v § 22."
+  },
+  {
+   "ref": "§ 31 odst. 3",
+   "anchor": "p31-3",
+   "text": "(3) V případech uvedených v odstavcích 1 a 2 provede o této skutečnosti učitel výcviku určený provozovatelem autoškoly záznam do třídní knihy a do průkazu žadatele. Doklad o splnění podmínek podle odstavců 1 a 2 je povinen žadatel o řidičské oprávnění přiložit k žádosti."
+  },
+  {
+   "ref": "§ 32 odst. 1",
+   "anchor": "p32-1",
+   "text": "(1) Žadatel o řidičské oprávnění se po ukončení výuky a výcviku v autoškole podrobí zkoušce z odborné způsobilosti k řízení motorového vozidla."
+  },
+  {
+   "ref": "§ 32 odst. 2",
+   "anchor": "p32-2",
+   "text": "(2) Provozovatel autoškoly je povinen nejpozději do 15 dnů ode dne ukončení výuky a výcviku, popřípadě doručení žádosti žadatele o přihlášení k opakované zkoušce podle § 39 odst. 2 nebo 3 písemně přihlásit žadatele o řidičské oprávnění u obecního úřadu obce s rozšířenou působností ke zkoušce z odborné způsobilosti k řízení motorového vozidla pro získání řidičského oprávnění, pro které žadatel absolvoval u provozovatele autoškoly výuku a výcvik, popřípadě k opakované zkoušce. Příslušným je obecní úřad obce s rozšířenou působností podle místa provozovny provozovatele autoškoly."
+  },
+  {
+   "ref": "§ 32 odst. 3",
+   "anchor": "p32-3",
+   "text": "(3) Příslušný obecní úřad obce s rozšířenou působností neprodleně písemně sdělí žadateli prostřednictvím autoškoly místo, datum a čas konání zkoušky z odborné způsobilosti k řízení motorového vozidla, popřípadě opakované zkoušky. Obecní úřad obce s rozšířenou působností zařadí žadatele ke zkoušce z odborné způsobilosti, popřípadě opakované zkoušce tak, aby byla zahájena nejpozději do 15 dnů po obdržení žádosti provozovatele autoškoly o přihlášení ke zkoušce, a bude dbát, aby požadavek autoškoly byl uspokojen v jednom termínu."
+  },
+  {
+   "ref": "§ 33 odst. 1",
+   "anchor": "p33-1",
+   "text": "(1) Zkoušky žadatelů o řidičská oprávnění provádí příslušný obecní úřad obce s rozšířenou působností."
+  },
+  {
+   "ref": "§ 33 odst. 2",
+   "anchor": "p33-2",
+   "text": "(2) Pro provádění zkoušek určí příslušný obecní úřad obce s rozšířenou působností zkušebního komisaře, kterým může být pouze zaměstnanec obce zařazený do obecního úřadu, který je současně držitelem platného průkazu zkušebního komisaře vydaného podle tohoto zákona; jde-li o zkoušku ze znalostí ovládání a údržby vozidla a z praktické jízdy s výcvikovým vozidlem, musí být zkušební komisař držitelem platného průkazu zkušebního komisaře v rozsahu skupin vozidel, pro které je zkouška prováděna."
+  },
+  {
+   "ref": "§ 33 odst. 3",
+   "anchor": "p33-3",
+   "text": "(3) Pro provádění zkoušek osob, které jsou vojáky v činné službě, určí příslušný obecní úřad obce s rozšířenou působností vojenského zkušebního komisaře."
+  },
+  {
+   "ref": "§ 33 odst. 4",
+   "anchor": "p33-4",
+   "text": "(4) V případě, kdy jsou při výkonu státního dozoru nebo vrchního státního dozoru při provádění zkoušek u zkušebního komisaře nebo vojenského zkušebního komisaře zjištěny tak závažné nedostatky, pro které nemohou být zkoušky odborné způsobilosti žadatelů o řidičské oprávnění tímto zkušebním komisařem dokončeny, dokončí tyto zkoušky jiný držitel průkazu zkušebního komisaře."
+  },
+  {
+   "ref": "§ 33 odst. 5",
+   "anchor": "p33-5",
+   "text": "(5) Provádění činnosti zkušebního komisaře je neslučitelné s podnikáním nebo jiným druhem výdělečné činnosti v oblasti provozování autoškol."
+  },
+  {
+   "ref": "§ 34 odst. 1",
+   "anchor": "p34-1",
+   "text": "(1) O vydání průkazu zkušebního komisaře rozhoduje Ministerstvo dopravy (dále jen \"ministerstvo\"). Ministerstvo vydá průkaz zkušebního komisaře na základě písemné žádosti, prokáže-li žadatel, že"
+  },
+  {
+   "ref": "§ 34 odst. 1 písm. a)",
+   "anchor": "p34-1-a",
+   "text": "a) je starší 25 let,"
+  },
+  {
+   "ref": "§ 34 odst. 1 písm. b)",
+   "anchor": "p34-1-b",
+   "text": "b) má ukončeno střední vzdělání zakončené maturitní zkouškou,"
+  },
+  {
+   "ref": "§ 34 odst. 1 písm. c)",
+   "anchor": "p34-1-c",
+   "text": "c) je nejméně 5 let držitelem řidičského oprávnění pro skupinu vozidel, pro kterou bude žadatele o řidičské oprávnění zkoušet,"
+  },
+  {
+   "ref": "§ 34 odst. 1 písm. d)",
+   "anchor": "p34-1-d",
+   "text": "d) absolvoval základní školení pro zkušební komisaře a zkouškou prokázal dovednosti vztahující se k provádění a hodnocení zkoušek odborné způsobilosti, znalosti předpisů o provozu na pozemních komunikacích, o podmínkách provozu vozidel na pozemních komunikacích, o získávání a zdokonalování odborné způsobilosti k řízení motorových vozidel a znalosti ovládání a údržby vozidla, řízení vozidla a bezpečné jízdy."
+  },
+  {
+   "ref": "§ 34 odst. 1 písm. e)",
+   "anchor": "p34-1-e",
+   "text": "e) nemá soudem nebo správním orgánem uložen trest zákazu řízení motorových vozidel a že mu v posledních pěti letech nebyl takový trest uložen."
+  },
+  {
+   "ref": "§ 34 odst. 2",
+   "anchor": "p34-2",
+   "text": "(2) Základní školení žadatelů o vydání průkazu zkušebního komisaře a zkoušky provádí ministerstvo. Ministerstvo může na základě výsledku výběrového řízení provedeného podle zvláštního právního předpisu pověřit prováděním základního školení právnickou osobu."
+  },
+  {
+   "ref": "§ 34 odst. 3",
+   "anchor": "p34-3",
+   "text": "(3) Učební osnovu základního školení, způsob provádění a organizování zkoušky stanoví prováděcí předpis."
+  },
+  {
+   "ref": "§ 35 odst. 1",
+   "anchor": "p35-1",
+   "text": "(1) Průkaz zkušebního komisaře se vydává na pět let."
+  },
+  {
+   "ref": "§ 35 odst. 2",
+   "anchor": "p35-2",
+   "text": "(2) Průkaz zkušebního komisaře musí obsahovat jméno, příjmení a datum narození držitele, rozsah oprávnění k provádění zkoušek z odborné způsobilosti k řízení motorových vozidel, přidělené osobní číslo zkušebního komisaře a číslo přiděleného razítka, sérii a číslo průkazu, datum vydání (prodloužení) a dobu jeho platnosti."
+  },
+  {
+   "ref": "§ 35 odst. 3",
+   "anchor": "p35-3",
+   "text": "(3) Ministerstvo vede evidenci o vydaných průkazech zkušebního komisaře v rozsahu údajů uváděných v průkazu."
+  },
+  {
+   "ref": "§ 35 odst. 4",
+   "anchor": "p35-4",
+   "text": "(4) Vzor průkazu zkušebního komisaře stanoví prováděcí předpis."
+  },
+  {
+   "ref": "§ 36 odst. 1",
+   "anchor": "p36-1",
+   "text": "(1) Zkušební komisař je povinen každý rok absolvovat zdokonalovací školení za účelem prohloubení znalostí a dovedností potřebných pro provádění zkoušek v rozsahu nejméně 2 dnů a za účelem prohloubení praktických dovedností potřebných pro řízení vozidel zařazených do příslušné skupiny v rozsahu nejméně 1 dne. Zkušební komisař je povinen se v rámci zdokonalovacího školení v posledním roce platnosti průkazu zkušebního komisaře podrobit přezkoušení."
+  },
+  {
+   "ref": "§ 36 odst. 2",
+   "anchor": "p36-2",
+   "text": "(2) Ministerstvo prodlouží platnost průkazu zkušebního komisaře na základě písemné žádosti držitele o dalších 5 let, prokáže-li žadatel, že absolvoval zdokonalovací školení pro zkušební komisaře a přezkoušení."
+  },
+  {
+   "ref": "§ 36 odst. 3",
+   "anchor": "p36-3",
+   "text": "(3) Zdokonalovací školení pro zkušební komisaře a jejich přezkoušení provádí ministerstvo. Ministerstvo může na základě výsledku výběrového řízení provedeného podle zvláštního právního předpisu pověřit prováděním zdokonalovacího školení zkušebních komisařů právnickou osobu."
+  },
+  {
+   "ref": "§ 36 odst. 4",
+   "anchor": "p36-4",
+   "text": "(4) Pokud se zkušební komisař nezúčastní zdokonalovacího školení a přezkoušení po dobu delší než jeden rok od ukončení platnosti průkazu zkušebního komisaře, musí opětovně absolvovat základní školení pro zkušební komisaře a složit zkoušku."
+  },
+  {
+   "ref": "§ 36 odst. 5",
+   "anchor": "p36-5",
+   "text": "(5) Učební osnovu zdokonalovacího školení zkušebních komisařů, rozsah přezkoušení a způsob jeho organizování stanoví prováděcí předpis."
+  },
+  {
+   "ref": "§ 37 odst. 1",
+   "anchor": "p37-1",
+   "text": "(1) Ministerstvo odejme průkaz zkušebního komisaře, pokud zkušební komisař"
+  },
+  {
+   "ref": "§ 37 odst. 1 písm. a)",
+   "anchor": "p37-1-a",
+   "text": "a) opakovaně nebo hrubým způsobem porušil povinnosti stanovené tímto zákonem,"
+  },
+  {
+   "ref": "§ 37 odst. 1 písm. b)",
+   "anchor": "p37-1-b",
+   "text": "b) pozbyl nebo mu bylo odejmuto řidičské oprávnění pro příslušnou skupinu vozidel, nebo"
+  },
+  {
+   "ref": "§ 37 odst. 1 písm. c)",
+   "anchor": "p37-1-c",
+   "text": "c) vykonává činnost neslučitelnou s prováděním činnosti zkušebního komisaře podle § 33 odst. 5."
+  },
+  {
+   "ref": "§ 37 odst. 2",
+   "anchor": "p37-2",
+   "text": "(2) Zkušební komisař je povinen neprodleně po nabytí právní moci rozhodnutí o odnětí průkazu zkušebního komisaře odevzdat ministerstvu průkaz zkušebního komisaře a přidělené razítko."
+  },
+  {
+   "ref": "§ 37 odst. 3",
+   "anchor": "p37-3",
+   "text": "(3) Žádost o opětovné vydání průkazu zkušebního komisaře může žadatel podat nejdříve za tři roky po odnětí průkazu zkušebního komisaře."
+  },
+  {
+   "ref": "§ 38 odst. 1",
+   "anchor": "p38-1",
+   "text": "(1) Zkoušky z odborné způsobilosti žadatele o řidičské oprávnění a opakované zkoušky se provádí zpravidla v jeden den. Neprovede-li obecní úřad obce s rozšířenou působností zkoušky v jeden den, zařadí žadatele k dalším zkouškám tak, aby byly provedeny nejpozději do 7 dnů od jejich zahájení."
+  },
+  {
+   "ref": "§ 38 odst. 2",
+   "anchor": "p38-2",
+   "text": "(2) Provozovatel autoškoly, který zajišťoval výuku a výcvik žadatele, poskytne příslušnému obecnímu úřadu obce s rozšířenou působností pro účely zkoušky na náklady žadatele výcvikové vozidlo."
+  },
+  {
+   "ref": "§ 38 odst. 3",
+   "anchor": "p38-3",
+   "text": "(3) Ke zkoušce doprovází žadatele o řidičské oprávnění držitel příslušného profesního osvědčení; to neplatí, jde-li o zkoušku z předpisů o provozu na pozemních komunikacích a zdravotnické přípravy."
+  },
+  {
+   "ref": "§ 38 odst. 4",
+   "anchor": "p38-4",
+   "text": "(4) Rozsah zkoušek z odborné způsobilosti pro jednotlivé skupiny vozidel a způsob jejich provádění je uveden v příloze č. 5."
+  },
+  {
+   "ref": "§ 39 odst. 1",
+   "anchor": "p39-1",
+   "text": "(1) Žadatel o řidičské oprávnění se musí podrobit zkoušce z odborné způsobilosti k řízení motorových vozidel, která se skládá ze zkoušky"
+  },
+  {
+   "ref": "§ 39 odst. 1 písm. a)",
+   "anchor": "p39-1-a",
+   "text": "a) z předpisů o provozu na pozemních komunikacích a zdravotnické přípravy,"
+  },
+  {
+   "ref": "§ 39 odst. 1 písm. b)",
+   "anchor": "p39-1-b",
+   "text": "b) ze znalostí ovládání a údržby vozidla, jde-li o žadatele o řidičské oprávnění pro skupinu C1, C1+E, C, C+E, D1, D1+E, D nebo D+E,"
+  },
+  {
+   "ref": "§ 39 odst. 1 písm. c)",
+   "anchor": "p39-1-c",
+   "text": "c) z praktické jízdy s výcvikovým vozidlem,"
+  },
+  {
+   "ref": "§ 39 odst. 2",
+   "anchor": "p39-2",
+   "text": "(2) Výsledek každé zkoušky se hodnotí stupněm „prospěl“ nebo „neprospěl“. Jestliže žadatel o řidičské oprávnění neprospěl v některé zkoušce, může tuto zkoušku nejvýše dvakrát opakovat. Neuspěje-li žadatel ani při druhé opakované zkoušce, musí se před další zkouškou podrobit"
+  },
+  {
+   "ref": "§ 39 odst. 2 písm. a)",
+   "anchor": "p39-2-a",
+   "text": "a) nové výuce podle § 20 odst. 2, jde-li o zkoušku podle odstavce 1 písm. a),"
+  },
+  {
+   "ref": "§ 39 odst. 2 písm. b)",
+   "anchor": "p39-2-b",
+   "text": "b) nové výuce podle § 20 odst. 2 písm. b), jde-li o zkoušku podle odstavce 1 písm. b),"
+  },
+  {
+   "ref": "§ 39 odst. 2 písm. c)",
+   "anchor": "p39-2-c",
+   "text": "c) novému výcviku podle § 20 odst. 3 písm. a), jde-li o zkoušku podle odstavce 1 písm. c)."
+  },
+  {
+   "ref": "§ 39 odst. 3",
+   "anchor": "p39-3",
+   "text": "(3) Po absolvování výuky nebo výcviku podle odstavce 2 smí žadatel o řidičské oprávnění zkoušku, ve které neuspěl, opakovat nejvýše třikrát. Neuspěje-li ani při těchto opakovaných zkouškách, je povinen před další zkouškou absolvovat novou výuku a výcvik v plném rozsahu. Další zkouška se provede podle odstavce 1."
+  },
+  {
+   "ref": "§ 39 odst. 4",
+   "anchor": "p39-4",
+   "text": "(4) Zkoušky z odborné způsobilosti k řízení motorových vozidel jsou zahájeny testem z předpisů o provozu na pozemních komunikacích a zdravotnické přípravy. Je-li žadatel o řidičské oprávnění u této zkoušky hodnocen stupněm „neprospěl“, nesmí pokračovat v dalších zkouškách do doby, kdy bude při opakované zkoušce hodnocen stupněm „prospěl“."
+  },
+  {
+   "ref": "§ 39 odst. 5",
+   "anchor": "p39-5",
+   "text": "(5) Výsledek zkoušek zapíše zkušební komisař do žádosti o přijetí k výuce a výcviku a zápis stvrdí svým podpisem a razítkem. Výsledek zkoušek zkušební komisař sdělí způsobem umožňujícím dálkový přístup Ministerstvu dopravy. Po absolvování zkoušek opatří obecní úřad obce s rozšířenou působností žádost o přijetí k výuce a výcviku razítkem obecního úřadu obce s rozšířenou působností."
+  },
+  {
+   "ref": "§ 39 odst. 6",
+   "anchor": "p39-6",
+   "text": "(6) Neuspěl-li žadatel o řidičské oprávnění při zkouškách do doby 12 měsíců ode dne zahájení první zkoušky navazující na absolvování výuky a výcviku v plném rozsahu, je povinen před další zkouškou absolvovat novou výuku a výcvik v plném rozsahu."
+  },
+  {
+   "ref": "§ 39 odst. 7",
+   "anchor": "p39-7",
+   "text": "(7) Pokud žadatel neovládá dostatečně nebo vůbec jazyk, ve kterém je konána zkouška, může zkoušku složit za přítomnosti tlumočníka ustanoveného podle zvláštního zákona. Tlumočníka si zajistí žadatel na vlastní náklady. Zkouška z předpisů o provozu na pozemních komunikacích a zdravotnické přípravy se v takovémto případě koná ústně."
+  },
+  {
+   "ref": "§ 39 odst. 8",
+   "anchor": "p39-8",
+   "text": "(8) Žadatel může využít možnosti podle odstavce 7 pouze v případě, pokud měl k dispozici tlumočníka při všech hodinách výuky k řidičskému oprávnění. Účast tlumočníka při výuce musí být doložena společně s účastí žadatele při výuce."
+  },
+  {
+   "ref": "§ 39a odst. 1",
+   "anchor": "p39a-1",
+   "text": "Žadatel o řidičské oprávnění je povinen zaplatit příslušnému obecnímu úřadu obce s rozšířenou působností, u kterého je zkušební komisař zaměstnán, za zkoušku z odborné způsobilosti 700 Kč; v případě opakovaných zkoušek žadatel zaplatí za opakovanou zkoušku z předpisů o provozu na pozemních komunikacích 100 Kč, za opakovanou zkoušku ze znalosti ovládání a údržby vozidla 200 Kč a za opakovanou zkoušku z praktické jízdy 400 Kč."
+  },
+  {
+   "ref": "§ 40 odst. 1",
+   "anchor": "p40-1",
+   "text": "(1) Zkouška z předpisů o provozu na pozemních komunikacích a zdravotnické přípravy se provádí testem písemně nebo pomocí výpočetní techniky. Test obsahuje otázky z pravidel provozu na pozemních komunikacích, z předpisu o podmínkách provozu vozidel na pozemních komunikacích, ze zdravotnické přípravy a dále z předpisů souvisejících s provozem na pozemních komunikacích, které jsou součástí výuky podle učebních osnov. Zkouška prováděná pomocí výpočetní techniky je sestavována náhodným výběrem jednotlivých zkušebních otázek. Znění všech zkušebních otázek z předpisů o provozu na pozemních komunikacích a zdravotnické přípravy vydává ministerstvo ve Věstníku dopravy."
+  },
+  {
+   "ref": "§ 40 odst. 2",
+   "anchor": "p40-2",
+   "text": "(2) Na vykonání zkoušky se stanoví doba 30 minut. Žadateli o řidičské oprávnění, který doloží lékařským vyšetřením, že trpí poruchou dyslexie nebo dysgrafie, prodlouží zkušební komisař předepsanou dobu na dvojnásobek."
+  },
+  {
+   "ref": "§ 40 odst. 3",
+   "anchor": "p40-3",
+   "text": "(3) Počet otázek v testu, jejich bodové hodnocení, složení testu podle bodového hodnocení a minimální počet bodů nutných pro úspěšné vykonání zkoušky pro jednotlivé skupiny vozidel stanoví prováděcí předpis."
+  },
+  {
+   "ref": "§ 41 odst. 1",
+   "anchor": "p41-1",
+   "text": "(1) Zkouška ze znalosti ovládání a údržby vozidla se provádí ústně u modelů či výcvikového vozidla (ne u obrazů)."
+  },
+  {
+   "ref": "§ 41 odst. 2",
+   "anchor": "p41-2",
+   "text": "(2) Jestliže žadatel o řidičské oprávnění je osobou sluchově postiženou, provede se zkouška za přítomnosti tlumočníka v žadatelem zvoleném komunikačním systému neslyšících a hluchoslepých osob. Tlumočníka si zajistí žadatel o řidičské oprávnění podle jiného právního předpisu na své náklady."
+  },
+  {
+   "ref": "§ 41 odst. 3",
+   "anchor": "p41-3",
+   "text": "(3) Prováděcí předpis stanoví rozsah požadovaných znalostí pro zkoušku z ovládaní a údržby vozidla."
+  },
+  {
+   "ref": "§ 42 odst. 1",
+   "anchor": "p42-1",
+   "text": "(1) Žadatel o řidičské oprávnění musí při zkoušce z praktické jízdy prokázat znalosti, dovednosti a chování včetně specifických požadavků pro jednotlivé skupiny vozidel. Zkouška z praktické jízdy je rozdělena do dvou částí. Žadatel o řidičské oprávnění, který při zkoušce neprokáže základní znalosti u každé ze dvou částí, je hodnocen stupněm \"neprospěl\". O průběhu zkoušky z praktické jízdy zkušební komisař pořídí písemný záznam. Záznam o zkoušce může být veden i v elektronické podobě."
+  },
+  {
+   "ref": "§ 42 odst. 2",
+   "anchor": "p42-2",
+   "text": "(2) Neprokáže-li žadatel o řidičské oprávnění pro skupinu AM, A1, A2 nebo A základní znalosti v první části zkoušky, je hodnocen stupněm „neprospěl“ a nesmí pokračovat ve druhé části zkoušky. Neprokáže-li žadatel o řidičské oprávnění pro skupinu AM, A1, A2 nebo A základní znalosti ve druhé části zkoušky, je hodnocen stupněm neprospěl“ a opakovaná zkouška se provede pouze v rozsahu druhé části zkoušky."
+  },
+  {
+   "ref": "§ 42 odst. 3",
+   "anchor": "p42-3",
+   "text": "(3) V první části zkoušky žadatel o řidičské oprávnění prokazuje zejména"
+  },
+  {
+   "ref": "§ 42 odst. 3 písm. a)",
+   "anchor": "p42-3-a",
+   "text": "a) základní znalosti a dovednosti úkonů přípravy vozidla před jeho použitím,"
+  },
+  {
+   "ref": "§ 42 odst. 3 písm. b)",
+   "anchor": "p42-3-b",
+   "text": "b) rozjíždění s různým stupněm obtížnosti,"
+  },
+  {
+   "ref": "§ 42 odst. 3 písm. c)",
+   "anchor": "p42-3-c",
+   "text": "c) zastavení vozidla,"
+  },
+  {
+   "ref": "§ 42 odst. 3 písm. d)",
+   "anchor": "p42-3-d",
+   "text": "d) couvání a otáčení při couvání,"
+  },
+  {
+   "ref": "§ 42 odst. 3 písm. e)",
+   "anchor": "p42-3-e",
+   "text": "e) zajíždění do omezeného prostoru a vyjíždění z něj,"
+  },
+  {
+   "ref": "§ 42 odst. 3 písm. f)",
+   "anchor": "p42-3-f",
+   "text": "f) podélné, šikmé a kolmé zaparkování vozidla,"
+  },
+  {
+   "ref": "§ 42 odst. 3 písm. g)",
+   "anchor": "p42-3-g",
+   "text": "g) zastavení a rozjíždění ve stoupání,"
+  },
+  {
+   "ref": "§ 42 odst. 3 písm. h)",
+   "anchor": "p42-3-h",
+   "text": "h) řízení vozidla při malé rychlosti nejvýše do 30 km.h-1."
+  },
+  {
+   "ref": "§ 42 odst. 4",
+   "anchor": "p42-4",
+   "text": "(4) Ve druhé části zkoušky žadatel o řidičské oprávnění prokazuje zejména znalosti"
+  },
+  {
+   "ref": "§ 42 odst. 4 písm. a)",
+   "anchor": "p42-4-a",
+   "text": "a) v bezpečném řízení vozidla s různou intenzitou provozu na pozemních komunikacích,"
+  },
+  {
+   "ref": "§ 42 odst. 4 písm. b)",
+   "anchor": "p42-4-b",
+   "text": "b) řízení vozidla na různých druzích pozemních komunikací,"
+  },
+  {
+   "ref": "§ 42 odst. 4 písm. c)",
+   "anchor": "p42-4-c",
+   "text": "c) řízení vozidla na křižovatce, která je řízena světelnou signalizací,"
+  },
+  {
+   "ref": "§ 42 odst. 4 písm. d)",
+   "anchor": "p42-4-d",
+   "text": "d) řízení vozidla na úseku, kde je provoz hromadné osobní dopravy a kde je dostatečný pohyb chodců s vyznačenými přechody pro chodce,"
+  },
+  {
+   "ref": "§ 42 odst. 4 písm. e)",
+   "anchor": "p42-4-e",
+   "text": "e) řízení vozidla mimo obec a v případě velkých měst alespoň na vícepruhové komunikaci, kde je dovolena rychlost vyšší než 50 km.h-1,"
+  },
+  {
+   "ref": "§ 42 odst. 4 písm. f)",
+   "anchor": "p42-4-f",
+   "text": "f) ovládání vozidla ve vyšších rychlostech a při různých manévrovacích situacích,"
+  },
+  {
+   "ref": "§ 42 odst. 4 písm. g)",
+   "anchor": "p42-4-g",
+   "text": "g) rychlého a bezpečného rozhodování v dopravní situaci při řízení vozidla,"
+  },
+  {
+   "ref": "§ 42 odst. 4 písm. h)",
+   "anchor": "p42-4-h",
+   "text": "h) správné reakce na vzniklou dopravní situaci."
+  },
+  {
+   "ref": "§ 42 odst. 5",
+   "anchor": "p42-5",
+   "text": "(5) Od podmínky stanovené v odstavci 4 písm. c) lze upustit v případě, že žadatel absolvoval výcvik v provozovně provozovatele autoškoly s místem v okrese, kde není křižovatka řízená světelnou signalizací."
+  },
+  {
+   "ref": "§ 42 odst. 6",
+   "anchor": "p42-6",
+   "text": "(6) Výčet jednotlivých znalostí, dovedností a chování a podrobnosti o požadavcích na zkoušku včetně náležitostí záznamu o zkoušce a způsobu jeho vedení stanoví prováděcí předpis."
+  },
+  {
+   "ref": "§ 43 odst. 1",
+   "anchor": "p43-1",
+   "text": "(1) Zkouška z praktické jízdy musí trvat v první části nejméně 10 minut a v druhé části nejméně 20 minut, pokud má být řidičské oprávnění uděleno pro skupinu AM, A1, A2, A, B1, B, B+E nebo T, a nejméně 35 minut pro ostatní skupiny vozidel."
+  },
+  {
+   "ref": "§ 43 odst. 2",
+   "anchor": "p43-2",
+   "text": "(2) Při každé dopravní situaci v rámci zkoušky musí žadatel o řidičské oprávnění prokázat bezpečné ovládání vozidla. Chyby v řízení nebo nebezpečné vedení bezprostředně snižující bezpečnost výcvikového vozidla, jeho osádky nebo jiných účastníků provozu vozidel na pozemních komunikacích se hodnotí stupněm \"neprospěl\" bez ohledu na to, zda zkušební komisař nebo učitel výcviku zasáhnou (verbálně nebo přímo) do ovládacích prvků vozidla."
+  },
+  {
+   "ref": "§ 43 odst. 3",
+   "anchor": "p43-3",
+   "text": "(3) Dojde-li při zkoušce k takovému porušení pravidel provozu na pozemních komunikacích, které ohrozilo nebo může ohrozit vážným způsobem bezpečnost provozu na pozemních komunikacích, anebo k situaci, kdy musel do řízení motorového vozidla zasáhnout učitel, zkouška se okamžitě ukončí a žadatel je hodnocen stupněm \"neprospěl\"."
+  },
+  {
+   "ref": "§ 43 odst. 4",
+   "anchor": "p43-4",
+   "text": "(4) Zkoušky se účastní učitel výcviku autoškoly, která žadatele přihlásila ke zkoušce. Učitel výcviku sedí ve vozidle na sedadle pro učitele výcviku. Zkoušky se může dále účastnit osoba pověřená výkonem státního dozoru, vrchního státního dozoru a tlumočník."
+  },
+  {
+   "ref": "§ 43 odst. 5",
+   "anchor": "p43-5",
+   "text": "(5) U zkoušky k získání řidičského oprávnění prováděné s výcvikovým vozidlem, které je pouze dvoumístné, se učitel výcviku přímého výkonu zkoušky neúčastní. V tomto případě zkušební komisař přebírá povinnosti učitele autoškoly."
+  },
+  {
+   "ref": "§ 43 odst. 6",
+   "anchor": "p43-6",
+   "text": "(6) U zkoušky k získání řidičského oprávnění pro skupinu AM, A1, A2 nebo A jede žadatel sám na výcvikovém motocyklu, který nemusí být vybaven dvojím řízením ani dvojím zařízením umožňujícím ovládání spojky a provozní brzdy, a zkušební komisař jede za žadatelem na doprovodném motocyklu nebo v doprovodném automobilu řízeném učitelem výcviku. Pokyny dává žadateli zkušební komisař pomocí elektronického zařízení umožňujícího komunikaci s žákem; při jízdě v doprovodném automobilu může dávat pokyny prostřednictvím učitele výcviku."
+  },
+  {
+   "ref": "§ 43 odst. 7",
+   "anchor": "p43-7",
+   "text": "(7) Pokud je zkouška prováděna na vozidle, které je konstrukčně přizpůsobené osobě tělesně postižené, nebo na vozidle, které je vybavené automatickou převodovkou, zapíše zkušební komisař tuto skutečnost do žádosti o přijetí k výuce a výcviku a sdělí ji způsobem umožňujícím dálkový přístup Ministerstvu dopravy. Tento zápis pak slouží jako podklad pro omezení řidičského oprávnění podle zvláštního zákona."
+  },
+  {
+   "ref": "§ 44 odst. 1",
+   "anchor": "p44-1",
+   "text": "(1) Zkouška z předpisů o provozu na pozemních komunikacích a zdravotnické přípravy se provádí jedním testem."
+  },
+  {
+   "ref": "§ 44 odst. 2",
+   "anchor": "p44-2",
+   "text": "(2) Při zkoušce z předmětu ovládání a údržba vozidla se sčítají otázky stanovené pro jednotlivé skupiny vozidel."
+  },
+  {
+   "ref": "§ 44 odst. 3",
+   "anchor": "p44-3",
+   "text": "(3) Zkouška z praktické jízdy se provádí na vozidlech z každé skupiny vozidel, pro které byla prováděna sdružená výuka a výcvik."
+  },
+  {
+   "ref": "§ 45 odst. 1",
+   "anchor": "p45-1",
+   "text": "Na přezkoušení z odborné způsobilosti k řízení motorových vozidel podle zvláštního zákona se použijí obdobně ustanovení o zkoušce z odborné způsobilosti žadatelů o řidičská oprávnění. Náklady zkoušky hradí žadatel."
+  },
+  {
+   "ref": "§ 45a odst. 1",
+   "anchor": "p45a-1",
+   "text": "(1) Řidič, který dosažením počtu 12 bodů v bodovém hodnocení podle zvláštního právního předpisu pozbyl řidičské oprávnění a hodlá požádat o vrácení řidičského oprávnění podle zvláštního právního předpisu, je povinen se podrobit přezkoušení z odborné způsobilosti k řízení motorových vozidel."
+  },
+  {
+   "ref": "§ 45a odst. 2",
+   "anchor": "p45a-2",
+   "text": "(2) Pro přezkoušení z odborné způsobilosti k řízení motorových vozidel řidiče uvedeného v odstavci 1 platí obdobně § 45."
+  },
+  {
+   "ref": "§ 45b odst. 1",
+   "anchor": "p45b-1",
+   "text": "(1) Žadatel o řidičské oprávnění je povinen absolvovat pouze doplňovací zkoušku, která se provede ve stejném rozsahu a stejným způsobem jako zkouška z praktické jízdy podle § 42, pokud jde o žadatele o řidičské oprávnění"
+  },
+  {
+   "ref": "§ 45b odst. 1 písm. a)",
+   "anchor": "p45b-1-a",
+   "text": "a) pro skupinu A2, který je alespoň 2 roky držitelem řidičského oprávnění pro skupinu A1, nebo"
+  },
+  {
+   "ref": "§ 45b odst. 1 písm. b)",
+   "anchor": "p45b-1-b",
+   "text": "b) pro skupinu A, který je alespoň 2 roky držitelem řidičského oprávnění pro skupinu A2."
+  },
+  {
+   "ref": "§ 45b odst. 2",
+   "anchor": "p45b-2",
+   "text": "(2) Doplňovací zkouška pro zrušení omezení řidičského oprávnění omezeného podle zvláštního zákona (pro vozidla s automatickou převodovkou) se provede ve stejném rozsahu a stejným způsobem jako zkouška z praktické jízdy podle § 42 tohoto zákona."
+  },
+  {
+   "ref": "§ 45b odst. 3",
+   "anchor": "p45b-3",
+   "text": "(3) Pro rozšíření rozsahu řidičského oprávnění pro skupinu B na jízdní soupravy složené z vozidla skupiny B a přípojného vozidla o největší povolené hmotnosti převyšující 750 kg, jejichž největší povolená hmotnost převyšuje 3500 kg, ale nepřevyšuje 4250 kg, je žadatel o řidičské oprávnění, který neabsolvoval zkoušku v řízení motorového vozidla na takovéto jízdní soupravě, povinen absolvovat doplňovací zkoušku, která se provede ve stejném rozsahu a stejným způsobem, jako zkouška z praktické jízdy podle § 42."
+  },
+  {
+   "ref": "§ 46 odst. 1",
+   "anchor": "p46-1",
+   "text": "(1) Zdokonalování odborné způsobilosti řidičů vozidel zařazených do skupiny C1, C1+E, C, C+E, D1, D1+E, D nebo D+E zahrnuje vstupní školení a následná pravidelná školení."
+  },
+  {
+   "ref": "§ 46 odst. 2",
+   "anchor": "p46-2",
+   "text": "(2) Pravidelné školení je prohlubováním kvalifikace podle zvláštního právního předpisu."
+  },
+  {
+   "ref": "§ 47 odst. 1",
+   "anchor": "p47-1",
+   "text": "(1) Vstupní školení se provádí formou výuky a výcviku a je zakončeno zkouškou z profesní způsobilosti řidičů. Předmětem výuky a výcviku je získání a prohloubení znalostí"
+  },
+  {
+   "ref": "§ 47 odst. 1 písm. a)",
+   "anchor": "p47-1-a",
+   "text": "a) teorie pokročilého racionálního řízení a zásad bezpečné a defenzivní jízdy,"
+  },
+  {
+   "ref": "§ 47 odst. 1 písm. b)",
+   "anchor": "p47-1-b",
+   "text": "b) uplatnění vnitrostátních a mezinárodních právních předpisů vztahujících se k silniční dopravě,"
+  },
+  {
+   "ref": "§ 47 odst. 1 písm. c)",
+   "anchor": "p47-1-c",
+   "text": "c) bezpečnosti provozu a ekologického provozu vozidla,"
+  },
+  {
+   "ref": "§ 47 odst. 1 písm. d)",
+   "anchor": "p47-1-d",
+   "text": "d) poskytování služeb a logistiky,"
+  },
+  {
+   "ref": "§ 47 odst. 1 písm. e)",
+   "anchor": "p47-1-e",
+   "text": "e) hospodářského prostředí a organizace dopravního trhu,"
+  },
+  {
+   "ref": "§ 47 odst. 1 písm. f)",
+   "anchor": "p47-1-f",
+   "text": "f) sociálně-právního prostředí v silniční dopravě,"
+  },
+  {
+   "ref": "§ 47 odst. 1 písm. g)",
+   "anchor": "p47-1-g",
+   "text": "g) zdravotních rizik a jejich předcházení v provozu na pozemních komunikacích,"
+  },
+  {
+   "ref": "§ 47 odst. 1 písm. h)",
+   "anchor": "p47-1-h",
+   "text": "h) prevence a řešení mimořádných událostí v provozu na pozemních komunikacích."
+  },
+  {
+   "ref": "§ 47 odst. 2",
+   "anchor": "p47-2",
+   "text": "(2) Výcvik pro příslušnou skupinu vozidel se provádí řízením výcvikového vozidla podle přílohy č. 2 pod dohledem lektora. Výcviku se může podrobit pouze řidič, který již je držitelem řidičského oprávnění pro příslušnou skupinu vozidel. Část výcviku v řízení vozidla může být nahrazena výcvikem na řidičském trenažéru."
+  },
+  {
+   "ref": "§ 47 odst. 3",
+   "anchor": "p47-3",
+   "text": "(3) Výuka a výcvik v rámci vstupního školení se provádí v základním rozsahu 140 hodin."
+  },
+  {
+   "ref": "§ 47 odst. 4",
+   "anchor": "p47-4",
+   "text": "(4) Řidiči, kteří jsou držiteli řidičského oprávnění skupiny C, C+E, D a D+E, se mohou podrobit výuce a výcviku v rámci vstupního školení v rozšířeném rozsahu 280 hodin."
+  },
+  {
+   "ref": "§ 47 odst. 5",
+   "anchor": "p47-5",
+   "text": "(5) Řidič, který absolvoval vstupní školení pro skupiny C1, C1+E, C a C+E a který hodlá řídit vozidlo, k jehož řízení opravňuje řidičské oprávnění pro skupiny D1, D1+E, D a D+E, a naopak, se podrobí pouze zvláštní části výuky a výcviku pro novou skupinu."
+  },
+  {
+   "ref": "§ 47 odst. 6",
+   "anchor": "p47-6",
+   "text": "(6) Učební osnovu vstupního školení, podíl výuky a výcviku na celkovém rozsahu vstupního školení, obsah výuky a výcviku, rozsah společné části a zvláštních částí výuky, část výcviku v řízení vozidla, která může být nahrazena výcvikem na řidičském trenažéru, a nejvyšší počet účastníků kurzu vstupního školení stanoví prováděcí právní předpis."
+  },
+  {
+   "ref": "§ 48 odst. 1",
+   "anchor": "p48-1",
+   "text": "(1) Předmětem pravidelného školení je prohloubení znalostí získaných při vstupním školení. Pravidelné školení se provádí formou výuky a výcviku."
+  },
+  {
+   "ref": "§ 48 odst. 2",
+   "anchor": "p48-2",
+   "text": "(2) Řidič se zúčastní pravidelného školení v celkovém rozsahu 35 hodin do konce pátého roku od data vydání průkazu podle § 52c. Pravidelné školení je rozděleno do ročních kurzů v rozsahu 7 hodin. Roční kurz lze rozdělit do 2 po sobě následujících dnů. Část výuky může probíhat způsobem umožňujícím dálkový přístup, je-li zajištěno řádné ověření totožnosti řidiče. Výcvik může být proveden s využitím simulátoru."
+  },
+  {
+   "ref": "§ 48 odst. 3",
+   "anchor": "p48-3",
+   "text": "(3) Držitel platného dokladu osvědčujícího profesní způsobilost řidiče vydaného podle předpisu Evropské unie jiným členským státem Evropské unie, smluvní stranou Dohody o Evropském hospodářském prostoru anebo Švýcarskou konfederací, který má na území České republiky obvyklé bydliště podle zákona o silničním provozu nebo vykonává závislou práci pro zaměstnavatele usazeného na území České republiky anebo podniká na území České republiky, se zúčastní pravidelného školení v rozsahu 35 hodin do data uplynutí platnosti tohoto dokladu. Pokud do tohoto data uplyne méně než 5 let, neuplatní se rozsah ročního kurzu podle odstavce 2."
+  },
+  {
+   "ref": "§ 48 odst. 4",
+   "anchor": "p48-4",
+   "text": "(4) Řidič, který přestal vykonávat své povolání, vrací se k němu a neabsolvoval pravidelné školení předepsaným způsobem podle § 48, je povinen, pokud hodlá opět řídit vozidlo, na jehož řidiče se vztahuje povinnost zdokonalování odborné způsobilosti řidičů, zúčastnit se kurzu pravidelného školení v rozsahu 35 hodin; rozsah ročního kurzu podle odstavce 2 se neuplatní."
+  },
+  {
+   "ref": "§ 48 odst. 5",
+   "anchor": "p48-5",
+   "text": "(5) Ustanovení odstavce 4 platí obdobně i pro řidiče, kteří dosud nebyli profesně způsobilí, avšak řidičské oprávnění skupiny nebo podskupiny C1, C1+E, C a C+E jim bylo uděleno před 10. zářím 2009, a jde-li o řidičské oprávnění skupiny nebo podskupiny D1, D1+E, D nebo D+E, před 10. zářím 2008."
+  },
+  {
+   "ref": "§ 48 odst. 6",
+   "anchor": "p48-6",
+   "text": "(6) Řidič, který se zúčastnil pravidelného školení pro skupiny C1, C1+E, C a C+E a který řídí vozidlo, k jehož řízení opravňuje řidičské oprávnění pro skupiny D1, D1+E, D nebo D+E, a naopak, nemusí absolvovat nové pravidelné školení pro tyto další skupiny."
+  },
+  {
+   "ref": "§ 48 odst. 7",
+   "anchor": "p48-7",
+   "text": "(7) Učební osnovu pravidelného školení, podíl výuky a výcviku na celkovém rozsahu pravidelného školení, obsah výuky a výcviku, rozsah části výuky, která může proběhnout způsobem umožňujícím dálkový přístup, a podmínky průběhu této části výuky, nejvyšší počet účastníků kurzu pravidelného školení a pravidla pro uznávání pravidelného školení stanoví prováděcí právní předpis."
+  },
+  {
+   "ref": "§ 49 odst. 1",
+   "anchor": "p49-1",
+   "text": "(1) Výuku a výcvik provádí fyzická nebo právnická osoba, které je udělena akreditace k provozování této činnosti krajským úřadem příslušným podle jejího místa podnikání nebo sídla (dále jen \"provozovatel školicího střediska\")."
+  },
+  {
+   "ref": "§ 49 odst. 2",
+   "anchor": "p49-2",
+   "text": "(2) Krajský úřad udělí žadateli akreditaci k provozování výuky a výcviku na základě písemné žádosti, prokáže-li žadatel, že"
+  },
+  {
+   "ref": "§ 49 odst. 2 písm. a)",
+   "anchor": "p49-2-a",
+   "text": "a) je držitelem živnostenského oprávnění,"
+  },
+  {
+   "ref": "§ 49 odst. 2 písm. b)",
+   "anchor": "p49-2-b",
+   "text": "b) splňuje další požadavky podle tohoto zákona a"
+  },
+  {
+   "ref": "§ 49 odst. 2 písm. c)",
+   "anchor": "p49-2-c",
+   "text": "c) zaplatil správní poplatek."
+  },
+  {
+   "ref": "§ 49 odst. 3",
+   "anchor": "p49-3",
+   "text": "(3) Akreditace k provozování výuky a výcviku je nepřevoditelná a nepřechází na právního nástupce."
+  },
+  {
+   "ref": "§ 50 odst. 1",
+   "anchor": "p50-1",
+   "text": "(1) Žadatel o udělení akreditace k provozování výuky a výcviku musí"
+  },
+  {
+   "ref": "§ 50 odst. 1 písm. a)",
+   "anchor": "p50-1-a",
+   "text": "a) mít vytvořen písemný plán pro zajištění výuky a výcviku, ve kterém vymezí organizaci a rozsah výuky a výcviku, včetně nejvyššího počtu účastníků v jednotlivých kurzech, jednotlivé výukové předměty a způsob provádění výuky a výcviku, včetně odpovídajících učebních materiálů a, má-li být část výuky prováděna způsobem umožňujícím dálkový přístup, způsob provádění této části výuky a zajištění řádného ověření totožnosti řidiče,"
+  },
+  {
+   "ref": "§ 50 odst. 1 písm. b)",
+   "anchor": "p50-1-b",
+   "text": "b) mít seznam lektorů, jejichž prostřednictvím zajistí po zahájení provozování školicího střediska výuku a výcvik, s uvedením jejich jmen, příjmení a odborných předpokladů pro výuku a výcvik, kteří"
+  },
+  {
+   "ref": "§ 50 odst. 1 písm. b) bod 1",
+   "anchor": "p50-1-b-1",
+   "text": "1. jsou uvedeni v § 22 písm. a), b), c) a e), jedná-li se o předměty spadající do zdravotních rizik a jejich předcházení, nebo"
+  },
+  {
+   "ref": "§ 50 odst. 1 písm. b) bod 2",
+   "anchor": "p50-1-b-2",
+   "text": "2. mají střední vzdělání s maturitní zkouškou v oborech souvisejících se silniční dopravou a 5 let praxe v oblasti silniční dopravy, nebo vyšší odborné vzdělání v oborech souvisejících se silniční dopravou a 4 roky praxe v oblasti silniční dopravy, nebo vysokoškolské vzdělání a 3 roky praxe v oblasti silniční dopravy, jedná-li se o ostatní předměty,"
+  },
+  {
+   "ref": "§ 50 odst. 1 písm. b) bod 3",
+   "anchor": "p50-1-b-3",
+   "text": "3. splňují podmínky podle § 21 odst. 3, jedná-li se o provádění výcviku,"
+  },
+  {
+   "ref": "§ 50 odst. 1 písm. c)",
+   "anchor": "p50-1-c",
+   "text": "c) mít právo k užívání nebytových prostor a vybavení nezbytného pro poskytování výuky,"
+  },
+  {
+   "ref": "§ 50 odst. 1 písm. d)",
+   "anchor": "p50-1-d",
+   "text": "d) mít právo k užívání výcvikových vozidel nezbytných pro poskytování výcviku a"
+  },
+  {
+   "ref": "§ 50 odst. 1 písm. e)",
+   "anchor": "p50-1-e",
+   "text": "e) mít vytvořen kontrolní systém pro sledování souladu poskytování výuky a výcviku s plánem podle písmene a)."
+  },
+  {
+   "ref": "§ 50 odst. 2",
+   "anchor": "p50-2",
+   "text": "(2) Pokud je žadatelem o udělení akreditace k provozování výuky a výcviku právnická osoba vykonávající činnost školy, lze u osob, které jsou zaměstnanci této právnické osoby, nahradit praxi v oblasti silniční dopravy podle odstavce 1 písm. b) bodu 2 praxí ve výuce v oblasti silniční dopravy."
+  },
+  {
+   "ref": "§ 50 odst. 3",
+   "anchor": "p50-3",
+   "text": "(3) Na použití výcvikového vozidla při výcviku se obdobně použijí § 9 a 10."
+  },
+  {
+   "ref": "§ 50 odst. 4",
+   "anchor": "p50-4",
+   "text": "(4) Obory související se silniční dopravou v rámci středního vzdělání s maturitní zkouškou a vyššího odborného vzdělání stanoví prováděcí právní předpis."
+  },
+  {
+   "ref": "§ 51 odst. 1",
+   "anchor": "p51-1",
+   "text": "(1) Provozovatel školicího střediska je povinen"
+  },
+  {
+   "ref": "§ 51 odst. 1 písm. a)",
+   "anchor": "p51-1-a",
+   "text": "a) provádět výuku a výcvik podle plánu pro zajištění výuky a výcviku,"
+  },
+  {
+   "ref": "§ 51 odst. 1 písm. b)",
+   "anchor": "p51-1-b",
+   "text": "b) zajistit provádění výuky a výcviku prostřednictvím odborně způsobilých osob,"
+  },
+  {
+   "ref": "§ 51 odst. 1 písm. c)",
+   "anchor": "p51-1-c",
+   "text": "c) zajistit provádění výuky a výcviku prostřednictvím výcvikových vozidel podle § 9 a 10,"
+  },
+  {
+   "ref": "§ 51 odst. 1 písm. d)",
+   "anchor": "p51-1-d",
+   "text": "d) po celou dobu provozování své činnosti mít právo k užívání nebytových prostor a vybavení nezbytného pro poskytování výuky a mít tyto prostory a vybavení po celou dobu k dispozici,"
+  },
+  {
+   "ref": "§ 51 odst. 1 písm. e)",
+   "anchor": "p51-1-e",
+   "text": "e) po celou dobu provozování své činnosti mít právo k užívání výcvikových vozidel nezbytných pro poskytování výcviku a mít tato vozidla po celou dobu k dispozici,"
+  },
+  {
+   "ref": "§ 51 odst. 1 písm. f)",
+   "anchor": "p51-1-f",
+   "text": "f) postupovat v souladu s kontrolním systémem pro sledování souladu poskytování výuky a výcviku s plánem pro zajištění výuky a výcviku,"
+  },
+  {
+   "ref": "§ 51 odst. 1 písm. g)",
+   "anchor": "p51-1-g",
+   "text": "g) vést evidenci o uskutečněné výuce a výcviku, včetně seznamu účastníků, a"
+  },
+  {
+   "ref": "§ 51 odst. 1 písm. h)",
+   "anchor": "p51-1-h",
+   "text": "h) zaslat nejpozději 5 pracovních dnů před zahájením výuky nebo výcviku v rámci vstupního a pravidelného školení seznam přihlášených účastníků, a dále místo, datum a čas zahájení výuky nebo výcviku krajskému úřadu příslušnému podle jeho sídla a v rámci vstupního školení seznam přihlášených účastníků, a dále místo, datum a čas zahájení výuky nebo výcviku i obecnímu úřadu obce s rozšířenou působností příslušnému podle místa provozovny, v níž výuka nebo výcvik probíhá; změny v seznamu přihlášených účastníků je možné krajskému úřadu nebo obecnímu úřadu obce s rozšířenou působností doručit nejpozději 1 pracovní den před konáním školení,"
+  },
+  {
+   "ref": "§ 51 odst. 1 písm. i)",
+   "anchor": "p51-1-i",
+   "text": "i) zaslat nejpozději do 10 pracovních dnů ode dne, kdy bylo ukončeno pravidelné školení řidičů, obecnímu úřadu obce s rozšířenou působností příslušnému k rozhodování o profesní způsobilosti řidiče seznam účastníků pravidelného školení."
+  },
+  {
+   "ref": "§ 51 odst. 2",
+   "anchor": "p51-2",
+   "text": "(2) Provozovatel školicího střediska je povinen oznámit krajskému úřadu změny údajů rozhodných pro udělení akreditace a předložit o nich doklady do 15 dnů ode dne, kdy k nim došlo."
+  },
+  {
+   "ref": "§ 51 odst. 3",
+   "anchor": "p51-3",
+   "text": "(3) Provozovatel školicího střediska je povinen vydat bez zbytečného prodlení řidiči, který ukončil výuku a výcvik v tomto středisku, potvrzení o rozsahu a obsahu absolvované výuky a výcviku a datu ukončení výuky a výcviku."
+  },
+  {
+   "ref": "§ 51 odst. 4",
+   "anchor": "p51-4",
+   "text": "(4) Provozovatel školicího střediska je povinen uznat výuku a výcvik v rozsahu uvedeném v potvrzení podle předchozího odstavce, kterému se řidič podrobil u jiného provozovatele školicího střediska. U vstupního školení provozovatel školicího střediska uzná výuku a výcvik podle věty první, pouze pokud od ukončení předcházející výuky a výcviku neuplynuly více než 3 měsíce."
+  },
+  {
+   "ref": "§ 51 odst. 5",
+   "anchor": "p51-5",
+   "text": "(5) Vzor potvrzení o absolvované výuce a výcviku a datu ukončení výuky a výcviku ve školicím středisku stanoví prováděcí právní předpis."
+  },
+  {
+   "ref": "§ 52 odst. 1",
+   "anchor": "p52-1",
+   "text": "(1) Krajský úřad rozhodne o odejmutí akreditace k provozování výuky a výcviku, jestliže provozovatel školicího střediska"
+  },
+  {
+   "ref": "§ 52 odst. 1 písm. a)",
+   "anchor": "p52-1-a",
+   "text": "a) opakovaně nebo hrubým způsobem porušil povinnosti stanovené tímto zákonem,"
+  },
+  {
+   "ref": "§ 52 odst. 1 písm. b)",
+   "anchor": "p52-1-b",
+   "text": "b) přestal splňovat podmínku k udělení akreditace podle § 49 odst. 2 písm. a), nebo"
+  },
+  {
+   "ref": "§ 52 odst. 1 písm. c)",
+   "anchor": "p52-1-c",
+   "text": "c) požádal o odnětí akreditace."
+  },
+  {
+   "ref": "§ 52 odst. 2",
+   "anchor": "p52-2",
+   "text": "(2) O udělení akreditace k provozování výuky a výcviku může provozovatel, kterému byla akreditace k provozování výuky a výcviku odňata podle odstavce 1 písm. a), znovu požádat krajský úřad nejdříve po uplynutí 3 let od nabytí právní moci rozhodnutí o odnětí akreditace k provozování výuky a výcviku."
+  },
+  {
+   "ref": "§ 52a odst. 1",
+   "anchor": "p52a-1",
+   "text": "(1) Provozovatel školicího střediska může přijmout k výuce a výcviku v rámci vstupního školení pouze osobu, která"
+  },
+  {
+   "ref": "§ 52a odst. 1 písm. a)",
+   "anchor": "p52a-1-a",
+   "text": "a) podá písemnou přihlášku,"
+  },
+  {
+   "ref": "§ 52a odst. 1 písm. b)",
+   "anchor": "p52a-1-b",
+   "text": "b) je držitelem řidičského oprávnění pro příslušnou skupinu vozidel nebo se účastní výuky a výcviku k jeho získání."
+  },
+  {
+   "ref": "§ 52a odst. 2",
+   "anchor": "p52a-2",
+   "text": "(2) Pro přijetí osoby k výuce a výcviku v rámci pravidelného školení platí podmínka uvedená v odstavci 1 písm. a)."
+  },
+  {
+   "ref": "§ 52b odst. 1",
+   "anchor": "p52b-1",
+   "text": "(1) Písemnou žádost o vykonání zkoušky podává řidič u obecního úřadu obce s rozšířenou působností příslušného podle místa provozovny provozovatele školicího střediska, v níž ukončil výuku a výcvik v rámci zdokonalování odborné způsobilosti řidičů."
+  },
+  {
+   "ref": "§ 52b odst. 2",
+   "anchor": "p52b-2",
+   "text": "(2) Žadatel o vykonání zkoušky musí doložit, že"
+  },
+  {
+   "ref": "§ 52b odst. 2 písm. a)",
+   "anchor": "p52b-2-a",
+   "text": "a) absolvoval výuku a výcvik v rámci vstupního školení v plném rozsahu a doplňující výuku, stanoví-li tak tento zákon,"
+  },
+  {
+   "ref": "§ 52b odst. 2 písm. b)",
+   "anchor": "p52b-2-b",
+   "text": "b) zaplatil správní poplatek,"
+  },
+  {
+   "ref": "§ 52b odst. 2 písm. c)",
+   "anchor": "p52b-2-c",
+   "text": "c) je občanem"
+  },
+  {
+   "ref": "§ 52b odst. 2 písm. c) bod 1",
+   "anchor": "p52b-2-c-1",
+   "text": "1. členského státu Evropské unie nebo státu, který je smluvní stranou Dohody o Evropském hospodářském prostoru, (dále jen „členský stát“) nebo Švýcarské konfederace a má na území České republiky obvyklé bydliště podle zákona o silničním provozu, nebo"
+  },
+  {
+   "ref": "§ 52b odst. 2 písm. c) bod 2",
+   "anchor": "p52b-2-c-2",
+   "text": "2. jiného státu než členského státu nebo Švýcarské konfederace a vykonává závislou práci pro zaměstnavatele usazeného na území České republiky nebo podniká na území České republiky a"
+  },
+  {
+   "ref": "§ 52b odst. 2 písm. d)",
+   "anchor": "p52b-2-d",
+   "text": "d) je držitelem řidičského oprávnění pro příslušnou skupinu vozidel."
+  },
+  {
+   "ref": "§ 52b odst. 3",
+   "anchor": "p52b-3",
+   "text": "(3) Obecní úřad obce s rozšířenou působností bez zbytečného odkladu písemně sdělí žadateli místo, datum a čas konání zkoušky. Zkouška se musí konat nejpozději do 30 dnů po doručení žádosti o vykonání zkoušky a doložení všech skutečností podle odstavce 2 obecnímu úřadu obce s rozšířenou působností, nejdříve však pátý pracovní den ode dne sdělení místa, data a času konání zkoušky podle věty první."
+  },
+  {
+   "ref": "§ 52b odst. 4",
+   "anchor": "p52b-4",
+   "text": "(4) Zkouška se provádí písemnou formou a ověřuje znalosti ve všech oblastech výuky uvedených v § 47 odst. 1."
+  },
+  {
+   "ref": "§ 52b odst. 5",
+   "anchor": "p52b-5",
+   "text": "(5) Zkoušku provádí obecní úřad obce s rozšířenou působností prostřednictvím zkušebního komisaře podle § 33 odst. 2. Na zkušebního komisaře se vztahuje ustanovení § 33 odst. 4 a 5 a § 34 až 37 obdobně."
+  },
+  {
+   "ref": "§ 52b odst. 6",
+   "anchor": "p52b-6",
+   "text": "(6) Jestliže řidič při zkoušce neuspěl, může zkoušku opakovat nejvýše třikrát. Neuspěje-li řidič při druhé opakované zkoušce, musí se podrobit opakované výuce z předmětu, ve kterém neprospěl, a zkoušce. Neuspěje-li řidič ani při třetí opakované zkoušce, je povinen se zúčastnit nového vstupního školení v plném rozsahu. Opakované zkoušky musí řidič složit nejpozději do 1 roku ode dne konání první zkoušky, jinak se musí podrobit novému vstupnímu školení v plném rozsahu."
+  },
+  {
+   "ref": "§ 52b odst. 7",
+   "anchor": "p52b-7",
+   "text": "(7) Obecní úřad obce s rozšířenou působností, který provedl zkoušku, vydá žadateli bez zbytečného odkladu po vyhodnocení výsledků zkoušky písemné potvrzení o vykonání zkoušky a vyznačí v něm její výsledek."
+  },
+  {
+   "ref": "§ 52b odst. 8",
+   "anchor": "p52b-8",
+   "text": "(8) Obsah, rozsah a způsob provádění zkoušky a hodnocení jejích výsledků a vzor potvrzení o vykonání zkoušky stanoví prováděcí právní předpis."
+  },
+  {
+   "ref": "§ 52c odst. 1",
+   "anchor": "p52c-1",
+   "text": "(1) Obecní úřad obce s rozšířenou působností rozhodne na písemnou žádost řidiče, že je profesně způsobilý, pokud je držitelem řidičského oprávnění pro příslušnou skupinu vozidel a"
+  },
+  {
+   "ref": "§ 52c odst. 1 písm. a)",
+   "anchor": "p52c-1-a",
+   "text": "a) úspěšně vykonal zkoušku v období 6 měsíců před podáním žádosti, nebo"
+  },
+  {
+   "ref": "§ 52c odst. 1 písm. b)",
+   "anchor": "p52c-1-b",
+   "text": "b) se podrobil výuce a výcviku v rámci pravidelného školení v plném rozsahu a způsobem předepsaným v § 48 a má na území České republiky obvyklé bydliště podle zákona o silničním provozu, vykonává závislou práci pro zaměstnavatele usazeného na území České republiky nebo podniká na území České republiky."
+  },
+  {
+   "ref": "§ 52c odst. 2",
+   "anchor": "p52c-2",
+   "text": "(2) Splnění podmínky obvyklého bydliště, výkonu práce nebo podnikání podle odstavce 1 písm. b) musí žadatel, který nemá na území České republiky trvalý pobyt, doložit."
+  },
+  {
+   "ref": "§ 52c odst. 3",
+   "anchor": "p52c-3",
+   "text": "(3) Pokud obecní úřad obce s rozšířenou působností žádosti vyhoví, namísto písemného vyhotovení rozhodnutí vydá"
+  },
+  {
+   "ref": "§ 52c odst. 3 písm. a)",
+   "anchor": "p52c-3-a",
+   "text": "a) průkaz profesní způsobilosti řidiče, pokud řidič není držitelem řidičského průkazu vydaného Českou republikou nebo nemá na území České republiky obvyklé bydliště podle zákona o silničním provozu, nebo"
+  },
+  {
+   "ref": "§ 52c odst. 3 písm. b)",
+   "anchor": "p52c-3-b",
+   "text": "b) řidičský průkaz se záznamem profesní způsobilosti řidiče; o jeho vydání žadatel požádá postupem podle zákona o silničním provozu současně s podáním žádosti podle odstavce 1."
+  },
+  {
+   "ref": "§ 52c odst. 4",
+   "anchor": "p52c-4",
+   "text": "(4) Osoba, která má na území České republiky trvalý pobyt a je držitelem řidičského průkazu vydaného Českou republikou, může žádost podle odstavce 1 podat rovněž způsobem umožňujícím dálkový přístup prostřednictvím uživatelského rozhraní stanoveného ministerstvem. V takovém případě musí být žadatel ztotožněn prostřednictvím prostředků elektronické identifikace podle právních předpisů upravujících elektronickou identifikaci a o žádosti lze rozhodnout automatizovaně bez účasti úřední osoby. Nejsou-li splněny podmínky pro vyhovění takto podané žádosti v plném rozsahu, je o tom žadatel bezodkladně informován způsobem umožňujícím dálkový přístup prostřednictvím uživatelského rozhraní stanoveného ministerstvem a příslušný obecní úřad obce s rozšířenou působností o žádosti nerozhoduje."
+  },
+  {
+   "ref": "§ 52c odst. 5",
+   "anchor": "p52c-5",
+   "text": "(5) Platnost průkazu profesní způsobilosti řidiče nebo záznamu profesní způsobilosti řidiče do řidičského průkazu je 5 let."
+  },
+  {
+   "ref": "§ 52c odst. 6",
+   "anchor": "p52c-6",
+   "text": "(6) Ztrátu, odcizení, poškození nebo zničení průkazu profesní způsobilosti řidiče je jeho držitel povinen bez zbytečného odkladu ohlásit obecnímu úřadu obce s rozšířenou působností. Bez zbytečného odkladu po ohlášení vydá obecní úřad obce s rozšířenou působností řidiči potvrzení o ztrátě, odcizení, poškození nebo zničení průkazu profesní způsobilosti řidiče. Potvrzení nahrazuje ztracený, odcizený, poškozený nebo zničený průkaz profesní způsobilosti řidiče a jeho platnost je 30 dnů od jeho vydání."
+  },
+  {
+   "ref": "§ 52c odst. 7",
+   "anchor": "p52c-7",
+   "text": "(7) Za ztracený, odcizený, poškozený nebo zničený průkaz profesní způsobilosti řidiče vyhotoví řidiči na základě písemné žádosti a po zaplacení správního poplatku obecní úřad obce s rozšířenou působností do 20 dnů ode dne podání žádosti duplikát průkazu."
+  },
+  {
+   "ref": "§ 52c odst. 8",
+   "anchor": "p52c-8",
+   "text": "(8) Dojde-li ke změně údajů v průkazu profesní způsobilosti řidiče, vydá obecní úřad obce s rozšířenou působností řidiči na písemnou žádost nový průkaz profesní způsobilosti řidiče. Žadatel musí doložit změnu údajů. Datum ukončení platnosti nového průkazu se musí shodovat s datem ukončení platnosti průkazu, který je novým průkazem nahrazován. Pro držitele platného dokladu osvědčujícího profesní způsobilost řidiče vydaného jiným členským státem nebo Švýcarskou konfederací, který má na území České republiky obvyklé bydliště podle zákona o silničním provozu nebo který začal vykonávat závislou práci pro zaměstnavatele usazeného na území České republiky nebo podnikat na území České republiky, se použije toto ustanovení obdobně."
+  },
+  {
+   "ref": "§ 52c odst. 9",
+   "anchor": "p52c-9",
+   "text": "(9) Pro účely vedení v registru řidičů a vyhotovení průkazu profesní způsobilosti řidiče si obecní úřad obce s rozšířenou působností při podání žádosti podle odstavce 1, 7 nebo 8 opatří digitalizovanou fotografii žadatele a digitalizovaný vlastnoruční podpis žadatele. Nelze-li digitalizovanou fotografii žadatele získat z registru řidičů, z evidence občanských průkazů, z evidence cestovních dokladů nebo z agendového informačního systému cizinců nebo došlo-li k podstatné změně podoby žadatele, pořídí ji obecní úřad obce s rozšířenou působností při podání žádosti."
+  },
+  {
+   "ref": "§ 52c odst. 10",
+   "anchor": "p52c-10",
+   "text": "(10) Příslušný k rozhodování o profesní způsobilosti řidiče podle odstavce 1 a k úkonům podle odstavce 7 nebo 8 je kterýkoli obecní úřad obce s rozšířenou působností. Obecní úřad obce s rozšířenou působností, který vedl řízení podle odstavce 1 nebo provedl úkon podle odstavce 7 nebo 8, zapíše související údaje do registru řidičů."
+  },
+  {
+   "ref": "§ 52c odst. 11",
+   "anchor": "p52c-11",
+   "text": "(11) Držitel průkazu profesní způsobilosti řidiče je povinen při převzetí řidičského průkazu se záznamem profesní způsobilosti řidiče nebo nového průkazu profesní způsobilosti řidiče odevzdat obecnímu úřadu obce s rozšířenou působností dosavadní průkaz nebo potvrzení o ztrátě, odcizení, poškození nebo zničení průkazu profesní způsobilosti řidiče, pokud mu byly vydány."
+  },
+  {
+   "ref": "§ 52c odst. 12",
+   "anchor": "p52c-12",
+   "text": "(12) Vzor průkazu profesní způsobilosti řidiče a vzor potvrzení o ztrátě, odcizení, poškození nebo zničení průkazu profesní způsobilosti řidiče stanoví prováděcí právní předpis."
+  },
+  {
+   "ref": "§ 52d odst. 1",
+   "anchor": "p52d-1",
+   "text": "Zdokonalováním odborné způsobilosti řidičů, kteří mají zaznamenány v registru řidičů body za jednání zařazené do bodového hodnocení porušení povinností podle zvláštního právního předpisu, se rozumí dobrovolná účast řidiče, který nemá v registru řidičů zaznamenáno více než 10 bodů za porušení právních předpisů ohodnocená podle zvláštního právního předpisu méně než 6 body, na školení bezpečné jízdy."
+  },
+  {
+   "ref": "§ 52e odst. 1",
+   "anchor": "p52e-1",
+   "text": "(1) Zdokonalování odborné způsobilosti řidičů, kteří mají v registru řidičů zaznamenány body, provádí provozovatel školicího střediska, kterému udělil krajský úřad vyšší akreditaci k provozování školení bezpečné jízdy (dále jen \"provozovatel střediska bezpečné jízdy\")."
+  },
+  {
+   "ref": "§ 52e odst. 2",
+   "anchor": "p52e-2",
+   "text": "(2) Krajský úřad udělí vyšší akreditaci k provozování školení bezpečné jízdy žadateli na základě písemné žádosti, prokáže-li žadatel, že"
+  },
+  {
+   "ref": "§ 52e odst. 2 písm. a)",
+   "anchor": "p52e-2-a",
+   "text": "a) má udělenu akreditaci k provozování výuky a výcviku podle tohoto zákona,"
+  },
+  {
+   "ref": "§ 52e odst. 2 písm. b)",
+   "anchor": "p52e-2-b",
+   "text": "b) splňuje další požadavky podle tohoto zákona a"
+  },
+  {
+   "ref": "§ 52e odst. 2 písm. c)",
+   "anchor": "p52e-2-c",
+   "text": "c) zaplatil správní poplatek."
+  },
+  {
+   "ref": "§ 52e odst. 3",
+   "anchor": "p52e-3",
+   "text": "(3) Vyšší akreditace k provozování školení bezpečné jízdy je nepřevoditelná a nepřechází na právního nástupce."
+  },
+  {
+   "ref": "§ 52f odst. 1",
+   "anchor": "p52f-1",
+   "text": "(1) Žadatel o udělení vyšší akreditace k provozování školení bezpečné jízdy musí"
+  },
+  {
+   "ref": "§ 52f odst. 1 písm. a)",
+   "anchor": "p52f-1-a",
+   "text": "a) mít vytvořen písemný plán pro zajištění školení bezpečné jízdy, ve kterém vymezí organizaci a rozsah školení, včetně nejvyššího počtu účastníků školení, jednotlivé výukové předměty a způsob provádění školení,"
+  },
+  {
+   "ref": "§ 52f odst. 1 písm. b)",
+   "anchor": "p52f-1-b",
+   "text": "b) mít seznam lektorů bezpečné jízdy, jejichž prostřednictvím zajistí po zahájení školení bezpečné jízdy výuku a výcvik, s uvedením jejich jmen, příjmení a odborných předpokladů pro výuku a výcvik, kteří"
+  },
+  {
+   "ref": "§ 52f odst. 1 písm. b) bod 1",
+   "anchor": "p52f-1-b-1",
+   "text": "1. jsou držiteli profesního osvědčení alespoň na skupiny A, B, B+E, C, C+E a D,"
+  },
+  {
+   "ref": "§ 52f odst. 1 písm. b) bod 2",
+   "anchor": "p52f-1-b-2",
+   "text": "2. mají praxi v poskytování výuky a výcviku podle tohoto zákona po dobu nejméně 5 let a"
+  },
+  {
+   "ref": "§ 52f odst. 1 písm. b) bod 3",
+   "anchor": "p52f-1-b-3",
+   "text": "3. mají vyšší odborné nebo vysokoškolské vzdělání,"
+  },
+  {
+   "ref": "§ 52f odst. 1 písm. c)",
+   "anchor": "p52f-1-c",
+   "text": "c) prokázat, že má právo k užívání nebytových prostor a vybavení nezbytné pro poskytování školení bezpečné jízdy,"
+  },
+  {
+   "ref": "§ 52f odst. 1 písm. d)",
+   "anchor": "p52f-1-d",
+   "text": "d) prokázat, že má vytvořen kontrolní systém pro sledování souladu poskytování školení bezpečné jízdy s plánem podle písmene a), a"
+  },
+  {
+   "ref": "§ 52f odst. 1 písm. e)",
+   "anchor": "p52f-1-e",
+   "text": "e) prokázat, že má zajištěnu výcvikovou plochu, která není veřejně přístupnou pozemní komunikací, na které lze při výcviku technicky navodit různé dopravní situace a klimatické a povětrnostní podmínky."
+  },
+  {
+   "ref": "§ 52f odst. 2",
+   "anchor": "p52f-2",
+   "text": "(2) Základní technické požadavky na nebytové prostory a vybavení podle odstavce 1 písm. c) a na výcvikovou plochu podle odstavce 1 písm. e), její vybavení a technické zajištění výcviku na ní stanoví prováděcí právní předpis."
+  },
+  {
+   "ref": "§ 52g odst. 1",
+   "anchor": "p52g-1",
+   "text": "(1) Provozovatel střediska bezpečné jízdy je povinen"
+  },
+  {
+   "ref": "§ 52g odst. 1 písm. a)",
+   "anchor": "p52g-1-a",
+   "text": "a) provádět školení bezpečné jízdy podle plánu pro zajištění školení bezpečné jízdy,"
+  },
+  {
+   "ref": "§ 52g odst. 1 písm. b)",
+   "anchor": "p52g-1-b",
+   "text": "b) zajistit provádění školení bezpečné jízdy prostřednictvím lektorů bezpečné jízdy,"
+  },
+  {
+   "ref": "§ 52g odst. 1 písm. c)",
+   "anchor": "p52g-1-c",
+   "text": "c) po celou dobu provozování své činnosti mít právo k užívání nebytových prostor a vybavení nezbytného pro poskytování kurzu bezpečné jízdy a mít tyto prostory a vybavení po celou dobu k dispozici,"
+  },
+  {
+   "ref": "§ 52g odst. 1 písm. d)",
+   "anchor": "p52g-1-d",
+   "text": "d) vést evidenci o uskutečněném školení bezpečné jízdy, včetně seznamu účastníků, a"
+  },
+  {
+   "ref": "§ 52g odst. 1 písm. e)",
+   "anchor": "p52g-1-e",
+   "text": "e) zaslat nejpozději 5 pracovních dnů před zahájením školení bezpečné jízdy seznam přihlášených účastníků, místo, datum a čas zahájení školení bezpečné jízdy obecnímu úřadu obce s rozšířenou působností příslušnému podle jeho místa podnikání nebo sídla."
+  },
+  {
+   "ref": "§ 52g odst. 2",
+   "anchor": "p52g-2",
+   "text": "(2) Provozovatel střediska bezpečné jízdy může přijmout na školení bezpečné jízdy řidiče, který se hodlá zúčastnit školení bezpečné jízdy za účelem odečtení bodů v registrů řidičů, prokáže-li řidič, že má ke dni podání písemné žádosti o přijetí na školení nejvýše 10 bodů v registru řidičů za porušení právních předpisů ohodnocená podle zvláštního právního předpisu méně než 6 body."
+  },
+  {
+   "ref": "§ 52g odst. 3",
+   "anchor": "p52g-3",
+   "text": "(3) Provozovatel střediska bezpečné jízdy je povinen oznámit příslušnému krajskému úřadu změny údajů rozhodných pro vydání vyšší akreditace k provozování školení bezpečné jízdy a předložit o nich doklady do 15 dnů od jejich vzniku."
+  },
+  {
+   "ref": "§ 52g odst. 4",
+   "anchor": "p52g-4",
+   "text": "(4) Provozovatel střediska bezpečné jízdy vydá řidiči, který ukončil školení bezpečné jízdy, ke dni ukončení školení bezpečné jízdy potvrzení o ukončeném školení bezpečné jízdy."
+  },
+  {
+   "ref": "§ 52g odst. 5",
+   "anchor": "p52g-5",
+   "text": "(5) Vzor potvrzení podle odstavce 4 stanoví prováděcí právní předpis."
+  },
+  {
+   "ref": "§ 52h odst. 1",
+   "anchor": "p52h-1",
+   "text": "(1) Krajský úřad rozhodne o odnětí vyšší akreditace k provozování školení bezpečné jízdy, jestliže provozovatel střediska bezpečné jízdy"
+  },
+  {
+   "ref": "§ 52h odst. 1 písm. a)",
+   "anchor": "p52h-1-a",
+   "text": "a) opakovaně nebo hrubým způsobem porušil povinnosti stanovené tímto zákonem,"
+  },
+  {
+   "ref": "§ 52h odst. 1 písm. b)",
+   "anchor": "p52h-1-b",
+   "text": "b) přestal splňovat podmínku k udělení vyšší akreditace podle § 52e odst. 2 písm. a), nebo"
+  },
+  {
+   "ref": "§ 52h odst. 1 písm. c)",
+   "anchor": "p52h-1-c",
+   "text": "c) požádal o odnětí vyšší akreditace."
+  },
+  {
+   "ref": "§ 52h odst. 2",
+   "anchor": "p52h-2",
+   "text": "(2) O udělení vyšší akreditace k provozování školení bezpečné jízdy může provozovatel, kterému byla vyšší akreditace odejmuta podle odstavce 1 písm. a), znovu požádat krajský úřad nejdříve po uplynutí 3 let od nabytí právní moci rozhodnutí o odnětí vyšší akreditace k provozování školení bezpečné jízdy."
+  },
+  {
+   "ref": "§ 52i odst. 1",
+   "anchor": "p52i-1",
+   "text": "(1) Předmětem výuky v rámci školení bezpečné jízdy je získání a prohloubení znalostí"
+  },
+  {
+   "ref": "§ 52i odst. 1 písm. a)",
+   "anchor": "p52i-1-a",
+   "text": "a) teorie řízení a zásad bezpečné a defenzivní jízdy,"
+  },
+  {
+   "ref": "§ 52i odst. 1 písm. b)",
+   "anchor": "p52i-1-b",
+   "text": "b) nejčastějších příčin dopravních nehod a jejich předcházení,"
+  },
+  {
+   "ref": "§ 52i odst. 1 písm. c)",
+   "anchor": "p52i-1-c",
+   "text": "c) důsledků protiprávního jednání řidičů motorových vozidel,"
+  },
+  {
+   "ref": "§ 52i odst. 1 písm. d)",
+   "anchor": "p52i-1-d",
+   "text": "d) prevence a řešení mimořádných událostí v provozu na pozemních komunikacích."
+  },
+  {
+   "ref": "§ 52i odst. 2",
+   "anchor": "p52i-2",
+   "text": "(2) Předmětem výcviku v rámci školení bezpečné jízdy je praktická jízda s motorovým vozidlem pod dohledem lektora bezpečné jízdy na výcvikové ploše podle § 52f odst. 1 písm. e), zaměřená na předcházení a řešení situací, při kterých je značně ztížena možnost ovládat vozidlo, formou bezpečné a defenzivní jízdy. V průběhu a po ukončení výcviku provádí lektor bezpečné jízdy vyhodnocení chování řidiče při výcviku. K výcviku může dojít až po ukončení výuky."
+  },
+  {
+   "ref": "§ 52i odst. 3",
+   "anchor": "p52i-3",
+   "text": "(3) Učební osnovu školení bezpečné jízdy, obsah a rozsah výuky a výcviku a nejvyšší počet účastníků školení bezpečné jízdy stanoví prováděcí právní předpis."
+  },
+  {
+   "ref": "§ 52j odst. 1",
+   "anchor": "p52j-1",
+   "text": "(1) Zdokonalování odborné způsobilosti řidičů, kteří se v období do 2 let ode dne udělení řidičského oprávnění dopustili závažného porušení pravidel provozu na pozemních komunikacích, spočívá v účasti na školení začínajících řidičů."
+  },
+  {
+   "ref": "§ 52j odst. 2",
+   "anchor": "p52j-2",
+   "text": "(2) Předmětem výuky v rámci školení začínajících řidičů je získání a prohloubení znalostí teorie řízení a zásad bezpečné a defenzivní jízdy. Výuka probíhá v rozsahu 1 vyučovací hodiny."
+  },
+  {
+   "ref": "§ 52j odst. 3",
+   "anchor": "p52j-3",
+   "text": "(3) Předmětem výcviku v rámci školení začínajících řidičů je praktická jízda pod dohledem učitele výuky a výcviku. Výcvik probíhá v rozsahu 3 vyučovacích hodin. Výcvik lze provést na dvoukolovém vozidle jen v případě, že účastníkovi výcviku nebylo uděleno řidičské oprávnění pro řízení jiného vozidla. Na výcvik navazuje vyhodnocení chování řidiče při výcviku, které provádí učitel výuky a výcviku v rozsahu 1 vyučovací hodiny."
+  },
+  {
+   "ref": "§ 52j odst. 4",
+   "anchor": "p52j-4",
+   "text": "(4) Školení začínajících řidičů provádí provozovatel autoškoly. Provozovatel autoškoly je povinen"
+  },
+  {
+   "ref": "§ 52j odst. 4 písm. a)",
+   "anchor": "p52j-4-a",
+   "text": "a) provádět školení začínajících řidičů prostřednictvím učitele výuky a výcviku,"
+  },
+  {
+   "ref": "§ 52j odst. 4 písm. b)",
+   "anchor": "p52j-4-b",
+   "text": "b) provádět praktickou jízdu výcvikovým vozidlem podle § 9 a 10,"
+  },
+  {
+   "ref": "§ 52j odst. 4 písm. c)",
+   "anchor": "p52j-4-c",
+   "text": "c) vést evidenci o uskutečněných školeních začínajících řidičů, včetně seznamu účastníků, a"
+  },
+  {
+   "ref": "§ 52j odst. 4 písm. d)",
+   "anchor": "p52j-4-d",
+   "text": "d) před zahájením výuky zaslat obecnímu úřadu obce s rozšířenou působností příslušnému podle místa provozovny provozovatele autoškoly seznam přihlášených účastníků a místo, datum a čas zahájení výuky."
+  },
+  {
+   "ref": "§ 52j odst. 5",
+   "anchor": "p52j-5",
+   "text": "(5) Účastník školení začínajících řidičů předloží provozovateli autoškoly výpis svých údajů z registru řidičů, který není starší než 30 dní."
+  },
+  {
+   "ref": "§ 52j odst. 6",
+   "anchor": "p52j-6",
+   "text": "(6) O absolvování školení začínajících řidičů vydá provozovatel autoškoly potvrzení."
+  },
+  {
+   "ref": "§ 52j odst. 7",
+   "anchor": "p52j-7",
+   "text": "(7) Obsah a způsob provádění školení začínajících řidičů, nejvyšší počet účastníků školení začínajících řidičů, vzor potvrzení o jeho absolvování a způsob vedení evidence o uskutečněných školeních začínajících řidičů stanoví prováděcí právní předpis."
+  },
+  {
+   "ref": "§ 53 odst. 1",
+   "anchor": "p53-1",
+   "text": "(1) Státní správu ve věcech získávání a zdokonalování odborné způsobilosti k řízení motorových vozidel podle tohoto zákona a v rozsahu jím vymezeném vykonávají obecní úřady obcí s rozšířenou působností, krajský úřad a ministerstvo."
+  },
+  {
+   "ref": "§ 53 odst. 2",
+   "anchor": "p53-2",
+   "text": "(2) Obecní úřad obce s rozšířenou působností"
+  },
+  {
+   "ref": "§ 53 odst. 2 písm. a)",
+   "anchor": "p53-2-a",
+   "text": "a) rozhoduje o vydání registrace k provozování autoškoly, o její změně a o jejím odnětí,"
+  },
+  {
+   "ref": "§ 53 odst. 2 písm. b)",
+   "anchor": "p53-2-b",
+   "text": "b) schvaluje výcvikové vozidlo pro jeho použití k výcviku v autoškole a změny jeho užívání,"
+  },
+  {
+   "ref": "§ 53 odst. 2 písm. c)",
+   "anchor": "p53-2-c",
+   "text": "c) zařazuje žadatele o řidičské oprávnění ke zkouškám z odborné způsobilosti a provádí tyto zkoušky,"
+  },
+  {
+   "ref": "§ 53 odst. 2 písm. d)",
+   "anchor": "p53-2-d",
+   "text": "d) rozhoduje o profesní způsobilosti řidiče,"
+  },
+  {
+   "ref": "§ 53 odst. 2 písm. e)",
+   "anchor": "p53-2-e",
+   "text": "e) projednává přestupky podle tohoto zákona v rozsahu své působnosti podle tohoto odstavce."
+  },
+  {
+   "ref": "§ 53 odst. 3",
+   "anchor": "p53-3",
+   "text": "(3) Krajský úřad"
+  },
+  {
+   "ref": "§ 53 odst. 3 písm. a)",
+   "anchor": "p53-3-a",
+   "text": "a) rozhoduje o udělení profesního osvědčení a o jeho odnětí,"
+  },
+  {
+   "ref": "§ 53 odst. 3 písm. b)",
+   "anchor": "p53-3-b",
+   "text": "b) provádí zkoušky učitelů výuky a výcviku,"
+  },
+  {
+   "ref": "§ 53 odst. 3 písm. c)",
+   "anchor": "p53-3-c",
+   "text": "c) rozhoduje o udělení akreditace k provozování výuky a výcviku v rámci zdokonalování odborné způsobilosti řidičů pro účely profesní způsobilosti řidičů a o udělení vyšší akreditace k provozování školení bezpečné jízdy a o odnětí akreditace nebo vyšší akreditace,"
+  },
+  {
+   "ref": "§ 53 odst. 3 písm. d)",
+   "anchor": "p53-3-d",
+   "text": "d) projednává přestupky podle tohoto zákona v rozsahu své působnosti podle tohoto odstavce."
+  },
+  {
+   "ref": "§ 53 odst. 4",
+   "anchor": "p53-4",
+   "text": "(4) Ministerstvo"
+  },
+  {
+   "ref": "§ 53 odst. 4 písm. a)",
+   "anchor": "p53-4-a",
+   "text": "a) rozhoduje o vydání průkazu zkušebního komisaře, o jeho prodloužení a o jeho odnětí,"
+  },
+  {
+   "ref": "§ 53 odst. 4 písm. b)",
+   "anchor": "p53-4-b",
+   "text": "b) provádí základní školení a provádí zkoušky zkušebních komisařů,"
+  },
+  {
+   "ref": "§ 53 odst. 4 písm. c)",
+   "anchor": "p53-4-c",
+   "text": "c) provádí zdokonalovací školení zkušebních komisařů a přezkušuje zkušební komisaře,"
+  },
+  {
+   "ref": "§ 53 odst. 4 písm. d)",
+   "anchor": "p53-4-d",
+   "text": "d) projednává přestupky podle tohoto zákona v rozsahu své působnosti podle tohoto odstavce."
+  },
+  {
+   "ref": "§ 54 odst. 1",
+   "anchor": "p54-1",
+   "text": "(1) Státní dozor ve věcech získávání a zdokonalování odborné způsobilosti k řízení motorových vozidel vykonávají obecní úřady obcí s rozšířenou působností a krajské úřady. Státní dozor ve věcech zkušebních komisařů vykonává ministerstvo, a to alespoň v rozsahu 4 hodin v průběhu 5 let u každého zkušebního komisaře; dozor zahrnuje provádění nejméně 2 zkoušek odborné způsobilosti žadatelů o řidičská oprávnění."
+  },
+  {
+   "ref": "§ 54 odst. 2",
+   "anchor": "p54-2",
+   "text": "(2) Vrchní státní dozor nad výkonem státního dozoru ve věcech získávání a zdokonalování odborné způsobilosti k řízení motorových vozidel a dále ve věcech výkonu státní správy podle § 53 odst. 4 vykonává ministerstvo. Při výkonu vrchního státního dozoru může ministerstvo vykonávat činnosti náležející státnímu dozoru."
+  },
+  {
+   "ref": "§ 54 odst. 3",
+   "anchor": "p54-3",
+   "text": "(3) Pověření k výkonu státního dozoru nebo vrchního státního dozoru ve věcech odborné způsobilosti k řízení motorových vozidel ve formě průkazu vydává správní orgán, do jehož působnosti výkon dozoru spadá. Náležitosti průkazu a jeho vzor stanoví prováděcí právní předpis."
+  },
+  {
+   "ref": "§ 56 odst. 1",
+   "anchor": "p56-1",
+   "text": "(1) Přestupku se dopustí ten, kdo"
+  },
+  {
+   "ref": "§ 56 odst. 1 písm. a)",
+   "anchor": "p56-1-a",
+   "text": "a) v rozporu s § 2 provozuje autoškolu bez registrace k provozování autoškoly,"
+  },
+  {
+   "ref": "§ 56 odst. 1 písm. b)",
+   "anchor": "p56-1-b",
+   "text": "b) v rozporu s § 49 provozuje školicí středisko bez akreditace k provozování výuky a výcviku,"
+  },
+  {
+   "ref": "§ 56 odst. 1 písm. c)",
+   "anchor": "p56-1-c",
+   "text": "c) v rozporu s § 52e provozuje středisko bezpečné jízdy bez vyšší akreditace k provozování školení bezpečné jízdy,"
+  },
+  {
+   "ref": "§ 56 odst. 1 písm. d)",
+   "anchor": "p56-1-d",
+   "text": "d) v rozporu s § 52j provádí školení začínajících řidičů bez registrace k provozování autoškoly."
+  },
+  {
+   "ref": "§ 56 odst. 2",
+   "anchor": "p56-2",
+   "text": "(2) Právnická nebo podnikající fyzická osoba se jako provozovatel autoškoly dopustí přestupku tím, že"
+  },
+  {
+   "ref": "§ 56 odst. 2 písm. a)",
+   "anchor": "p56-2-a",
+   "text": "a) v rozporu s § 4 poskytuje výuku a výcvik v rozsahu, který neodpovídá registraci k provozování autoškoly,"
+  },
+  {
+   "ref": "§ 56 odst. 2 písm. b)",
+   "anchor": "p56-2-b",
+   "text": "b) v rozporu s § 3 provádí výuku a výcvik osobami, které nejsou držiteli platného profesního osvědčení,"
+  },
+  {
+   "ref": "§ 56 odst. 2 písm. c)",
+   "anchor": "p56-2-c",
+   "text": "c) v rozporu s § 5 nenahlásí změny údajů a dokladů stanovených jako náležitosti žádosti o vydání registrace k provozování autoškoly,"
+  },
+  {
+   "ref": "§ 56 odst. 2 písm. d)",
+   "anchor": "p56-2-d",
+   "text": "d) v rozporu s § 9 provádí výcvik neschváleným výcvikovým vozidlem,"
+  },
+  {
+   "ref": "§ 56 odst. 2 písm. e)",
+   "anchor": "p56-2-e",
+   "text": "e) přijme jako žadatele o řidičské oprávnění osobu, která nesplňuje podmínky podle § 13,"
+  },
+  {
+   "ref": "§ 56 odst. 2 písm. f)",
+   "anchor": "p56-2-f",
+   "text": "f) opakovaně nebo závažným způsobem nedodrží obsah a rozsah výuky a výcviku stanovený v § 20,"
+  },
+  {
+   "ref": "§ 56 odst. 2 písm. g)",
+   "anchor": "p56-2-g",
+   "text": "g) v rozporu s § 25 nepředá příslušnému obecnímu úřadu obce s rozšířenou působností seznamy žadatelů k získání řidičského oprávnění,"
+  },
+  {
+   "ref": "§ 56 odst. 2 písm. h)",
+   "anchor": "p56-2-h",
+   "text": "h) v rozporu s § 32 nepřihlásí písemně žadatele k získání řidičského oprávnění ke zkoušce,"
+  },
+  {
+   "ref": "§ 56 odst. 2 písm. i)",
+   "anchor": "p56-2-i",
+   "text": "i) v rozporu s § 52j neprovádí školení začínajících řidičů prostřednictvím učitele výuky a výcviku,"
+  },
+  {
+   "ref": "§ 56 odst. 2 písm. j)",
+   "anchor": "p56-2-j",
+   "text": "j) v rozporu s § 52j provádí praktickou jízdu neschváleným výcvikovým vozidlem,"
+  },
+  {
+   "ref": "§ 56 odst. 2 písm. k)",
+   "anchor": "p56-2-k",
+   "text": "k) v rozporu s § 52j nedodrží stanovený obsah nebo rozsah školení začínajících řidičů,"
+  },
+  {
+   "ref": "§ 56 odst. 2 písm. l)",
+   "anchor": "p56-2-l",
+   "text": "l) v rozporu s § 52j nevede evidenci o uskutečněném školení začínajících řidičů, včetně seznamu účastníků,"
+  },
+  {
+   "ref": "§ 56 odst. 2 písm. m)",
+   "anchor": "p56-2-m",
+   "text": "m) v rozporu s § 52j nezašle před zahájením výuky seznam přihlášených účastníků a místo, datum a čas zahájení výuky obecnímu úřadu obce s rozšířenou působností příslušnému podle místa provozovny provozovatele autoškoly,"
+  },
+  {
+   "ref": "§ 56 odst. 2 písm. n)",
+   "anchor": "p56-2-n",
+   "text": "n) v rozporu s § 52j nevydá potvrzení o absolvování školení začínajících řidičů."
+  },
+  {
+   "ref": "§ 56 odst. 3",
+   "anchor": "p56-3",
+   "text": "(3) Právnická nebo podnikající fyzická osoba se jako provozovatel školicího střediska dopustí přestupku tím, že"
+  },
+  {
+   "ref": "§ 56 odst. 3 písm. a)",
+   "anchor": "p56-3-a",
+   "text": "a) v rozporu s § 51 neprovádí výuku a výcvik prostřednictvím odborně způsobilých osob,"
+  },
+  {
+   "ref": "§ 56 odst. 3 písm. b)",
+   "anchor": "p56-3-b",
+   "text": "b) v rozporu s § 51 provádí výcvik neschváleným výcvikovým vozidlem,"
+  },
+  {
+   "ref": "§ 56 odst. 3 písm. c)",
+   "anchor": "p56-3-c",
+   "text": "c) v rozporu s § 51 neprovádí výuku a výcvik podle plánu pro zajištění výuky a výcviku,"
+  },
+  {
+   "ref": "§ 56 odst. 3 písm. d)",
+   "anchor": "p56-3-d",
+   "text": "d) v rozporu s § 51 nevede evidenci o uskutečněné výuce a výcviku včetně seznamu účastníků,"
+  },
+  {
+   "ref": "§ 56 odst. 3 písm. e)",
+   "anchor": "p56-3-e",
+   "text": "e) v rozporu s § 51 nezašle nejpozději 5 pracovních dnů před zahájením výuky nebo výcviku v rámci vstupního a pravidelného školení seznam přihlášených účastníků, místo, datum a čas zahájení výuky nebo výcviku krajskému úřadu, popřípadě i obecnímu úřadu obce s rozšířenou působností,"
+  },
+  {
+   "ref": "§ 56 odst. 3 písm. f)",
+   "anchor": "p56-3-f",
+   "text": "f) v rozporu s § 51 neoznámí krajskému úřadu změny údajů rozhodných pro udělení akreditace k provozování výuky a výcviku a nepředloží o nich doklady,"
+  },
+  {
+   "ref": "§ 56 odst. 3 písm. g)",
+   "anchor": "p56-3-g",
+   "text": "g) v rozporu s § 51 nevydá bez zbytečného prodlení řidiči, který ukončil výuku a výcvik, potvrzení o rozsahu a obsahu výuky a výcviku a datu jejich ukončení,"
+  },
+  {
+   "ref": "§ 56 odst. 3 písm. h)",
+   "anchor": "p56-3-h",
+   "text": "h) přijme k výuce a výcviku osobu, která nesplňuje podmínky podle § 52a,"
+  },
+  {
+   "ref": "§ 56 odst. 3 písm. i)",
+   "anchor": "p56-3-i",
+   "text": "i) v rozporu s § 51 nezašle nejpozději do 10 pracovních dnů ode dne, kdy bylo ukončeno pravidelné školení řidičů, příslušnému úřadu seznam účastníků pravidelného školení."
+  },
+  {
+   "ref": "§ 56 odst. 4",
+   "anchor": "p56-4",
+   "text": "(4) Právnická nebo podnikající fyzická osoba se jako provozovatel střediska bezpečné jízdy dopustí přestupku tím, že"
+  },
+  {
+   "ref": "§ 56 odst. 4 písm. a)",
+   "anchor": "p56-4-a",
+   "text": "a) v rozporu s § 52g neprovádí výuku a výcvik bezpečné jízdy prostřednictvím lektorů bezpečné jízdy,"
+  },
+  {
+   "ref": "§ 56 odst. 4 písm. b)",
+   "anchor": "p56-4-b",
+   "text": "b) v rozporu s § 52g neprovádí školení bezpečné jízdy podle plánu pro zajištění školení bezpečné jízdy,"
+  },
+  {
+   "ref": "§ 56 odst. 4 písm. c)",
+   "anchor": "p56-4-c",
+   "text": "c) v rozporu s § 52g nevede evidenci o uskutečněném školení bezpečné jízdy, včetně seznamu účastníků,"
+  },
+  {
+   "ref": "§ 56 odst. 4 písm. d)",
+   "anchor": "p56-4-d",
+   "text": "d) v rozporu s § 52g nezašle nejpozději 5 pracovních dnů před zahájením školení bezpečné jízdy seznam přihlášených účastníků, místo, datum a čas zahájení školení bezpečné jízdy příslušnému obecnímu úřadu obce s rozšířenou působností,"
+  },
+  {
+   "ref": "§ 56 odst. 4 písm. e)",
+   "anchor": "p56-4-e",
+   "text": "e) v rozporu s § 52g neoznámí příslušnému krajskému úřadu změny údajů rozhodných pro udělení vyšší akreditace k provozování školení bezpečné jízdy a nepředloží o nich doklady,"
+  },
+  {
+   "ref": "§ 56 odst. 4 písm. f)",
+   "anchor": "p56-4-f",
+   "text": "f) v rozporu s § 52g nevydá bez zbytečného prodlení řidiči, který ukončil školení bezpečné jízdy, potvrzení o rozsahu a obsahu absolvovaného školení bezpečné jízdy a datu ukončení školení bezpečné jízdy,"
+  },
+  {
+   "ref": "§ 56 odst. 4 písm. g)",
+   "anchor": "p56-4-g",
+   "text": "g) přijme na školení bezpečné jízdy osobu, která nesplňuje podmínky podle § 52g."
+  },
+  {
+   "ref": "§ 56 odst. 5",
+   "anchor": "p56-5",
+   "text": "(5) Za přestupek lze uložit pokutu"
+  },
+  {
+   "ref": "§ 56 odst. 5 písm. a)",
+   "anchor": "p56-5-a",
+   "text": "a) do 1 000 000 Kč, jde-li o přestupek podle odstavce 1, odstavce 2 písm. a), b), d), e), f), i), j) a k), odstavce 3 písm. a), b), c), h) a i) a odstavce 4 písm. a) a b),"
+  },
+  {
+   "ref": "§ 56 odst. 5 písm. b)",
+   "anchor": "p56-5-b",
+   "text": "b) do 100 000 Kč, jde-li o přestupek podle odstavce 2 písm. c), g), h), l) a m), odstavce 3 písm. d), e) a f) a odstavce 4 písm. c), d), e) a g),"
+  },
+  {
+   "ref": "§ 56 odst. 5 písm. c)",
+   "anchor": "p56-5-c",
+   "text": "c) do 10 000 Kč, jde-li o přestupek podle odstavce 2 písm. n), odstavce 3 písm. g) a odstavce 4 písm. f)."
+  },
+  {
+   "ref": "§ 59 odst. 1",
+   "anchor": "p59-1",
+   "text": "V řízení ve věcech upravených tímto zákonem se postupuje podle správního řádu."
+  },
+  {
+   "ref": "§ 59a odst. 1",
+   "anchor": "p59a-1",
+   "text": "Působnosti stanovené krajskému úřadu nebo obecnímu úřadu obce s rozšířenou působností podle tohoto zákona jsou výkonem přenesené působnosti."
+  },
+  {
+   "ref": "§ 60 odst. 1",
+   "anchor": "p60-1",
+   "text": "(1) Provozovatel autoškoly, který provozuje autoškolu na základě živnostenského oprávnění vydaného před účinností tohoto zákona, může požádat do jednoho roku od účinnosti tohoto zákona okresní úřad o vydání registrace k provozování autoškoly. Do doby rozhodnutí okresního úřadu se provozovatel autoškoly považuje za provozovatele, kterému byla vydána registrace podle tohoto zákona. Nepožádá-li provozovatel autoškoly ve stanovené lhůtě o vydání registrace k provozování autoškoly, dosavadní oprávnění provozovat autoškolu zaniká."
+  },
+  {
+   "ref": "§ 60 odst. 2",
+   "anchor": "p60-2",
+   "text": "(2) Držitel průkazu zkušebního komisaře vydaného před účinností tohoto zákona je povinen nejpozději do jednoho roku od účinnosti tohoto zákona sdělit ministerstvu údaje a doložit doklady vyžadované pro průkaz zkušebního komisaře podle ustanovení § 34 tohoto zákona. Nesplní-li tuto povinnost, pozbude dosavadní průkaz zkušebního komisaře platnosti uplynutím posledního dne lhůty stanovené pro sdělení údajů a doložení dokladů. Nesplňuje-li dosavadní držitel průkazu zkušebního komisaře na základě sdělených údajů a předložených dokladů podmínky stanovené v § 34 tohoto zákona, zahájí ministerstvo řízení o odnětí průkazu zkušebního komisaře."
+  },
+  {
+   "ref": "§ 60 odst. 3",
+   "anchor": "p60-3",
+   "text": "(3) Držitel osvědčení pro učitele výcviku vydaného před účinností tohoto zákona (dále jen \"držitel osvědčení\") je povinen nejpozději do jednoho roku od účinnosti tohoto zákona sdělit ministerstvu údaje a doložit doklady vyžadované pro profesní osvědčení v § 21 tohoto zákona. Nesplní-li tuto povinnost, pozbude dosavadní osvědčení pro učitele výcviku platnosti uplynutím posledního dne lhůty stanovené pro sdělení údajů a doložení dokladů. Nesplňuje-li dosavadní držitel osvědčení na základě sdělených údajů a předložených dokladů podmínky stanovené v § 21 tohoto zákona, zahájí ministerstvo řízení o odnětí osvědčení pro učitele výcviku. Nesplňuje-li dosavadní držitel osvědčení podmínku stanovenou v § 21 odst. 2 písm. a), ministerstvo potvrdí platnost dosavadního osvědčení pro učitele výcviku, pokud má držitel osvědčení nejméně patnáctiletou praxi v provádění výuky a výcviku."
+  },
+  {
+   "ref": "§ 60 odst. 4",
+   "anchor": "p60-4",
+   "text": "(4) Provozovatel autoškoly je povinen označit výcviková vozidla podle tohoto zákona do šesti měsíců od účinnosti tohoto zákona."
+  },
+  {
+   "ref": "§ 60 odst. 5",
+   "anchor": "p60-5",
+   "text": "(5) Okresní úřad může po dobu šesti měsíců od účinnosti tohoto zákona pověřit prováděním zkoušek držitele průkazu zkušebního komisaře vydaného před účinností tohoto zákona, který není zaměstnancem okresního úřadu."
+  },
+  {
+   "ref": "§ 61 odst. 1",
+   "anchor": "p61-1",
+   "text": "(1) Práva a povinnosti z pracovněprávních vztahů zaměstnanců Ministerstva vnitra a příslušníků Policie České republiky, kteří ke dni účinnosti tohoto zákona vykonávají ty druhy činností, které bude podle § 53 odst. 4 tohoto zákona vykonávat ministerstvo, přecházejí z Ministerstva vnitra a Policie České republiky na ministerstvo."
+  },
+  {
+   "ref": "§ 61 odst. 2",
+   "anchor": "p61-2",
+   "text": "(2) Práva a povinnosti z pracovněprávních vztahů zaměstnanců Ministerstva vnitra a příslušníků Policie České republiky, kteří ke dni účinnosti tohoto zákona vykonávají ty druhy činností, které bude podle § 53 odst. 2 tohoto zákona vykonávat okresní úřad, přecházejí z Ministerstva vnitra a Policie České republiky na okresní úřady."
+  },
+  {
+   "ref": "§ 62 odst. 1",
+   "anchor": "p62-1",
+   "text": "Ministerstvo vydá vyhlášku k provedení § 11 odst. 2, § 13 odst. 5, § 20 odst. 5, § 21 odst. 1, § 23 odst. 3, § 27 odst. 5, § 30 odst. 2, § 34 odst. 3, § 35 odst. 4, § 36 odst. 5, § 40 odst. 3, § 41 odst. 3, § 42 odst. 6, § 47 odst. 6, § 48 odst. 7, § 50 odst. 4, § 51 odst. 5, § 52b odst. 8, § 52c odst. 12, § 52f odst. 2, § 52g odst. 5, § 52i odst. 3, § 52j odst. 7 a § 54 odst. 3."
+  },
+  {
+   "ref": "§ 63 odst. 1",
+   "anchor": "p63-1",
+   "text": "Zákon č. 455/1991 Sb., o živnostenském podnikání (živnostenský zákon), ve znění zákona č. 231/1992 Sb., zákona č. 591/1992 Sb., zákona č. 273/1993 Sb., zákona č. 303/1993 Sb., zákona č. 38/1994 Sb., zákona č. 42/1994 Sb., zákona č. 136/1994 Sb., zákona č. 200/1994 Sb., zákona č. 237/1995 Sb., zákona č. 286/1995 Sb., zákona č. 94/1996 Sb., zákona č. 95/1996 Sb., zákona č. 147/1996 Sb., zákona č. 19/1997 Sb., zákona č. 49/1997 Sb., zákona č. 61/1997 Sb., zákona č. 79/1997 Sb., zákona č. 217/1997 Sb., zákona č. 280/1997 Sb., zákona č. 15/1998 Sb., zákona č. 83/1998 Sb., zákona č. 157/1998 Sb., zákona č. 167/1998 Sb., zákona č. 159/1999 Sb., zákona č. 356/1999 Sb., zákona č. 358/1999 Sb., zákona č. 360/1999 Sb., zákona č. 363/1999 Sb., zákona č. 27/2000 Sb., zákona č. 29/2000 Sb., zákona č. 121/2000 Sb., zákona č. 122/2000 Sb., zákona č. 123/2000 Sb., zákona č. 124/2000 Sb., zákona č. 151/2000 Sb., zákona č. 158/2000 Sb. a zákona č. 249/2000 Sb., se mění takto:"
+  },
+  {
+   "ref": "§ 63 odst. a",
+   "anchor": "p63-a",
+   "text": "a) dosavadní obor živnosti \"Vyučování řízení motorových vozidel\" ve sloupci 1 nově zní: \"Provozování autoškoly\","
+  },
+  {
+   "ref": "§ 63 odst. b",
+   "anchor": "p63-b",
+   "text": "b) text ve sloupci 2 se nahrazuje textem, který zní: \"odborná způsobilost podle § 3 odst. 1 zákona č. 247/2000 Sb., o získávání a zdokonalování odborné způsobilosti k řízení motorových vozidel a o změnách některých zákonů\"."
+  },
+  {
+   "ref": "§ 64 odst. 1",
+   "anchor": "p64-1",
+   "text": "Zákon č. 12/1997 Sb., o bezpečnosti a plynulosti provozu na pozemních komunikacích, ve znění zákona č. 168/1999 Sb., se mění takto:"
+  },
+  {
+   "ref": "§ 64 odst. 1",
+   "anchor": "p64-1",
+   "text": "1. V § 1 odst. 1 se ve větě prvé za slovo \"vykonává\" vkládají slova \"podle tohoto zákona\"."
+  },
+  {
+   "ref": "§ 64 odst. 2",
+   "anchor": "p64-2",
+   "text": "2. V § 2 odst. 1 se písmeno e) zrušuje."
+  },
+  {
+   "ref": "§ 64 odst. 3",
+   "anchor": "p64-3",
+   "text": "3. V § 2 se odstavec 2 zrušuje."
+  },
+  {
+   "ref": "§ 64 odst. 4",
+   "anchor": "p64-4",
+   "text": "4. V § 3 písm. d) se slova \"zkoušení žadatelů o řidičská oprávnění,\" zrušují."
+  },
+  {
+   "ref": "§ 64 odst. 5",
+   "anchor": "p64-5",
+   "text": "5. V § 4 se písmeno c) zrušuje."
+  },
+  {
+   "ref": "§ 64 odst. 6",
+   "anchor": "p64-6",
+   "text": "6. V § 5 odst. 1 se písmena f), g) a h) zrušují."
+  },
+  {
+   "ref": "§ 64 odst. 7",
+   "anchor": "p64-7",
+   "text": "7. V § 5 odst. 1 písm. j) se slova \"a autoškol\" zrušují."
+  },
+  {
+   "ref": "§ 64 odst. 8",
+   "anchor": "p64-8",
+   "text": "8. V § 9 odst. 4 se slova \"způsob provádění výuky a výcviku, rozsah potřebných odborných znalostí, způsob provádění zkoušek z odborné způsobilosti k řízení motorových vozidel,\" zrušují."
+  },
+  {
+   "ref": "§ 64 odst. 9",
+   "anchor": "p64-9",
+   "text": "9. § 12 se zrušuje."
+  },
+  {
+   "ref": "§ 65 odst. 1",
+   "anchor": "p65-1",
+   "text": "Tento zákon nabývá účinnosti dnem 1. ledna 2001."
+  }
+ ]
+}

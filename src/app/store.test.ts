@@ -157,3 +157,91 @@ describe('resumeExam with damaged or stale saved data', () => {
     expect(s.session!.records[0].correct).toBe(false)
   })
 })
+
+describe('control of error: a missed question returns until answered right', () => {
+  const wrongOf = (c: string) => (['a', 'b', 'c'] as const).find((x) => x !== c)!
+  // Play a whole round; answer wrong for questions whose index is in `miss`.
+  function round(s: AppState, miss: number[] = [], today?: string): AppState {
+    const total = s.session!.questions.length
+    for (let i = 0; i < total; i++) {
+      const cur = currentQuestion(s.session!)!
+      s = reducer(s, { type: 'answer', choice: miss.includes(i) ? wrongOf(cur.correct) : cur.correct, now: 1000 + i })
+      s = reducer(s, { type: 'next', today })
+    }
+    return s
+  }
+  const practice = () => {
+    let s = reducer(start(), { type: 'setCategories', categories: new Set(['Zdravotnická příprava']) })
+    return reducer(s, { type: 'startPractice', rng: makeRng(3) })
+  }
+
+  it('after the last question, the missed ones come back instead of the results', () => {
+    let s = practice()
+    const first = s.session!.questions
+    s = round(s, [0, 2])
+    expect(s.view).toBe('quiz')
+    expect(s.session!.questions.map((q) => q.id)).toEqual([first[0].id, first[2].id])
+    expect(s.correction?.missed).toBe(2)
+  })
+
+  it('a second attempt does not change the progress record', () => {
+    let s = round(practice(), [0])
+    const id = currentQuestion(s.session!)!.id
+    const before = statFor(s.progress, id)
+    s = round(s)
+    expect(statFor(s.progress, id)).toEqual(before)
+  })
+
+  it('the set ends once no error stands, with the first-attempt score', () => {
+    let s = practice()
+    const total = s.session!.questions.length
+    s = round(s, [1])
+    s = round(s, [0]) // still wrong
+    expect(s.view).toBe('quiz')
+    s = round(s)
+    expect(s.view).toBe('results')
+    expect(s.session!.questions.length).toBe(total)
+    expect(score(s.session!)).toBe(total - 1)
+    expect(s.correction?.missed).toBe(1)
+  })
+
+  it('a daily lesson counts as complete only when its errors are corrected', () => {
+    let s = reducer(start(), { type: 'startLesson', rng: makeRng(2) })
+    s = round(s, [0], '2026-06-06')
+    expect(s.progress.streak.current).toBe(0)
+    s = round(s, [], '2026-06-06')
+    expect(s.view).toBe('results')
+    expect(s.progress.streak.current).toBe(1)
+  })
+
+  it('the exam keeps the real exam rules: no second attempts', () => {
+    let s = reducer(start(), { type: 'startExam', rng: makeRng(4), now: 0 })
+    s = round(s, [0, 1])
+    expect(s.view).toBe('results')
+    expect(s.correction).toBeNull()
+  })
+
+  it('a clean round goes straight to the results', () => {
+    const s = round(practice())
+    expect(s.view).toBe('results')
+    expect(s.correction).toBeNull()
+  })
+})
+
+describe('control of error: timing', () => {
+  it('a lesson is credited to the day its first round ended, even if corrections run past midnight', () => {
+    const wrongOf = (c: string) => (['a', 'b', 'c'] as const).find((x) => x !== c)!
+    let s = reducer(start(), { type: 'startLesson', rng: makeRng(2) })
+    const n = s.session!.questions.length
+    for (let i = 0; i < n; i++) {
+      const cur = currentQuestion(s.session!)!
+      s = reducer(s, { type: 'answer', choice: i === 0 ? wrongOf(cur.correct) : cur.correct, now: i })
+      s = reducer(s, { type: 'next', today: '2026-06-06' })
+    }
+    const cur = currentQuestion(s.session!)!
+    s = reducer(s, { type: 'answer', choice: cur.correct, now: 99 })
+    s = reducer(s, { type: 'next', today: '2026-06-07' })
+    expect(s.view).toBe('results')
+    expect(s.progress.streak.lastDate).toBe('2026-06-06')
+  })
+})
