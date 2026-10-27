@@ -6,6 +6,7 @@ import {
   type ProgressData,
 } from './progress'
 import { emptyJizdyState, type JizdyState } from './jizdy'
+import type { AnswerRecord } from './session'
 
 // Anonymous progress lives under STORAGE_KEY; a signed-in account's under STORAGE_KEY:<uid>,
 // so one account's answers never end up in another's on a shared device.
@@ -116,4 +117,35 @@ export function loadJizdy(uid?: string): JizdyState {
 
 export function saveJizdy(state: JizdyState, uid?: string): void {
   writeJson(jizdyKey(uid), state)
+}
+
+// The exam in progress, so a reload, a back gesture or the browser dropping the tab does not
+// throw it away. Only ids are stored; questions come from the bundled dataset.
+export const EXAM_KEY = 'autoskola-kviz:exam:v1'
+export interface SavedExam {
+  ids: number[]
+  index: number
+  records: AnswerRecord[]
+  endsAt: number
+}
+
+export function loadExam(): SavedExam | null {
+  try {
+    const raw = storage()?.getItem(EXAM_KEY)
+    const e = raw ? (JSON.parse(raw) as SavedExam) : null
+    return e && Array.isArray(e.ids) && Array.isArray(e.records) && typeof e.endsAt === 'number' ? e : null
+  } catch {
+    return null
+  }
+}
+
+export function saveExam(exam: SavedExam | null): void {
+  if (exam) writeJson(EXAM_KEY, exam)
+  else {
+    try {
+      storage()?.removeItem(EXAM_KEY)
+    } catch {
+      // storage unavailable: nothing was saved either
+    }
+  }
 }

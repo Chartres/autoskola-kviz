@@ -46,6 +46,18 @@ test('exam mode from practice tab: timer, no reveal', async ({ page }) => {
   await expect(page.locator('button[data-state="correct"]')).toHaveCount(0)
 })
 
+test('exam survives a reload mid-test', async ({ page }) => {
+  await page.goto('/')
+  await page.getByRole('button', { name: 'Procvičovat' }).click()
+  await page.getByRole('button', { name: /Zkušební test/ }).click()
+  await page.locator('button[data-state="idle"]').first().click()
+  await page.getByRole('button', { name: /Další/ }).click()
+  await expect(page.getByText('02 / 25')).toBeVisible()
+  await page.reload()
+  await expect(page.getByText('02 / 25')).toBeVisible()
+  await expect(page.getByRole('timer')).toBeVisible()
+})
+
 test('guide and stats tabs are reachable', async ({ page }) => {
   await page.goto('/')
   await page.getByRole('button', { name: 'Průvodce' }).click()
