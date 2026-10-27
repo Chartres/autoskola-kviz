@@ -190,4 +190,40 @@ describe('QuestionCard', () => {
     expect(screen.getByText('A 1a')).toBeInTheDocument()
     expect(screen.getByText('Zatáčka vpravo')).toBeInTheDocument()
   })
+
+  it('renders a video with the still as poster for animated questions', () => {
+    setup({ question: { ...Q, video: 'anim.mp4', image: 'still.webp' } })
+    const video = screen.getByTestId('question-video')
+    expect(video).toHaveAttribute('poster', expect.stringContaining('still.webp'))
+    expect(video.querySelector('source')).toHaveAttribute('src', expect.stringContaining('anim.mp4'))
+    expect(screen.getByText(/Spusťte animaci/)).toBeInTheDocument()
+  })
+
+  it('falls back to the still when the video fails to load (offline, unsupported)', () => {
+    setup({ question: { ...Q, video: 'anim.mp4', image: 'still.webp' } })
+    fireEvent.error(screen.getByTestId('question-video'))
+    expect(screen.queryByTestId('question-video')).not.toBeInTheDocument()
+    expect(screen.getByRole('img', { name: /Obrázek k otázce/ })).toBeInTheDocument()
+    expect(screen.getByText(/Animace nedostupná/)).toBeInTheDocument()
+  })
+
+  it('ignores answer keys originating from the video element', () => {
+    const { onNext } = setup({ question: { ...Q, video: 'anim.mp4', image: 'still.webp' }, chosen: 'b' })
+    // Space on the focused video toggles play/pause; it must not also advance.
+    fireEvent.keyDown(screen.getByTestId('question-video'), { key: ' ' })
+    expect(onNext).not.toHaveBeenCalled()
+    fireEvent.keyDown(document.body, { key: ' ' })
+    expect(onNext).toHaveBeenCalledTimes(1)
+  })
+
+  it('answer keys still work while the video has focus (after pressing play)', () => {
+    const { onAnswer } = setup({ question: { ...Q, video: 'anim.mp4', image: 'still.webp' } })
+    fireEvent.keyDown(screen.getByTestId('question-video'), { key: '2' })
+    expect(onAnswer).toHaveBeenCalledWith('b')
+  })
+
+  it('names the video for screen readers', () => {
+    setup({ question: { ...Q, video: 'anim.mp4', image: 'still.webp' } })
+    expect(screen.getByLabelText('Animace k otázce 1')).toBe(screen.getByTestId('question-video'))
+  })
 })

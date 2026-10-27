@@ -74,6 +74,14 @@ describe('dataset invariants', () => {
     }
   })
 
+  it('every video question plays a local mp4 (the still alone loses the situation)', () => {
+    const withVideo = ALL_QUESTIONS.filter((q) => q.videoUrl)
+    for (const q of withVideo) {
+      expect(q.video, `q${q.id}`).toMatch(/\.mp4$/)
+      expect(MEDIA_FILES.has(q.video!), `q${q.id}: ${q.video}`).toBe(true)
+    }
+  })
+
   it('zásady questions are tagged with licence groups and cover skupina B', () => {
     const zasady = byCategory('Zásady bezpečné jízdy')
     for (const q of zasady) {
