@@ -26,3 +26,31 @@ describe('SEO topic page', () => {
     expect(window.location.pathname).toBe('/')
   })
 })
+
+describe('question page', () => {
+  it('/otazka/<id>-<slug>/ opens practice of its okruh on that question, and leaves the URL after', async () => {
+    const { getQuestion } = await import('@/domain/questions')
+    const { currentQuestion } = await import('@/domain/session')
+    let shown: number | undefined
+    function Q() {
+      const { state, dispatch } = useApp()
+      shown = state.session ? currentQuestion(state.session)?.id : undefined
+      return <button onClick={() => dispatch({ type: 'goMenu' })}>{state.view}</button>
+    }
+    window.history.replaceState(null, '', '/otazka/13-chodec-na-prechodu/')
+    render(<AppProvider><Q /></AppProvider>)
+    expect(screen.getByRole('button').textContent).toBe('quiz')
+    expect(shown).toBe(13)
+    expect(getQuestion(13)).toBeTruthy()
+    act(() => screen.getByRole('button').click())
+    expect(window.location.pathname).toBe('/')
+  })
+})
+
+describe('mock-exam guide page', () => {
+  it('/zkouska-nanecisto/ opens the timed mock exam', () => {
+    window.history.replaceState(null, '', '/zkouska-nanecisto/')
+    render(<AppProvider><View /></AppProvider>)
+    expect(screen.getByRole('button').textContent).toBe('exam')
+  })
+})
