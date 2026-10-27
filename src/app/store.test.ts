@@ -1,5 +1,7 @@
 import { describe, it, expect } from 'vitest'
-import { reducer, initialState, type AppState } from './store'
+import { reducer, initialState, resumeExam, type AppState } from './store'
+import { EXAM } from '@/domain/exam'
+import { getQuestion } from '@/domain/questions'
 import { makeRng } from '@/domain/rng'
 import { emptyProgress, recordAnswer, statFor } from '@/domain/progress'
 import { currentQuestion, score } from '@/domain/session'
@@ -125,5 +127,33 @@ describe('app store', () => {
     expect(s.view).toBe('home')
     expect(s.session).toBeNull()
     expect(s.examEndsAt).toBeNull()
+  })
+})
+
+describe('resumeExam with damaged or stale saved data', () => {
+  const now = 1_000_000
+  const ids = [1, 2, 3]
+  const ok = { ids, index: 1, records: [{ id: 1, choice: 'a' as const, correct: true }], endsAt: now + 60_000 }
+
+  it('ignores records that are not answer records instead of crashing', () => {
+    const s = resumeExam(start(), { ...ok, records: [null, 5] as never }, now)
+    expect(s.view).toBe('home')
+  })
+
+  it('a position past the last question opens the results', () => {
+    const s = resumeExam(start(), { ...ok, index: 99 }, now)
+    expect(s.view).toBe('results')
+  })
+
+  it('drops a deadline further away than one exam length (clock moved, corrupt value)', () => {
+    const s = resumeExam(start(), { ...ok, endsAt: now + (EXAM.timeLimitMinutes + 5) * 60_000 }, now)
+    expect(s.view).toBe('home')
+  })
+
+  it('re-checks each saved answer against the current answer key', () => {
+    const q = getQuestion(1)!
+    const wrong = (['a', 'b', 'c'] as const).find((c) => c !== q.correct)!
+    const s = resumeExam(start(), { ...ok, records: [{ id: 1, choice: wrong, correct: true }] }, now)
+    expect(s.session!.records[0].correct).toBe(false)
   })
 })

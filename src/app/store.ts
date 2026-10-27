@@ -22,6 +22,8 @@ import {
   type ProgressData,
 } from '@/domain/progress'
 import { buildLesson } from '@/domain/lesson'
+import { getQuestion } from '@/domain/questions'
+import type { SavedExam } from '@/domain/storage'
 import { shuffle } from '@/domain/rng'
 
 // Bottom-tab destinations (persistent nav) + focused full-screen flows.
@@ -57,6 +59,45 @@ export function initialState(): AppState {
     selectedCategories: new Set(),
     search: '',
     jizdyState: emptyJizdyState(),
+  }
+}
+
+/** An exam whose time ran out longer ago than this is dropped on load instead of shown. */
+export const STALE_EXAM_MS = 60 * 60 * 1000
+
+/**
+ * Put a saved exam back on screen at app load: still running → the same question and
+ * deadline; time ran out while away → its results; abandoned long ago → nothing.
+ */
+export function resumeExam(state: AppState, saved: SavedExam | null, now: number): AppState {
+  if (!saved) return state
+  const found = saved.ids.map(getQuestion)
+  if (!found.length || found.some((q) => !q)) return state
+  const questions = found as NonNullable<(typeof found)[number]>[]
+  // Damaged storage, or a deadline beyond one exam length (clock moved back): start clean.
+  if (saved.endsAt > now + EXAM.timeLimitMinutes * 60 * 1000) return state
+  const byId = new Map(questions.map((q) => [q.id, q]))
+  const valid = saved.records.every(
+    (r) => !!r && typeof r === 'object' && byId.has(r.id) && ['a', 'b', 'c'].includes(r.choice),
+  )
+  if (!valid) return state
+  // Score against today's answer key, in case a deploy corrected one meanwhile.
+  const records = saved.records.map((r) => ({ ...r, correct: r.choice === byId.get(r.id)!.correct }))
+  const session: SessionState = {
+    questions,
+    index: Math.max(0, Math.min(Number(saved.index) || 0, questions.length)),
+    records,
+    chosen: Object.fromEntries(records.map((r) => [r.id, r.choice])),
+  }
+  if (now < saved.endsAt && !isFinished(session)) {
+    return { ...begin(state, 'exam', session), examEndsAt: saved.endsAt }
+  }
+  if (now - saved.endsAt > STALE_EXAM_MS) return state
+  return {
+    ...begin(state, 'exam', session),
+    view: 'results',
+    examResult: evaluateExam(session),
+    examEndsAt: null,
   }
 }
 

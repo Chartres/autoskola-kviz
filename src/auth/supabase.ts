@@ -12,6 +12,18 @@ const publishableKey = (import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY ??
  */
 export const isAuthConfigured = Boolean(url && publishableKey)
 
+/**
+ * True when this page load came back from a sign-in link (tokens or a PKCE code in the URL).
+ * Read before createClient, which strips them from the URL.
+ */
+export const authLinkLanding =
+  typeof window !== 'undefined' && isAuthLinkHash(window.location.hash)
+
+/** The implicit-flow sign-in link returns with tokens in the hash; a `?code=` alone is not one. */
+export function isAuthLinkHash(hash: string): boolean {
+  return /(^#|&)access_token=/.test(hash)
+}
+
 export const supabase: SupabaseClient | null = isAuthConfigured
   ? createClient(url!, publishableKey!, {
       auth: { persistSession: true, detectSessionInUrl: true },

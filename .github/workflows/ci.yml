@@ -11,9 +11,11 @@ permissions:
   pages: write
   id-token: write
 
+# Per ref: a newer push supersedes an older run of the same branch or PR, but a PR run
+# never cancels main's deploy (one shared group did, so merges went undeployed).
 concurrency:
-  group: pages
-  cancel-in-progress: true
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
   test:
@@ -41,6 +43,10 @@ jobs:
     needs: test
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
+    # One Pages deployment at a time; a queued one waits instead of cancelling.
+    concurrency:
+      group: pages
+      cancel-in-progress: false
     permissions:
       contents: write # the release tag below
       pages: write
