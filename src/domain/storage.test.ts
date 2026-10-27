@@ -1,5 +1,5 @@
-import { describe, it, expect, beforeEach } from 'vitest'
-import { loadProgress, saveProgress, loadJizdy, saveJizdy, STORAGE_KEY } from './storage'
+import { describe, it, expect, beforeEach, vi } from 'vitest'
+import { loadProgress, saveProgress, loadJizdy, saveJizdy, claimAnonymousProgress, STORAGE_KEY } from './storage'
 import { emptyProgress, recordAnswer, toggleBookmark } from './progress'
 import { logLesson, emptyJizdyState, type LessonRecord } from './jizdy'
 
@@ -84,5 +84,29 @@ describe('jizdy persistence', () => {
     saveJizdy({ version: 1, lessons: [lesson('mine'), lesson('both')] }, 'u1')
     saveJizdy({ version: 1, lessons: [lesson('both'), lesson('anon')] })
     expect(loadJizdy('u1').lessons.map((l) => l.id)).toEqual(['mine', 'both', 'anon'])
+  })
+})
+
+describe('claimAnonymousProgress', () => {
+  beforeEach(() => localStorage.clear())
+
+  it('moves anonymous answers into the account and empties the anonymous key', () => {
+    saveProgress(recordAnswer(emptyProgress(), 3, true, 100))
+    expect(Object.keys(claimAnonymousProgress('A').stats)).toEqual(['3'])
+    expect(Object.keys(loadProgress('A').stats)).toEqual(['3'])
+    expect(localStorage.getItem(STORAGE_KEY)).toBeNull()
+  })
+
+  it('keeps the anonymous key when the account copy could not be written (quota, private mode)', () => {
+    saveProgress(recordAnswer(emptyProgress(), 3, true, 100))
+    const setItem = vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+      throw new DOMException('full', 'QuotaExceededError')
+    })
+    try {
+      claimAnonymousProgress('A')
+    } finally {
+      setItem.mockRestore()
+    }
+    expect(Object.keys(loadProgress().stats)).toEqual(['3'])
   })
 })
