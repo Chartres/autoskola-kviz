@@ -28,8 +28,18 @@ test('daily set from home: finishable, with completion + streak', async ({ page 
   await page.getByRole('button', { name: /Denní dávka/ }).click()
   // a daily lesson is always exactly 10 questions
   await expect(page.getByText('01 / 10')).toBeVisible()
-  for (let i = 0; i < 10; i++) {
-    await page.locator('button[data-state="idle"]').first().click()
+  // Control of error: missed questions come back until right, so answer them from what the
+  // app revealed the first time.
+  const known = new Map<string, string>()
+  for (let step = 0; step < 60 && !(await page.getByText('Lekce dokončena').isVisible()); step++) {
+    const q = (await page.locator('h2').first().textContent())!
+    const want = known.get(q)
+    const option = want
+      ? page.locator('button[data-state="idle"]', { hasText: want })
+      : page.locator('button[data-state="idle"]')
+    await option.first().click()
+    const right = await page.locator('button[data-state="correct"]').first().innerText()
+    known.set(q, right.split('\n').pop()!.replace('✓ Správná odpověď', '').trim())
     await page.getByRole('button', { name: /Další|Dokončit/ }).click()
   }
   await expect(page.getByText('Lekce dokončena')).toBeVisible()
