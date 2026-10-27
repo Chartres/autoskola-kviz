@@ -49,4 +49,15 @@ describe('analytics on the theory journey', () => {
     expect(sent().filter((e) => !DB_ACCEPTS.includes(e))).toEqual([])
     expect(track).toHaveBeenCalledWith('start_practice', expect.objectContaining({ topic: expect.any(String) }))
   })
+
+  it('a topic landing page counts its practice screen, not a home view that never showed', () => {
+    window.history.replaceState(null, '', '/okruh/dopravni-znacky/')
+    try {
+      render(<App />)
+      expect(track).not.toHaveBeenCalledWith('page_view', { view: 'home' })
+      expect(track).toHaveBeenCalledWith('page_view', { view: 'quiz' })
+    } finally {
+      window.history.replaceState(null, '', '/')
+    }
+  })
 })

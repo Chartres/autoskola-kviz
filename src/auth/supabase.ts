@@ -17,8 +17,12 @@ export const isAuthConfigured = Boolean(url && publishableKey)
  * Read before createClient, which strips them from the URL.
  */
 export const authLinkLanding =
-  typeof window !== 'undefined' &&
-  /(^|[#&?])(access_token|code)=/.test(window.location.hash + window.location.search)
+  typeof window !== 'undefined' && isAuthLinkHash(window.location.hash)
+
+/** The implicit-flow sign-in link returns with tokens in the hash; a `?code=` alone is not one. */
+export function isAuthLinkHash(hash: string): boolean {
+  return /(^#|&)access_token=/.test(hash)
+}
 
 export const supabase: SupabaseClient | null = isAuthConfigured
   ? createClient(url!, publishableKey!, {

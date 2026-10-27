@@ -113,8 +113,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, [])
 
   // One page_view per screen (tabs and full-screen flows alike); views are not URLs here.
+  // A topic landing page opens straight into practice: its first 'home' never shows.
+  const landingRef = useRef(!!topicFromPath(window.location.pathname))
   useEffect(() => {
-    track('page_view', { view: state.view })
+    const skip = landingRef.current && state.view === 'home'
+    landingRef.current = false
+    if (!skip) track('page_view', { view: state.view })
   }, [state.view])
 
   // Once practice started from an SEO page ends, leave the topic URL so a reload or an
