@@ -42,13 +42,16 @@ export function loadProgress(uid?: string): ProgressData {
   }
 }
 
-function writeJson(key: string, value: unknown): void {
+/** Returns whether the value was written. */
+function writeJson(key: string, value: unknown): boolean {
   const s = storage()
-  if (!s) return
+  if (!s) return false
   try {
     s.setItem(key, JSON.stringify(value))
+    return true
   } catch {
     // private mode / quota exceeded — degrade gracefully to in-memory only
+    return false
   }
 }
 
@@ -65,7 +68,8 @@ export function claimAnonymousProgress(uid: string): ProgressData {
   const s = storage()
   if (!s?.getItem(STORAGE_KEY)) return own
   const merged = mergeProgress(own, loadProgress())
-  saveProgress(merged, uid)
+  // Empty the anonymous key only once the account holds the answers on disk.
+  if (!writeJson(progressKey(uid), merged)) return merged
   try {
     s.removeItem(STORAGE_KEY)
   } catch {
