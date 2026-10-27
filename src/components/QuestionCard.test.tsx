@@ -166,4 +166,15 @@ describe('QuestionCard', () => {
     fireEvent.keyDown(document.body, { key: ' ' })
     expect(onNext).toHaveBeenCalledTimes(1)
   })
+
+  it('answer keys still work while the video has focus (after pressing play)', () => {
+    const { onAnswer } = setup({ question: { ...Q, video: 'anim.mp4', image: 'still.webp' } })
+    fireEvent.keyDown(screen.getByTestId('question-video'), { key: '2' })
+    expect(onAnswer).toHaveBeenCalledWith('b')
+  })
+
+  it('names the video for screen readers', () => {
+    setup({ question: { ...Q, video: 'anim.mp4', image: 'still.webp' } })
+    expect(screen.getByLabelText('Animace k otázce 1')).toBe(screen.getByTestId('question-video'))
+  })
 })

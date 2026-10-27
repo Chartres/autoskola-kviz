@@ -172,16 +172,21 @@ def publish_video(name: str) -> str | None:
     (app falls back to the still image).
     """
     if not shutil.which("ffmpeg"):
+        print("ffmpeg not found: video questions keep only their still", file=sys.stderr)
         return None
     src = CACHE_M / name
     dst = PUBLIC_MEDIA / name
     if not dst.exists():
+        # Encode beside the target and move it in only when complete, so a failed run
+        # never leaves a truncated clip that the next run would treat as done.
+        tmp = dst.with_suffix(".part.mp4")
         subprocess.run(
-            ["ffmpeg", "-loglevel", "error", "-i", str(src), "-an",
+            ["ffmpeg", "-y", "-loglevel", "error", "-i", str(src), "-an",
              "-vf", "scale='min(720,iw)':-2", "-c:v", "libx264", "-crf", "30",
-             "-preset", "slow", "-movflags", "+faststart", str(dst)],
+             "-preset", "slow", "-movflags", "+faststart", str(tmp)],
             check=True, capture_output=True,
         )
+        tmp.replace(dst)
     return dst.name
 
 

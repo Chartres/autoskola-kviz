@@ -85,10 +85,13 @@ export function QuestionCard({
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
-      // Video controls own their keys (Space = play/pause): don't also answer or advance.
-      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLVideoElement) return
-      // A focused button/link handles Enter/Space itself (bookmark, back, "Další").
-      const onControl = e.target instanceof HTMLButtonElement || e.target instanceof HTMLAnchorElement
+      if (e.target instanceof HTMLInputElement) return
+      // A focused button/link handles Enter/Space itself (bookmark, back, "Další"), and a
+      // focused video uses Space for play/pause; answer keys still work on both.
+      const onControl =
+        e.target instanceof HTMLButtonElement ||
+        e.target instanceof HTMLAnchorElement ||
+        e.target instanceof HTMLVideoElement
       if (e.metaKey || e.ctrlKey || e.altKey) return
       const key = e.key.length === 1 ? e.key.toLowerCase() : e.key
       const choice = KEY_TO_CHOICE[key]
@@ -135,6 +138,7 @@ export function QuestionCard({
             <video
               key={question.id}
               data-testid="question-video"
+              aria-label={`Animace k otázce ${question.id}`}
               controls
               playsInline
               preload="metadata"
