@@ -38,13 +38,17 @@ function makeClient(
 }
 
 const { clientHolder } = vi.hoisted(() => ({
-  clientHolder: { client: null as ReturnType<typeof makeClient> | null },
+  clientHolder: { client: null as ReturnType<typeof makeClient> | null, landing: false },
 }))
 
 vi.mock('./supabase', () => ({
   get supabase() { return clientHolder.client },
   isAuthConfigured: true,
+  get authLinkLanding() { return clientHolder.landing },
 }))
+
+const { track } = vi.hoisted(() => ({ track: vi.fn() }))
+vi.mock('../analytics', () => ({ track, identify: vi.fn() }))
 
 // ── Test component ────────────────────────────────────────────────────────────
 
@@ -60,6 +64,9 @@ function Spy() {
 
 beforeEach(() => {
   clientHolder.client = null
+  clientHolder.landing = false
+  track.mockClear()
+  localStorage.clear()
 })
 
 // ── Tests ─────────────────────────────────────────────────────────────────────
@@ -258,5 +265,45 @@ describe('AuthContext signInWithEmail (C2M4)', () => {
     expect(window.location.hash).toBe('')
     act(() => screen.getByRole('button').click())
     expect(screen.getByRole('button').textContent).toBe('no-error')
+  })
+})
+
+describe('AuthContext signup analytics', () => {
+  const sent = (e: string) => track.mock.calls.filter(([n]) => n === e)
+
+  it('sends signup_started when the magic link is sent, then signup_completed on sign-in', async () => {
+    const client = makeClient(null)
+    clientHolder.client = client
+    let signInWithEmail!: (email: string) => Promise<{ ok: boolean; error?: string }>
+    function Capture() {
+      signInWithEmail = useAuth().signInWithEmail
+      return null
+    }
+    render(<AuthProvider><Capture /></AuthProvider>)
+    await waitFor(() => expect(client.auth.getSession).toHaveBeenCalled())
+    await signInWithEmail('user@example.com')
+    expect(sent('signup_started')).toEqual([['signup_started', { method: 'email' }]])
+
+    await act(async () => client._fire('SIGNED_IN', 'bob'))
+    await act(async () => client._fire('SIGNED_IN', 'bob')) // tab refocus repeats SIGNED_IN
+    expect(sent('signup_completed')).toHaveLength(1)
+  })
+
+  it('sends signup_completed when the page opens from a sign-in link', async () => {
+    clientHolder.landing = true
+    clientHolder.client = makeClient('dana')
+    render(<AuthProvider><Spy /></AuthProvider>)
+    await waitFor(() => expect(screen.getByTestId('user-id').textContent).toBe('dana'))
+    expect(sent('signup_completed')).toHaveLength(1)
+  })
+
+  it('does not count a restored session as a sign-up', async () => {
+    const client = makeClient('erik')
+    clientHolder.client = client
+    render(<AuthProvider><Spy /></AuthProvider>)
+    await waitFor(() => expect(screen.getByTestId('user-id').textContent).toBe('erik'))
+    await act(async () => client._fire('INITIAL_SESSION', 'erik'))
+    await act(async () => client._fire('SIGNED_IN', 'erik'))
+    expect(sent('signup_completed')).toHaveLength(0)
   })
 })

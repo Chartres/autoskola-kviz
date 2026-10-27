@@ -27,7 +27,7 @@ export function HomeScreen() {
 
   // Free topic choice from day 1 — no locked path (Montessori).
   function startTopic(name: CategoryName) {
-    track('start_topic', { topic: name })
+    track('start_practice', { topic: name, from: 'home' })
     dispatch({ type: 'setCategories', categories: new Set([name]) })
     dispatch({ type: 'setSearch', search: '' })
     dispatch({ type: 'startPractice', rng: freshRng() })

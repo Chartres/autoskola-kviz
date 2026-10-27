@@ -37,8 +37,10 @@ Adoption is read from web KPIs — no extra telemetry needed.
 
 ## Analytics (Common Platform)
 Vendored client: `src/platform/flywheel-client.ts` (`app: 'autoskola-kviz'`). Fire the shared
-taxonomy (`page_view`, `signup_*`, `conversion`, `key_action`, `feedback_given`, `error`). The aha
-moment fires `conversion`; set `activation_event: "conversion"` in the portfolio record and the
+taxonomy (`page_view`, `signup_*`, `conversion`, `key_action`, `feedback_given`, `error`). `track()` is
+typed to `ACCEPTED_EVENTS` in `src/analytics.ts`, a copy of the `events` insert policy: the database
+silently rejects any other name, so add a name to the policy before using it. The aha moment (any
+finished practice set) fires `conversion`; set `activation_event: "conversion"` in the portfolio record and the
 conversion rate flows into the console with no extra wiring.
 
 ## Done means
