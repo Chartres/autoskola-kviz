@@ -72,7 +72,7 @@
   ]
  },
  "7": {
-  "why": "Na semaforu svítí signál, který zakazuje vjet do křižovatky. Ani současně svítící červená a žlutá neznamená volno, jen povinnost připravit se k jízdě. Řidič musí zastavit před příčnou čárou souvislou.",
+  "why": "Na semaforu nad křižovatkou svítí červený signál „Stůj!“. Řidič musí zastavit před příčnou čárou souvislou. Ani současně svítící červená a žlutá neznamená volno, jen povinnost připravit se k jízdě.",
   "sources": [
    {
     "law": "361/2000 Sb.",
@@ -133,13 +133,13 @@
   ]
  },
  "12": {
-  "why": "V situaci ve videu nastal jeden z případů, kdy zákon vjetí na přejezd zakazuje (např. výstražná světla, závory, blížící se vlak nebo nedostatek místa za přejezdem). Řidič proto musí zastavit a počkat.",
+  "why": "Závory jsou sice zdvižené, ale přejezdové zabezpečovací zařízení dává výstrahu dvěma červenými střídavě přerušovanými světly. Za této výstrahy řidič na přejezd vjet nesmí a musí počkat, až světla zhasnou.",
   "sources": [
    {
     "law": "361/2000 Sb.",
-    "ref": "§ 29 odst. 1",
-    "anchor": "p29-1",
-    "quote": "Řidič nesmí vjíždět na železniční přejezd"
+    "ref": "§ 29 odst. 1 písm. a)",
+    "anchor": "p29-1-a",
+    "quote": "je-li dávána výstraha dvěma červenými střídavě přerušovanými světly signálu přejezdového zabezpečovacího zařízení"
    }
   ]
  },
@@ -433,19 +433,13 @@
   ]
  },
  "37": {
-  "why": "V dané situaci mají účastníci volno (policista k nim stojí bokem, popř. svítí zelená). Při volnu smí řidič jet rovně i odbočit vpravo nebo vlevo, pokud dodrží pravidla pro odbočování.",
+  "why": "Policista stojí k cyklistům bokem, což je pokyn „Volno“. Řidič při něm smí jet rovně, a dodrží-li pravidla pro odbočování, smí odbočit vpravo i vlevo.",
   "sources": [
    {
     "law": "361/2000 Sb.",
     "ref": "§ 75 odst. 1 písm. c)",
     "anchor": "p75-1-c",
     "quote": "\"Volno\" pro směr, ke kterému stojí policista bokem; řidič může pokračovat v jízdě, a dodrží-li ustanovení o odbočování, může odbočit vpravo nebo vlevo"
-   },
-   {
-    "law": "361/2000 Sb.",
-    "ref": "§ 70 odst. 2 písm. c)",
-    "anchor": "p70-2-c",
-    "quote": "dodrží-li ustanovení o odbočování, může odbočit vpravo nebo vlevo"
    }
   ]
  },
@@ -2807,8 +2801,21 @@
   ]
  },
  "238": {
-  "why": "Pravidlo přednosti zprava platí jen tam, kde přednost neurčuje nic jiného, například značky nebo vyjíždění z místa mimo silnici. V zobrazené situaci jde o takový případ, a proto vozidlu zprava přednost dávat nemusíte.",
-  "sources": []
+  "why": "Značka „Hlavní pozemní komunikace“ na rohu označuje silnici, po které jedete, jako hlavní. Vozidlo zprava přijíždí po vedlejší komunikaci a musí dát přednost vám, takže pravidlo pravé ruky se tu neuplatní.",
+  "sources": [
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 2, značka P 2",
+    "anchor": "sign-P2",
+    "quote": "Značka označuje zejména v obci hlavní pozemní komunikaci v nejbližší křižovatce"
+   },
+   {
+    "law": "361/2000 Sb.",
+    "ref": "§ 22 odst. 1",
+    "anchor": "p22-1",
+    "quote": "musí dát přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím po hlavní pozemní komunikaci"
+   }
+  ]
  },
  "239": {
   "why": "Oddělený tramvajový pás se smí přejíždět jen příčně a na místě k tomu určeném. Ani při tom nesmí řidič tramvaj ohrozit ani omezit, tramvaj tedy musí nechat projet.",
@@ -2822,8 +2829,14 @@
   ]
  },
  "240": {
-  "why": "Přijíždíte po vedlejší silnici označené značkou přednosti, proto musíte dát přednost všem, kdo jedou po hlavní silnici, ať přijíždějí zprava, nebo zleva.",
+  "why": "Na křižovatce stojí značka „Dej přednost v jízdě!“, přijíždíte tedy po vedlejší silnici. Přednost musíte dát všem vozidlům na hlavní silnici, ať přijíždějí zprava, nebo zleva.",
   "sources": [
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 2, značka P 4",
+    "anchor": "sign-P4",
+    "quote": "Značka označuje vedlejší pozemní komunikaci."
+   },
    {
     "law": "361/2000 Sb.",
     "ref": "§ 22 odst. 1",
@@ -2905,8 +2918,14 @@
   ]
  },
  "247": {
-  "why": "Z vedlejší silnice musíte dát přednost všem, kdo přicházejí po hlavní silnici: vozidlům, jezdcům na zvířatech, organizované skupině chodců i průvodcům hnaných zvířat. Žádný z nich vám přednost dávat nemusí.",
+  "why": "Značka „Dej přednost v jízdě!“ označuje vaši silnici jako vedlejší. Musíte dát přednost všem, kdo přicházejí po hlavní silnici: vozidlům, jezdcům na zvířatech, organizované skupině chodců i průvodcům hnaných zvířat.",
   "sources": [
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 2, značka P 4",
+    "anchor": "sign-P4",
+    "quote": "Značka označuje vedlejší pozemní komunikaci."
+   },
    {
     "law": "361/2000 Sb.",
     "ref": "§ 22 odst. 1",
@@ -4158,8 +4177,14 @@
   ]
  },
  "356": {
-  "why": "Když hlavní pozemní komunikace na křižovatce zatáčí vlevo, řidič, který po ní pokračuje, mění směr jízdy. Proto musí dát znamení o změně směru jízdy vlevo.",
+  "why": "Pod značkou „Hlavní pozemní komunikace“ je dodatková tabulka „Tvar křižovatky“: hlavní silnice v křižovatce zatáčí vlevo. Kdo po ní pokračuje, mění směr jízdy, a proto musí dát znamení o změně směru vlevo.",
   "sources": [
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 6, značka E 2b",
+    "anchor": "sign-E2b",
+    "quote": "Tabulka vyznačuje skutečný tvar křižovatky a upřesňuje, která komunikace je hlavní a která vedlejší."
+   },
    {
     "law": "361/2000 Sb.",
     "ref": "§ 30 odst. 1",
@@ -4169,13 +4194,19 @@
   ]
  },
  "357": {
-  "why": "Na příkaz značky „Stůj, dej přednost v jízdě!“ musí řidič zastavit tam, odkud má do křižovatky náležitý rozhled. Je-li takové místo až na přechodu, smí tam zastavit; chodce přitom nesmí ohrozit ani omezit.",
+  "why": "Před přechodem stojí značka „Dej přednost v jízdě!“. Zastavení kvůli dání přednosti je přerušení jízdy z důvodu nezávislého na vůli řidiče, nikoli zakázané zastavení na přechodu; pokud řidič odjinud křižovatku nevidí, smí zastavit i na přechodu, chodce však nesmí ohrozit ani omezit.",
   "sources": [
    {
     "law": "361/2000 Sb.",
-    "ref": "§ 22 odst. 4",
-    "anchor": "p22-4",
-    "quote": "musí řidič zastavit vozidlo na takovém místě, odkud má do křižovatky náležitý rozhled"
+    "ref": "§ 2 odst. 1 písm. p)",
+    "anchor": "p2-1-p",
+    "quote": "zastavit vozidlo znamená přerušit jízdu z důvodu nezávislého na vůli řidiče"
+   },
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 2, značka P 4",
+    "anchor": "sign-P4",
+    "quote": "Značka označuje vedlejší pozemní komunikaci."
    }
   ]
  },
@@ -4264,17 +4295,30 @@
   ]
  },
  "364": {
-  "why": "Podle obrázku platí za křižovatkou v přímém směru omezení na 20 km/h. Taková nejvyšší rychlost platí například v obytné, pěší nebo sdílené zóně, kde je nutné počítat s chodci na vozovce.",
-  "sources": []
+  "why": "Za křižovatkou stojí na začátku ulice značka „Obytná zóna“. V obytné zóně smí řidič jet nejvýše 20 km/h.",
+  "sources": [
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 5, značka IZ 5a",
+    "anchor": "sign-IZ5a",
+    "quote": "Značka označuje oblast, kde kromě obecných pravidel provozu na pozemních komunikacích platí zvláštní pravidla pro provoz v obytné zóně."
+   },
+   {
+    "law": "361/2000 Sb.",
+    "ref": "§ 39 odst. 5",
+    "anchor": "p39-5",
+    "quote": "V obytné zóně a pěší zóně smí řidič jet rychlostí nejvýše 20 km.h-1."
+   }
+  ]
  },
  "365": {
-  "why": "Na tramvajový pás v úrovni vozovky smí řidič vjet mimo jiné při otáčení, takže se přes něj do protisměru otočit smí. Nesmí přitom ohrozit ani omezit tramvaj.",
+  "why": "Tramvajový pás je od vozovky oddělený travnatým pásem. Takový pás se smí přejíždět jen příčně na místě k tomu přizpůsobeném, a to je zpevněné přerušení pásu před řidičem. Otočit se přes něj tedy smí, ale nesmí ohrozit ani omezit tramvaj.",
   "sources": [
    {
     "law": "361/2000 Sb.",
     "ref": "§ 13 odst. 2",
     "anchor": "p13-2",
-    "quote": "Na tramvajový pás v úrovni vozovky se smí v podélném směru vjet jen při objíždění, předjíždění, odbočování, otáčení"
+    "quote": "od vozovky jinak oddělený například obrubníkem se smí přejíždět jen příčně, a to na místě k tomu přizpůsobeném"
    }
   ]
  },
@@ -4440,13 +4484,13 @@
   ]
  },
  "379": {
-  "why": "Zvednuté závory a dobrý rozhled samy nestačí. Před přejezdem se řidič musí přesvědčit, zda ho může bezpečně přejet; v situaci na obrázku to možné není, proto vjet nesmí.",
+  "why": "Na přejezdovém zabezpečovacím zařízení svítí červená přerušovaná světla. Při této výstraze řidič na přejezd vjet nesmí, i když jsou závory zvednuté a trať se zdá volná.",
   "sources": [
    {
     "law": "361/2000 Sb.",
-    "ref": "§ 28 odst. 1",
-    "anchor": "p28-1",
-    "quote": "zejména se přesvědčit, zda může železniční přejezd bezpečně přejet"
+    "ref": "§ 29 odst. 1 písm. a)",
+    "anchor": "p29-1-a",
+    "quote": "je-li dávána výstraha dvěma červenými střídavě přerušovanými světly signálu přejezdového zabezpečovacího zařízení"
    }
   ]
  },
@@ -4833,8 +4877,14 @@
   ]
  },
  "412": {
-  "why": "Když cyklista jede ve vyhrazeném jízdním pruhu a auto vedle něj v jiném pruhu rychleji, zákon to za předjíždění nepovažuje. Povinný odstup 1,5 m nebo 1 m se proto neuplatní, opatrnost ale ano.",
+  "why": "Červený pruh se symbolem kola je jízdní pruh pro cyklisty. Platí pro něj pravidla vyhrazeného pruhu: jede-li cyklista v tomto pruhu jinou rychlostí než auta vedle, nejde o předjíždění, a předepsaný boční odstup se proto neuplatní.",
   "sources": [
+   {
+    "law": "361/2000 Sb.",
+    "ref": "§ 14 odst. 5",
+    "anchor": "p14-5",
+    "quote": "Je-li vyznačen jízdní pruh vodorovnými dopravními značkami jako jízdní pruh pro cyklisty, použijí se pro cyklisty a řidiče jiných vozidel odstavce 1 až 3 obdobně"
+   },
    {
     "law": "361/2000 Sb.",
     "ref": "§ 14 odst. 3",
@@ -4980,7 +5030,7 @@
   ]
  },
  "425": {
-  "why": "Řidič vjíždějící na pozemní komunikaci z místa mimo ni, z účelové komunikace nebo z obytné či pěší zóny musí dát přednost všem vozidlům jedoucím po komunikaci, na kterou vjíždí, z obou směrů.",
+  "why": "Červené vozidlo vyjíždí z parkoviště vedle silnice, tedy z místa mimo pozemní komunikaci. Musí dát přednost všem vozidlům na silnici z obou směrů. Značka Dej přednost v jízdě! s tabulkou Tvar křižovatky platí pro jiný směr, ne pro něj.",
   "sources": [
    {
     "law": "361/2000 Sb.",
@@ -5019,8 +5069,14 @@
   ]
  },
  "428": {
-  "why": "Do pěší zóny smějí vjet jen vozidla vyznačená ve spodní části značky „Pěší zóna“. Motocykl mezi nimi není, a proto řidič rovně pokračovat nemůže.",
+  "why": "Rovně je značka Pěší zóna s tabulkou „Zásobování 10–14 h“. Vjet smějí jen vozidla vyznačená ve spodní části značky, tady jen zásobování v uvedené době. Motocykl mezi nimi není, rovně proto pokračovat nesmí.",
   "sources": [
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 5, značka IZ 6a",
+    "anchor": "sign-IZ6a",
+    "quote": "Ve spodní části značky se vyznačuje vhodným nápisem nebo symbolem, kterým vozidlům je vjezd do této oblasti povolen a popřípadě v jaké době"
+   },
    {
     "law": "361/2000 Sb.",
     "ref": "§ 39 odst. 4",
@@ -5030,8 +5086,14 @@
   ]
  },
  "429": {
-  "why": "V obci smí řidič jet nejvýše 50 km/h, na dálnici nebo silnici pro motorová vozidla v obci však nejvýše 80 km/h. Rychlosti 110 a 130 km/h platí jen mimo obec.",
+  "why": "Bílé auto na modrém čtverci je značka Silnice pro motorová vozidla. V obci na ní platí nejvyšší rychlost 80 km/h, ne obecných 50 km/h. Rychlosti 110 a 130 km/h platí jen mimo obec.",
   "sources": [
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 5, značka IZ 2a",
+    "anchor": "sign-IZ2a",
+    "quote": "platí zvláštní pravidla pro provoz na silnici pro motorová vozidla"
+   },
    {
     "law": "361/2000 Sb.",
     "ref": "§ 18 odst. 4",
@@ -5052,13 +5114,13 @@
   ]
  },
  "431": {
-  "why": "Pro vyhrazený jízdní pruh platí obdobně pravidla tramvajového pásu: vjet do něj lze například při objíždění, předjíždění nebo odbočování. Řidič přitom nesmí ohrozit ani omezit vozidla, pro která je pruh vyhrazen.",
+  "why": "Červený pruh se symbolem kola je jízdní pruh pro cyklisty. Vjet do něj lze jako na tramvajový pás, např. při objíždění překážky, nebo když vedlejší pruh není dost široký. Cyklistu v pruhu přitom řidič nesmí ohrozit ani omezit.",
   "sources": [
    {
     "law": "361/2000 Sb.",
-    "ref": "§ 14 odst. 1",
-    "anchor": "p14-1",
-    "quote": "platí pro řidiče ostatních vozidel obdobně § 13 odst. 2"
+    "ref": "§ 14 odst. 5",
+    "anchor": "p14-5",
+    "quote": "Je-li vyznačen jízdní pruh vodorovnými dopravními značkami jako jízdní pruh pro cyklisty, použijí se pro cyklisty a řidiče jiných vozidel odstavce 1 až 3 obdobně"
    },
    {
     "law": "361/2000 Sb.",
@@ -5069,30 +5131,36 @@
   ]
  },
  "432": {
-  "why": "Znamení o změně směru jízdy se dává při změně směru nebo vybočení z něj. Kdo jede rovně, směr nemění, a znamení proto nedává, i když hlavní silnice v křižovatce zatáčí.",
+  "why": "Tabulka „Tvar křižovatky“ ukazuje, že hlavní silnice uhýbá vlevo. Kdo jede rovně, směr jízdy nemění, a proto znamení nedává, i když hlavní silnici opouští.",
   "sources": [
    {
     "law": "361/2000 Sb.",
     "ref": "§ 30 odst. 1",
     "anchor": "p30-1",
     "quote": "vždy při změně směru jízdy, vybočování z něho"
-   }
-  ]
- },
- "433": {
-  "why": "Řidič pokračuje po hlavní pozemní komunikaci, která v křižovatce zatáčí vlevo. Protijedoucí vozidlo přijíždí po vedlejší komunikaci, takže přednost musí dát ono jemu.",
-  "sources": [
-   {
-    "law": "361/2000 Sb.",
-    "ref": "§ 22 odst. 1",
-    "anchor": "p22-1",
-    "quote": "musí dát přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím po hlavní pozemní komunikaci"
    },
    {
     "law": "294/2015 Sb.",
     "ref": "příloha č. 6, značka E 2b",
     "anchor": "sign-E2b",
+    "quote": "Tabulka vyznačuje skutečný tvar křižovatky a upřesňuje, která komunikace je hlavní a která vedlejší."
+   }
+  ]
+ },
+ "433": {
+  "why": "Značka Hlavní pozemní komunikace s tabulkou Tvar křižovatky ukazuje, že hlavní silnice zde zatáčí vlevo. Řidič po ní pokračuje, protijedoucí přijíždí po vedlejší a musí dát přednost on.",
+  "sources": [
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 6, značka E 2b",
+    "anchor": "sign-E2b",
     "quote": "upřesňuje, která komunikace je hlavní a která vedlejší"
+   },
+   {
+    "law": "361/2000 Sb.",
+    "ref": "§ 22 odst. 1",
+    "anchor": "p22-1",
+    "quote": "musí dát přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím po hlavní pozemní komunikaci"
    }
   ]
  },
@@ -5108,7 +5176,7 @@
   ]
  },
  "435": {
-  "why": "Přerušované žluté světlo provoz neřídí, jen upozorňuje na zvýšenou opatrnost. Přednost se proto řídí značkami: řidič jede po hlavní komunikaci, a protijedoucí z vedlejší mu ji musí dát.",
+  "why": "Semafor svítí jen přerušovaně žlutě, takže provoz neřídí a přednost určují značky. Hlavní pozemní komunikace s tabulkou Tvar křižovatky ukazuje, že hlavní silnice zatáčí vlevo; protijedoucí je na vedlejší a dává přednost.",
   "sources": [
    {
     "law": "361/2000 Sb.",
@@ -5117,15 +5185,15 @@
     "quote": "Signál \"Přerušované žluté světlo\" užitý samostatně upozorňuje řidiče na nutnost dbát zvýšené opatrnosti"
    },
    {
-    "law": "361/2000 Sb.",
-    "ref": "§ 22 odst. 1",
-    "anchor": "p22-1",
-    "quote": "musí dát přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím po hlavní pozemní komunikaci"
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 6, značka E 2b",
+    "anchor": "sign-E2b",
+    "quote": "upřesňuje, která komunikace je hlavní a která vedlejší"
    }
   ]
  },
  "436": {
-  "why": "Dálnice je zpoplatněna mýtným, takže nákladní vozidlo nad 3 500 kg bez registrace v systému elektronického mýtného na ni nesmí. Může pokračovat jen po silnici č. 118, která zpoplatněna není.",
+  "why": "Na návěsti je u silnice č. 16 (oba směry vlevo, k dálnici na Prahu, Chomutov i Ústí n. L.) symbol M: úsek je zpoplatněn mýtným. Nákladní vozidlo nad 3,5 t bez registrace v mýtném systému tam nesmí. Zbývá směr přímo po silnici č. 118 bez symbolu M.",
   "sources": [
    {
     "law": "294/2015 Sb.",
@@ -5136,13 +5204,19 @@
   ]
  },
  "437": {
-  "why": "Omezení rychlosti tu vyplývá ze zónové značky. Ta na rozdíl od běžné zákazové značky nekončí křižovatkou, ale až značkou konce zóny, takže i za křižovatkou platí nižší rychlost.",
+  "why": "Za křižovatkou začíná ulice označená značkou „Obytná zóna“. V ní smí řidič jet nejvýše 20 km/h, takže 35 km/h je příliš.",
   "sources": [
    {
     "law": "294/2015 Sb.",
-    "ref": "§ 3 odst. 6",
-    "anchor": "p3-6",
-    "quote": "Platnost zónové dopravní značky je ukončena značkou informující o jejím konci, není-li stanoveno jinak"
+    "ref": "příloha č. 5, značka IZ 5a",
+    "anchor": "sign-IZ5a",
+    "quote": "Značka označuje oblast, kde kromě obecných pravidel provozu na pozemních komunikacích platí zvláštní pravidla pro provoz v obytné zóně."
+   },
+   {
+    "law": "361/2000 Sb.",
+    "ref": "§ 39 odst. 5",
+    "anchor": "p39-5",
+    "quote": "V obytné zóně a pěší zóně smí řidič jet rychlostí nejvýše 20 km.h-1."
    }
   ]
  },
@@ -5274,19 +5348,25 @@
   ]
  },
  "447": {
-  "why": "Značky upravující přednost (kromě značek pro přednost protijedoucích vozidel) platí jen pro nejbližší křižovatku. Na každé další křižovatce musí být přednost znovu upravena, jinak platí pravidlo pravé ruky.",
+  "why": "Značka Dej přednost v jízdě! s tabulkou Tvar křižovatky platí jen pro nejbližší křižovatku. Na každé další křižovatce musí být přednost upravena znovu, jinak platí přednost zprava.",
   "sources": [
    {
     "law": "294/2015 Sb.",
     "ref": "§ 3 odst. 5",
     "anchor": "p3-5",
-    "quote": "platí pro nejbližší křižovatku"
+    "quote": "„Dej přednost v jízdě!“, „Dej přednost v jízdě tramvaji!“ a „Stůj, dej přednost v jízdě!“ platí pro nejbližší křižovatku"
    }
   ]
  },
  "448": {
-  "why": "Přednost upravují jen značky z přílohy č. 2 vyhlášky, např. Hlavní pozemní komunikace, Dej přednost v jízdě!, Stůj, dej přednost v jízdě! nebo Přednost protijedoucích vozidel. Správně označená značka do této skupiny nepatří; je to značka výstražná, zákazová, příkazová nebo informativní.",
+  "why": "Značky „Konec hlavní pozemní komunikace“ a „Přednost před protijedoucími vozidly“ upravují přednost. Modrá značka „Okruh“ je informativní a označuje dopravní okruh kolem obce, přednost neupravuje.",
   "sources": [
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 5, značka IP 1",
+    "anchor": "sign-IP1",
+    "quote": "Značka označuje dopravní okruh zřízený pro objíždění obce nebo její části."
+   },
    {
     "law": "361/2000 Sb.",
     "ref": "§ 63 odst. 1 písm. b)",
@@ -5296,8 +5376,14 @@
   ]
  },
  "449": {
-  "why": "Přednost upravují jen značky z přílohy č. 2 vyhlášky, např. Hlavní pozemní komunikace, Dej přednost v jízdě!, Stůj, dej přednost v jízdě! nebo Přednost protijedoucích vozidel. Správně označená značka do této skupiny nepatří; je to značka výstražná, zákazová, příkazová nebo informativní.",
+  "why": "„Konec hlavní pozemní komunikace“ a „Křižovatka s vedlejší pozemní komunikací“ jsou značky upravující přednost. Trojúhelník s křížem je výstražná značka „Křižovatka“, která jen upozorňuje na křižovatku bez úpravy přednosti značkami.",
   "sources": [
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 1, značka A 3",
+    "anchor": "sign-A3",
+    "quote": "Značka upozorňuje na křižovatku, kde není přednost v jízdě upravena svislými dopravními značkami."
+   },
    {
     "law": "361/2000 Sb.",
     "ref": "§ 63 odst. 1 písm. b)",
@@ -5307,8 +5393,14 @@
   ]
  },
  "450": {
-  "why": "Přednost upravují jen značky z přílohy č. 2 vyhlášky, např. Hlavní pozemní komunikace, Dej přednost v jízdě!, Stůj, dej přednost v jízdě! nebo Přednost protijedoucích vozidel. Správně označená značka do této skupiny nepatří; je to značka výstražná, zákazová, příkazová nebo informativní.",
+  "why": "„Konec hlavní pozemní komunikace“ a „Stůj, dej přednost v jízdě!“ upravují přednost. Modrá značka „Okruh“ je informativní a označuje dopravní okruh kolem obce.",
   "sources": [
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 5, značka IP 1",
+    "anchor": "sign-IP1",
+    "quote": "Značka označuje dopravní okruh zřízený pro objíždění obce nebo její části."
+   },
    {
     "law": "361/2000 Sb.",
     "ref": "§ 63 odst. 1 písm. b)",
@@ -5446,15 +5538,17 @@
     "anchor": "sign-P8",
     "quote": "řidič protijedoucího vozidla smí do následujícího úseku pozemní komunikace vjet pouze v případě, kdy se jeho a protijedoucí vozidlo mohou bezpečně vyhnout"
    }
-  ],
-  "sign": {
-   "code": "P 8",
-   "name": "Přednost před protijedoucími vozidly"
-  }
+  ]
  },
  "460": {
-  "why": "Značka označuje obytnou (případně pěší) zónu. V ní smí řidič jet nejvýše 20 km/h a musí dbát zvýšené ohleduplnosti k chodcům.",
+  "why": "Modrá značka s chodcem, autem, hrajícím si dítětem a domem označuje obytnou zónu. V ní smí řidič jet nejvýše 20 km/h.",
   "sources": [
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 5, značka IZ 5a",
+    "anchor": "sign-IZ5a",
+    "quote": "Značka označuje oblast, kde kromě obecných pravidel provozu na pozemních komunikacích platí zvláštní pravidla pro provoz v obytné zóně."
+   },
    {
     "law": "361/2000 Sb.",
     "ref": "§ 39 odst. 5",
@@ -5464,24 +5558,36 @@
   ]
  },
  "461": {
-  "why": "V obytné a pěší zóně je stání dovoleno jen na místech označených jako parkoviště. Krátké zastavení, například k vystoupení spolujezdce, toto pravidlo nezakazuje.",
+  "why": "Značka označuje obytnou zónu. V ní je stání dovoleno jen na místech označených jako parkoviště; krátké zastavení, například k vystoupení spolujezdce, toto pravidlo nezakazuje.",
   "sources": [
    {
     "law": "361/2000 Sb.",
     "ref": "§ 39 odst. 5",
     "anchor": "p39-5",
     "quote": "Stání je dovoleno jen na místech označených jako parkoviště."
+   },
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 5, značka IZ 5a",
+    "anchor": "sign-IZ5a",
+    "quote": "Značka označuje oblast, kde kromě obecných pravidel provozu na pozemních komunikacích platí zvláštní pravidla pro provoz v obytné zóně."
    }
   ]
  },
  "462": {
-  "why": "V obytné a pěší zóně musí řidič dbát zvýšené ohleduplnosti k chodcům všude, nejen na přechodech, a v případě nutnosti zastavit.",
+  "why": "Značka označuje obytnou zónu. Chodci tu smějí užívat celou šířku komunikace, a řidič proto musí dbát zvýšené ohleduplnosti k nim všude, nejen na přechodech, a v případě nutnosti zastavit.",
   "sources": [
    {
     "law": "361/2000 Sb.",
     "ref": "§ 39 odst. 5",
     "anchor": "p39-5",
     "quote": "Přitom musí dbát zvýšené ohleduplnosti vůči chodcům, které nesmí ohrozit; v případě nutnosti musí zastavit vozidlo."
+   },
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 5, značka IZ 5a",
+    "anchor": "sign-IZ5a",
+    "quote": "Značka označuje oblast, kde kromě obecných pravidel provozu na pozemních komunikacích platí zvláštní pravidla pro provoz v obytné zóně."
    }
   ]
  },
@@ -5500,11 +5606,7 @@
     "anchor": "p22-5",
     "quote": "musí dát přednost v jízdě vozidlům a jezdcům na zvířatech jedoucím po kruhovém objezdu"
    }
-  ],
-  "sign": {
-   "code": "C 1",
-   "name": "Kruhový objezd"
-  }
+  ]
  },
  "464": {
   "why": "Značka Zúžená vozovka z obou stran upozorňuje, že se vozovka zužuje z obou stran zároveň. Zúžení z jedné strany má jiný symbol a střídavé řazení označuje značka Střídavé řazení.",
@@ -5560,11 +5662,7 @@
     "anchor": "sign-B29",
     "quote": "na dobu delší, než je doba nezbytně nutná k neprodlenému nastoupení nebo vystoupení přepravovaných osob"
    }
-  ],
-  "sign": {
-   "code": "B 29",
-   "name": "Zákaz stání"
-  }
+  ]
  },
  "468": {
   "why": "Značka Zákaz stání zakazuje stát, ale dovoluje krátké zastavení k neprodlenému nastoupení či vystoupení osob nebo naložení či složení nákladu. Zastavení úplně zakazuje až značka Zákaz zastavení.",
@@ -5590,11 +5688,7 @@
     "anchor": "sign-A11",
     "quote": "Značka upozorňuje na přechod pro chodce"
    }
-  ],
-  "sign": {
-   "code": "A 11",
-   "name": "Přechod pro chodce"
-  }
+  ]
  },
  "470": {
   "why": "Modrá příkazová značka se šipkou vpravo přikazuje jízdu vpravo. Jiný směr jízdy řidič zvolit nesmí.",
@@ -5648,13 +5742,13 @@
   }
  },
  "473": {
-  "why": "Příkazová značka přikazuje jen směr jízdy přímo, o přednosti neříká nic. Není-li přednost upravena jinak, platí pravidlo pravé ruky: řidič dá přednost vozidlům zprava.",
+  "why": "Nad příkazem Přímo je výstražná značka Křižovatka: přednost tu není upravena značkami a platí přednost zprava. Příkaz Přímo určuje jen směr jízdy, přednost nedává.",
   "sources": [
    {
     "law": "294/2015 Sb.",
-    "ref": "příloha č. 4, značka C 2a",
-    "anchor": "sign-C2a",
-    "quote": "Značka přikazuje jízdu ve směru přímo."
+    "ref": "příloha č. 1, značka A 3",
+    "anchor": "sign-A3",
+    "quote": "Značka upozorňuje na křižovatku, kde není přednost v jízdě upravena svislými dopravními značkami"
    },
    {
     "law": "361/2000 Sb.",
@@ -5662,11 +5756,7 @@
     "anchor": "p22-2",
     "quote": "musí dát řidič přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím zprava"
    }
-  ],
-  "sign": {
-   "code": "C 2a",
-   "name": "Přikázaný směr jízdy přímo"
-  }
+  ]
  },
  "474": {
   "why": "Nejnižší dovolenou rychlost přikazuje modrá kruhová příkazová značka s bílým číslem. Červeně lemovaná značka s číslem naopak určuje nejvyšší rychlost.",
@@ -6145,7 +6235,7 @@
   }
  },
  "506": {
-  "why": "Značka Zákaz vjezdu vyznačených vozidel zakazuje vjezd jen těm druhům vozidel, jejichž symboly jsou na ní zobrazeny. Ostatní vozidla vjet smějí.",
+  "why": "Značka Zákaz vjezdu vyznačených vozidel zakazuje vjezd jen druhům vozidel zobrazeným na ní, zde nákladním automobilům, motocyklům a jízdním kolům. Ostatní vozidla, např. osobní automobily, vjet smějí.",
   "sources": [
    {
     "law": "294/2015 Sb.",
@@ -6366,24 +6456,36 @@
   ]
  },
  "521": {
-  "why": "Výstražné značky upozorňují na nebezpečí a mají tvar trojúhelníku s červeným okrajem. Správně označená značka do této skupiny nepatří, protože nic nevaruje, ale ukládá zákaz, příkaz či podává informaci.",
+  "why": "Trojúhelníkový tvar ještě neznamená výstražnou značku. „Křižovatka s vedlejší pozemní komunikací“ patří mezi značky upravující přednost, protože označuje hlavní pozemní komunikaci. Padající kamení a práce na silnici jsou výstražné značky.",
   "sources": [
    {
-    "law": "361/2000 Sb.",
-    "ref": "§ 63 odst. 1 písm. a)",
-    "anchor": "p63-1-a",
-    "quote": "výstražné značky, které upozorňují na místa, kde účastníku provozu na pozemních komunikacích hrozí nebezpečí"
-   }
-  ]
- },
- "522": {
-  "why": "Značky upravující přednost (např. Hlavní pozemní komunikace, Dej přednost v jízdě!, Stůj, dej přednost v jízdě!) stanoví, kdo má na křižovatce přednost. Správně označená značka přednost neupravuje, patří do jiné skupiny.",
-  "sources": [
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 2, značka P 1",
+    "anchor": "sign-P1",
+    "quote": "Značka upozorňuje mimo obec na křižovatku a označuje hlavní pozemní komunikaci."
+   },
    {
     "law": "361/2000 Sb.",
     "ref": "§ 63 odst. 1 písm. b)",
     "anchor": "p63-1-b",
     "quote": "značky upravující přednost, které stanoví přednost v jízdě"
+   }
+  ]
+ },
+ "522": {
+  "why": "„Křižovatka s vedlejší pozemní komunikací“ a „Hlavní pozemní komunikace“ upravují přednost. Trojúhelník s křížem je výstražná značka „Křižovatka“, která jen upozorňuje na křižovatku, kde přednost značkami upravena není.",
+  "sources": [
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 1, značka A 3",
+    "anchor": "sign-A3",
+    "quote": "Značka upozorňuje na křižovatku, kde není přednost v jízdě upravena svislými dopravními značkami."
+   },
+   {
+    "law": "361/2000 Sb.",
+    "ref": "§ 63 odst. 1 písm. a)",
+    "anchor": "p63-1-a",
+    "quote": "výstražné značky, které upozorňují na místa, kde účastníku provozu na pozemních komunikacích hrozí nebezpečí"
    }
   ]
  },
@@ -6474,13 +6576,19 @@
   }
  },
  "529": {
-  "why": "Značka Parkoviště se symbolem podélného stání na chodníku dovoluje zastavit a stát na chodníku podélně. Na chodníku však nesmí stát vozidlo nad 3,5 t.",
+  "why": "Pod písmenem P je symbol vozidla stojícího celou šířkou na chodníku podél obrubníku, tedy Parkoviště se stáním na chodníku podélným, jak stojí červené auto na záběru. Vozidlo nad 3 500 kg na chodníku zastavit ani stát nesmí.",
   "sources": [
    {
     "law": "294/2015 Sb.",
     "ref": "příloha č. 5, značka IP 11e",
     "anchor": "sign-IP11e",
-    "quote": "Parkoviště stání na chodníku podélné Značka označuje místo, kde je dovoleno zastavení a stání."
+    "quote": "Symbol, uvedený ve spodní části značky, vyznačuje stanovený způsob stání na parkovišti."
+   },
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 5, značka IP 11e",
+    "anchor": "sign-IP11e",
+    "quote": "Na chodníku nesmí zastavit ani stát vozidlo o nejvyšší povolené hmotnosti převyšující 3500 kg"
    }
   ],
   "sign": {
@@ -6626,25 +6734,25 @@
   ]
  },
  "539": {
-  "why": "Hlavní pozemní komunikaci označuje značka Hlavní pozemní komunikace, žlutý čtverec s bílým okrajem postavený na vrchol. Platí pro nejbližší křižovatku.",
+  "why": "Hlavní pozemní komunikaci označuje značka a, Křižovatka s vedlejší pozemní komunikací (P 1): silná svislá čára je hlavní silnice, tenká vedlejší. Značka b s křížem je jen Křižovatka bez určené přednosti (A 3), žlutý čtverec s přeškrtnutím c je Konec hlavní pozemní komunikace (P 3).",
   "sources": [
    {
     "law": "294/2015 Sb.",
-    "ref": "příloha č. 2, značka P 2",
-    "anchor": "sign-P2",
-    "quote": "Značka označuje zejména v obci hlavní pozemní komunikaci v nejbližší křižovatce"
+    "ref": "příloha č. 2, značka P 1",
+    "anchor": "sign-P1",
+    "quote": "Značka upozorňuje mimo obec na křižovatku a označuje hlavní pozemní komunikaci."
+   },
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 2, značka P 3",
+    "anchor": "sign-P3",
+    "quote": "na nejbližší křižovatce tato pozemní komunikace již není hlavní"
    }
   ]
  },
  "540": {
-  "why": "Směr k místu, k němuž se značka vztahuje, vyznačuje dodatková tabulka se směrovou šipkou (E 7a pro směr přímo, E 7b pro odbočení).",
+  "why": "Směr k místu, k němuž se značka vztahuje, vyznačuje dodatková tabulka se samotnou směrovou šipkou („Směrová šipka pro odbočení“). Tabulka se šipkou a údajem v metrech vyznačuje úsek platnosti, druhá tabulka ukazuje tvar křižovatky.",
   "sources": [
-   {
-    "law": "294/2015 Sb.",
-    "ref": "příloha č. 6, značka E 7a",
-    "anchor": "sign-E7a",
-    "quote": "Tabulka vyznačuje směr k místu, k němuž se vztahuje značka, pod níž je tabulka umístěna."
-   },
    {
     "law": "294/2015 Sb.",
     "ref": "příloha č. 6, značka E 7b",
@@ -6654,13 +6762,19 @@
   ]
  },
  "541": {
-  "why": "Značka Nejvyšší dovolená rychlost zakazuje překročit rychlost uvedenou na ní. Jízdu 40 km/h proto zakazuje značka s nižším údajem; značka s údajem 40 jízdu touto rychlostí dovoluje.",
+  "why": "Červeně orámovaná značka „Nejvyšší dovolená rychlost“ s číslem 30 zakazuje jet rychleji než 30 km/h, tedy i 40 km/h. Modrá kruhová značka určuje nejnižší dovolenou rychlost a čtvercová jen doporučuje rychlost; jízdu 40 km/h nezakazují.",
   "sources": [
    {
     "law": "294/2015 Sb.",
     "ref": "příloha č. 3, značka B 20a",
     "anchor": "sign-B20a",
     "quote": "Značka zakazuje řidiči překročit rychlost vyjádřenou na značce číslem v kilometrech za hodinu."
+   },
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 4, značka C 6a",
+    "anchor": "sign-C6a",
+    "quote": "jet nejméně rychlostí vyjádřenou na značce číslem v kilometrech za hodinu"
    }
   ]
  },
@@ -6864,11 +6978,7 @@
     "anchor": "sign-Z11cZ11d",
     "quote": "Sloupky vyznačují vyústění účelové komunikace na jinou pozemní komunikaci."
    }
-  ],
-  "sign": {
-   "code": "Z 11c Z 11d",
-   "name": "Směrový sloupek červený levý"
-  }
+  ]
  },
  "556": {
   "why": "Výstražná značka Kamení na vozovce upozorňuje na úsek, kde se kvůli sesuvům nebo padání kamenů může na vozovce objevit kamení nebo zemina.",
@@ -7062,19 +7172,15 @@
   ]
  },
  "569": {
-  "why": "Výstražná značka Zatáčka vlevo upozorňuje na zatáčku, kterou lze bezpečně projet jen při výrazném snížení rychlosti. Na železniční přejezd v uvedené situaci nic neupozorňuje.",
+  "why": "Na konci přímého úseku stojí dvě vodicí tabule s červenobílými šipkami doleva. Označují nebezpečnou zatáčku vlevo, v níž je nutné výrazně snížit rychlost. Návěstní desky, které by ohlašovaly železniční přejezd, ve výhledu nejsou.",
   "sources": [
    {
     "law": "294/2015 Sb.",
-    "ref": "příloha č. 1, značka A 1b",
-    "anchor": "sign-A1b",
-    "quote": "Značka upozorňuje na zatáčku (směrový oblouk) vlevo"
+    "ref": "příloha č. 10, značka Z 3",
+    "anchor": "sign-Z3",
+    "quote": "Vodicí tabule označuje zejména nebezpečnou zatáčku, v níž musí řidič výrazně snížit rychlost jízdy, a usměrňuje provoz ve směru šipek"
    }
-  ],
-  "sign": {
-   "code": "A 1b",
-   "name": "Zatáčka vlevo"
-  }
+  ]
  },
  "570": {
   "why": "Modrá kruhová značka se šipkou vpravo je Přikázaný směr jízdy vpravo. Na křižovatce za ní musíte odbočit vpravo, bez ohledu na to, kam jedete dál.",
@@ -7173,26 +7279,24 @@
     "anchor": "sign-Z11cZ11d",
     "quote": "Sloupky vyznačují vyústění účelové komunikace na jinou pozemní komunikaci"
    }
-  ],
-  "sign": {
-   "code": "Z 11c Z 11d",
-   "name": "Směrový sloupek červený levý"
-  }
+  ]
  },
  "577": {
-  "why": "Před vámi je značka Zákaz zastavení. Zakazuje jakékoli dobrovolné uvedení vozidla do klidu, tedy i krátké zastavení k vyložení nákladu. To by šlo jen u značky Zákaz stání.",
+  "why": "Nejbližší značka je Zákaz zastavení (modrý kruh s červeným křížem) s dodatkovou tabulkou se šipkou dolů, tj. Konec úseku. Zákaz tedy platí v úseku před značkou a zakazuje i krátké zastavení k vyložení nákladu; to by dovolovala jen značka Zákaz stání.",
   "sources": [
    {
     "law": "294/2015 Sb.",
     "ref": "příloha č. 3, značka B 28",
     "anchor": "sign-B28",
     "quote": "Značka zakazuje zastavení nebo stání, tj. uvedení vozidla do klidu"
+   },
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 6, značka E 8c",
+    "anchor": "sign-E8c",
+    "quote": "Tabulka vyznačuje konec úseku platnosti značky"
    }
-  ],
-  "sign": {
-   "code": "B 28",
-   "name": "Zákaz zastavení"
-  }
+  ]
  },
  "578": {
   "why": "V první skupině značek je Přikázaný směr jízdy vpravo a vlevo. Na nejbližší křižovatce proto nesmíte jet rovně, musíte odbočit vpravo nebo vlevo.",
@@ -7203,11 +7307,7 @@
     "anchor": "sign-C2f",
     "quote": "Značka přikazuje jízdu ve směru vpravo a vlevo"
    }
-  ],
-  "sign": {
-   "code": "C 2f",
-   "name": "Přikázaný směr jízdy vpravo a vlevo"
-  }
+  ]
  },
  "579": {
   "why": "Značka s údajem délky zakazuje vjezd vozidlům nebo soupravám, které jsou i s nákladem delší, než udává značka. Platí pro všechna vozidla, ne jen pro nákladní.",
@@ -7292,25 +7392,21 @@
   ]
  },
  "585": {
-  "why": "Vyhrazené parkoviště se symbolem vozíčkáře smí použít jen vozidlo označené parkovacím průkazem pro osoby se zdravotním postižením. Vozidla bez tohoto označení zde nesmějí zastavit ani stát, i když vezou příbuzné takové osoby.",
+  "why": "Značka Vyhrazené parkoviště se symbolem vozíčkáře a registrační značkou 1A2 3456 vyhrazuje místo jen pro konkrétní vozidlo přepravující těžce postiženou osobu, označené parkovacím průkazem. Jiná vozidla, i s označením O 1 nebo vezoucí příbuzné, zde zastavit ani stát nesmějí.",
   "sources": [
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 5, značka IP 12",
+    "anchor": "sign-IP12",
+    "quote": "Značka označuje místo, kde je dovoleno zastavení a stání pouze vozidel, pro které je parkoviště vyhrazeno"
+   },
    {
     "law": "361/2000 Sb.",
     "ref": "§ 67 odst. 8",
     "anchor": "p67-8",
-    "quote": "Na vyhrazeném parkovišti pro vozidlo označené parkovacím průkazem pro osoby se zdravotním postižením je vozidlům bez tohoto označení zakázáno zastavení a stání"
-   },
-   {
-    "law": "294/2015 Sb.",
-    "ref": "příloha č. 8, značka V 10f",
-    "anchor": "sign-V10f",
-    "quote": "smí zastavit a stát pouze vozidlo označené parkovacím průkazem"
+    "quote": "je vozidlům bez tohoto označení zakázáno zastavení a stání"
    }
-  ],
-  "sign": {
-   "code": "V 10f",
-   "name": "Vyhrazené parkoviště pro vozidlo přepravující osobu těžce postiženou nebo osobu těžce pohybově postiženou"
-  }
+  ]
  },
  "586": {
   "why": "Na neočekávané nebo špatně viditelné semafory upozorňuje výstražná značka Světelné signály, trojúhelník s vyobrazeným semaforem.",
@@ -7324,7 +7420,7 @@
   ]
  },
  "587": {
-  "why": "Značka Nejnižší dovolená rychlost (modrý kruh s číslem, např. 30) přikazuje jet nejméně uvedenou rychlostí, pokud to provoz dovoluje. Jízda 25 km/h by tedy byla pod limitem.",
+  "why": "Modrá kruhová značka s číslem 30 je Nejnižší dovolená rychlost: přikazuje jet nejméně 30 km/h, takže 25 km/h nestačí. Červený kruh s 30 je nejvyšší dovolená rychlost a modrý čtverec s 30 doporučená rychlost; u obou je 25 km/h dovoleno.",
   "sources": [
    {
     "law": "294/2015 Sb.",
@@ -7358,11 +7454,7 @@
     "anchor": "sign-P8",
     "quote": "řidič protijedoucího vozidla smí do následujícího úseku pozemní komunikace vjet pouze v případě, kdy se jeho a protijedoucí vozidlo mohou bezpečně vyhnout"
    }
-  ],
-  "sign": {
-   "code": "P 8",
-   "name": "Přednost před protijedoucími vozidly"
-  }
+  ]
  },
  "590": {
   "why": "Značka Kruhový objezd přikazuje jet ve směru šipek. S doplňující značkou Dej přednost v jízdě! musíte dát přednost vozidlům na objezdu; zastavit musíte jen tehdy, když je to k tomu nutné.",
@@ -7373,11 +7465,7 @@
     "anchor": "sign-C1",
     "quote": "musí řidič vjíždějící na kruhový objezd dát přednost v jízdě vozidlům jedoucím po kruhovém objezdu"
    }
-  ],
-  "sign": {
-   "code": "C 1",
-   "name": "Kruhový objezd"
-  }
+  ]
  },
  "591": {
   "why": "Na obrázku je trojúhelník Dej přednost v jízdě! s dodatkovou tabulkou tvaru křižovatky a modrá značka Přechod pro chodce. Žlutý čtverec značky Hlavní pozemní komunikace na obrázku není.",
@@ -7429,7 +7517,7 @@
   }
  },
  "595": {
-  "why": "Modrá kruhová značka s číslem je Nejnižší dovolená rychlost. Přikazuje jet aspoň uvedenou rychlostí, pokud tomu nebrání provoz, mlha, náledí apod. Je-li na značce číslo vyšší než 25, jízda 25 km/h nestačí.",
+  "why": "Modrá kruhová značka s číslem 30 je Nejnižší dovolená rychlost: přikazuje jet aspoň 30 km/h, pokud tomu nebrání provoz, mlha, náledí apod. Červený kruh s 30 (nejvyšší dovolená) ani modrý čtverec s 30 (doporučená rychlost) jízdu 25 km/h nezakazují.",
   "sources": [
    {
     "law": "294/2015 Sb.",
@@ -7506,11 +7594,7 @@
     "anchor": "sign-B32",
     "quote": "Je-li na značce uveden nápis „PRŮJEZD ZAKÁZÁN“, nesmí řidič bez důvodu vjet do takto označeného úseku. Za takový důvod se nepovažuje objíždění dopravně složité situace nebo zkracování trasy."
    }
-  ],
-  "sign": {
-   "code": "B 32",
-   "name": "Jiný zákaz"
-  }
+  ]
  },
  "601": {
   "why": "Parkoviště je vyhrazeno pro držitele oprávnění jen od pondělí do pátku od 8 do 20 hodin. Mimo tuto dobu, tedy i v sobotu v poledne, zde smí bezplatně stát kdokoli.",
@@ -7632,11 +7716,7 @@
     "anchor": "sign-E12a",
     "quote": "Této skutečnosti musí řidič přizpůsobit své chování, zejména stanovenou mu povinnost neohrozit ostatní účastníky provozu"
    }
-  ],
-  "sign": {
-   "code": "E 12a",
-   "name": "Jízda cyklistů v protisměru"
-  }
+  ]
  },
  "610": {
   "why": "Jde o Piktogramový koridor pro cyklisty. Vyznačuje prostor a směr jízdy cyklistů a upozorňuje řidiče na zvýšený provoz cyklistů.",
@@ -7684,26 +7764,35 @@
   }
  },
  "613": {
-  "why": "Červené směrové sloupky (na rozdíl od bílých, které lemují okraj silnice) označují místo, kde na silnici vyúsťuje účelová komunikace, například polní nebo lesní cesta.",
+  "why": "Na obrázku je červený kulatý směrový sloupek. Nahrazuje dvojici červených směrových sloupků a stejně jako ony vyznačuje vyústění účelové komunikace, např. polní nebo lesní cesty. Okraj silnice označují bílé sloupky.",
   "sources": [
    {
     "law": "294/2015 Sb.",
-    "ref": "příloha č. 10, značka Z 11c Z 11d",
-    "anchor": "sign-Z11cZ11d",
-    "quote": "Sloupky vyznačují vyústění účelové komunikace na jinou pozemní komunikaci"
+    "ref": "příloha č. 10, značka Z 11g",
+    "anchor": "sign-Z11g",
+    "quote": "Sloupek lze použít jako náhradu za levé a pravé červené směrové sloupky k vyznačení vyústění účelové komunikace"
    }
-  ],
-  "sign": {
-   "code": "Z 11c Z 11d",
-   "name": "Směrový sloupek červený levý"
-  }
+  ]
  },
  "614": {
-  "why": "Z vyobrazených značek nevyplývá zákaz ani příkaz, který by řidiči osobního automobilu bránil odbočit vpravo, a zároveň mu odbočení vpravo nepřikazují. Vpravo tedy odbočit může, ale nemusí.",
-  "sources": []
+  "why": "Pod značkou „Zákaz odbočování vpravo“ je dodatková tabulka se symbolem autobusu, která zákaz omezuje jen na autobusy. Řidič osobního automobilu proto vpravo odbočit může, ale nemusí.",
+  "sources": [
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 3, značka B 24a",
+    "anchor": "sign-B24a",
+    "quote": "Značka zakazuje odbočování vpravo na nejbližší křižovatce"
+   },
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 6, značka E 13",
+    "anchor": "sign-E13",
+    "quote": "Vhodným nápisem nebo symbolem uvedeným na dodatkové tabulce je zpřesněn nebo omezen význam dopravní značky"
+   }
+  ]
  },
  "615": {
-  "why": "Taková značka v katalogu dopravních značek není. Přednost vozidel na hlavní pozemní komunikaci upravují značky „Dej přednost v jízdě!“ a „Stůj, dej přednost v jízdě!“, přednost zprava platí obecně bez značky.",
+  "why": "Obrácený trojúhelník má tvar značky Dej přednost v jízdě!, ale nese symbol větrného rukávu ze značky Boční vítr. Taková kombinace v katalogu dopravních značek není. Přednost upravují značky Dej přednost v jízdě! a Stůj, dej přednost v jízdě! bez symbolu uvnitř.",
   "sources": []
  },
  "616": {
@@ -7746,20 +7835,54 @@
   ]
  },
  "619": {
-  "why": "Dopravní značení na vyobrazené křižovatce dovoluje jen jízdu přímo nebo odbočení vlevo. Odbočení vpravo je tu zakázáno.",
-  "sources": []
+  "why": "Pod značkou „Hlavní pozemní komunikace“ je značka „Zákaz odbočování vpravo“. Na nejbližší křižovatce proto lze jet jen přímo nebo odbočit vlevo.",
+  "sources": [
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 3, značka B 24a",
+    "anchor": "sign-B24a",
+    "quote": "Značka zakazuje odbočování vpravo na nejbližší křižovatce"
+   }
+  ]
  },
  "620": {
-  "why": "Vyobrazené značení zakazuje na nejbližší křižovatce odbočit vpravo. Vlevo odbočit smí, ale nemusí, takže možnost „musí odbočit vlevo“ je špatně.",
-  "sources": []
+  "why": "Značka „Zákaz odbočování vpravo“ na ostrůvku platí pro všechna vozidla, vpravo tedy odbočit nesmí. Vlevo odbočit smí, ale nemusí, takže možnost „musí odbočit vlevo“ je špatně.",
+  "sources": [
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 3, značka B 24a",
+    "anchor": "sign-B24a",
+    "quote": "Značka zakazuje odbočování vpravo na nejbližší křižovatce"
+   }
+  ]
  },
  "621": {
-  "why": "Na vyobrazeném místě se řidič přes tramvajový pás otočit nesmí, protože to místní úprava nedovoluje. Otázka, komu by při otáčení dával přednost, proto vůbec nenastává.",
-  "sources": []
+  "why": "Značka „Zákaz otáčení“ pod značkou hlavní pozemní komunikace zakazuje otáčení, tedy ani přes tramvajový pás. Otázka, komu by při otáčení dával přednost, proto vůbec nenastává.",
+  "sources": [
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 3, značka B 25",
+    "anchor": "sign-B25",
+    "quote": "Značka zakazuje otáčení."
+   }
+  ]
  },
  "622": {
-  "why": "Vyobrazené značení upozorňuje na místo, kde přes vozovku přecházejí chodci a zároveň ji přejíždějí cyklisté. Řidič tu musí počítat s oběma skupinami.",
-  "sources": []
+  "why": "Značka „Přechod pro chodce“ a pod ní značka „Přejezd pro cyklisty“ upozorňují, že tu vozovku přecházejí chodci a zároveň ji přejíždějí cyklisté. Řidič musí počítat s oběma skupinami.",
+  "sources": [
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 5, značka IP 6",
+    "anchor": "sign-IP6",
+    "quote": "Značka označuje přechod pro chodce vyznačený vodorovnou značkou „Přechod pro chodce“"
+   },
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 5, značka IP 7",
+    "anchor": "sign-IP7",
+    "quote": "Značka označuje přejezd pro cyklisty vyznačený vodorovnou značkou „Přejezd pro cyklisty“"
+   }
+  ]
  },
  "623": {
   "why": "Jde o značku „Nebezpečné stoupání“. Upozorňuje na úsek s prudkým stoupáním a uvádí jeho největší sklon. Slova o nebezpečných místních podmínkách patří ke značce „Nebezpečné klesání“.",
@@ -7800,11 +7923,7 @@
     "anchor": "sign-V1a",
     "quote": "Značku je zakázáno přejíždět nebo ji nákladem přesahovat, pokud to není nutné k objíždění, předjíždění cyklisty, odbočování na místo ležící mimo pozemní komunikaci"
    }
-  ],
-  "sign": {
-   "code": "V 1a",
-   "name": "Podélná čára souvislá"
-  }
+  ]
  },
  "626": {
   "why": "Garáž u rodinného domu je místo ležící mimo pozemní komunikaci. Odbočení na takové místo je jednou z výjimek, kdy se podélná čára souvislá přejet smí.",
@@ -7841,41 +7960,29 @@
     "anchor": "sign-V1a",
     "quote": "Značku je zakázáno přejíždět nebo ji nákladem přesahovat, pokud to není nutné k objíždění, předjíždění cyklisty, odbočování na místo ležící mimo pozemní komunikaci nebo vjíždění na pozemní komunikaci z místa ležícího mimo pozemní komunikaci"
    }
-  ],
-  "sign": {
-   "code": "V 1a",
-   "name": "Podélná čára souvislá"
-  }
+  ]
  },
  "629": {
-  "why": "Značka „Řadicí pruhy“ ukazuje, kam vede který jízdní pruh. Pruh, ve kterém řidič jede, podle ní vede i do centra, takže v něm může zůstat.",
+  "why": "Směrová návěst nad jízdními pruhy ukazuje šipkami, kam který pruh vede. Řidič jede pod levou tabulí, kde je uvedena Praha se symbolem centra, takže v pruhu může pokračovat.",
   "sources": [
    {
     "law": "294/2015 Sb.",
-    "ref": "příloha č. 5, značka IP 19",
-    "anchor": "sign-IP19",
-    "quote": "Značka vyznačuje způsob řazení do jízdních pruhů před křižovatkou nebo místem odbočení a stanovený směr jízdy"
+    "ref": "příloha č. 5, značka IS 6e",
+    "anchor": "sign-IS6e",
+    "quote": "Při umístění nad vozovkou šipky současně vyjadřují způsob řazení před křižovatkou."
    }
-  ],
-  "sign": {
-   "code": "IP 19",
-   "name": "Řadící pruhy"
-  }
+  ]
  },
  "630": {
-  "why": "Značka „Konec nejvyšší dovolené rychlosti“ ukončuje jen předcházející značku „Nejvyšší dovolená rychlost“. Ostatní zákazy, například „Zákaz zastavení“, platí dál.",
+  "why": "Bílý kruh s šedým šikmým pruhem bez čísla je značka Konec všech zákazů. Ukončuje zákazy pro jedoucí vozidla, tedy i Nejvyšší dovolenou rychlost. Zákaz zastavení se netýká jízdy, takže jím ukončen není, a ostatní značky (např. příkazové) také ne.",
   "sources": [
    {
     "law": "294/2015 Sb.",
-    "ref": "příloha č. 3, značka B 20b",
-    "anchor": "sign-B20b",
-    "quote": "Značka ukončuje platnost předcházející značky „Nejvyšší dovolená rychlost“"
+    "ref": "příloha č. 3, značka B 26",
+    "anchor": "sign-B26",
+    "quote": "Značka ukončuje platnost všech zákazů, které jsou stanoveny pro jedoucí vozidla"
    }
-  ],
-  "sign": {
-   "code": "B 20b",
-   "name": "Konec nejvyšší dovolené rychlosti"
-  }
+  ]
  },
  "631": {
   "why": "Je-li na značce „Jiný zákaz“ nápis „PRŮJEZD ZAKÁZÁN“, smí do úseku vjet jen ten, kdo tam má důvod. Zkrácení cesty ani objetí složité dopravní situace se za důvod nepovažuje.",
@@ -7940,19 +8047,21 @@
   }
  },
  "635": {
-  "why": "Značka „Přednost protijedoucích vozidel“ přikazuje dát přednost protijedoucímu vozidlu, pokud se vozidla nemohou bezpečně vyhnout. Rychlost 20 km/h vyplývá z vyobrazené značky nejvyšší dovolené rychlosti.",
+  "why": "Značka „Přednost protijedoucích vozidel“ přikazuje dát přednost protijedoucím, pokud se nemohou bezpečně vyhnout, a nad ní je „Nejvyšší dovolená rychlost“ 20 km/h. Značka 22 t omezuje okamžitou hmotnost vozidel, s předností nesouvisí.",
   "sources": [
    {
     "law": "294/2015 Sb.",
     "ref": "příloha č. 2, značka P 7",
     "anchor": "sign-P7",
     "quote": "Značka přikazuje řidiči dát přednost v jízdě protijedoucímu vozidlu v případě, kdy se protijedoucí vozidla nemohou bezpečně vyhnout"
+   },
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 3, značka B 20a",
+    "anchor": "sign-B20a",
+    "quote": "Značka zakazuje řidiči překročit rychlost vyjádřenou na značce číslem v kilometrech za hodinu"
    }
-  ],
-  "sign": {
-   "code": "P 7",
-   "name": "Přednost protijedoucích vozidel"
-  }
+  ]
  },
  "636": {
   "why": "Dvě vedle sebe umístěná střídavě přerušovaná červená světla znamenají povinnost zastavit před světelným signalizačním zařízením. Pouhé zpomalení nestačí.",
@@ -7983,7 +8092,7 @@
   ]
  },
  "638": {
-  "why": "Vodicí tabule s šipkami označuje nebezpečnou zatáčku, ve které musí řidič výrazně snížit rychlost. Šipky ukazují směr zatáčky, zde vpravo.",
+  "why": "Sestava vodicích tabulí s šipkami označuje nebezpečnou zatáčku, ve které musí řidič výrazně snížit rychlost. Šipky ukazují směr zatáčky, zde vpravo.",
   "sources": [
    {
     "law": "294/2015 Sb.",
@@ -8028,19 +8137,21 @@
   }
  },
  "641": {
-  "why": "Značka „Doporučená rychlost“ rychlost nepřikazuje ani neomezuje, jen doporučuje rychlost, kterou lze za běžných okolností považovat za bezpečnou.",
+  "why": "Výstražná značka „Zpomalovací práh“ upozorňuje na umělou nerovnost na vozovce. Modrá značka „Doporučená rychlost“ pod ní rychlost nepřikazuje ani neomezuje, jen doporučuje 20 km/h jako bezpečnou rychlost.",
   "sources": [
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 1, značka A 7b",
+    "anchor": "sign-A7b",
+    "quote": "Značka upozorňuje na umělou nerovnost na vozovce"
+   },
    {
     "law": "294/2015 Sb.",
     "ref": "příloha č. 5, značka IP 5",
     "anchor": "sign-IP5",
     "quote": "Značka řidiči doporučuje, pokud to ostatní okolnosti provozu na pozemních komunikacích dovolují, rychlost jízdy"
    }
-  ],
-  "sign": {
-   "code": "IP 5",
-   "name": "Doporučená rychlost"
-  }
+  ]
  },
  "642": {
   "why": "Značka „Parkoviště K+R“ označuje parkoviště, kde lze zastavit, aby osoby vystoupily nebo nastoupily. Záchytné parkoviště s návazností na hromadnou dopravu je P+R.",
@@ -8058,25 +8169,21 @@
   }
  },
  "643": {
-  "why": "Značka „Křižovatka“ upozorňuje, že přednost na křižovatce neupravují svislé značky. Platí proto obecné pravidlo přednosti zprava, a to i vůči jezdcům na zvířatech, organizované skupině chodců a průvodcům zvířat.",
+  "why": "Značka „Zóna s dopravním omezením“ se symbolem značky „Křižovatka“ a nápisem PŘEDNOST ZPRAVA platí v celé oblasti: přednost neupravují svislé značky, proto dáváte přednost vozidlům a jezdcům zprava i organizované skupině chodců zprava.",
   "sources": [
    {
     "law": "294/2015 Sb.",
-    "ref": "příloha č. 1, značka A 3",
-    "anchor": "sign-A3",
-    "quote": "Značka upozorňuje na křižovatku, kde není přednost v jízdě upravena svislými dopravními značkami"
+    "ref": "příloha č. 5, značka IZ 8a",
+    "anchor": "sign-IZ8a",
+    "quote": "Značka označuje oblast, zejména část obce, kde platí výstraha, zákaz, omezení nebo příkaz vyplývající z příslušných vyobrazení značky"
    },
    {
     "law": "361/2000 Sb.",
     "ref": "§ 22 odst. 2",
     "anchor": "p22-2",
-    "quote": "musí dát řidič přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím zprava"
+    "quote": "Nevyplývá-li přednost v jízdě z ustanovení odstavce 1, musí dát řidič přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím zprava"
    }
-  ],
-  "sign": {
-   "code": "A 3",
-   "name": "Křižovatka"
-  }
+  ]
  },
  "644": {
   "why": "Sestava jednotlivých šipek za sebou je provedením vodicí tabule. Ta označuje nebezpečnou zatáčku, ve které musí řidič výrazně snížit rychlost, zde vlevo.",
@@ -8140,26 +8247,24 @@
     "anchor": "sign-B17",
     "quote": "Značka zakazuje vjezd vozidel nebo jízdních souprav, jejichž okamžitá délka včetně nákladu je větší než údaj uvedený na značce"
    }
-  ],
-  "sign": {
-   "code": "B 17",
-   "name": "Zákaz vjezdu vozidel nebo souprav, jejichž délka přesahuje vyznačenou mez"
-  }
+  ]
  },
  "648": {
-  "why": "Dodatková tabulka „Největší povolená hmotnost“ omezuje zákaz na vozidla nad vyznačenou hmotnost. U soupravy se sčítají největší povolené hmotnosti všech vozidel: 3 300 + 2 000 kg překračuje údaj na tabulce.",
+  "why": "Značka „Zákaz vjezdu nákladních automobilů“ s údajem 3,5 t platí pro nákladní automobily s největší povolenou hmotností nad 3,5 t. U soupravy se sčítají největší povolené hmotnosti všech vozidel: 3 300 + 2 000 kg = 5 300 kg, proto vjet nesmí.",
   "sources": [
    {
     "law": "294/2015 Sb.",
-    "ref": "příloha č. 6, značka E 5",
-    "anchor": "sign-E5",
-    "quote": "U jízdní soupravy je rozhodný součet nejvyšších povolených hmotností všech vozidel soupravy"
+    "ref": "příloha č. 3, značka B 4",
+    "anchor": "sign-B4",
+    "quote": "na značce pod symbolem nákladního automobilu uvedena hodnota největší povolené hmotnosti, platí značka pro vozidla o největší povolené hmotnosti převyšující tuto hodnotu"
+   },
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 3, značka B 4",
+    "anchor": "sign-B4",
+    "quote": "U jízdní soupravy je rozhodný součet největších povolených hmotností všech vozidel soupravy"
    }
-  ],
-  "sign": {
-   "code": "E 5",
-   "name": "Největší povolená hmotnost"
-  }
+  ]
  },
  "649": {
   "why": "Značka zakazuje vjezd vozidlům, jejichž okamžitá šířka včetně nákladu a zpětných zrcátek přesahuje 2,2 m. Rozhoduje skutečná šířka, ne údaj v technickém průkazu.",
@@ -8170,11 +8275,7 @@
     "anchor": "sign-B15",
     "quote": "Značka zakazuje vjezd vozidel, jejichž okamžitá šířka včetně nákladu a zpětných zrcátek je větší než údaj uvedený na značce"
    }
-  ],
-  "sign": {
-   "code": "B 15",
-   "name": "Zákaz vjezdu vozidel, jejichž šířka přesahuje vyznačenou mez"
-  }
+  ]
  },
  "650": {
   "why": "Dodatková tabulka se vzdáleností pod značkou udává, jak daleko od ní začíná platit značka nad ní. Zákaz vjezdu všech vozidel v obou směrech tedy začíná až za 1500 m.",
@@ -8319,11 +8420,7 @@
     "anchor": "sign-Z11cZ11d",
     "quote": "Sloupky vyznačují vyústění účelové komunikace na jinou pozemní komunikaci"
    }
-  ],
-  "sign": {
-   "code": "Z 11c Z 11d",
-   "name": "Směrový sloupek červený levý"
-  }
+  ]
  },
  "659": {
   "why": "Červené sloupky označují vyústění účelové komunikace. Kdo z ní vyjíždí na jinou pozemní komunikaci, musí dát přednost všem, kdo po ní jedou, bez ohledu na směr.",
@@ -8340,15 +8437,17 @@
     "anchor": "p23-1",
     "quote": "To platí i při vjíždění z účelové pozemní komunikace"
    }
-  ],
-  "sign": {
-   "code": "Z 11c Z 11d",
-   "name": "Směrový sloupek červený levý"
-  }
+  ]
  },
  "660": {
-  "why": "Odbočení vpravo nákladnímu automobilu nic nezakazuje. Při odbočování vpravo však musí dát přednost cyklistům v jízdním pruhu pro cyklisty, tedy je nesmí ohrozit ani omezit.",
+  "why": "Značka „Zákaz odbočování vpravo“ je doplněna dodatkovou tabulkou, která zákaz omezuje jen na určitá vozidla; nákladní automobil mezi ně nepatří, a smí tedy odbočit. Při odbočení vpravo musí dát přednost cyklistům v jízdním pruhu pro cyklisty.",
   "sources": [
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 3, značka B 24a",
+    "anchor": "sign-B24a",
+    "quote": "Značka zakazuje odbočování vpravo na nejbližší křižovatce"
+   },
    {
     "law": "361/2000 Sb.",
     "ref": "§ 21 odst. 6",
@@ -8358,8 +8457,14 @@
   ]
  },
  "661": {
-  "why": "Motocyklista smí odbočit vpravo, ale musí dát přednost cyklistovi v jízdním pruhu pro cyklisty. Přednost má cyklista, ne odbočující řidič.",
+  "why": "Značka „Zákaz odbočování vpravo“ je doplněna dodatkovou tabulkou, která zákaz omezuje jen na určitá vozidla; motocykl mezi ně nepatří. Při odbočení vpravo musí motocyklista dát přednost cyklistovi v jízdním pruhu pro cyklisty, ne naopak.",
   "sources": [
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 3, značka B 24a",
+    "anchor": "sign-B24a",
+    "quote": "Značka zakazuje odbočování vpravo na nejbližší křižovatce"
+   },
    {
     "law": "361/2000 Sb.",
     "ref": "§ 21 odst. 6",
@@ -8369,13 +8474,13 @@
   ]
  },
  "662": {
-  "why": "Protijedoucí vozidla se v místě zúžení nemohou bezpečně vyhnout, proto musí motocyklista před zúžením zastavit a dát přednost. I jednostopé vozidlo se musí řídit pravidly o přednosti.",
+  "why": "Před zúžením stojí značka „Přednost protijedoucích vozidel“. Protijedoucí auto už do zúžení vjíždí a vozidla se tam bezpečně nevyhnou, proto musí motocyklista před zúžením zastavit a dát mu přednost; platí to i pro jednostopé vozidlo.",
   "sources": [
    {
-    "law": "361/2000 Sb.",
-    "ref": "§ 20 odst. 1",
-    "anchor": "p20-1",
-    "quote": "Nemohou-li se bezpečně vyhnout, musí dát přednost v jízdě ten, na jehož straně jízdy je překážka nebo zúžená vozovka"
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 2, značka P 7",
+    "anchor": "sign-P7",
+    "quote": "Značka přikazuje řidiči dát přednost v jízdě protijedoucímu vozidlu v případě, kdy se protijedoucí vozidla nemohou bezpečně vyhnout"
    }
   ]
  },
@@ -8410,8 +8515,21 @@
   }
  },
  "665": {
-  "why": "Vyobrazené dopravní značení zakazuje odbočení vpravo právě autobusům, proto řidič autobusu vpravo odbočit nesmí. Ostatní vozidla, například nákladní automobil nebo motocykl, vpravo odbočit mohou.",
-  "sources": []
+  "why": "Pod značkou „Zákaz odbočování vpravo“ je dodatková tabulka se symbolem autobusu, takže zákaz platí právě pro autobusy. Řidič autobusu vpravo odbočit nesmí.",
+  "sources": [
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 3, značka B 24a",
+    "anchor": "sign-B24a",
+    "quote": "Značka zakazuje odbočování vpravo na nejbližší křižovatce"
+   },
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 6, značka E 13",
+    "anchor": "sign-E13",
+    "quote": "Vhodným nápisem nebo symbolem uvedeným na dodatkové tabulce je zpřesněn nebo omezen význam dopravní značky"
+   }
+  ]
  },
  "666": {
   "why": "Značka zakazuje vjezd všem motorovým vozidlům kromě motocyklů bez postranního vozíku. Netýká se tramvají ani nemotorových vozidel.",
@@ -8468,7 +8586,7 @@
   ]
  },
  "670": {
-  "why": "Pořadí odpovídá pravidlům přednosti na křižovatce: kdo musí dát přednost, jede až po vozidlech s předností. Modré vozidlo a vaše vozidlo se dráhami nekříží, a tak projedou současně jako poslední.",
+  "why": "Stojíte u značky „Stůj, dej přednost v jízdě!“ a protijedoucí modré vozidlo má značku „Dej přednost v jízdě!“; červené a zelené vozidlo jedou po hlavní. Zelené odbočuje vlevo, proto dává přednost protijedoucímu červenému. Vy a modré vozidlo pak jedete současně, vaše dráhy se nekříží.",
   "sources": [
    {
     "law": "361/2000 Sb.",
@@ -8478,9 +8596,9 @@
    },
    {
     "law": "361/2000 Sb.",
-    "ref": "§ 22 odst. 2",
-    "anchor": "p22-2",
-    "quote": "Nevyplývá-li přednost v jízdě z ustanovení odstavce 1, musí dát řidič přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím zprava"
+    "ref": "§ 21 odst. 5",
+    "anchor": "p21-5",
+    "quote": "Řidič odbočující vlevo musí dát přednost v jízdě protijedoucím motorovým i nemotorovým vozidlům"
    }
   ]
  },
@@ -8496,52 +8614,58 @@
   ]
  },
  "672": {
-  "why": "Zelené vozidlo musí dát přednost, přestože přijíždí zprava, tedy přijíždí po vedlejší pozemní komunikaci. Vaše a protijedoucí červené vozidlo se dráhami nekříží, a tak projedou současně jako první.",
+  "why": "Podle tabulky „Tvar křižovatky“ vede hlavní pozemní komunikace zdola doleva; jste na ní a odbočujete vpravo. Červené i zelené vozidlo jsou na vedlejší a mezi nimi platí přednost zprava: zelené má červené po pravé ruce, jede tedy až po něm. Vaše dráha a dráha červeného se nekříží, proto jedete současně.",
   "sources": [
    {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 6, značka E 2b",
+    "anchor": "sign-E2b",
+    "quote": "upřesňuje, která komunikace je hlavní a která vedlejší"
+   },
+   {
     "law": "361/2000 Sb.",
-    "ref": "§ 22 odst. 1",
-    "anchor": "p22-1",
-    "quote": "musí dát přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím po hlavní pozemní komunikaci"
+    "ref": "§ 22 odst. 2",
+    "anchor": "p22-2",
+    "quote": "Nevyplývá-li přednost v jízdě z ustanovení odstavce 1, musí dát řidič přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím zprava"
    }
   ]
  },
  "673": {
-  "why": "Zelené vozidlo zprava jede poslední, protože přijíždí po vedlejší komunikaci a dává přednost vozidlům na hlavní. Protijedoucí žluté vozidlo jede až po vás, jak to platí pro vozidlo odbočující vlevo, které dává přednost protijedoucím.",
+  "why": "Podle tabulky „Tvar křižovatky“ vede hlavní pozemní komunikace zdola doleva; jste na ní, proto jedete první. Protijedoucí žluté a zelené vozidlo zprava jsou na vedlejší a mezi nimi platí přednost zprava: zelené má žluté po pravé ruce, a tak jede poslední.",
   "sources": [
    {
-    "law": "361/2000 Sb.",
-    "ref": "§ 22 odst. 1",
-    "anchor": "p22-1",
-    "quote": "musí dát přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím po hlavní pozemní komunikaci"
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 6, značka E 2b",
+    "anchor": "sign-E2b",
+    "quote": "upřesňuje, která komunikace je hlavní a která vedlejší"
    },
    {
     "law": "361/2000 Sb.",
-    "ref": "§ 21 odst. 5",
-    "anchor": "p21-5",
-    "quote": "Řidič odbočující vlevo musí dát přednost v jízdě protijedoucím motorovým i nemotorovým vozidlům"
+    "ref": "§ 22 odst. 2",
+    "anchor": "p22-2",
+    "quote": "Nevyplývá-li přednost v jízdě z ustanovení odstavce 1, musí dát řidič přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím zprava"
    }
   ]
  },
  "674": {
-  "why": "Vaše vozidlo dává přednost všem ostatním, proto jede poslední. Ostatní projedou v pořadí podle přednosti: vozidla na hlavní komunikaci před vedlejší, a kdo odbočuje vlevo, dává přednost protijedoucím.",
+  "why": "Podle tabulky „Tvar křižovatky“ vede hlavní pozemní komunikace zleva nahoru; vy i oranžové nákladní vozidlo jste na vedlejší. Obě zelená vozidla jsou na hlavní a mezi nimi platí přednost zprava, první tedy jede zelené zleva. Na vedlejší dáváte přednost nákladnímu vozidlu zprava, proto jedete poslední.",
   "sources": [
    {
-    "law": "361/2000 Sb.",
-    "ref": "§ 22 odst. 1",
-    "anchor": "p22-1",
-    "quote": "musí dát přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím po hlavní pozemní komunikaci"
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 6, značka E 2b",
+    "anchor": "sign-E2b",
+    "quote": "upřesňuje, která komunikace je hlavní a která vedlejší"
    },
    {
     "law": "361/2000 Sb.",
-    "ref": "§ 21 odst. 5",
-    "anchor": "p21-5",
-    "quote": "Řidič odbočující vlevo musí dát přednost v jízdě protijedoucím motorovým i nemotorovým vozidlům"
+    "ref": "§ 22 odst. 2",
+    "anchor": "p22-2",
+    "quote": "Nevyplývá-li přednost v jízdě z ustanovení odstavce 1, musí dát řidič přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím zprava"
    }
   ]
  },
  "675": {
-  "why": "Řidič z výhledu musí dát přednost všem ostatním vozidlům na křižovatce, proto projede jako poslední. Pořadí určují nejdřív dopravní značky (vedlejší dává přednost hlavní), a nejsou-li, pravidlo pravé ruky.",
+  "why": "Jste na vedlejší pozemní komunikaci (značka „Dej přednost v jízdě!“), hlavní vede podle tabulky zleva nahoru. Dáváte přednost modrému a červenému vozidlu na hlavní a také zelenému vozidlu, které je rovněž na vedlejší a přijíždí zprava. Proto jedete poslední.",
   "sources": [
    {
     "law": "361/2000 Sb.",
@@ -8558,13 +8682,13 @@
   ]
  },
  "676": {
-  "why": "Zelené vozidlo musí dát přednost červenému vozidlu, a proto projede až po něm jako druhé. Přednost se řídí značkami, a nejsou-li, pravidlem pravé ruky.",
+  "why": "Podle tabulky „Tvar křižovatky“ vede hlavní pozemní komunikace zprava nahoru, zelené i červené vozidlo jsou tedy na hlavní. Mezi nimi platí přednost zprava: zelené má červené po pravé ruce, proto mu dá přednost a projede jako druhé. Vy jste na vedlejší a jedete poslední.",
   "sources": [
    {
-    "law": "361/2000 Sb.",
-    "ref": "§ 22 odst. 1",
-    "anchor": "p22-1",
-    "quote": "musí dát přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím po hlavní pozemní komunikaci"
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 6, značka E 2b",
+    "anchor": "sign-E2b",
+    "quote": "upřesňuje, která komunikace je hlavní a která vedlejší"
    },
    {
     "law": "361/2000 Sb.",
@@ -8575,30 +8699,30 @@
   ]
  },
  "677": {
-  "why": "Projedete první, protože vám nikdo z ostatních nemá přednost. Modré protijedoucí vozidlo jede druhé a oranžové nákladní vozidlo, které dává přednost oběma, projede jako poslední.",
+  "why": "Podle tabulky „Tvar křižovatky“ vede hlavní pozemní komunikace zdola doleva; jste na ní a odbočujete po ní vlevo, proto jedete první. Modré i oranžové vozidlo jsou na vedlejší a mezi nimi platí přednost zprava: oranžové má modré po pravé ruce, a tak jede poslední.",
   "sources": [
    {
-    "law": "361/2000 Sb.",
-    "ref": "§ 22 odst. 1",
-    "anchor": "p22-1",
-    "quote": "musí dát přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím po hlavní pozemní komunikaci"
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 6, značka E 2b",
+    "anchor": "sign-E2b",
+    "quote": "upřesňuje, která komunikace je hlavní a která vedlejší"
    },
    {
     "law": "361/2000 Sb.",
-    "ref": "§ 21 odst. 5",
-    "anchor": "p21-5",
-    "quote": "Řidič odbočující vlevo musí dát přednost v jízdě protijedoucím motorovým i nemotorovým vozidlům"
+    "ref": "§ 22 odst. 2",
+    "anchor": "p22-2",
+    "quote": "Nevyplývá-li přednost v jízdě z ustanovení odstavce 1, musí dát řidič přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím zprava"
    }
   ]
  },
  "678": {
-  "why": "Zelené vozidlo zprava jede poslední, přijíždí tedy po vedlejší komunikaci a dává přednost vozidlům na hlavní. Protijedoucí modré vozidlo jede až po vás, jak to platí pro vozidlo odbočující vlevo, které dává přednost protijedoucím.",
+  "why": "Značka „Hlavní pozemní komunikace“ označuje vaši silnici. Protijedoucí modré vozidlo je také na hlavní, ale odbočuje vlevo, a proto vám dává přednost. Zelené vozidlo zprava přijíždí po vedlejší a dává přednost oběma, takže jede poslední.",
   "sources": [
    {
-    "law": "361/2000 Sb.",
-    "ref": "§ 22 odst. 1",
-    "anchor": "p22-1",
-    "quote": "musí dát přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím po hlavní pozemní komunikaci"
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 2, značka P 2",
+    "anchor": "sign-P2",
+    "quote": "Značka označuje zejména v obci hlavní pozemní komunikaci v nejbližší křižovatce"
    },
    {
     "law": "361/2000 Sb.",
@@ -8609,30 +8733,48 @@
   ]
  },
  "679": {
-  "why": "Červené nákladní vozidlo má přednost, protože jede po hlavní pozemní komunikaci, a projede první. Vy a protijedoucí modré vozidlo dáváte přednost jemu; vaše dráhy se nekříží, proto pak projedete současně.",
+  "why": "Podle tabulky „Tvar křižovatky“ vede hlavní pozemní komunikace zdola doprava. Vy i červené nákladní vozidlo jste na hlavní a mezi vámi platí přednost zprava, proto nákladní vozidlo jede první. Modré vozidlo je na vedlejší, ale vaše dráhy se nekříží, takže pak jedete současně.",
   "sources": [
    {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 6, značka E 2b",
+    "anchor": "sign-E2b",
+    "quote": "upřesňuje, která komunikace je hlavní a která vedlejší"
+   },
+   {
     "law": "361/2000 Sb.",
-    "ref": "§ 22 odst. 1",
-    "anchor": "p22-1",
-    "quote": "musí dát přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím po hlavní pozemní komunikaci"
+    "ref": "§ 22 odst. 2",
+    "anchor": "p22-2",
+    "quote": "Nevyplývá-li přednost v jízdě z ustanovení odstavce 1, musí dát řidič přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím zprava"
    }
   ]
  },
  "680": {
-  "why": "Nejste na hlavní pozemní komunikaci: červený nákladní automobil po ní přijíždí, a proto mu musíte dát přednost. Projedete hned po něm. Žlutému protijedoucímu vozidlu přednost nedáváte.",
+  "why": "Podle tabulky „Tvar křižovatky“ vede hlavní pozemní komunikace zdola doprava. Vy i červený nákladní automobil jste na hlavní a mezi vámi platí přednost zprava, proto mu ji dáváte. Žluté protijedoucí vozidlo je na vedlejší a dává přednost vám.",
   "sources": [
    {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 6, značka E 2b",
+    "anchor": "sign-E2b",
+    "quote": "upřesňuje, která komunikace je hlavní a která vedlejší"
+   },
+   {
     "law": "361/2000 Sb.",
-    "ref": "§ 22 odst. 1",
-    "anchor": "p22-1",
-    "quote": "musí dát přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím po hlavní pozemní komunikaci"
+    "ref": "§ 22 odst. 2",
+    "anchor": "p22-2",
+    "quote": "Nevyplývá-li přednost v jízdě z ustanovení odstavce 1, musí dát řidič přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím zprava"
    }
   ]
  },
  "681": {
-  "why": "Nejste na hlavní pozemní komunikaci – vozidlo zleva po ní přijíždí, a proto mu musíte dát přednost. Pravidlo pravé ruky platí jen tam, kde přednost nevyplývá ze značek.",
+  "why": "Stojíte u značky „Dej přednost v jízdě!“, jste tedy na vedlejší pozemní komunikaci. Vozidlo zleva přijíždí po hlavní, proto mu musíte dát přednost, i když přijíždí zleva.",
   "sources": [
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 2, značka P 4",
+    "anchor": "sign-P4",
+    "quote": "Značka označuje vedlejší pozemní komunikaci"
+   },
    {
     "law": "361/2000 Sb.",
     "ref": "§ 22 odst. 1",
@@ -8642,14 +8784,8 @@
   ]
  },
  "682": {
-  "why": "Musíte dát přednost červenému automobilu. Přednost se na křižovatce řídí značkami (vedlejší dává přednost hlavní), a nejsou-li, pravidlem pravé ruky.",
+  "why": "Na křižovatce nejsou značky upravující přednost, platí tedy přednost zprava. Červený automobil přijíždí zprava, proto mu dáváte přednost; zelené vozidlo zleva naopak dává přednost vám.",
   "sources": [
-   {
-    "law": "361/2000 Sb.",
-    "ref": "§ 22 odst. 1",
-    "anchor": "p22-1",
-    "quote": "musí dát přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím po hlavní pozemní komunikaci"
-   },
    {
     "law": "361/2000 Sb.",
     "ref": "§ 22 odst. 2",
@@ -8659,30 +8795,36 @@
   ]
  },
  "683": {
-  "why": "Na železniční přejezd nesmíte vjet, je-li dávána výstraha světly nebo zvukem, pohybují-li se závory, blíží-li se vlak nebo nedovoluje-li situace za přejezdem bezpečně přejet a pokračovat. Ve vyobrazené situaci vjet nesmíte.",
+  "why": "Přejezdové zabezpečovací zařízení dává výstrahu dvěma červenými střídavě přerušovanými světly. V takovém případě řidič na železniční přejezd vjet nesmí.",
   "sources": [
    {
     "law": "361/2000 Sb.",
     "ref": "§ 29 odst. 1",
     "anchor": "p29-1",
     "quote": "Řidič nesmí vjíždět na železniční přejezd"
+   },
+   {
+    "law": "361/2000 Sb.",
+    "ref": "§ 29 odst. 1 písm. a)",
+    "anchor": "p29-1-a",
+    "quote": "je-li dávána výstraha dvěma červenými střídavě přerušovanými světly signálu přejezdového zabezpečovacího zařízení"
    }
   ]
  },
  "684": {
-  "why": "Řidič z výhledu nemusí nikomu dávat přednost, proto projede jako první. Pořadí určují nejdřív dopravní značky (vedlejší dává přednost hlavní), a nejsou-li, pravidlo pravé ruky.",
+  "why": "Jste na hlavní pozemní komunikaci (značka „Hlavní pozemní komunikace“) a podle tabulky „Tvar křižovatky“ hlavní vede vlevo, kam odbočujete. Stříbrné vozidlo zprava přijíždí po vedlejší a musí vám dát přednost, proto projedete jako první.",
   "sources": [
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 6, značka E 2b",
+    "anchor": "sign-E2b",
+    "quote": "upřesňuje, která komunikace je hlavní a která vedlejší"
+   },
    {
     "law": "361/2000 Sb.",
     "ref": "§ 22 odst. 1",
     "anchor": "p22-1",
     "quote": "musí dát přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím po hlavní pozemní komunikaci"
-   },
-   {
-    "law": "361/2000 Sb.",
-    "ref": "§ 22 odst. 2",
-    "anchor": "p22-2",
-    "quote": "Nevyplývá-li přednost v jízdě z ustanovení odstavce 1, musí dát řidič přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím zprava"
    }
   ]
  },
@@ -8698,7 +8840,7 @@
   ]
  },
  "686": {
-  "why": "Žluté vozidlo přijíždí po hlavní pozemní komunikaci, tak mu dáváte přednost. Zelenému protijedoucímu vozidlu dáváte přednost, protože odbočujete vlevo a odbočující vlevo dává přednost protijedoucím.",
+  "why": "Stojíte u značky „Dej přednost v jízdě!“, proto dáváte přednost žlutému vozidlu na hlavní pozemní komunikaci. Zelenému protijedoucímu vozidlu dáváte přednost, protože odbočujete vlevo.",
   "sources": [
    {
     "law": "361/2000 Sb.",
@@ -8726,13 +8868,13 @@
   ]
  },
  "688": {
-  "why": "Dáváte přednost oběma vozidlům, proto jedete poslední. Červené vozidlo projede první, protože zelené mu musí dát přednost. Přednost určují značky, a nejsou-li, pravidlo pravé ruky.",
+  "why": "Podle tabulky „Tvar křižovatky“ vede hlavní pozemní komunikace zprava nahoru; jste na vedlejší a dáváte přednost oběma vozidlům. Červené i zelené jsou na hlavní a mezi nimi platí přednost zprava: zelené má červené po pravé ruce, proto červené jede první.",
   "sources": [
    {
-    "law": "361/2000 Sb.",
-    "ref": "§ 22 odst. 1",
-    "anchor": "p22-1",
-    "quote": "musí dát přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím po hlavní pozemní komunikaci"
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 6, značka E 2b",
+    "anchor": "sign-E2b",
+    "quote": "upřesňuje, která komunikace je hlavní a která vedlejší"
    },
    {
     "law": "361/2000 Sb.",
@@ -8743,13 +8885,13 @@
   ]
  },
  "689": {
-  "why": "Nemusíte dávat přednost nikomu, proto pojedete první. Zelené vozidlo pak má přednost před červeným nákladním, které pojede poslední. Přednost určují značky, a nejsou-li, pravidlo pravé ruky.",
+  "why": "Podle tabulky „Tvar křižovatky“ vede hlavní pozemní komunikace zdola doleva. Vy i zelené vozidlo jste na hlavní a mezi vámi platí přednost zprava: zelené vás má po pravé ruce, proto jedete první. Červené nákladní vozidlo zprava je na vedlejší a jede poslední.",
   "sources": [
    {
-    "law": "361/2000 Sb.",
-    "ref": "§ 22 odst. 1",
-    "anchor": "p22-1",
-    "quote": "musí dát přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím po hlavní pozemní komunikaci"
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 6, značka E 2b",
+    "anchor": "sign-E2b",
+    "quote": "upřesňuje, která komunikace je hlavní a která vedlejší"
    },
    {
     "law": "361/2000 Sb.",
@@ -8760,30 +8902,30 @@
   ]
  },
  "690": {
-  "why": "Vozidlu zprava přednost nedáváte, protože přednost v této situaci vyplývá ze značek a vy jste na hlavní pozemní komunikaci. Pravidlo pravé ruky platí, jen když přednost ze značek nevyplývá. Odbočit vpravo nemusíte.",
+  "why": "Jste na silnici označené značkou „Hlavní pozemní komunikace“. Vozidlo zprava přijíždí po vedlejší a musí vám dát přednost, proto projedete jako první; přednost zprava tu neplatí. Odbočit vpravo nemusíte.",
   "sources": [
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 2, značka P 2",
+    "anchor": "sign-P2",
+    "quote": "Značka označuje zejména v obci hlavní pozemní komunikaci v nejbližší křižovatce"
+   },
    {
     "law": "361/2000 Sb.",
     "ref": "§ 22 odst. 1",
     "anchor": "p22-1",
     "quote": "musí dát přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím po hlavní pozemní komunikaci"
-   },
-   {
-    "law": "361/2000 Sb.",
-    "ref": "§ 22 odst. 2",
-    "anchor": "p22-2",
-    "quote": "Nevyplývá-li přednost v jízdě z ustanovení odstavce 1, musí dát řidič přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím zprava"
    }
   ]
  },
  "691": {
-  "why": "Řidič z výhledu nedává přednost nikomu a jede první, potom červené a nakonec bílé vozidlo, které dává přednost oběma. Přednost určují značky, a nejsou-li, pravidlo pravé ruky.",
+  "why": "Hlavní pozemní komunikace vede podle tabulky „Tvar křižovatky“ zleva dolů. Vozidlo z výhledu i červené vozidlo zleva jsou na hlavní a mezi nimi platí přednost zprava, takže vozidlo z výhledu jede první. Bílé vozidlo zprava je na vedlejší a jede poslední.",
   "sources": [
    {
-    "law": "361/2000 Sb.",
-    "ref": "§ 22 odst. 1",
-    "anchor": "p22-1",
-    "quote": "musí dát přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím po hlavní pozemní komunikaci"
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 6, značka E 2b",
+    "anchor": "sign-E2b",
+    "quote": "upřesňuje, která komunikace je hlavní a která vedlejší"
    },
    {
     "law": "361/2000 Sb.",
@@ -8827,7 +8969,7 @@
   ]
  },
  "695": {
-  "why": "Řidič z výhledu musí dát přednost všem ostatním vozidlům na křižovatce, a proto projede jako poslední. Přednost určují značky, a nejsou-li, pravidlo pravé ruky.",
+  "why": "Jste na vedlejší pozemní komunikaci (značka „Dej přednost v jízdě!“), hlavní vede podle tabulky zleva nahoru. Dáváte přednost oběma zeleným vozidlům na hlavní a také oranžovému nákladnímu vozidlu, které je rovněž na vedlejší a přijíždí zprava. Proto jedete poslední.",
   "sources": [
    {
     "law": "361/2000 Sb.",
@@ -8844,13 +8986,13 @@
   ]
  },
  "696": {
-  "why": "Vaše vozidlo dává přednost všem ostatním, proto jede poslední. Ostatní projedou postupně podle toho, kdo komu musí dát přednost – podle značek, a nejsou-li, podle pravidla pravé ruky.",
+  "why": "Hlavní pozemní komunikace vede podle tabulky „Tvar křižovatky“ zleva nahoru. Na ní jede modré vozidlo zleva před červeným, protože je červené má po pravé ruce. Vy i zelené vozidlo jste na vedlejší; zelené přijíždí zprava, jede tedy před vámi a vy jedete poslední.",
   "sources": [
    {
-    "law": "361/2000 Sb.",
-    "ref": "§ 22 odst. 1",
-    "anchor": "p22-1",
-    "quote": "musí dát přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím po hlavní pozemní komunikaci"
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 6, značka E 2b",
+    "anchor": "sign-E2b",
+    "quote": "upřesňuje, která komunikace je hlavní a která vedlejší"
    },
    {
     "law": "361/2000 Sb.",
@@ -8861,7 +9003,7 @@
   ]
  },
  "697": {
-  "why": "Vy a protijedoucí zelené vozidlo máte před žlutým nákladním vozidlem přednost a vaše dráhy se nekříží, proto projedete současně. Žluté nákladní vozidlo, které dává přednost oběma, jede poslední.",
+  "why": "Jedete po hlavní pozemní komunikaci (značka „Hlavní pozemní komunikace“ s tabulkou tvaru křižovatky). Zelené i žluté vozidlo přijíždějí po vedlejších. Zelené odbočuje vpravo a vaši dráhu nekříží, proto jede současně s vámi. Žluté dává přednost vám i zelenému, které má zprava.",
   "sources": [
    {
     "law": "361/2000 Sb.",
@@ -8878,7 +9020,7 @@
   ]
  },
  "698": {
-  "why": "Vozidlu zleva, které podle znění odpovědi má právo přednostní jízdy, musíte umožnit bezpečný a plynulý průjezd. Před ním tedy do křižovatky vjet nesmíte, ať jste na hlavní komunikaci, nebo přijíždí zleva.",
+  "why": "Zleva přijíždí hasičský vůz se zapnutým modrým výstražným světlem, tedy vozidlo s právem přednostní jízdy. Musíte mu umožnit bezpečný a plynulý průjezd, i když přijíždí zleva a jinak by přednost dávalo ono vám. Do křižovatky před ním proto nevjedete.",
   "sources": [
    {
     "law": "361/2000 Sb.",
@@ -8900,7 +9042,7 @@
   ]
  },
  "700": {
-  "why": "Ve vzdálenosti 50 m před železničním přejezdem a při jeho přejíždění smíte jet nejvýše 30 km/h, a to i mimo obec. Vyšší rychlost 50 km/h je dovolena jen při svítícím přerušovaném bílém světle.",
+  "why": "Na výstražníku u přejezdu nesvítí přerušované bílé světlo, takže 50 m před přejezdem a na něm smíte jet nejvýše 30 km/h, a to i mimo obec. Rychlost 50 km/h by byla dovolena jen při svítícím přerušovaném bílém světle.",
   "sources": [
    {
     "law": "361/2000 Sb.",
@@ -8911,7 +9053,7 @@
   ]
  },
  "701": {
-  "why": "Na železničním přejezdu a 50 m před ním je nejvyšší dovolená rychlost 30 km/h. Rychlost 35 km/h ji překračuje, 25 a 30 km/h jsou v pořádku.",
+  "why": "Na výstražníku u přejezdu nesvítí přerušované bílé světlo, proto na přejezdu a 50 m před ním platí nejvýše 30 km/h. Rychlost 35 km/h ji překračuje, 25 a 30 km/h jsou v pořádku.",
   "sources": [
    {
     "law": "361/2000 Sb.",
@@ -8988,7 +9130,7 @@
   ]
  },
  "708": {
-  "why": "Dáváte přednost oběma vozidlům. Protijedoucí červený automobil má přednost před zeleným nákladním, proto projede první. Přednost určují značky, a nejsou-li, pravidlo pravé ruky; odbočující vlevo dává přednost protijedoucím.",
+  "why": "Značka „Dej přednost v jízdě!“ s tabulkou tvaru křižovatky ukazuje, že hlavní komunikace vede od protijedoucího červeného automobilu doleva. Červený jede po hlavní, a projede proto první. Zelený nákladní automobil je stejně jako vy na vedlejší, přijíždí ale zprava, takže i jemu dáváte přednost.",
   "sources": [
    {
     "law": "361/2000 Sb.",
@@ -8998,14 +9140,14 @@
    },
    {
     "law": "361/2000 Sb.",
-    "ref": "§ 21 odst. 5",
-    "anchor": "p21-5",
-    "quote": "Řidič odbočující vlevo musí dát přednost v jízdě protijedoucím motorovým i nemotorovým vozidlům"
+    "ref": "§ 22 odst. 2",
+    "anchor": "p22-2",
+    "quote": "Nevyplývá-li přednost v jízdě z ustanovení odstavce 1, musí dát řidič přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím zprava"
    }
   ]
  },
  "709": {
-  "why": "Když zjistíte, že jste v nesprávném pruhu, pokračujte ve směru, pro který je pruh určen, a cíl objeďte. Couvat na křižovatce by ohrozilo ostatní a zvukové znamení se smí dávat jen k odvrácení nebezpečí.",
+  "why": "Pruh je vyznačen směrovou šipkou vlevo, takže z něj musíte odbočit vlevo a cíl objet. Couvat na křižovatce by ohrozilo ostatní a zvukové výstražné znamení se smí dávat jen k odvrácení hrozícího nebezpečí.",
   "sources": [
    {
     "law": "361/2000 Sb.",
@@ -9039,7 +9181,7 @@
   ]
  },
  "711": {
-  "why": "Vozidlu s právem přednostní jízdy musíte umožnit bezpečný a plynulý průjezd a v případě potřeby i zastavit. Takový řidič nemusí dodržovat pravidla o přednosti na křižovatce, je však povinen dbát potřebné opatrnosti.",
+  "why": "Zleva přijíždí hasičský vůz se zapnutým modrým výstražným světlem. Vozidlu s právem přednostní jízdy musíte umožnit bezpečný a plynulý průjezd a v případě potřeby i zastavit; pravidlo pravé ruky tu nerozhoduje.",
   "sources": [
    {
     "law": "361/2000 Sb.",
@@ -9084,64 +9226,64 @@
   ]
  },
  "714": {
-  "why": "Tramvaj je vozidlo, takže i pro ni na křižovatce platí značky a pravidlo pravé ruky; přednost nemá automaticky. Ve vyobrazené situaci řidič z výhledu tramvajím přednost dávat nemusí, proto projede první.",
+  "why": "Značka „Hlavní pozemní komunikace“ s tabulkou tvaru křižovatky ukazuje, že hlavní vede rovně a jede po ní vozidlo z výhledu. Obě tramvaje i zelený nákladní automobil přijíždějí po vedlejší a musí mu dát přednost, proto projede první.",
   "sources": [
    {
-    "law": "361/2000 Sb.",
-    "ref": "§ 2 odst. 1 písm. f)",
-    "anchor": "p2-1-f",
-    "quote": "vozidlo je motorové vozidlo, nemotorové vozidlo nebo tramvaj"
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 6, značka E 2b",
+    "anchor": "sign-E2b",
+    "quote": "Tabulka vyznačuje skutečný tvar křižovatky a upřesňuje, která komunikace je hlavní a která vedlejší."
    },
    {
     "law": "361/2000 Sb.",
-    "ref": "§ 22 odst. 2",
-    "anchor": "p22-2",
-    "quote": "Nevyplývá-li přednost v jízdě z ustanovení odstavce 1, musí dát řidič přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím zprava"
+    "ref": "§ 22 odst. 1",
+    "anchor": "p22-1",
+    "quote": "musí dát přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím po hlavní pozemní komunikaci"
    }
   ]
  },
  "715": {
-  "why": "Tramvaj je vozidlo, takže i pro ni na křižovatce platí značky a pravidlo pravé ruky; přednost nemá automaticky. Ve vyobrazené situaci řidič z výhledu tramvajím přednost dávat nemusí, proto projede první.",
+  "why": "Značka „Hlavní pozemní komunikace“ s tabulkou tvaru křižovatky ukazuje, že hlavní vede rovně a jede po ní vozidlo z výhledu. Obě tramvaje i zelený nákladní automobil přijíždějí po vedlejší a musí mu dát přednost, proto projede první.",
   "sources": [
    {
-    "law": "361/2000 Sb.",
-    "ref": "§ 2 odst. 1 písm. f)",
-    "anchor": "p2-1-f",
-    "quote": "vozidlo je motorové vozidlo, nemotorové vozidlo nebo tramvaj"
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 6, značka E 2b",
+    "anchor": "sign-E2b",
+    "quote": "Tabulka vyznačuje skutečný tvar křižovatky a upřesňuje, která komunikace je hlavní a která vedlejší."
    },
    {
     "law": "361/2000 Sb.",
-    "ref": "§ 22 odst. 2",
-    "anchor": "p22-2",
-    "quote": "Nevyplývá-li přednost v jízdě z ustanovení odstavce 1, musí dát řidič přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím zprava"
+    "ref": "§ 22 odst. 1",
+    "anchor": "p22-1",
+    "quote": "musí dát přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím po hlavní pozemní komunikaci"
    }
   ]
  },
  "716": {
-  "why": "Tramvaj je vozidlo a na křižovatce pro ni platí stejná pravidla přednosti jako pro ostatní. Obě tramvaje i zelený nákladní automobil dávají přednost vozidlu z výhledu; navzájem se jejich dráhy nekříží, proto projedou současně po něm.",
+  "why": "Podle značky „Hlavní pozemní komunikace“ s tabulkou tvaru křižovatky vede hlavní rovně a jede po ní vozidlo z výhledu, které projede první. Obě tramvaje i zelený nákladní automobil přijíždějí po vedlejší a dávají mu přednost; navzájem si nepřekážejí, proto projedou současně po něm.",
   "sources": [
    {
-    "law": "361/2000 Sb.",
-    "ref": "§ 2 odst. 1 písm. f)",
-    "anchor": "p2-1-f",
-    "quote": "vozidlo je motorové vozidlo, nemotorové vozidlo nebo tramvaj"
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 6, značka E 2b",
+    "anchor": "sign-E2b",
+    "quote": "Tabulka vyznačuje skutečný tvar křižovatky a upřesňuje, která komunikace je hlavní a která vedlejší."
    },
    {
     "law": "361/2000 Sb.",
-    "ref": "§ 22 odst. 2",
-    "anchor": "p22-2",
-    "quote": "Nevyplývá-li přednost v jízdě z ustanovení odstavce 1, musí dát řidič přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím zprava"
+    "ref": "§ 22 odst. 1",
+    "anchor": "p22-1",
+    "quote": "musí dát přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím po hlavní pozemní komunikaci"
    }
   ]
  },
  "717": {
-  "why": "Tramvaj je vozidlo, takže i pro ni na křižovatce platí značky a pravidlo pravé ruky; přednost nemá automaticky. Ve vyobrazené situaci řidič z výhledu tramvajím přednost dávat nemusí, proto projede první.",
+  "why": "Podle tabulky pod značkou „Hlavní pozemní komunikace“ vede hlavní od vás doleva, kam odbočujete. Tramvaj č. 2 a zelené vozidlo přijíždějí zprava po vedlejší a dávají přednost. Tramvaj č. 1 jede po hlavní, ale přijíždí zleva, takže vám dává přednost podle pravidla pravé ruky.",
   "sources": [
    {
-    "law": "361/2000 Sb.",
-    "ref": "§ 2 odst. 1 písm. f)",
-    "anchor": "p2-1-f",
-    "quote": "vozidlo je motorové vozidlo, nemotorové vozidlo nebo tramvaj"
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 6, značka E 2b",
+    "anchor": "sign-E2b",
+    "quote": "Tabulka vyznačuje skutečný tvar křižovatky a upřesňuje, která komunikace je hlavní a která vedlejší."
    },
    {
     "law": "361/2000 Sb.",
@@ -9152,13 +9294,13 @@
   ]
  },
  "718": {
-  "why": "Tramvaj je vozidlo, takže i pro ni na křižovatce platí značky a pravidlo pravé ruky; přednost nemá automaticky. Ve vyobrazené situaci řidič z výhledu tramvajím přednost dávat nemusí, proto projede první.",
+  "why": "Podle tabulky pod značkou „Hlavní pozemní komunikace“ vede hlavní od vás doleva, kam odbočujete. Tramvaj č. 2 a zelené vozidlo přijíždějí zprava po vedlejší a dávají přednost. Tramvaj č. 1 jede po hlavní, ale přijíždí zleva, takže vám dává přednost podle pravidla pravé ruky.",
   "sources": [
    {
-    "law": "361/2000 Sb.",
-    "ref": "§ 2 odst. 1 písm. f)",
-    "anchor": "p2-1-f",
-    "quote": "vozidlo je motorové vozidlo, nemotorové vozidlo nebo tramvaj"
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 6, značka E 2b",
+    "anchor": "sign-E2b",
+    "quote": "Tabulka vyznačuje skutečný tvar křižovatky a upřesňuje, která komunikace je hlavní a která vedlejší."
    },
    {
     "law": "361/2000 Sb.",
@@ -9169,13 +9311,13 @@
   ]
  },
  "719": {
-  "why": "Tramvaj je vozidlo, takže i pro ni na křižovatce platí značky a pravidlo pravé ruky; přednost nemá automaticky. Ve vyobrazené situaci řidič z výhledu tramvajím přednost dávat nemusí, proto projede první.",
+  "why": "Podle tabulky pod značkou „Hlavní pozemní komunikace“ vede hlavní od vás doleva, kam odbočujete. Tramvaj č. 2 a zelené vozidlo přijíždějí zprava po vedlejší a dávají přednost. Tramvaj č. 1 jede po hlavní, ale přijíždí zleva, takže vám dává přednost podle pravidla pravé ruky.",
   "sources": [
    {
-    "law": "361/2000 Sb.",
-    "ref": "§ 2 odst. 1 písm. f)",
-    "anchor": "p2-1-f",
-    "quote": "vozidlo je motorové vozidlo, nemotorové vozidlo nebo tramvaj"
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 6, značka E 2b",
+    "anchor": "sign-E2b",
+    "quote": "Tabulka vyznačuje skutečný tvar křižovatky a upřesňuje, která komunikace je hlavní a která vedlejší."
    },
    {
     "law": "361/2000 Sb.",
@@ -9186,13 +9328,13 @@
   ]
  },
  "720": {
-  "why": "Tramvaj je vozidlo, takže i pro ni na křižovatce platí značky a pravidlo pravé ruky. Vozidlo z výhledu nedává přednost nikomu a projede jako jediné první; zelené vozidlo a tramvaje jedou až po něm.",
+  "why": "Podle tabulky pod značkou „Hlavní pozemní komunikace“ vede hlavní od vás doleva, kam odbočujete. Tramvaj č. 2 a zelené vozidlo přijíždějí zprava po vedlejší a dávají přednost. Tramvaj č. 1 jede po hlavní, ale přijíždí zleva, takže vám dává přednost podle pravidla pravé ruky.",
   "sources": [
    {
-    "law": "361/2000 Sb.",
-    "ref": "§ 2 odst. 1 písm. f)",
-    "anchor": "p2-1-f",
-    "quote": "vozidlo je motorové vozidlo, nemotorové vozidlo nebo tramvaj"
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 6, značka E 2b",
+    "anchor": "sign-E2b",
+    "quote": "Tabulka vyznačuje skutečný tvar křižovatky a upřesňuje, která komunikace je hlavní a která vedlejší."
    },
    {
     "law": "361/2000 Sb.",
@@ -9203,7 +9345,7 @@
   ]
  },
  "721": {
-  "why": "Žluté vozidlo musí dát přednost všem ostatním, a proto projede jako poslední. Přednost určují značky, a nejsou-li, pravidlo pravé ruky.",
+  "why": "Značka „Stůj, dej přednost v jízdě!“ s tabulkou ukazuje, že hlavní vede shora doprava; po ní jede modré nákladní vozidlo, které projede první. Vy i žluté vozidlo jste na vedlejších, žluté však přijíždí zleva, takže dává přednost i vám a projede poslední.",
   "sources": [
    {
     "law": "361/2000 Sb.",
@@ -9220,7 +9362,7 @@
   ]
  },
  "722": {
-  "why": "Vozidlo z výhledu musí dát přednost jednomu vozidlu, a proto projede jako druhé. Přednost určují značky, a nejsou-li, pravidlo pravé ruky.",
+  "why": "Značka „Stůj, dej přednost v jízdě!“ s tabulkou ukazuje, že hlavní vede shora doprava; po ní jede modré nákladní vozidlo, kterému dáváte přednost. Žluté vozidlo přijíždí po vedlejší zleva a dává přednost vám, takže projedete jako druhé.",
   "sources": [
    {
     "law": "361/2000 Sb.",
@@ -9237,7 +9379,7 @@
   ]
  },
  "723": {
-  "why": "Na křižovatce, kde přednost neupravují dopravní značky ani světelné signály, platí přednost zprava. Řidič z výhledu proto dává přednost vozidlu přijíždějícímu zprava a křižovatkou projede jako druhý.",
+  "why": "Značky „Zákaz odbočování vpravo“ a „Zákaz vjezdu všech vozidel“ přednost neupravují a jiné tu nejsou, proto platí pravidlo pravé ruky. Řidič z výhledu dává přednost zelenému vozidlu zprava a projede jako druhý.",
   "sources": [
    {
     "law": "361/2000 Sb.",
@@ -9248,7 +9390,7 @@
   ]
  },
  "724": {
-  "why": "Na této křižovatce nejsou značky upravující přednost, takže žádná z komunikací není hlavní ani vedlejší. Přednost se řídí pravidlem pravé ruky.",
+  "why": "Na křižovatce jsou jen značky „Zákaz odbočování vpravo“ a „Zákaz vjezdu všech vozidel“, které přednost neupravují. Žádná komunikace tu proto není hlavní ani vedlejší a přednost se řídí pravidlem pravé ruky.",
   "sources": [
    {
     "law": "361/2000 Sb.",
@@ -9259,7 +9401,7 @@
   ]
  },
  "725": {
-  "why": "Přednost zde není upravena svislými dopravními značkami, a proto neplatí pojmy hlavní a vedlejší komunikace. Řidiči dávají přednost vozidlům přijíždějícím zprava, takže vozidlo z výhledu přednost automaticky nemá.",
+  "why": "Značky „Zákaz odbočování vpravo“ a „Zákaz vjezdu všech vozidel“ přednost neupravují, takže tu neplatí pojmy hlavní a vedlejší komunikace. Řidiči dávají přednost vozidlům zprava, vozidlo z výhledu proto dává přednost zelenému vozidlu.",
   "sources": [
    {
     "law": "361/2000 Sb.",
@@ -9325,14 +9467,8 @@
   ]
  },
  "731": {
-  "why": "Na křižovatce bez úpravy přednosti dává řidič přednost vozidlům zprava. Zároveň musí přizpůsobit rychlost okolnostem, které lze předvídat, tedy i zasněžené vozovce a náledí na mostě.",
+  "why": "Řidič odbočující vlevo zde dává přednost vozidlům zprava. Zároveň musí přizpůsobit rychlost okolnostem, které lze předvídat: na zasněžené vozovce hrozí smyk a na mostě se může tvořit náledí.",
   "sources": [
-   {
-    "law": "361/2000 Sb.",
-    "ref": "§ 22 odst. 2",
-    "anchor": "p22-2",
-    "quote": "musí dát řidič přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím zprava"
-   },
    {
     "law": "361/2000 Sb.",
     "ref": "§ 18 odst. 1",
@@ -9370,22 +9506,41 @@
   ]
  },
  "734": {
-  "why": "Zastavit musí řidič jen tehdy, když mu to ukládá značka „Stůj, dej přednost v jízdě!“ nebo signál „Stůj!“. Podle oficiální odpovědi mu v této situaci nic takového zastavit nepřikazuje, a proto může křižovatkou projet.",
-  "sources": []
+  "why": "Svítí zelený signál „Volno“. Světelné signály jsou nadřazeny svislým značkám upravujícím přednost, proto se řidič neřídí značkou „Stůj, dej přednost v jízdě!“ a může křižovatkou projet.",
+  "sources": [
+   {
+    "law": "361/2000 Sb.",
+    "ref": "§ 76 odst. 6",
+    "anchor": "p76-6",
+    "quote": "Světelné signály jsou nadřazeny svislým dopravním značkám upravujícím přednost."
+   },
+   {
+    "law": "361/2000 Sb.",
+    "ref": "§ 70 odst. 2 písm. c)",
+    "anchor": "p70-2-c",
+    "quote": "signál se zeleným plným kruhovým světlem \"Volno\" možnost pokračovat v jízdě"
+   }
+  ]
  },
  "735": {
-  "why": "Jízda je zde přikázána vlevo a přednost není upravena značkami. Proto platí pravidlo pravé ruky a řidič musí dát přednost vozidlům přijíždějícím zprava.",
+  "why": "Značka „Přikázaný směr jízdy vlevo“ přikazuje odbočit vlevo. Přednost tu značky neupravují, proto platí pravidlo pravé ruky a řidič musí dát přednost vozidlům přijíždějícím zprava.",
   "sources": [
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 4, značka C 2c",
+    "anchor": "sign-C2c",
+    "quote": "Značka přikazuje jízdu ve směru vlevo."
+   },
    {
     "law": "361/2000 Sb.",
     "ref": "§ 22 odst. 2",
     "anchor": "p22-2",
-    "quote": "musí dát řidič přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím zprava"
+    "quote": "Nevyplývá-li přednost v jízdě z ustanovení odstavce 1, musí dát řidič přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím zprava"
    }
   ]
  },
  "736": {
-  "why": "Na křižovatce bez úpravy přednosti musí řidič dát přednost vozidlům zprava a zároveň nesmí ohrozit ani omezit chodce na přechodu. Musí proto sledovat obojí.",
+  "why": "Na křižovatce bez úpravy přednosti musí řidič dát přednost vozidlům zprava a zároveň nesmí ohrozit ani omezit chodce na přechodu, proto sleduje obojí. Vpravo odbočit nesmí, zakazuje to značka „Zákaz odbočování vpravo“.",
   "sources": [
    {
     "law": "361/2000 Sb.",
@@ -9413,30 +9568,48 @@
   ]
  },
  "738": {
-  "why": "Mezi dvěma vozidly přijíždějícími po vedlejších komunikacích přednost ze značek nevyplývá, a proto platí pravidlo pravé ruky. Značka „Stůj, dej přednost v jízdě!“ ukládá zastavit, ale vůči vozidlu zleva přednost nebere.",
+  "why": "Tabulka pod značkou „Dej přednost v jízdě!“ ukazuje, že hlavní vede shora doleva. Vy i červené vozidlo přijíždíte po vedlejších, mezi sebou proto platí pravidlo pravé ruky a červenému vozidlu zprava dáváte přednost. Značka „Stůj, dej přednost v jízdě!“ na jeho vjezdu na tom nic nemění.",
   "sources": [
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 6, značka E 2b",
+    "anchor": "sign-E2b",
+    "quote": "Tabulka vyznačuje skutečný tvar křižovatky a upřesňuje, která komunikace je hlavní a která vedlejší."
+   },
    {
     "law": "361/2000 Sb.",
     "ref": "§ 22 odst. 2",
     "anchor": "p22-2",
-    "quote": "musí dát řidič přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím zprava"
+    "quote": "Nevyplývá-li přednost v jízdě z ustanovení odstavce 1, musí dát řidič přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím zprava"
    }
   ]
  },
  "739": {
-  "why": "Řidič přijíždějící po vedlejší komunikaci nejprve dává přednost vozidlům na hlavní komunikaci. Podle oficiální odpovědi pak odbočuje vlevo dříve než protijedoucí modré vozidlo.",
+  "why": "Řidič přijíždí ke značce „Stůj, dej přednost v jízdě!“, a dává proto přednost vozidlům na hlavní komunikaci. Modré vozidlo vyjíždí z obytné zóny (značka za křižovatkou), a musí tak dát přednost všem, i řidiči odbočujícímu vlevo.",
   "sources": [
    {
     "law": "361/2000 Sb.",
     "ref": "§ 22 odst. 1",
     "anchor": "p22-1",
     "quote": "musí dát přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím po hlavní pozemní komunikaci"
+   },
+   {
+    "law": "361/2000 Sb.",
+    "ref": "§ 23 odst. 1",
+    "anchor": "p23-1",
+    "quote": "To platí i při vjíždění z účelové pozemní komunikace nebo ze stezky pro cyklisty nebo z obytné, pěší nebo cyklistické zóny na jinou pozemní komunikaci."
    }
   ]
  },
  "740": {
-  "why": "Tramvaj je z hlediska pravidel vozidlo a automaticky přednost nemá. O pořadí rozhoduje úprava přednosti na křižovatce a podle oficiální odpovědi ji zde má osobní automobil jedoucí rovně.",
+  "why": "Protijedoucí tramvaj odbočuje vlevo a křižuje směr jízdy automobilu. Tramvaj je vozidlo a její řidič musí jako každý odbočující vlevo dát přednost protijedoucím vozidlům, proto má automobil jedoucí rovně přednost.",
   "sources": [
+   {
+    "law": "361/2000 Sb.",
+    "ref": "§ 21 odst. 5",
+    "anchor": "p21-5",
+    "quote": "Řidič odbočující vlevo musí dát přednost v jízdě protijedoucím motorovým i nemotorovým vozidlům"
+   },
    {
     "law": "361/2000 Sb.",
     "ref": "§ 2 odst. 1 písm. f)",
@@ -9446,8 +9619,14 @@
   ]
  },
  "741": {
-  "why": "Řidič odbočující vlevo musí dát přednost tramvajím jedoucím v obou směrech. Nejprve projede tramvaj, potom vozidlo z výhledu.",
+  "why": "Řidič přijíždí po vedlejší komunikaci označené značkou „Dej přednost v jízdě!“ a navíc odbočuje vlevo, takže musí dát přednost tramvajím jedoucím v obou směrech. Tramvaj projede první, vozidlo z výhledu po ní.",
   "sources": [
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 2, značka P 4",
+    "anchor": "sign-P4",
+    "quote": "Značka označuje vedlejší pozemní komunikaci."
+   },
    {
     "law": "361/2000 Sb.",
     "ref": "§ 21 odst. 5",
@@ -9457,30 +9636,36 @@
   ]
  },
  "742": {
-  "why": "Vozidlům na kruhovém objezdu dává vjíždějící řidič přednost jen tehdy, je-li vjezd označen značkou „Kruhový objezd“ společně se značkou „Dej přednost v jízdě!“ nebo „Stůj…“. Bez nich platí pravidlo pravé ruky a vjíždějící vozidlo přijíždí zprava.",
+  "why": "Vjezd je označen značkou „Kruhový objezd“ spolu se značkou „Hlavní pozemní komunikace“. Řidič z výhledu tedy přijíždí po hlavní a vozidla jedoucí po kruhovém objezdu mu musí dát přednost.",
   "sources": [
    {
-    "law": "361/2000 Sb.",
-    "ref": "§ 22 odst. 5",
-    "anchor": "p22-5",
-    "quote": "Řidič vjíždějící na kruhový objezd označený dopravními značkami \"Kruhový objezd\" společně se značkou \"Dej přednost v jízdě!\""
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 2, značka P 2",
+    "anchor": "sign-P2",
+    "quote": "Značka označuje zejména v obci hlavní pozemní komunikaci v nejbližší křižovatce"
    },
    {
     "law": "361/2000 Sb.",
-    "ref": "§ 22 odst. 2",
-    "anchor": "p22-2",
-    "quote": "musí dát řidič přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím zprava"
+    "ref": "§ 22 odst. 1",
+    "anchor": "p22-1",
+    "quote": "musí dát přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím po hlavní pozemní komunikaci"
    }
   ]
  },
  "743": {
-  "why": "Kruhový objezd bez značek „Dej přednost v jízdě!“ na vjezdech se řídí pravidlem pravé ruky. Vozidla vjíždějící přicházejí zprava, a řidič na objezdu jim proto dává přednost. Zastavit musí jen tehdy, je-li to k tomu nutné.",
+  "why": "Na ostrůvku kruhového objezdu stojí proti červenému vozidlu značky „Dej přednost v jízdě!“, protože jeden z vjezdů je hlavní pozemní komunikací. Řidič na objezdu proto dává přednost vozidlům, která na něj vjíždějí; zastavit musí jen tehdy, je-li to nutné.",
   "sources": [
    {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 2, značka P 4",
+    "anchor": "sign-P4",
+    "quote": "Značku lze použít i uvnitř větší nebo složitější křižovatky"
+   },
+   {
     "law": "361/2000 Sb.",
-    "ref": "§ 22 odst. 2",
-    "anchor": "p22-2",
-    "quote": "musí dát řidič přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím zprava"
+    "ref": "§ 22 odst. 1",
+    "anchor": "p22-1",
+    "quote": "musí dát přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím po hlavní pozemní komunikaci"
    }
   ]
  },
@@ -9524,7 +9709,7 @@
   ]
  },
  "747": {
-  "why": "Řidič na vedlejší komunikaci dává přednost vozidlům na hlavní komunikaci. Vůči ostatním vozidlům, která také nepřijíždějí po hlavní, platí pravidlo pravé ruky, takže dává přednost i vozidlům zprava.",
+  "why": "Tabulka pod značkou „Dej přednost v jízdě!“ ukazuje, že hlavní vede shora doleva a zprava se připojuje další vedlejší komunikace. Řidič dává přednost vozidlům na hlavní a vůči vozidlům z druhé vedlejší platí pravidlo pravé ruky, takže dává přednost i jim.",
   "sources": [
    {
     "law": "361/2000 Sb.",
@@ -9536,7 +9721,7 @@
     "law": "361/2000 Sb.",
     "ref": "§ 22 odst. 2",
     "anchor": "p22-2",
-    "quote": "musí dát řidič přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím zprava"
+    "quote": "Nevyplývá-li přednost v jízdě z ustanovení odstavce 1, musí dát řidič přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím zprava"
    }
   ]
  },
@@ -9679,13 +9864,19 @@
   ]
  },
  "759": {
-  "why": "Podél tramvaje se jezdí vpravo. Vlevo ji lze objíždět jen tam, kde to povoluje značka „Objíždění tramvaje“.",
+  "why": "Tramvaj před vámi stojí v zastávce. Podél tramvaje se jezdí vpravo; vlevo ji smíte objíždět jen tam, kde to povoluje značka „Objíždění tramvaje“.",
   "sources": [
    {
     "law": "361/2000 Sb.",
     "ref": "§ 13 odst. 1",
     "anchor": "p13-1",
     "quote": "Podél tramvaje se jezdí vpravo, pokud není dopravní značkou \"Objíždění tramvaje\" povolena jízda vlevo."
+   },
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 5, značka IP 23a",
+    "anchor": "sign-IP23a",
+    "quote": "Značka označuje místo, kde lze objíždět vlevo tramvaj, která stojí v zastávce."
    }
   ]
  },
@@ -9784,13 +9975,13 @@
   ]
  },
  "768": {
-  "why": "Přednost vozidlům na kruhovém objezdu je třeba dát jen tehdy, je-li vjezd označen značkou „Kruhový objezd“ spolu se značkou „Dej přednost v jízdě!“ nebo „Stůj…“. Jinak platí pravidlo pravé ruky a vjíždějící vozidlo má přednost.",
+  "why": "Vjezd je označen jen značkou „Kruhový objezd“, bez značky „Dej přednost v jízdě!“ nebo „Stůj, dej přednost v jízdě!“. Přednost vozidlům na objezdu se proto dávat nemusí a platí pravidlo pravé ruky: vozidlo vjíždějící zprava má přednost před vozidly jedoucími po objezdu.",
   "sources": [
    {
-    "law": "361/2000 Sb.",
-    "ref": "§ 22 odst. 5",
-    "anchor": "p22-5",
-    "quote": "Řidič vjíždějící na kruhový objezd označený dopravními značkami \"Kruhový objezd\" společně se značkou \"Dej přednost v jízdě!\""
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 4, značka C 1",
+    "anchor": "sign-C1",
+    "quote": "Je-li značka doplněna značkou „Dej přednost v jízdě!“ nebo „Stůj, dej přednost v jízdě!“, musí řidič vjíždějící na kruhový objezd dát přednost v jízdě vozidlům jedoucím po kruhovém objezdu"
    },
    {
     "law": "361/2000 Sb.",
@@ -10091,7 +10282,7 @@
   ]
  },
  "791": {
-  "why": "Odbočují-li vlevo dva protijedoucí řidiči, vyhýbají se vlevo, tedy projíždějí kolem sebe levými boky. Podle oficiální odpovědi to řidiči nedodrželi. Vlevo se řadí co nejdále vlevo, ne k pravému okraji.",
+  "why": "Odbočují-li vlevo dva protijedoucí řidiči, vyhýbají se vlevo, tedy objedou se zezadu a míjejí se levými boky. Řidiči ve videu odbočili před sebou a minuli se pravými boky. Vlevo se řadí co nejdále vlevo, ne k pravému okraji.",
   "sources": [
    {
     "law": "361/2000 Sb.",
@@ -10124,19 +10315,31 @@
   ]
  },
  "794": {
-  "why": "Řidič odbočující vlevo musí dát přednost protijedoucím vozidlům. Řidič z výhledu tedy přednost před protijedoucím řidičem má; pokud by odbočoval vlevo on, musel by ji naopak dát on.",
+  "why": "Protijedoucí řidič odbočuje vlevo, proto musí dát přednost řidiči z výhledu, ne naopak. Povinnost zastavit by řidiči z výhledu ukládala jen značka „Stůj, dej přednost v jízdě!“.",
   "sources": [
    {
     "law": "361/2000 Sb.",
     "ref": "§ 21 odst. 5",
     "anchor": "p21-5",
     "quote": "Řidič odbočující vlevo musí dát přednost v jízdě protijedoucím motorovým i nemotorovým vozidlům"
+   },
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 2, značka P 6",
+    "anchor": "sign-P6",
+    "quote": "Značka přikazuje řidiči zastavit vozidlo"
    }
   ]
  },
  "795": {
-  "why": "Červené směrové sloupky jen vyznačují vyústění účelové komunikace, odbočení samy nepovolují. Podle oficiální odpovědi zde řidič vlevo odbočit nesmí, protože to úprava provozu v tomto místě nedovoluje.",
+  "why": "Zelené vozidlo vyjíždí z účelové komunikace vyznačené červenými sloupky. Jízdní pruhy tu odděluje dvojitá podélná čára souvislá, kterou nesmí přejet, proto nesmí odbočit vlevo; může pokračovat jen vpravo.",
   "sources": [
+   {
+    "law": "294/2015 Sb.",
+    "ref": "příloha č. 8, značka V 1b",
+    "anchor": "sign-V1b",
+    "quote": "Značku je zakázáno přejíždět nebo ji nákladem přesahovat, pokud to není nutné k objíždění."
+   },
    {
     "law": "294/2015 Sb.",
     "ref": "příloha č. 10, značka Z 11c Z 11d",
@@ -10190,7 +10393,7 @@
   ]
  },
  "800": {
-  "why": "V jednosměrné ulici smí cyklista jet v protisměru, pokud to povoluje dopravní značka nebo dodatková tabulka. Řidič s tím musí počítat; ostatní vozidla v protisměru jet nesmějí, ani při vyjíždění z parkovacího místa.",
+  "why": "Na vjezdu do ulice je značka „Jednosměrný provoz“ s dodatkovou tabulkou „Jízda cyklistů v protisměru“. Cyklista tu tedy smí jet v protisměru a řidič s ním musí počítat. Ostatní vozidla v protisměru jet nesmějí, ani krátce při vyjíždění z parkovacího místa.",
   "sources": [
    {
     "law": "294/2015 Sb.",
@@ -10200,9 +10403,9 @@
    },
    {
     "law": "294/2015 Sb.",
-    "ref": "příloha č. 5, značka IP 4c",
-    "anchor": "sign-IP4c",
-    "quote": "označuje povolení vjezdu cyklistů v protisměru"
+    "ref": "příloha č. 5, značka IP 4b",
+    "anchor": "sign-IP4b",
+    "quote": "Značka označuje směr jízdy vozidel na jednosměrné pozemní komunikaci."
    }
   ]
  },
@@ -10329,19 +10532,19 @@
   ]
  },
  "811": {
-  "why": "Koloběžka se posuzuje jako jízdní kolo, takže i jejího jezdce lze předjíždět jen s bočním odstupem nejméně 1,5 m. Kde k tomu situace nedá prostor, předjíždět nelze.",
+  "why": "Před pracovním místem se vozovka zužuje (značky „Práce na silnici“, „Přednost protijedoucích vozidel“, směrovací desky). Koloběžka se posuzuje jako jízdní kolo, takže předjet ji lze jen s bočním odstupem nejméně 1,5 m, na který tu nebylo místo. Značka zakazující předjíždění tu nebyla.",
   "sources": [
-   {
-    "law": "361/2000 Sb.",
-    "ref": "§ 57 odst. 2",
-    "anchor": "p57-2",
-    "quote": "Jízdním kolem se z hlediska provozu na pozemních komunikacích rozumí i koloběžka."
-   },
    {
     "law": "361/2000 Sb.",
     "ref": "§ 17 odst. 6",
     "anchor": "p17-6",
     "quote": "Při předjíždění cyklisty je řidič motorového vozidla povinen dodržet bezpečný boční odstup."
+   },
+   {
+    "law": "361/2000 Sb.",
+    "ref": "§ 57 odst. 2",
+    "anchor": "p57-2",
+    "quote": "Jízdním kolem se z hlediska provozu na pozemních komunikacích rozumí i koloběžka."
    }
   ]
  },
@@ -11248,18 +11451,18 @@
   "sources": []
  },
  "930": {
-  "why": "Za vozidlem hromadné dopravy, které zastavilo v obci v zastávce bez nástupního ostrůvku a nestojí u okraje vozovky (cestující tedy vystupují přímo do jízdní dráhy), musí řidič zastavit. Pokračovat smí, až když neohrozí nastupující a vystupující cestující.",
+  "why": "Autobus v zastávce je označen oranžovou tabulkou jako autobus přepravující děti. Za takovým autobusem musí řidič zastavit a pokračovat smí až po jeho odjezdu ze zastávky; objíždět ho nesmí.",
   "sources": [
    {
     "law": "361/2000 Sb.",
-    "ref": "§ 15 odst. 1",
-    "anchor": "p15-1",
-    "quote": "musí řidič jiného vozidla zastavit vozidlo"
+    "ref": "§ 15 odst. 2",
+    "anchor": "p15-2",
+    "quote": "Za autobusem s označením \"Označení autobusu přepravujícího děti\", který zastavil v označené zastávce, musí řidič jiného vozidla zastavit vozidlo. Pokračovat v jízdě může až po odjezdu autobusu ze zastávky."
    }
   ]
  },
  "931": {
-  "why": "Při 20 m/s ujede vozidlo za každou sekundu 20 m. Bezpečná vzdálenost má odpovídat aspoň reakční době, tedy zhruba dvěma sekundám, tj. přibližně 40 m. Řidič na obrázku jede blíž, takže by při náhlém zabrzdění vpředu jedoucího vozidla nestihl zastavit.",
+  "why": "Při 20 m/s ujede vozidlo za sekundu 20 m; doporučený odstup aspoň 2 sekundy je tedy asi 40 m. Podle měřítka na snímku je mezera mezi červeným nákladním autem a obytným vozem před ním jen kolem 15 m, tedy méně než sekunda jízdy. Při náhlém zabrzdění vpředu by řidič nestihl zastavit.",
   "sources": [
    {
     "law": "361/2000 Sb.",
@@ -11406,7 +11609,7 @@
   ]
  },
  "952": {
-  "why": "V náklonu v levotočivé zatáčce se tělo motorkáře dostává nad protisměr. Pokud přesahuje souvislou čáru, hrozí střet s protijedoucím vozidlem. Řidič proto volí stopu a rychlost tak, aby tělem čáru nepřesahoval; rychlé narovnání motocyklu v zatáčce není spolehlivé.",
+  "why": "V náklonu v levotočivé zatáčce se tělo motorkáře dostává nad protisměr. Ve videu se v zatáčce objeví protijedoucí nákladní auto; kdo by tělem přesahoval souvislou čáru, mohl by se s ním střetnout. Řidič proto volí stopu a rychlost tak, aby tělem čáru nepřesahoval; narovnat motocykl v zatáčce rychle nejde.",
   "sources": []
  },
  "953": {
@@ -11425,7 +11628,7 @@
   ]
  },
  "955": {
-  "why": "V obci může náhle vstoupit do vozovky chodec nebo vyjet vozidlo. Řidič těžkého vozidla s delší brzdnou dráhou musí jet jen tak rychle, aby dokázal bezpečně zastavit. Žádná minimální rychlost 50 km/h neexistuje a předvídat musí vždy.",
+  "why": "Na snímku je úzká klikatá silnice bez středové čáry, za zatáčkou není vidět. Řidič těžkého vozidla s delší brzdnou dráhou smí jet jen tak rychle, aby zastavil na vzdálenost, na kterou má rozhled, např. před protijedoucím vozidlem nebo chodcem. Minimální rychlost 50 km/h neexistuje a předvídat musí vždy.",
   "sources": [
    {
     "law": "361/2000 Sb.",
@@ -11950,7 +12153,7 @@
   ]
  },
  "1021": {
-  "why": "Nálepka udává měsíc a rok příští pravidelné technické prohlídky. Na fotografii je vyznačen termín, který už uplynul, takže technická prohlídka platná není.",
+  "why": "Nálepka udává měsíc a rok příští pravidelné technické prohlídky; vyznačené jsou otvory odhalující bílou tabulku. Na fotografii je vyznačen měsíc 1 a rok 2022, tento termín už uplynul, takže technická prohlídka platná není.",
   "sources": [
    {
     "law": "56/2001 Sb.",
