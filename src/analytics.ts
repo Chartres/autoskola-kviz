@@ -17,8 +17,19 @@ const fw = createFlywheelClient({
   supabase: supabase as unknown as SupabaseLike | null,
 })
 
-/** Backward-compatible: existing call sites keep calling track(event, props). */
-export function track(event: string, props?: Record<string, unknown>): void {
+/**
+ * Event names the shared `events` table accepts (its insert policy, "log known events").
+ * Any other name is rejected by the database and silently lost, so track() only takes these.
+ * Adding a name here needs the same name added to that policy first.
+ */
+export const ACCEPTED_EVENTS = [
+  'page_view', 'signup_started', 'signup_completed', 'conversion', 'key_action',
+  'feedback_given', 'error', 'app_open', 'start_lesson', 'start_practice', 'start_exam',
+  'start_review', 'start_bookmarks', 'lesson_complete', 'exam_finish', 'session_finish',
+] as const
+export type AppEvent = (typeof ACCEPTED_EVENTS)[number]
+
+export function track(event: AppEvent, props?: Record<string, unknown>): void {
   fw.track(event, props)
 }
 

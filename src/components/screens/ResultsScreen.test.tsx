@@ -20,10 +20,18 @@ vi.mock('@/app/AppContext', () => ({
     dispatch: vi.fn(),
   }),
 }))
-vi.mock('@/analytics', () => ({ track: vi.fn(), conversion: vi.fn() }))
+const { conversion } = vi.hoisted(() => ({ conversion: vi.fn() }))
+vi.mock('@/analytics', () => ({ track: vi.fn(), conversion }))
 vi.mock('@/components/FeedbackCard', () => ({ FeedbackCard: () => null }))
 
 describe('ResultsScreen', () => {
+  it('counts a finished practice set as a conversion (North Star: weekly set completers)', () => {
+    conversion.mockClear()
+    render(<ResultsScreen />)
+    expect(conversion).toHaveBeenCalledTimes(1)
+    expect(conversion).toHaveBeenCalledWith(expect.objectContaining({ mode: 'practice' }))
+  })
+
   it('shows the correct answer image for picture-answer questions', () => {
     expect(q.correct).toBe('c')
     render(<ResultsScreen />)

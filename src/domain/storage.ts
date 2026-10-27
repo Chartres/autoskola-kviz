@@ -1,13 +1,19 @@
 import {
   emptyProgress,
   emptyStreak,
+  mergeProgress,
   PROGRESS_VERSION,
   type ProgressData,
 } from './progress'
 import { emptyJizdyState, type JizdyState } from './jizdy'
 import type { AnswerRecord } from './session'
 
+// Anonymous progress lives under STORAGE_KEY; a signed-in account's under STORAGE_KEY:<uid>,
+// so one account's answers never end up in another's on a shared device.
 export const STORAGE_KEY = 'autoskola-kviz:progress:v1'
+export function progressKey(uid?: string): string {
+  return uid ? `${STORAGE_KEY}:${uid}` : STORAGE_KEY
+}
 
 function storage(): Storage | null {
   try {
@@ -17,11 +23,11 @@ function storage(): Storage | null {
   }
 }
 
-export function loadProgress(): ProgressData {
+export function loadProgress(uid?: string): ProgressData {
   const s = storage()
   if (!s) return emptyProgress()
   try {
-    const raw = s.getItem(STORAGE_KEY)
+    const raw = s.getItem(progressKey(uid))
     if (!raw) return emptyProgress()
     const parsed = JSON.parse(raw) as Partial<ProgressData>
     // ponytail: migrate forward — both version and non-version paths produce the same shape
@@ -37,18 +43,40 @@ export function loadProgress(): ProgressData {
   }
 }
 
-function writeJson(key: string, value: unknown): void {
+/** Returns whether the value was written. */
+function writeJson(key: string, value: unknown): boolean {
   const s = storage()
-  if (!s) return
+  if (!s) return false
   try {
     s.setItem(key, JSON.stringify(value))
+    return true
   } catch {
     // private mode / quota exceeded — degrade gracefully to in-memory only
+    return false
   }
 }
 
-export function saveProgress(data: ProgressData): void {
-  writeJson(STORAGE_KEY, data)
+export function saveProgress(data: ProgressData, uid?: string): void {
+  writeJson(progressKey(uid), data)
+}
+
+/**
+ * On sign-in: fold the anonymous progress into this account's and empty the anonymous key,
+ * so it moves into exactly one account. Returns the account's local progress.
+ */
+export function claimAnonymousProgress(uid: string): ProgressData {
+  const own = loadProgress(uid)
+  const s = storage()
+  if (!s?.getItem(STORAGE_KEY)) return own
+  const merged = mergeProgress(own, loadProgress())
+  // Empty the anonymous key only once the account holds the answers on disk.
+  if (!writeJson(progressKey(uid), merged)) return merged
+  try {
+    s.removeItem(STORAGE_KEY)
+  } catch {
+    // storage unavailable: the anonymous copy stays, merging again is harmless for this user
+  }
+  return merged
 }
 
 // ponytail: anonymous key kept as-is; signed-in users get a uid-scoped key so
