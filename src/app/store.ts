@@ -71,15 +71,25 @@ export const STALE_EXAM_MS = 60 * 60 * 1000
  */
 export function resumeExam(state: AppState, saved: SavedExam | null, now: number): AppState {
   if (!saved) return state
-  const questions = saved.ids.map(getQuestion)
-  if (!questions.length || questions.some((q) => !q)) return state
+  const found = saved.ids.map(getQuestion)
+  if (!found.length || found.some((q) => !q)) return state
+  const questions = found as NonNullable<(typeof found)[number]>[]
+  // Damaged storage, or a deadline beyond one exam length (clock moved back): start clean.
+  if (saved.endsAt > now + EXAM.timeLimitMinutes * 60 * 1000) return state
+  const byId = new Map(questions.map((q) => [q.id, q]))
+  const valid = saved.records.every(
+    (r) => !!r && typeof r === 'object' && byId.has(r.id) && ['a', 'b', 'c'].includes(r.choice),
+  )
+  if (!valid) return state
+  // Score against today's answer key, in case a deploy corrected one meanwhile.
+  const records = saved.records.map((r) => ({ ...r, correct: r.choice === byId.get(r.id)!.correct }))
   const session: SessionState = {
-    questions: questions as NonNullable<(typeof questions)[number]>[],
-    index: saved.index,
-    records: saved.records,
-    chosen: Object.fromEntries(saved.records.map((r) => [r.id, r.choice])),
+    questions,
+    index: Math.max(0, Math.min(Number(saved.index) || 0, questions.length)),
+    records,
+    chosen: Object.fromEntries(records.map((r) => [r.id, r.choice])),
   }
-  if (now < saved.endsAt) {
+  if (now < saved.endsAt && !isFinished(session)) {
     return { ...begin(state, 'exam', session), examEndsAt: saved.endsAt }
   }
   if (now - saved.endsAt > STALE_EXAM_MS) return state

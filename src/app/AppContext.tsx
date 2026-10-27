@@ -114,6 +114,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
       dispatch({ type: 'setCategories', categories: new Set([topic.category]) })
       dispatch({ type: 'startPractice', rng: freshRng() })
       track('start_topic', { topic: topic.category, from: 'seo-page' })
+    } else if (topic) {
+      // Leave the topic URL so the next reload after the exam doesn't start that practice.
+      window.history.replaceState(null, '', '/' + window.location.search)
     }
     track('app_open')
   }, [])
