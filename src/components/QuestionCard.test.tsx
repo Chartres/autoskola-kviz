@@ -141,4 +141,53 @@ describe('QuestionCard', () => {
     fireEvent.error(screen.getByAltText('Obrázek k otázce 1'))
     expect(screen.getByText(/Obrázek se nenačetl/)).toBeTruthy()
   })
+
+  describe('explanation from the law (ad fontes)', () => {
+    const explanation = {
+      why: 'Chodec nesmí vstoupit na přechod bezprostředně před blížící se vozidlo.',
+      sources: [{ law: '361/2000 Sb.', ref: '§ 54 odst. 3', anchor: 'p54-3', quote: 'Chodec nesmí vstupovat na přechod pro chodce' }],
+    }
+
+    it('after answering in practice: why, the quoted law and a link to the paragraph', () => {
+      setup({ chosen: 'a', explanation })
+      expect(screen.getByText(explanation.why)).toBeInTheDocument()
+      expect(screen.getByText(/Chodec nesmí vstupovat na přechod pro chodce/)).toBeInTheDocument()
+      const link = screen.getByRole('link', { name: /§ 54 odst. 3 zákona č. 361\/2000 Sb./ })
+      expect(link).toHaveAttribute('href', 'https://www.zakonyprolidi.cz/cs/2000-361#p54-3')
+    })
+
+    it('not before answering, and never in the exam', () => {
+      setup({ explanation })
+      expect(screen.queryByText(explanation.why)).not.toBeInTheDocument()
+      setup({ chosen: 'a', reveal: false, explanation })
+      expect(screen.queryByText(explanation.why)).not.toBeInTheDocument()
+    })
+
+    it('says so when current law or practice differs from the official answer', () => {
+      setup({ chosen: 'a', explanation: { ...explanation, flag: 'Současná doporučení uvádějí 5–6 cm.' } })
+      expect(screen.getByText(/Současná doporučení uvádějí 5–6 cm./)).toBeInTheDocument()
+    })
+
+    it('reports opening a source', () => {
+      const onSourceOpen = vi.fn()
+      setup({ chosen: 'a', explanation, onSourceOpen })
+      fireEvent.click(screen.getByRole('link', { name: /§ 54 odst. 3/ }))
+      expect(onSourceOpen).toHaveBeenCalledWith(explanation.sources[0])
+    })
+  })
+
+  it('a wrong answer says the question will come back', () => {
+    const wrong = (['a', 'b', 'c'] as const).find((c) => c !== Q.correct)!
+    setup({ chosen: wrong })
+    expect(screen.getByText(/vrátí na konci sady/)).toBeInTheDocument()
+  })
+
+  it('a sign question names its sign under the picture once answered (Orbis Pictus)', () => {
+    const explanation = { why: 'Značka upozorňuje na zatáčku vpravo.', sources: [], sign: { code: 'A 1a', name: 'Zatáčka vpravo' } }
+    setup({ question: { ...Q, image: 'sign.png' }, explanation })
+    expect(screen.queryByText('Zatáčka vpravo')).not.toBeInTheDocument()
+    setup({ question: { ...Q, image: 'sign.png' }, chosen: 'a', explanation })
+    expect(screen.getByText('A 1a')).toBeInTheDocument()
+    expect(screen.getByText('Zatáčka vpravo')).toBeInTheDocument()
+  })
 })

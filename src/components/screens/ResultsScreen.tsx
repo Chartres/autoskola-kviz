@@ -11,6 +11,8 @@ import { FeedbackCard } from '@/components/FeedbackCard'
 export function ResultsScreen() {
   const { state, dispatch } = useApp()
   const { session, examResult, mode } = state
+  // Errors the learner put right in the correction rounds (score above is the first attempt).
+  const corrected = state.correction?.missed ?? 0
 
   const isExam = mode === 'exam'
   const isLesson = mode === 'lesson'
@@ -28,6 +30,7 @@ export function ResultsScreen() {
     // The canonical activation KPI: a finished set of any kind (lesson, practice, review,
     // bookmarks, exam). Weekly distinct visitors with a conversion = the North Star.
     conversion({ mode, score: correct, total })
+    if (corrected) track('key_action', { action: 'errors_corrected', count: corrected })
     // fire once per results view
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -70,6 +73,16 @@ export function ResultsScreen() {
         {isExam && examResult && (
           <p className="mt-2 text-sm text-sand-400">
             Pro úspěch {examResult.passThreshold} z {total} bodů.
+          </p>
+        )}
+        {corrected > 0 && (
+          <p className="mt-2 text-sm text-moss-400">
+            {corrected === 1
+              ? 'Opravena 1 chyba'
+              : corrected < 5
+                ? `Opraveny ${corrected} chyby`
+                : `Opraveno ${corrected} chyb`}{' '}
+            — skóre počítá první pokus.
           </p>
         )}
       </div>

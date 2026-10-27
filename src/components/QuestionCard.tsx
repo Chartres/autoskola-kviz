@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import type { Choice, Question } from '@/domain/types'
 import { imageUrl } from '@/lib/assets'
+import { sourceLabel, sourceUrl, type Explanation, type LawSource } from '@/domain/explanations'
 
 export interface QuestionCardProps {
   question: Question
@@ -14,6 +15,9 @@ export interface QuestionCardProps {
   onAnswer: (choice: Choice) => void
   onNext: () => void
   onToggleBookmark: () => void
+  /** Why the official answer is right, from the law; shown after answering outside the exam. */
+  explanation?: Explanation | null
+  onSourceOpen?: (source: LawSource) => void
 }
 
 const ALL_OPTIONS: Choice[] = ['a', 'b', 'c']
@@ -73,6 +77,8 @@ export function QuestionCard({
   onAnswer,
   onNext,
   onToggleBookmark,
+  explanation,
+  onSourceOpen,
 }: QuestionCardProps) {
   const answered = chosen !== undefined
   const isCorrect = answered && chosen === question.correct
@@ -191,6 +197,35 @@ export function QuestionCard({
         </p>
       )}
 
+      {answered && reveal && explanation && (
+        /* Set like a statute book: the reasoning, then the law quoted with its paragraph. */
+        <section aria-label="Proč" className="mt-5 border-l-2 border-sand-600 pl-4">
+          <h3 className="mb-1 font-mono text-[0.7rem] uppercase tracking-[0.15em] text-sand-500">Proč</h3>
+          <p className="leading-relaxed text-sand-200">{explanation.why}</p>
+          {explanation.flag && (
+            <p className="mt-2 text-sm leading-relaxed text-terra-300">
+              Pozor, oficiální odpověď je starší než dnešní stav: {explanation.flag}
+            </p>
+          )}
+          {explanation.sources.map((s) => (
+            <figure key={s.anchor + s.quote} className="mt-3">
+              <blockquote className="italic leading-relaxed text-sand-300">„{s.quote}“</blockquote>
+              <figcaption className="mt-1">
+                <a
+                  href={sourceUrl(s)}
+                  target="_blank"
+                  rel="noopener"
+                  onClick={() => onSourceOpen?.(s)}
+                  className="font-mono text-xs text-terra-400 underline-offset-2 hover:underline"
+                >
+                  {sourceLabel(s)}
+                </a>
+              </figcaption>
+            </figure>
+          ))}
+        </section>
+      )}
+
       {answered && (
         <footer
           className="sticky bottom-0 z-10 -mx-4 mt-5 flex items-center justify-between gap-3 border-t border-sand-700 bg-sand-950/95 px-4 py-3 backdrop-blur sm:rounded-card sm:border"
@@ -204,7 +239,7 @@ export function QuestionCard({
             >
               {isCorrect
                 ? 'Správně.'
-                : 'Nesprávně — zapamatujte si správnou odpověď výše.'}
+                : 'Nesprávně. Otázka se vrátí na konci sady.'}
             </p>
           ) : (
             <span className="text-sm text-sand-400">Uloženo</span>

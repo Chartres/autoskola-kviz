@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useApp } from '@/app/AppContext'
 import { currentChoice, currentQuestion } from '@/domain/session'
 import { isBookmarked } from '@/domain/progress'
@@ -7,6 +7,8 @@ import { QuestionCard } from '@/components/QuestionCard'
 import { ExamTimer } from '@/components/ExamTimer'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import { todayStr } from '@/lib/date'
+import { loadExplanations, type Explanations } from '@/domain/explanations'
+import { track } from '@/analytics'
 
 const MODE_LABEL: Record<string, string> = {
   lesson: 'Denní dávka',
@@ -20,6 +22,11 @@ export function QuizScreen() {
   const { state, dispatch } = useApp()
   const { session, mode } = state
   const onExpire = useCallback(() => dispatch({ type: 'finishExam' }), [dispatch])
+  // Explanations load as their own chunk; practice works without them meanwhile.
+  const [explanations, setExplanations] = useState<Explanations | null>(null)
+  useEffect(() => {
+    if (mode && mode !== 'exam') loadExplanations().then(setExplanations, () => {})
+  }, [mode])
 
   // Warm the cache for the next question's image so it shows without a flash.
   const nextImage = session ? session.questions[session.index + 1]?.image : null
@@ -57,7 +64,7 @@ export function QuizScreen() {
           ← Konec
         </button>
         <span className="font-mono text-[0.7rem] uppercase tracking-[0.15em] text-sand-500">
-          {MODE_LABEL[mode]}
+          {state.correction ? `Oprava chyb · ${MODE_LABEL[mode]}` : MODE_LABEL[mode]}
         </span>
         {isExam && state.examEndsAt != null ? (
           <ExamTimer endsAt={state.examEndsAt} onExpire={onExpire} />
@@ -82,6 +89,10 @@ export function QuizScreen() {
         onNext={() => dispatch({ type: 'next', today: todayStr() })}
         onToggleBookmark={() =>
           dispatch({ type: 'toggleBookmark', id: question.id })
+        }
+        explanation={explanations?.[question.id]}
+        onSourceOpen={(s) =>
+          track('key_action', { action: 'source_opened', question: question.id, law: s.law, ref: s.ref })
         }
       />
     </div>
