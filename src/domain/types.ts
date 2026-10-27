@@ -38,8 +38,10 @@ export interface Question {
   points: number
   /** eTesty question id (traceability back to the official bank). */
   sourceId: number
-  /** Source video for animated situace questions (not played yet; `image` holds the still). */
+  /** Source video URL for animated questions (traceability). */
   videoUrl?: string
+  /** Local re-encoded mp4 (filename under public/media); `image` holds the still. */
+  video?: string
   /** Licence groups a zásady question applies to (A / B / CD). */
   groups?: string[]
 }

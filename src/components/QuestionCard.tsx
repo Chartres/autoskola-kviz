@@ -80,12 +80,18 @@ export function QuestionCard({
   // Images that failed to load (e.g. offline, not yet in the runtime cache).
   const [failed, setFailed] = useState<ReadonlySet<string>>(new Set())
   const markFailed = (src: string) => setFailed((f) => new Set(f).add(src))
+  // Animated situations play the official clip; the still is the poster and the fallback.
+  const showVideo = !!question.video && !failed.has(imageUrl(question.video))
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if (e.target instanceof HTMLInputElement) return
-      // A focused button/link handles Enter/Space itself (bookmark, back, "Další").
-      const onControl = e.target instanceof HTMLButtonElement || e.target instanceof HTMLAnchorElement
+      // A focused button/link handles Enter/Space itself (bookmark, back, "Další"), and a
+      // focused video uses Space for play/pause; answer keys still work on both.
+      const onControl =
+        e.target instanceof HTMLButtonElement ||
+        e.target instanceof HTMLAnchorElement ||
+        e.target instanceof HTMLVideoElement
       if (e.metaKey || e.ctrlKey || e.altKey) return
       const key = e.key.length === 1 ? e.key.toLowerCase() : e.key
       const choice = KEY_TO_CHOICE[key]
@@ -124,11 +130,29 @@ export function QuestionCard({
         </button>
       </header>
 
-      {question.image && (
+      {(question.image || question.video) && (
         /* min-h-64 = image cap (max-h-56) + p-4 padding — the box height is
-           reserved up front so the arriving image never shifts the layout. */
+           reserved up front so the arriving media never shifts the layout. */
         <div className="mb-5 flex min-h-64 items-center justify-center rounded-card border border-sand-700 bg-white p-4">
-          {failed.has(imageUrl(question.image)) ? (
+          {showVideo ? (
+            <video
+              key={question.id}
+              data-testid="question-video"
+              aria-label={`Animace k otázce ${question.id}`}
+              controls
+              playsInline
+              preload="metadata"
+              poster={question.image ? imageUrl(question.image) : undefined}
+              onError={() => markFailed(imageUrl(question.video!))}
+              className="max-h-56 w-auto"
+            >
+              <source
+                src={imageUrl(question.video!)}
+                type="video/mp4"
+                onError={() => markFailed(imageUrl(question.video!))}
+              />
+            </video>
+          ) : !question.image ? null : failed.has(imageUrl(question.image)) ? (
             <ImageFailed />
           ) : (
             <img
@@ -139,6 +163,13 @@ export function QuestionCard({
             />
           )}
         </div>
+      )}
+      {question.video && (
+        <p className="-mt-3 mb-4 font-mono text-xs text-sand-500">
+          {showVideo
+            ? 'Spusťte animaci a pozorně sledujte situaci.'
+            : 'Animace nedostupná, zobrazen náhled situace.'}
+        </p>
       )}
 
       <h2 className="mb-5 text-balance text-xl font-semibold leading-relaxed text-sand-50">
