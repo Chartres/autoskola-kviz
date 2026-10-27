@@ -62,9 +62,9 @@ the learner names the hazard first. Needs hazard annotations per clip; not built
 
 | # | Mechanic | What the learner sees | From | How we'll know (event · number) | Status |
 |---|---|---|---|---|---|
-| 1 | **Ze zákona** (ad fontes) | After answering: one or two plain sentences on why, then the quoted sentence of law with "§ 22 odst. 1 zákona č. 361/2000 Sb." linking to the text | Erasmus, *ad fontes* | `key_action {action:'source_opened'}` per explained answer; target ≥ 15 % of answered questions in week 1 | building |
-| 2 | **Obraz a jméno** (picture and word) | Sign questions show the sign's number and official name from the annex of vyhláška 294/2015 Sb. | Komenský, *Orbis Pictus* | share of sign questions answered right on second sight (progress stats) | building, with 1 |
-| 3 | **Kontrola chyby** (control of error) | Wrong answers return at the end of the set until right; the set ends when no error stands | Montessori; Roediger & Karpicke | `key_action {action:'error_corrected'}`; share of in-set misses corrected ≥ 80 % | building |
+| 1 | **Ze zákona** (ad fontes) | After answering: one or two plain sentences on why, then the quoted sentence of law with "§ 22 odst. 1 zákona č. 361/2000 Sb." linking to the text | Erasmus, *ad fontes* | `key_action {action:'source_opened'}` per explained answer; target ≥ 15 % of answered questions in week 1 | shipped |
+| 2 | **Obraz a jméno** (picture and word) | Sign questions show the sign's number and official name from the annex of vyhláška 294/2015 Sb. | Komenský, *Orbis Pictus* | share of sign questions answered right on second sight (progress stats) | shipped (plates checked against each picture) |
+| 3 | **Kontrola chyby** (control of error) | Wrong answers return at the end of the set until right; the set ends when no error stands | Montessori; Roediger & Karpicke | `key_action {action:'errors_corrected', count}` on results; share of sets with misses that reach results ≥ 80 % | shipped |
 | 4 | **Připravenost** (mastery readiness) | Expected exam points per okruh vs the 43 needed, from mastered questions | Bloom | `conversion` on exam with `passed`; pass rate of users who saw ≥ 43 expected | proposed |
 
 ## 4. Visual signature

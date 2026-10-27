@@ -5250,7 +5250,11 @@
     "anchor": "sign-A2b",
     "quote": "z nichž první je vlevo, a jejichž bezpečné projetí vyžaduje výrazné snížení rychlosti jízdy"
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 2b",
+   "name": "Dvojitá zatáčka, první vlevo"
+  }
  },
  "446": {
   "why": "Výstražná značka Přechod pro chodce předem upozorňuje na přechod. Dodatková tabulka s údajem 150 m udává vzdálenost k místu, na které značka upozorňuje.",
@@ -5322,7 +5326,11 @@
     "anchor": "sign-P2",
     "quote": "Značka označuje zejména v obci hlavní pozemní komunikaci v nejbližší křižovatce"
    }
-  ]
+  ],
+  "sign": {
+   "code": "P 2",
+   "name": "Hlavní pozemní komunikace"
+  }
  },
  "452": {
   "why": "Značka Zúžená vozovka z obou stran upozorňuje, že se vozovka výrazně zužuje. Řidič má snížit rychlost a počítat s menším prostorem pro míjení, ne zrychlovat.",
@@ -5333,7 +5341,11 @@
     "anchor": "sign-A6a",
     "quote": "vozovka oproti předcházejícímu úseku výrazně zužuje, a to z obou stran"
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 6a",
+   "name": "Zúžená vozovka z obou stran"
+  }
  },
  "453": {
   "why": "Modrá kruhová značka se symbolem řetězu je příkazová značka Sněhové řetězy. Je to příkaz, ne doporučení: řetězy musí být nasazeny nejméně na dvou hnacích kolech.",
@@ -5344,7 +5356,11 @@
     "anchor": "sign-C5a",
     "quote": "pokračovat v jízdě až po nasazení sněhových (protiskluzových) řetězů na nejméně dvě hnací kola"
    }
-  ]
+  ],
+  "sign": {
+   "code": "C 5a",
+   "name": "Sněhové řetězy"
+  }
  },
  "454": {
   "why": "Výstražná značka Tramvaj upozorňuje na místo, kde tramvaj křižuje směr jízdy. Povinnost dát tramvaji přednost ukládá jiná značka, Dej přednost v jízdě tramvaji!",
@@ -5355,7 +5371,11 @@
     "anchor": "sign-A25",
     "quote": "Značka upozorňuje na místo, kde tramvaj křižuje směr jízdy ostatních vozidel."
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 25",
+   "name": "Tramvaj"
+  }
  },
  "455": {
   "why": "Značka Nebezpečná krajnice upozorňuje, že krajnice je nezpevněná nebo jinak nebezpečná a vjet na ni může vést ke smyku nebo převrácení vozidla.",
@@ -5366,7 +5386,11 @@
     "anchor": "sign-A28",
     "quote": "kde je nebezpečné vjet na krajnici"
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 28",
+   "name": "Nebezpečná krajnice"
+  }
  },
  "456": {
   "why": "Výstražná značka s parní lokomotivou je Železniční přejezd bez závor. Přejezd se závorami má na značce vyobrazenou závoru.",
@@ -5377,7 +5401,11 @@
     "anchor": "sign-A30",
     "quote": "Značka upozorňuje na železniční přejezd nevybavený závorami."
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 30",
+   "name": "Železniční přejezd bez závor"
+  }
  },
  "457": {
   "why": "Návěstní deska se dvěma šikmými pruhy se umisťuje 160 m před přejezdem. Deska se třemi pruhy stojí 240 m a s jedním pruhem 80 m před přejezdem.",
@@ -5388,7 +5416,11 @@
     "anchor": "sign-A31b",
     "quote": "Značka se umisťuje ve vzdálenosti 160 m před železničním přejezdem"
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 31b",
+   "name": "Návěstní deska (160 m)"
+  }
  },
  "458": {
   "why": "Jednoduchý výstražný kříž označuje jednokolejný přejezd. Musí-li řidič před přejezdem zastavit, zastaví před touto značkou, ne až u kolejí.",
@@ -5399,7 +5431,11 @@
     "anchor": "sign-A32a",
     "quote": "Je-li řidič povinen před železničním přejezdem zastavit vozidlo, zastaví před touto značkou."
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 32a",
+   "name": "Výstražný kříž pro železniční přejezd jednokolejný"
+  }
  },
  "459": {
   "why": "Značka Přednost před protijedoucími vozidly dává řidiči přednost v zúženém úseku. Protijedoucí řidič smí vjet jen tehdy, když se vozidla mohou bezpečně vyhnout.",
@@ -5410,7 +5446,11 @@
     "anchor": "sign-P8",
     "quote": "řidič protijedoucího vozidla smí do následujícího úseku pozemní komunikace vjet pouze v případě, kdy se jeho a protijedoucí vozidlo mohou bezpečně vyhnout"
    }
-  ]
+  ],
+  "sign": {
+   "code": "P 8",
+   "name": "Přednost před protijedoucími vozidly"
+  }
  },
  "460": {
   "why": "Značka označuje obytnou (případně pěší) zónu. V ní smí řidič jet nejvýše 20 km/h a musí dbát zvýšené ohleduplnosti k chodcům.",
@@ -5460,7 +5500,11 @@
     "anchor": "p22-5",
     "quote": "musí dát přednost v jízdě vozidlům a jezdcům na zvířatech jedoucím po kruhovém objezdu"
    }
-  ]
+  ],
+  "sign": {
+   "code": "C 1",
+   "name": "Kruhový objezd"
+  }
  },
  "464": {
   "why": "Značka Zúžená vozovka z obou stran upozorňuje, že se vozovka zužuje z obou stran zároveň. Zúžení z jedné strany má jiný symbol a střídavé řazení označuje značka Střídavé řazení.",
@@ -5471,7 +5515,11 @@
     "anchor": "sign-A6a",
     "quote": "Značka upozorňuje na místo, kde se vozovka oproti předcházejícímu úseku výrazně zužuje, a to z obou stran."
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 6a",
+   "name": "Zúžená vozovka z obou stran"
+  }
  },
  "465": {
   "why": "Červený kruh s číslem je zákazová značka Nejvyšší dovolená rychlost. Zakazuje překročit uvedenou rychlost; nejnižší rychlost přikazuje modrá značka a doporučenou rychlost modrý čtverec.",
@@ -5482,7 +5530,11 @@
     "anchor": "sign-B20a",
     "quote": "Značka zakazuje řidiči překročit rychlost vyjádřenou na značce číslem v kilometrech za hodinu."
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 20a",
+   "name": "Nejvyšší dovolená rychlost"
+  }
  },
  "466": {
   "why": "Značka Přechod pro chodce upozorňuje na přechod, který řidič nemusí vidět včas, zde kvůli horizontu. Řidič má jet tak, aby za horizontem stihl zpomalit nebo zastavit.",
@@ -5493,7 +5545,11 @@
     "anchor": "sign-A11",
     "quote": "Značka upozorňuje na přechod pro chodce, který by řidič jinak neočekával a který není viditelný z dostatečné vzdálenosti."
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 11",
+   "name": "Přechod pro chodce"
+  }
  },
  "467": {
   "why": "Jde o značku Zákaz stání. Ta zakazuje jen stání delší, než je nezbytně nutné k neprodlenému vystoupení nebo nastoupení osob, takové krátké zastavení je tedy dovoleno.",
@@ -5504,7 +5560,11 @@
     "anchor": "sign-B29",
     "quote": "na dobu delší, než je doba nezbytně nutná k neprodlenému nastoupení nebo vystoupení přepravovaných osob"
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 29",
+   "name": "Zákaz stání"
+  }
  },
  "468": {
   "why": "Značka Zákaz stání zakazuje stát, ale dovoluje krátké zastavení k neprodlenému nastoupení či vystoupení osob nebo naložení či složení nákladu. Zastavení úplně zakazuje až značka Zákaz zastavení.",
@@ -5515,7 +5575,11 @@
     "anchor": "sign-B29",
     "quote": "Značka zakazuje stání, tj. uvedení vozidla do klidu na dobu delší, než je doba nezbytně nutná k neprodlenému nastoupení nebo vystoupení přepravovaných osob nebo k neprodlenému naložení a vyložení nákladu."
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 29",
+   "name": "Zákaz stání"
+  }
  },
  "469": {
   "why": "Symbol na vozovce odpovídá výstražné značce Přechod pro chodce a upozorňuje na blížící se přechod. Řidič má být připraven zpomalit a dát přednost chodcům, kteří na něm jsou nebo na něj vstupují.",
@@ -5526,7 +5590,11 @@
     "anchor": "sign-A11",
     "quote": "Značka upozorňuje na přechod pro chodce"
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 11",
+   "name": "Přechod pro chodce"
+  }
  },
  "470": {
   "why": "Modrá příkazová značka se šipkou vpravo přikazuje jízdu vpravo. Jiný směr jízdy řidič zvolit nesmí.",
@@ -5537,7 +5605,11 @@
     "anchor": "sign-C2b",
     "quote": "Značka přikazuje jízdu ve směru vpravo."
    }
-  ]
+  ],
+  "sign": {
+   "code": "C 2b",
+   "name": "Přikázaný směr jízdy vpravo"
+  }
  },
  "471": {
   "why": "Značka Obec označuje začátek obce, kde smí řidič jet nejvýše 50 km/h, pokud jinou rychlost nestanoví jiná značka. 20 km/h platí v obytné zóně, která má jinou značku.",
@@ -5554,7 +5626,11 @@
     "anchor": "p18-4",
     "quote": "V obci smí jet řidič rychlostí nejvýše 50 km.h-1"
    }
-  ]
+  ],
+  "sign": {
+   "code": "IZ 4a",
+   "name": "Obec"
+  }
  },
  "472": {
   "why": "Značka Přednost protijedoucích vozidel přikazuje dát přednost protijedoucímu vozidlu, pokud se vozidla nemohou v následujícím úseku bezpečně vyhnout.",
@@ -5565,7 +5641,11 @@
     "anchor": "sign-P7",
     "quote": "Značka přikazuje řidiči dát přednost v jízdě protijedoucímu vozidlu v případě, kdy se protijedoucí vozidla nemohou bezpečně vyhnout."
    }
-  ]
+  ],
+  "sign": {
+   "code": "P 7",
+   "name": "Přednost protijedoucích vozidel"
+  }
  },
  "473": {
   "why": "Příkazová značka přikazuje jen směr jízdy přímo, o přednosti neříká nic. Není-li přednost upravena jinak, platí pravidlo pravé ruky: řidič dá přednost vozidlům zprava.",
@@ -5582,7 +5662,11 @@
     "anchor": "p22-2",
     "quote": "musí dát řidič přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím zprava"
    }
-  ]
+  ],
+  "sign": {
+   "code": "C 2a",
+   "name": "Přikázaný směr jízdy přímo"
+  }
  },
  "474": {
   "why": "Nejnižší dovolenou rychlost přikazuje modrá kruhová příkazová značka s bílým číslem. Červeně lemovaná značka s číslem naopak určuje nejvyšší rychlost.",
@@ -5604,7 +5688,11 @@
     "anchor": "sign-A1a",
     "quote": "Značka upozorňuje na zatáčku (směrový oblouk) vpravo, jehož bezpečné projetí vyžaduje výrazné snížení rychlosti jízdy."
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 1a",
+   "name": "Zatáčka vpravo"
+  }
  },
  "476": {
   "why": "Jde o značku Dvojitá zatáčka, první vpravo. Upozorňuje na dva nebo více po sobě jdoucích oblouků, z nichž první se stáčí doprava.",
@@ -5615,7 +5703,11 @@
     "anchor": "sign-A2a",
     "quote": "z nichž první je vpravo, a jejichž bezpečné projetí vyžaduje výrazné snížení rychlosti jízdy"
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 2a",
+   "name": "Dvojitá zatáčka, první vpravo"
+  }
  },
  "477": {
   "why": "Jde o značku Dvojitá zatáčka, první vlevo. Upozorňuje na dva nebo více po sobě jdoucích oblouků, z nichž první se stáčí doleva.",
@@ -5626,7 +5718,11 @@
     "anchor": "sign-A2b",
     "quote": "z nichž první je vlevo, a jejichž bezpečné projetí vyžaduje výrazné snížení rychlosti jízdy"
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 2b",
+   "name": "Dvojitá zatáčka, první vlevo"
+  }
  },
  "478": {
   "why": "Výstražná značka Křižovatka upozorňuje na křižovatku bez úpravy přednosti značkami. V obci se tak upozorňuje hlavně tam, kde komunikace přestává být hlavní a platí přednost zprava.",
@@ -5637,7 +5733,11 @@
     "anchor": "sign-A3",
     "quote": "kde na rozdíl od svého předcházejícího průběhu již není pozemní komunikace hlavní a uplatňuje se zde ustanovení o přednosti v jízdě vozidel přijíždějících zprava"
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 3",
+   "name": "Křižovatka"
+  }
  },
  "479": {
   "why": "Značka Nebezpečné klesání upozorňuje na úsek, kde je klesání kvůli místním podmínkám nebezpečné. Číslo na značce udává skutečný největší sklon vozovky.",
@@ -5648,7 +5748,11 @@
     "anchor": "sign-A5a",
     "quote": "Značka upozorňuje na úsek pozemní komunikace, kde místní podmínky činí klesání nebezpečným."
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 5a",
+   "name": "Nebezpečné klesání"
+  }
  },
  "480": {
   "why": "Značka Zúžená vozovka z obou stran upozorňuje na místo, kde se vozovka výrazně zužuje z obou stran. Na snížení počtu pruhů a střídavé řazení upozorňují jiné značky.",
@@ -5659,7 +5763,11 @@
     "anchor": "sign-A6a",
     "quote": "Značka upozorňuje na místo, kde se vozovka oproti předcházejícímu úseku výrazně zužuje, a to z obou stran."
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 6a",
+   "name": "Zúžená vozovka z obou stran"
+  }
  },
  "481": {
   "why": "Značka Zpomalovací práh upozorňuje na uměle vytvořenou nerovnost, jejímž účelem je zpomalit vozidla. Na hrboly a výtluky upozorňuje jiná značka, Nerovnost vozovky.",
@@ -5670,7 +5778,11 @@
     "anchor": "sign-A7b",
     "quote": "Značka upozorňuje na umělou nerovnost na vozovce, jejímž účelem je zejména snížení rychlosti jedoucích vozidel."
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 7b",
+   "name": "Zpomalovací práh"
+  }
  },
  "482": {
   "why": "Značka Nebezpečí smyku upozorňuje na místo, kde může vozidlo dostat smyk i za běžného počasí. Pokud nebezpečí hrozí jen za určitých podmínek, uvádí se to na dodatkové tabulce.",
@@ -5681,7 +5793,11 @@
     "anchor": "sign-A8",
     "quote": "kde může dojít ke smyku vozidla i za neztížených povětrnostních podmínek"
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 8",
+   "name": "Nebezpečí smyku"
+  }
  },
  "483": {
   "why": "Značka Provoz v obou směrech upozorňuje, že na rozdíl od předchozího úseku pojedou vozidla i v protisměru, například na konci jednosměrné nebo směrově rozdělené komunikace.",
@@ -5692,7 +5808,11 @@
     "anchor": "sign-A9",
     "quote": "Značka upozorňuje na úsek pozemní komunikace, kde je na rozdíl od předcházejícího úseku provoz vozidel veden dočasně nebo trvale v obou směrech."
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 9",
+   "name": "Provoz v obou směrech"
+  }
  },
  "484": {
   "why": "Značka Světelné signály upozorňuje na semafor, který by řidič nečekal nebo který není vidět z dostatečné vzdálenosti. Neumisťuje se před každou řízenou křižovatku.",
@@ -5703,7 +5823,11 @@
     "anchor": "sign-A10",
     "quote": "Značka upozorňuje řidiče na místo, kde je provoz na pozemní komunikaci řízen světelnými signály, které by řidič jinak neočekával, nebo které nejsou s ohledem na místní podmínky viditelné z dostatečné vzdálenosti."
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 10",
+   "name": "Světelné signály"
+  }
  },
  "485": {
   "why": "Výstražná značka Přechod pro chodce upozorňuje na přechod, který by řidič nečekal nebo který není včas vidět. Na místa s častým výskytem chodců bez přechodu upozorňuje značka Chodci.",
@@ -5714,7 +5838,11 @@
     "anchor": "sign-A11",
     "quote": "Značka upozorňuje na přechod pro chodce, který by řidič jinak neočekával a který není viditelný z dostatečné vzdálenosti."
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 11",
+   "name": "Přechod pro chodce"
+  }
  },
  "486": {
   "why": "Značka Děti upozorňuje na místa, kde se děti často pohybují nebo shromažďují, například u škol a hřišť, a mohou nečekaně vběhnout do vozovky.",
@@ -5725,7 +5853,11 @@
     "anchor": "sign-A12b",
     "quote": "v jejichž blízkosti se děti často pohybují nebo shromažďují, přecházejí vozovku, nebo kde hrozí zvýšené nebezpečí jejich nenadálého vběhnutí do vozovky"
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 12b",
+   "name": "Děti"
+  }
  },
  "487": {
   "why": "Značka Zvířata (zpravidla s krávou) upozorňuje na častý výskyt domácích zvířat na silnici. Na divokou zvěř upozorňuje jiná značka, Zvěř.",
@@ -5736,7 +5868,11 @@
     "anchor": "sign-A13",
     "quote": "kde může docházet k častému výskytu domácích zvířat na pozemní komunikaci"
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 13",
+   "name": "Zvířata"
+  }
  },
  "488": {
   "why": "Značka Zvěř (zpravidla se skákajícím jelenem) upozorňuje na častý výskyt divoké zvěře na silnici. Na domácí zvířata upozorňuje značka Zvířata.",
@@ -5747,7 +5883,11 @@
     "anchor": "sign-A14",
     "quote": "kde může docházet k častému výskytu divoké zvěře na pozemní komunikaci"
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 14",
+   "name": "Zvěř"
+  }
  },
  "489": {
   "why": "Značka Práce na silnici upozorňuje na práce na komunikaci nebo u ní, které mohou ohrozit provoz nebo při nichž hrozí nebezpečí pracovníkům. Řidič má zpomalit a dávat pozor.",
@@ -5758,7 +5898,11 @@
     "anchor": "sign-A15",
     "quote": "Značka upozorňuje na práci na pozemní komunikaci nebo v jejím bezprostředním okolí"
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 15",
+   "name": "Práce na silnici"
+  }
  },
  "490": {
   "why": "Značka Boční vítr upozorňuje na místo, kde hrozí náhlý poryv větru z boku, který může vozidlo vychýlit ze směru. Větrný rukáv značku jen doplňuje.",
@@ -5769,7 +5913,11 @@
     "anchor": "sign-A16",
     "quote": "Značka upozorňuje na místo s nebezpečím náhlého poryvu bočního větru"
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 16",
+   "name": "Boční vítr"
+  }
  },
  "491": {
   "why": "Značka Odlétávající štěrk upozorňuje na volný štěrk na vozovce, který mohou kola vymrštit na jiné účastníky. Na kamení ze sesuvů upozorňuje značka Kamení na vozovce.",
@@ -5780,7 +5928,11 @@
     "anchor": "sign-A17",
     "quote": "kde se na vozovce vyskytuje volný štěrk, který by mohl ohrozit bezpečnost účastníků provozu na pozemních komunikacích"
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 17",
+   "name": "Odlétávající štěrk"
+  }
  },
  "492": {
   "why": "Výstražná trojúhelníková značka s jízdním kolem je značka Cyklisté. Upozorňuje na místo, kde cyklisté vjíždějí na vozovku nebo ji přejíždějí, nebo kde se často vyskytují.",
@@ -5791,7 +5943,11 @@
     "anchor": "sign-A19",
     "quote": "Značka upozorňuje na místo, kde cyklisté vjíždějí na vozovku nebo ji přejíždějí, anebo na úsek, kde se cyklisté často vyskytují."
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 19",
+   "name": "Cyklisté"
+  }
  },
  "493": {
   "why": "Výstražná značka Letadla upozorňuje na místo, kde letadla přelétávají nízko nad silnicí, například u letiště. Náhlý hluk nebo stín může řidiče zaskočit.",
@@ -5802,7 +5958,11 @@
     "anchor": "sign-A20",
     "quote": "Značka upozorňuje na místo, kde v malé výšce nad pozemní komunikací přelétávají letadla."
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 20",
+   "name": "Letadla"
+  }
  },
  "494": {
   "why": "Značka Jiné nebezpečí (vykřičník) upozorňuje na nebezpečí, pro které neexistuje samostatná výstražná značka. Jeho popis se zpravidla uvádí na dodatkové tabulce.",
@@ -5813,7 +5973,11 @@
     "anchor": "sign-A22",
     "quote": "Značka upozorňuje na jiné nebezpečí než to, které je možno označit příslušnou výstražnou značkou."
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 22",
+   "name": "Jiné nebezpečí"
+  }
  },
  "495": {
   "why": "Značka Kolona upozorňuje, že se za ní mohou vyskytovat stojící nebo pomalu jedoucí vozidla. Řidič má zpomalit a být připraven zastavit.",
@@ -5824,7 +5988,11 @@
     "anchor": "sign-A23",
     "quote": "Značka upozorňuje na nebezpečí výskytu kolony stojících nebo pomalu jedoucích vozidel."
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 23",
+   "name": "Kolona"
+  }
  },
  "496": {
   "why": "Výstražná značka Náledí (se sněhovou vločkou) upozorňuje na úsek se zvýšeným nebezpečím náledí. Povinnost nasadit řetězy nebo mít zimní výbavu ukládají modré příkazové značky.",
@@ -5835,7 +6003,11 @@
     "anchor": "sign-A24",
     "quote": "Značka upozorňuje na úsek se zvýšeným nebezpečím výskytu náledí na vozovce."
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 24",
+   "name": "Náledí"
+  }
  },
  "497": {
   "why": "Výstražná značka Tramvaj upozorňuje na místo, kde tramvaj křižuje směr jízdy. Povinnost dát přednost tramvaji stanoví jiná značka, Dej přednost v jízdě tramvaji!",
@@ -5846,7 +6018,11 @@
     "anchor": "sign-A25",
     "quote": "Značka upozorňuje na místo, kde tramvaj křižuje směr jízdy ostatních vozidel."
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 25",
+   "name": "Tramvaj"
+  }
  },
  "498": {
   "why": "Značka Mlha upozorňuje na nebezpečí mlhy nebo kouře, které náhle zhorší viditelnost. Řidič má zpomalit a podle potřeby rozsvítit mlhová světla.",
@@ -5857,7 +6033,11 @@
     "anchor": "sign-A26",
     "quote": "Značka upozorňuje na nebezpečí výskytu mlhy nebo kouře."
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 26",
+   "name": "Mlha"
+  }
  },
  "499": {
   "why": "Jde o výstražnou značku Zatáčka vpravo. Vodicí tabule se šipkami, která usměrňuje provoz, je dopravní zařízení, ne výstražná značka.",
@@ -5868,7 +6048,11 @@
     "anchor": "sign-A1a",
     "quote": "Značka upozorňuje na zatáčku (směrový oblouk) vpravo, jehož bezpečné projetí vyžaduje výrazné snížení rychlosti jízdy."
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 1a",
+   "name": "Zatáčka vpravo"
+  }
  },
  "500": {
   "why": "Výstražná trojúhelníková značka s jízdním kolem je značka Cyklisté. Pruh pro cyklisty vyznačuje vodorovná značka a prostor pro čekající cyklisty jiná vodorovná značka.",
@@ -5879,7 +6063,11 @@
     "anchor": "sign-A19",
     "quote": "Značka upozorňuje na místo, kde cyklisté vjíždějí na vozovku nebo ji přejíždějí, anebo na úsek, kde se cyklisté často vyskytují."
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 19",
+   "name": "Cyklisté"
+  }
  },
  "501": {
   "why": "Značka Zákaz vjezdu autobusů zakazuje vjezd autobusům. Zastávku autobusu označuje jiná, informativní značka, a výjimku pro autobusy by vyjadřovala dodatková tabulka.",
@@ -5890,7 +6078,11 @@
     "anchor": "sign-B5",
     "quote": "Značka zakazuje vjezd autobusům."
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 5",
+   "name": "Zákaz vjezdu autobusů"
+  }
  },
  "502": {
   "why": "Značka Zákaz vjezdu motocyklů zakazuje vjezd všem motocyklům, tedy i motocyklům s postranním vozíkem.",
@@ -5901,7 +6093,11 @@
     "anchor": "sign-B7",
     "quote": "Značka zakazuje vjezd motocyklům."
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 7",
+   "name": "Zákaz vjezdu motocyklů"
+  }
  },
  "503": {
   "why": "Značka Zákaz vjezdu jízdních kol zakazuje na kole jet, ale cyklista smí kolo vést. Přikazuje-li značka stezku pro cyklisty, je modrá a kruhová, nikoli zákazová.",
@@ -5912,7 +6108,11 @@
     "anchor": "sign-B8",
     "quote": "Značka zakazuje vjezd cyklistům a jízdu na jízdním kole. Vedení jízdního kola cyklistou je povoleno."
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 8",
+   "name": "Zákaz vjezdu jízdních kol"
+  }
  },
  "504": {
   "why": "Symbol povozu taženého koněm na zákazové značce znamená Zákaz vjezdu potahových vozidel. Jezdce na zvířeti a vedení zvířete zakazuje jiná značka (B 31).",
@@ -5923,7 +6123,11 @@
     "anchor": "sign-B9",
     "quote": "Značka zakazuje vjezd potahových vozidel."
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 9",
+   "name": "Zákaz vjezdu potahových vozidel"
+  }
  },
  "505": {
   "why": "Značka Zákaz vjezdu všech motorových vozidel platí pro každé motorové vozidlo bez ohledu na druh. Nemotorová vozidla, např. jízdní kola, vjet smějí.",
@@ -5934,7 +6138,11 @@
     "anchor": "sign-B11",
     "quote": "Značka zakazuje vjezd všech motorových vozidel."
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 11",
+   "name": "Zákaz vjezdu všech motorových vozidel"
+  }
  },
  "506": {
   "why": "Značka Zákaz vjezdu vyznačených vozidel zakazuje vjezd jen těm druhům vozidel, jejichž symboly jsou na ní zobrazeny. Ostatní vozidla vjet smějí.",
@@ -5945,7 +6153,11 @@
     "anchor": "sign-B12",
     "quote": "Značka zakazuje vjezd vozidlům vyznačených druhů."
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 12",
+   "name": "Zákaz vjezdu vyznačených vozidel"
+  }
  },
  "507": {
   "why": "Rozhoduje okamžitá hmotnost vozidla, tedy skutečná hmotnost v danou chvíli včetně nákladu, nikoli největší povolená hmotnost z technického průkazu. Hmotnost na nápravu omezuje jiná značka (B 14).",
@@ -5956,7 +6168,11 @@
     "anchor": "sign-B13",
     "quote": "Značka zakazuje vjezd vozidel, jejichž okamžitá hmotnost přesahuje údaj uvedený na značce."
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 13",
+   "name": "Zákaz vjezdu vozidel, jejichž okamžitá hmotnost přesahuje vyznačenou mez"
+  }
  },
  "508": {
   "why": "Značka omezuje šířku vozidla. Počítá se okamžitá šířka včetně nákladu i zpětných zrcátek, protože právě ta musí projet zúženým místem.",
@@ -5967,7 +6183,11 @@
     "anchor": "sign-B15",
     "quote": "Značka zakazuje vjezd vozidel, jejichž okamžitá šířka včetně nákladu a zpětných zrcátek je větší než údaj uvedený na značce."
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 15",
+   "name": "Zákaz vjezdu vozidel, jejichž šířka přesahuje vyznačenou mez"
+  }
  },
  "509": {
   "why": "Jde o zákazovou značku omezující výšku vozidla. Rozhoduje okamžitá výška včetně nákladu, takže vysoko naložené vozidlo nesmí vjet, i když samo by výšku splnilo.",
@@ -5978,7 +6198,11 @@
     "anchor": "sign-B16",
     "quote": "Značka zakazuje vjezd vozidel, jejichž okamžitá výška včetně nákladu je vyšší než údaj uvedený na značce."
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 16",
+   "name": "Zákaz vjezdu vozidel, jejichž výška přesahuje vyznačenou mez"
+  }
  },
  "510": {
   "why": "Přeškrtnutá značka se symbolem nákladního automobilu je Konec zákazu předjíždění pro nákladní automobily. Ukončuje jen tento jeden zákaz, ne všechny zákazy pro jedoucí vozidla.",
@@ -5989,7 +6213,11 @@
     "anchor": "sign-B22b",
     "quote": "Značka ukončuje platnost značky „Zákaz předjíždění pro nákladní automobily“."
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 22b",
+   "name": "Konec zákazu předjíždění pro nákladní automobily"
+  }
  },
  "511": {
   "why": "Značka Zákaz zvukových výstražných znamení zakazuje troubit. Světelné výstražné znamení (krátké bliknutí) tato značka nezakazuje.",
@@ -6000,7 +6228,11 @@
     "anchor": "sign-B23a",
     "quote": "Značka zakazuje užívání výstražných zvukových znamení."
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 23a",
+   "name": "Zákaz zvukových výstražných znamení"
+  }
  },
  "512": {
   "why": "Značka Zákaz odbočování vpravo platí na nejbližší křižovatce a také pro odbočení na účelovou komunikaci nebo na místo mimo pozemní komunikaci.",
@@ -6011,7 +6243,11 @@
     "anchor": "sign-B24a",
     "quote": "Značka zakazuje odbočování vpravo na nejbližší křižovatce"
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 24a",
+   "name": "Zákaz odbočování vpravo"
+  }
  },
  "513": {
   "why": "Značka Zákaz odbočování vlevo platí na nejbližší křižovatce a také pro odbočení na účelovou komunikaci nebo na místo mimo pozemní komunikaci.",
@@ -6022,7 +6258,11 @@
     "anchor": "sign-B24b",
     "quote": "Značka zakazuje odbočování vlevo na nejbližší křižovatce"
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 24b",
+   "name": "Zákaz odbočování vlevo"
+  }
  },
  "514": {
   "why": "Přeškrtnutá šipka otáčení je zákazová značka Zákaz otáčení.",
@@ -6033,7 +6273,11 @@
     "anchor": "sign-B25",
     "quote": "Značka zakazuje otáčení."
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 25",
+   "name": "Zákaz otáčení"
+  }
  },
  "515": {
   "why": "Modrý kruh s červeným okrajem a křížem je Zákaz zastavení: nesmíte zastavit ani stát. Výjimkou je jen zastavení vynucené provozem, např. v koloně.",
@@ -6044,7 +6288,11 @@
     "anchor": "sign-B28",
     "quote": "Značka zakazuje zastavení nebo stání, tj. uvedení vozidla do klidu, kromě případů vyvolaných okolnostmi v provozu"
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 28",
+   "name": "Zákaz zastavení"
+  }
  },
  "516": {
   "why": "Modrý kruh s červeným okrajem a jedním šikmým pruhem je Zákaz stání. Krátce zastavit k nastoupení či vystoupení osob nebo k naložení či vyložení nákladu se smí.",
@@ -6055,7 +6303,11 @@
     "anchor": "sign-B29",
     "quote": "Značka zakazuje stání, tj. uvedení vozidla do klidu na dobu delší, než je doba nezbytně nutná"
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 29",
+   "name": "Zákaz stání"
+  }
  },
  "517": {
   "why": "Zákazová značka se symbolem chodce je Zákaz vstupu chodců. Na chodce upozorňuje výstražná trojúhelníková značka, stezku pro chodce označuje modrá příkazová.",
@@ -6066,7 +6318,11 @@
     "anchor": "sign-B30",
     "quote": "Značka zakazuje chodcům vstoupit na pozemní komunikaci nacházející se v prostoru za značkou."
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 30",
+   "name": "Zákaz vstupu chodců"
+  }
  },
  "518": {
   "why": "Zákazová značka s jezdcem na koni je Zákaz vjezdu pro jezdce na zvířeti. Zákaz platí i pro vedení nebo hnaní takového zvířete.",
@@ -6077,7 +6333,11 @@
     "anchor": "sign-B31",
     "quote": "Značka zakazuje jezdci na zvířeti vjet se zvířetem na pozemní komunikaci za značkou; zákaz platí i pro vedení nebo hnaní takového zvířete."
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 31",
+   "name": "Zákaz vjezdu pro jezdce na zvířeti"
+  }
  },
  "519": {
   "why": "Značka Jiný zákaz s nápisem SMOG zakazuje určeným vozidlům jízdu (nejen vjezd) v území, kde byla vyhlášena smogová situace. Platí tedy i pro vozidla, která už v území jsou.",
@@ -6088,7 +6348,11 @@
     "anchor": "sign-B32",
     "quote": "Je-li na značce uveden nápis „SMOG“, je zakázaná jízda (nikoli jen vjezd) pro určená vozidla v území, pro které byla vyhlášena smogová situace"
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 32",
+   "name": "Jiný zákaz"
+  }
  },
  "520": {
   "why": "Na práci na silnici upozorňuje výstražná značka Práce na silnici (A 15), červený trojúhelník se symbolem pracovníka s lopatou.",
@@ -6143,7 +6407,11 @@
     "anchor": "sign-B28",
     "quote": "Značka zakazuje zastavení nebo stání, tj. uvedení vozidla do klidu, kromě případů vyvolaných okolnostmi v provozu"
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 28",
+   "name": "Zákaz zastavení"
+  }
  },
  "525": {
   "why": "Výstražná značka Cyklisté upozorňuje na místo, kde cyklisté vjíždějí na vozovku nebo ji přejíždějí, nebo na úsek, kde se často vyskytují.",
@@ -6154,7 +6422,11 @@
     "anchor": "sign-A19",
     "quote": "Značka upozorňuje na místo, kde cyklisté vjíždějí na vozovku nebo ji přejíždějí, anebo na úsek, kde se cyklisté často vyskytují."
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 19",
+   "name": "Cyklisté"
+  }
  },
  "526": {
   "why": "Trojúhelníková výstražná značka Zatáčka vpravo jen upozorňuje na nebezpečný oblouk, kde je nutné výrazně zpomalit. Nic nepřikazuje ani neusměrňuje provoz.",
@@ -6165,7 +6437,11 @@
     "anchor": "sign-A1a",
     "quote": "Značka upozorňuje na zatáčku (směrový oblouk) vpravo, jehož bezpečné projetí vyžaduje výrazné snížení rychlosti jízdy."
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 1a",
+   "name": "Zatáčka vpravo"
+  }
  },
  "527": {
   "why": "Trojúhelníková výstražná značka Zatáčka vlevo jen upozorňuje na nebezpečný oblouk, kde je nutné výrazně zpomalit. Jízdu vlevo by přikazovala modrá kruhová značka.",
@@ -6176,7 +6452,11 @@
     "anchor": "sign-A1b",
     "quote": "Značka upozorňuje na zatáčku (směrový oblouk) vlevo, jehož bezpečné projetí vyžaduje výrazné snížení rychlosti jízdy."
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 1b",
+   "name": "Zatáčka vlevo"
+  }
  },
  "528": {
   "why": "Značka Zákaz vjezdu autobusů platí pro všechny autobusy, nejen pro městskou hromadnou dopravu.",
@@ -6187,7 +6467,11 @@
     "anchor": "sign-B5",
     "quote": "Značka zakazuje vjezd autobusům."
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 5",
+   "name": "Zákaz vjezdu autobusů"
+  }
  },
  "529": {
   "why": "Značka Parkoviště se symbolem podélného stání na chodníku dovoluje zastavit a stát na chodníku podélně. Na chodníku však nesmí stát vozidlo nad 3,5 t.",
@@ -6198,7 +6482,11 @@
     "anchor": "sign-IP11e",
     "quote": "Parkoviště stání na chodníku podélné Značka označuje místo, kde je dovoleno zastavení a stání."
    }
-  ]
+  ],
+  "sign": {
+   "code": "IP 11e",
+   "name": "Parkoviště stání na chodníku podélné"
+  }
  },
  "530": {
   "why": "Výstražná značka Zpomalovací práh upozorňuje předem na umělou nerovnost, která má zpomalit vozidla. Na výtluky a jiné přirozené nerovnosti upozorňuje značka Nerovnost vozovky.",
@@ -6209,7 +6497,11 @@
     "anchor": "sign-A7b",
     "quote": "Značka upozorňuje na umělou nerovnost na vozovce, jejímž účelem je zejména snížení rychlosti jedoucích vozidel."
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 7b",
+   "name": "Zpomalovací práh"
+  }
  },
  "531": {
   "why": "Na jednosměrné pozemní komunikaci se nesmí otáčet ani couvat. Couvat smíte jen tehdy, je-li to nezbytně nutné, např. při zajetí do řady stojících vozidel nebo vyjetí z ní.",
@@ -6226,7 +6518,11 @@
     "anchor": "sign-IP4b",
     "quote": "Značka označuje směr jízdy vozidel na jednosměrné pozemní komunikaci."
    }
-  ]
+  ],
+  "sign": {
+   "code": "IP 4b",
+   "name": "Jednosměrný provoz"
+  }
  },
  "532": {
   "why": "Značka Zákaz vjezdu vozidel přepravujících nebezpečný náklad platí pro vozidla s výbušninami, snadno hořlavým nebo jinak nebezpečným nákladem. Látky ohrožující vodu se týká jiná značka (B 19).",
@@ -6237,7 +6533,11 @@
     "anchor": "sign-B18",
     "quote": "Značka zakazuje vjezd vozidlům, která přepravují výbušniny, snadno hořlavý nebo jinak nebezpečný náklad"
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 18",
+   "name": "Zákaz vjezdu vozidel přepravujících nebezpečný náklad"
+  }
  },
  "533": {
   "why": "Výstražná značka Zatáčka vpravo upozorňuje na jeden oblouk vpravo, který vyžaduje výrazné snížení rychlosti. Dvojitou zatáčku označuje jiná značka.",
@@ -6248,7 +6548,11 @@
     "anchor": "sign-A1a",
     "quote": "Značka upozorňuje na zatáčku (směrový oblouk) vpravo"
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 1a",
+   "name": "Zatáčka vpravo"
+  }
  },
  "534": {
   "why": "Trojúhelníková značka se šipkami v kruhu je výstražná značka Křižovatka s kruhovým objezdem. Jen upozorňuje; jízdu po kruhovém objezdu přikazuje modrá kruhová značka.",
@@ -6259,7 +6563,11 @@
     "anchor": "sign-A4",
     "quote": "Značka upozorňuje v odůvodněných případech na křižovatku s kruhovým objezdem."
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 4",
+   "name": "Křižovatka s kruhovým objezdem"
+  }
  },
  "535": {
   "why": "Značka Zúžená vozovka z jedné strany ukazuje symbolem, ze které strany se vozovka zužuje; zde z pravé. Snížení počtu pruhů označuje jiná značka.",
@@ -6270,7 +6578,11 @@
     "anchor": "sign-A6b",
     "quote": "Symbol značky je proveden tak, aby odpovídal skutečnému zúžení vozovky buď z levé, nebo z pravé strany."
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 6b",
+   "name": "Zúžená vozovka z jedné strany"
+  }
  },
  "536": {
   "why": "Výstražná značka Nerovnost vozovky upozorňuje na hrboly, výtluky, díry a jiné nerovnosti. Na umělý zpomalovací práh upozorňuje jiná značka.",
@@ -6281,7 +6593,11 @@
     "anchor": "sign-A7a",
     "quote": "Značka upozorňuje na hrboly, výtluky, díry a jiné nerovnosti ve vozovce"
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 7a",
+   "name": "Nerovnost vozovky"
+  }
  },
  "537": {
   "why": "Značka Nebezpečné stoupání upozorňuje na prudké stoupání; číslo na ní udává skutečný nejvyšší podélný sklon vozovky.",
@@ -6292,7 +6608,11 @@
     "anchor": "sign-A5b",
     "quote": "Značka upozorňuje na úsek pozemní komunikace s prudkým stoupáním. Na značce se uvádí skutečný nejvyšší podélný sklon vozovky."
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 5b",
+   "name": "Nebezpečné stoupání"
+  }
  },
  "538": {
   "why": "Dodatková tabulka E 8d Úsek platnosti vyznačuje úsek, pro který platí značka nad ní. Tabulka E 7b je směrová šipka, ne úsek platnosti.",
@@ -6353,7 +6673,11 @@
     "anchor": "sign-A7b",
     "quote": "Značka upozorňuje na umělou nerovnost na vozovce, jejímž účelem je zejména snížení rychlosti jedoucích vozidel."
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 7b",
+   "name": "Zpomalovací práh"
+  }
  },
  "543": {
   "why": "Výstražná značka Zatáčka vlevo upozorňuje na oblouk vlevo, který vyžaduje výrazné snížení rychlosti jízdy.",
@@ -6364,7 +6688,11 @@
     "anchor": "sign-A1b",
     "quote": "Značka upozorňuje na zatáčku (směrový oblouk) vlevo"
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 1b",
+   "name": "Zatáčka vlevo"
+  }
  },
  "544": {
   "why": "Modrá kruhová značka se šipkou vpravo je příkazová značka Přikázaný směr jízdy vpravo. Objíždění by ukazovala šikmá šipka dolů, jednosměrný provoz označuje obdélníková informativní značka.",
@@ -6375,7 +6703,11 @@
     "anchor": "sign-C2b",
     "quote": "Přikázaný směr jízdy vpravo"
    }
-  ]
+  ],
+  "sign": {
+   "code": "C 2b",
+   "name": "Přikázaný směr jízdy vpravo"
+  }
  },
  "545": {
   "why": "Trojúhelníková výstražná značka se symbolem oblouku stáčejícího se doprava je Zatáčka vpravo. Upozorňuje na oblouk, který vyžaduje výrazné snížení rychlosti.",
@@ -6386,7 +6718,11 @@
     "anchor": "sign-A1a",
     "quote": "Značka upozorňuje na zatáčku (směrový oblouk) vpravo"
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 1a",
+   "name": "Zatáčka vpravo"
+  }
  },
  "546": {
   "why": "Značka Nebezpečí smyku upozorňuje, že smyk hrozí i za běžného počasí, např. kvůli kluzkému povrchu. Hrozí-li jen za určitých podmínek, upřesní to dodatková tabulka.",
@@ -6397,7 +6733,11 @@
     "anchor": "sign-A8",
     "quote": "kde může dojít ke smyku vozidla i za neztížených povětrnostních podmínek"
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 8",
+   "name": "Nebezpečí smyku"
+  }
  },
  "547": {
   "why": "Značka Zákaz vjezdu vozidel přepravujících nebezpečný náklad platí pro vozidla s výbušninami, snadno hořlavým nebo jinak nebezpečným nákladem.",
@@ -6408,7 +6748,11 @@
     "anchor": "sign-B18",
     "quote": "Značka zakazuje vjezd vozidlům, která přepravují výbušniny, snadno hořlavý nebo jinak nebezpečný náklad"
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 18",
+   "name": "Zákaz vjezdu vozidel přepravujících nebezpečný náklad"
+  }
  },
  "548": {
   "why": "Trojúhelníková značka se šipkami do kruhu je výstražná značka Křižovatka s kruhovým objezdem; upozorňuje na blížící se kruhový objezd.",
@@ -6419,7 +6763,11 @@
     "anchor": "sign-A4",
     "quote": "Značka upozorňuje v odůvodněných případech na křižovatku s kruhovým objezdem."
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 4",
+   "name": "Křižovatka s kruhovým objezdem"
+  }
  },
  "549": {
   "why": "Bílý kruh s červeným okrajem je Zákaz vjezdu všech vozidel v obou směrech. Platí pro všechny druhy vozidel, tedy i pro jízdní kola.",
@@ -6430,7 +6778,11 @@
     "anchor": "sign-B1",
     "quote": "Značka zakazuje vjezd všem druhům vozidel."
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 1",
+   "name": "Zákaz vjezdu všech vozidel v obou směrech"
+  }
  },
  "550": {
   "why": "Značka Dvojitá zatáčka, první vpravo upozorňuje na dvě nebo více zatáček za sebou. Směr prvního oblouku poznáte podle symbolu; zde se stáčí nejprve vpravo.",
@@ -6441,7 +6793,11 @@
     "anchor": "sign-A2a",
     "quote": "z nichž první je vpravo, a jejichž bezpečné projetí vyžaduje výrazné snížení rychlosti jízdy"
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 2a",
+   "name": "Dvojitá zatáčka, první vpravo"
+  }
  },
  "551": {
   "why": "Výstražná značka Zpomalovací práh upozorňuje na umělou nerovnost určenou ke zpomalení vozidel. Výtluky a vyjeté koleje označuje značka Nerovnost vozovky.",
@@ -6452,7 +6808,11 @@
     "anchor": "sign-A7b",
     "quote": "Značka upozorňuje na umělou nerovnost na vozovce, jejímž účelem je zejména snížení rychlosti jedoucích vozidel."
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 7b",
+   "name": "Zpomalovací práh"
+  }
  },
  "552": {
   "why": "Na neočekávaný semafor upozorňuje výstražná značka Světelné signály, trojúhelník se symbolem semaforu.",
@@ -6474,7 +6834,11 @@
     "anchor": "sign-B10",
     "quote": "Značka zakazuje vjezd ručních vozíků o okamžité šířce větší než 600 mm."
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 10",
+   "name": "Zákaz vjezdu ručních vozíků"
+  }
  },
  "554": {
   "why": "Stůj, dej přednost v jízdě! přikazuje zastavit tam, odkud je do křižovatky náležitý rozhled, nikoli nutně u značky. Je-li vyznačena čára STOP, zastavuje se na ní.",
@@ -6485,7 +6849,11 @@
     "anchor": "sign-P6",
     "quote": "Značka přikazuje řidiči zastavit vozidlo na takovém místě, odkud má do křižovatky náležitý rozhled, a dát přednost v jízdě."
    }
-  ]
+  ],
+  "sign": {
+   "code": "P 6",
+   "name": "Stůj, dej přednost v jízdě!"
+  }
  },
  "555": {
   "why": "Červené směrové sloupky vyznačují místo, kde účelová komunikace, např. polní cesta, vyúsťuje na jinou pozemní komunikaci. Bílé sloupky označují okraj komunikace.",
@@ -6496,7 +6864,11 @@
     "anchor": "sign-Z11cZ11d",
     "quote": "Sloupky vyznačují vyústění účelové komunikace na jinou pozemní komunikaci."
    }
-  ]
+  ],
+  "sign": {
+   "code": "Z 11c Z 11d",
+   "name": "Směrový sloupek červený levý"
+  }
  },
  "556": {
   "why": "Výstražná značka Kamení na vozovce upozorňuje na úsek, kde se kvůli sesuvům nebo padání kamenů může na vozovce objevit kamení nebo zemina.",
@@ -6507,7 +6879,11 @@
     "anchor": "sign-A18",
     "quote": "kde se může vlivem sesuvů nebo padání kamenů na pozemní komunikaci vyskytovat kamení nebo zemina"
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 18",
+   "name": "Kamení na vozovce"
+  }
  },
  "557": {
   "why": "Jde o značku Povinnost zastavit vozidlo. Řidič musí u značky zastavit; účel (např. POLICIE, KONTROLA) může být uveden ve spodní části značky. Se státní hranicí ani se stanicí technické kontroly značka nesouvisí.",
@@ -6518,7 +6894,11 @@
     "anchor": "sign-B27",
     "quote": "Značka zakazuje řidiči pokračovat v jízdě bez zastavení vozidla v prostoru u značky"
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 27",
+   "name": "Povinnost zastavit vozidlo"
+  }
  },
  "558": {
   "why": "Přeškrtnutá trubka je značka Konec zákazu zvukových výstražných znamení. Ruší jen zákaz daný předchozí značkou „Zákaz zvukových výstražných znamení“, sama nic nezakazuje.",
@@ -6529,7 +6909,11 @@
     "anchor": "sign-B23b",
     "quote": "Značka ukončuje platnost značky „Zákaz výstražných zvukových znamení“"
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 23b",
+   "name": "Konec zákazu zvukových výstražných znamení"
+  }
  },
  "559": {
   "why": "Značka Zákaz vjezdu vozidel přepravujících nebezpečný náklad platí pro vozidla s výbušninami, hořlavinami či jiným nebezpečným nákladem, která jsou takto označena. Pro náklad ohrožující vodu je jiná značka (B 19).",
@@ -6540,7 +6924,11 @@
     "anchor": "sign-B18",
     "quote": "zakazuje vjezd vozidlům, která přepravují výbušniny, snadno hořlavý nebo jinak nebezpečný náklad"
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 18",
+   "name": "Zákaz vjezdu vozidel přepravujících nebezpečný náklad"
+  }
  },
  "560": {
   "why": "Bílá značka s černými šikmými pruhy je Konec všech zákazů. Ruší najednou všechny zákazy pro jedoucí vozidla, např. zákaz předjíždění nebo omezení rychlosti. Zákazy zastavení a stání se jí neruší.",
@@ -6551,7 +6939,11 @@
     "anchor": "sign-B26",
     "quote": "Značka ukončuje platnost všech zákazů, které jsou stanoveny pro jedoucí vozidla"
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 26",
+   "name": "Konec všech zákazů"
+  }
  },
  "561": {
   "why": "Značka Zákaz vjezdu všech motorových vozidel se týká jen motorových vozidel, tedy i motocyklů. Nemotorová vozidla, např. jízdní kola, vjet smějí.",
@@ -6562,7 +6954,11 @@
     "anchor": "sign-B11",
     "quote": "Značka zakazuje vjezd všech motorových vozidel"
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 11",
+   "name": "Zákaz vjezdu všech motorových vozidel"
+  }
  },
  "562": {
   "why": "Červený kruh s bílým vodorovným pruhem je Zákaz vjezdu všech vozidel. Stojí na začátku jednosměrné ulice z té strany, odkud se do ní jet nesmí. Zákaz vjezdu v obou směrech vyjadřuje jiná značka (B 1).",
@@ -6573,7 +6969,11 @@
     "anchor": "sign-B2",
     "quote": "zakazuje vjezd všem druhům vozidel na jednosměrnou pozemní komunikaci, v níž je provoz veden opačným směrem"
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 2",
+   "name": "Zákaz vjezdu všech vozidel"
+  }
  },
  "563": {
   "why": "Značka s vozidlem a údajem délky zakazuje vjezd vozidlům nebo soupravám delším, než udává značka, a to včetně nákladu. S bezpečným odstupem mezi vozidly nesouvisí, ten upravuje značka Nejmenší vzdálenost mezi vozidly.",
@@ -6584,7 +6984,11 @@
     "anchor": "sign-B17",
     "quote": "zakazuje vjezd vozidel nebo jízdních souprav, jejichž okamžitá délka včetně nákladu je větší než údaj uvedený na značce"
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 17",
+   "name": "Zákaz vjezdu vozidel nebo souprav, jejichž délka přesahuje vyznačenou mez"
+  }
  },
  "564": {
   "why": "Značka se symbolem auta a motocyklu zakazuje vjezd motorovým vozidlům kromě motocyklů bez postranního vozíku. Vjet tedy smějí právě tyto motocykly a nemotorová vozidla.",
@@ -6595,7 +6999,11 @@
     "anchor": "sign-B3",
     "quote": "Značka zakazuje vjezd všech motorových vozidel s výjimkou motocyklů bez postranního vozíku. Zákaz neplatí pro tramvaje a nemotorová vozidla."
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 3",
+   "name": "Zákaz vjezdu všech motorových vozidel s výjimkou motocyklů bez postranního vozíku"
+  }
  },
  "565": {
   "why": "Značka Zákaz předjíždění (červené a černé auto) zakazuje předjíždět vlevo motorová vozidla. Výjimkou jsou motocykly bez postranního vozíku; nemotorová vozidla, např. cyklisty, předjíždět smíte.",
@@ -6606,7 +7014,11 @@
     "anchor": "sign-B21a",
     "quote": "zakazuje řidiči předjíždět motorové vozidlo vlevo s výjimkou motocyklů bez postranního vozíku"
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 21a",
+   "name": "Zákaz předjíždění"
+  }
  },
  "566": {
   "why": "Značka Nehoda upozorňuje na místo, kde se stala dopravní nehoda. Neoznačuje místo, kde se nehody stávají často, ani nebezpečné nábřeží.",
@@ -6617,7 +7029,11 @@
     "anchor": "sign-A27",
     "quote": "Značka upozorňuje na místo dopravní nehody"
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 27",
+   "name": "Nehoda"
+  }
  },
  "567": {
   "why": "Značka se symbolem auta s přívěsem zakazuje vjezd vozidlům s přívěsem nebo návěsem. Samotné vozidlo bez přípojného vozidla vjet smí.",
@@ -6628,7 +7044,11 @@
     "anchor": "sign-B33",
     "quote": "Značka zakazuje vjezd vozidel s přívěsem nebo návěsem"
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 33",
+   "name": "Zákaz vjezdu motorových vozidel s přípojným vozidlem"
+  }
  },
  "568": {
   "why": "Nejnižší dovolenou rychlost přikazuje modrá kruhová značka s číslem. Její konec označuje stejná značka přeškrtnutá červeným pruhem, Konec nejnižší dovolené rychlosti.",
@@ -6650,7 +7070,11 @@
     "anchor": "sign-A1b",
     "quote": "Značka upozorňuje na zatáčku (směrový oblouk) vlevo"
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 1b",
+   "name": "Zatáčka vlevo"
+  }
  },
  "570": {
   "why": "Modrá kruhová značka se šipkou vpravo je Přikázaný směr jízdy vpravo. Na křižovatce za ní musíte odbočit vpravo, bez ohledu na to, kam jedete dál.",
@@ -6661,7 +7085,11 @@
     "anchor": "sign-C2b",
     "quote": "Značka přikazuje jízdu ve směru vpravo"
    }
-  ]
+  ],
+  "sign": {
+   "code": "C 2b",
+   "name": "Přikázaný směr jízdy vpravo"
+  }
  },
  "571": {
   "why": "Na křižovatce řízené semafory se řídíte světelnými signály, protože jsou nadřazeny značkám upravujícím přednost. Značka Dej přednost v jízdě! platí až tehdy, když semafor nesvítí nebo bliká žlutě.",
@@ -6683,7 +7111,11 @@
     "anchor": "sign-P2",
     "quote": "Značka označuje zejména v obci hlavní pozemní komunikaci v nejbližší křižovatce"
    }
-  ]
+  ],
+  "sign": {
+   "code": "P 2",
+   "name": "Hlavní pozemní komunikace"
+  }
  },
  "573": {
   "why": "První značkou je Hlavní pozemní komunikace, takže na nejbližší křižovatce máte přednost před vozidly z vedlejších silnic a nemusíte měnit způsob jízdy. Stále ale dbáte opatrnosti a dáváte znamení o změně směru.",
@@ -6694,7 +7126,11 @@
     "anchor": "sign-P2",
     "quote": "Značka označuje zejména v obci hlavní pozemní komunikaci v nejbližší křižovatce"
    }
-  ]
+  ],
+  "sign": {
+   "code": "P 2",
+   "name": "Hlavní pozemní komunikace"
+  }
  },
  "574": {
   "why": "Značky upravující přednost, včetně značky Hlavní pozemní komunikace, platí jen pro nejbližší křižovatku. Na každé další křižovatce musí být přednost upravena znovu.",
@@ -6722,7 +7158,11 @@
     "anchor": "p18-4",
     "quote": "V obci smí jet řidič rychlostí nejvýše 50 km.h-1"
    }
-  ]
+  ],
+  "sign": {
+   "code": "IZ 4a",
+   "name": "Obec"
+  }
  },
  "576": {
   "why": "Červený směrový sloupek označuje místo, kde na silnici ústí účelová komunikace, např. polní cesta nebo sjezd k objektu. Před nebezpečnou krajnicí nebo námrazou varují jiné značky a sloupky.",
@@ -6733,7 +7173,11 @@
     "anchor": "sign-Z11cZ11d",
     "quote": "Sloupky vyznačují vyústění účelové komunikace na jinou pozemní komunikaci"
    }
-  ]
+  ],
+  "sign": {
+   "code": "Z 11c Z 11d",
+   "name": "Směrový sloupek červený levý"
+  }
  },
  "577": {
   "why": "Před vámi je značka Zákaz zastavení. Zakazuje jakékoli dobrovolné uvedení vozidla do klidu, tedy i krátké zastavení k vyložení nákladu. To by šlo jen u značky Zákaz stání.",
@@ -6744,7 +7188,11 @@
     "anchor": "sign-B28",
     "quote": "Značka zakazuje zastavení nebo stání, tj. uvedení vozidla do klidu"
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 28",
+   "name": "Zákaz zastavení"
+  }
  },
  "578": {
   "why": "V první skupině značek je Přikázaný směr jízdy vpravo a vlevo. Na nejbližší křižovatce proto nesmíte jet rovně, musíte odbočit vpravo nebo vlevo.",
@@ -6755,7 +7203,11 @@
     "anchor": "sign-C2f",
     "quote": "Značka přikazuje jízdu ve směru vpravo a vlevo"
    }
-  ]
+  ],
+  "sign": {
+   "code": "C 2f",
+   "name": "Přikázaný směr jízdy vpravo a vlevo"
+  }
  },
  "579": {
   "why": "Značka s údajem délky zakazuje vjezd vozidlům nebo soupravám, které jsou i s nákladem delší, než udává značka. Platí pro všechna vozidla, ne jen pro nákladní.",
@@ -6766,7 +7218,11 @@
     "anchor": "sign-B17",
     "quote": "zakazuje vjezd vozidel nebo jízdních souprav, jejichž okamžitá délka včetně nákladu je větší než údaj uvedený na značce"
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 17",
+   "name": "Zákaz vjezdu vozidel nebo souprav, jejichž délka přesahuje vyznačenou mez"
+  }
  },
  "580": {
   "why": "Značka s nápravou a údajem v tunách omezuje hmotnost připadající na jednu nápravu. Vjet nesmějí vozidla, u nichž tato okamžitá hmotnost přesahuje údaj na značce.",
@@ -6777,7 +7233,11 @@
     "anchor": "sign-B14",
     "quote": "zakazuje vjezd vozidel, jejichž okamžitá hmotnost připadající na nápravu přesahuje údaj uvedený na značce"
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 14",
+   "name": "Zákaz vjezdu vozidel, jejichž okamžitá hmotnost připadající na nápravu přesahuje vyznačenou mez"
+  }
  },
  "581": {
   "why": "Výstražná značka Nehoda upozorňuje na místo, kde se stala dopravní nehoda. Úsek s častými nehodami se takto neoznačuje.",
@@ -6788,7 +7248,11 @@
     "anchor": "sign-A27",
     "quote": "Značka upozorňuje na místo dopravní nehody"
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 27",
+   "name": "Nehoda"
+  }
  },
  "582": {
   "why": "Značka se symbolem ručního vozíku je Zákaz vjezdu ručních vozíků. Platí jen pro vozíky širší než 600 mm. Potahová vozidla mají vlastní značku s koněm.",
@@ -6799,7 +7263,11 @@
     "anchor": "sign-B10",
     "quote": "Značka zakazuje vjezd ručních vozíků o okamžité šířce větší než 600 mm"
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 10",
+   "name": "Zákaz vjezdu ručních vozíků"
+  }
  },
  "583": {
   "why": "Na práci na silnici upozorňuje výstražná značka Práce na silnici, červený trojúhelník s pracovníkem s lopatou. Varuje před nebezpečím pro řidiče i pro dělníky na silnici.",
@@ -6838,7 +7306,11 @@
     "anchor": "sign-V10f",
     "quote": "smí zastavit a stát pouze vozidlo označené parkovacím průkazem"
    }
-  ]
+  ],
+  "sign": {
+   "code": "V 10f",
+   "name": "Vyhrazené parkoviště pro vozidlo přepravující osobu těžce postiženou nebo osobu těžce pohybově postiženou"
+  }
  },
  "586": {
   "why": "Na neočekávané nebo špatně viditelné semafory upozorňuje výstražná značka Světelné signály, trojúhelník s vyobrazeným semaforem.",
@@ -6871,7 +7343,11 @@
     "anchor": "sign-A3",
     "quote": "Značka upozorňuje na křižovatku, kde není přednost v jízdě upravena svislými dopravními značkami"
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 3",
+   "name": "Křižovatka"
+  }
  },
  "589": {
   "why": "Modrá čtvercová značka s bílou a červenou šipkou je Přednost před protijedoucími vozidly. V úzkém místě máte přednost vy; protijedoucí smí vjet jen tehdy, když se lze bezpečně vyhnout.",
@@ -6882,7 +7358,11 @@
     "anchor": "sign-P8",
     "quote": "řidič protijedoucího vozidla smí do následujícího úseku pozemní komunikace vjet pouze v případě, kdy se jeho a protijedoucí vozidlo mohou bezpečně vyhnout"
    }
-  ]
+  ],
+  "sign": {
+   "code": "P 8",
+   "name": "Přednost před protijedoucími vozidly"
+  }
  },
  "590": {
   "why": "Značka Kruhový objezd přikazuje jet ve směru šipek. S doplňující značkou Dej přednost v jízdě! musíte dát přednost vozidlům na objezdu; zastavit musíte jen tehdy, když je to k tomu nutné.",
@@ -6893,7 +7373,11 @@
     "anchor": "sign-C1",
     "quote": "musí řidič vjíždějící na kruhový objezd dát přednost v jízdě vozidlům jedoucím po kruhovém objezdu"
    }
-  ]
+  ],
+  "sign": {
+   "code": "C 1",
+   "name": "Kruhový objezd"
+  }
  },
  "591": {
   "why": "Na obrázku je trojúhelník Dej přednost v jízdě! s dodatkovou tabulkou tvaru křižovatky a modrá značka Přechod pro chodce. Žlutý čtverec značky Hlavní pozemní komunikace na obrázku není.",
@@ -6908,7 +7392,11 @@
     "anchor": "sign-A4",
     "quote": "Značka upozorňuje v odůvodněných případech na křižovatku s kruhovým objezdem"
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 4",
+   "name": "Křižovatka s kruhovým objezdem"
+  }
  },
  "593": {
   "why": "Jde o značku Zatáčka vpravo: zatáčka, kterou lze bezpečně projet jen při výrazném snížení rychlosti. Dvojitou zatáčku by značka vyjadřovala dvěma oblouky.",
@@ -6919,7 +7407,11 @@
     "anchor": "sign-A1a",
     "quote": "Značka upozorňuje na zatáčku (směrový oblouk) vpravo, jehož bezpečné projetí vyžaduje výrazné snížení rychlosti jízdy"
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 1a",
+   "name": "Zatáčka vpravo"
+  }
  },
  "594": {
   "why": "Kruhová značka s černou a červenou šipkou je Přednost protijedoucích vozidel. Přednost mají vozidla ze směru černé šipky; vy jedete ve směru červené a musíte je pustit, pokud se nelze bezpečně vyhnout.",
@@ -6930,7 +7422,11 @@
     "anchor": "sign-P7",
     "quote": "Značka přikazuje řidiči dát přednost v jízdě protijedoucímu vozidlu"
    }
-  ]
+  ],
+  "sign": {
+   "code": "P 7",
+   "name": "Přednost protijedoucích vozidel"
+  }
  },
  "595": {
   "why": "Modrá kruhová značka s číslem je Nejnižší dovolená rychlost. Přikazuje jet aspoň uvedenou rychlostí, pokud tomu nebrání provoz, mlha, náledí apod. Je-li na značce číslo vyšší než 25, jízda 25 km/h nestačí.",
@@ -6974,7 +7470,11 @@
     "anchor": "sign-IP13b",
     "quote": "řidič musí při začátku stání umístit kotouč viditelně ve vozidle a nastavit na něm dobu začátku stání"
    }
-  ]
+  ],
+  "sign": {
+   "code": "IP 13b",
+   "name": "Parkoviště s parkovacím kotoučem"
+  }
  },
  "599": {
   "why": "Označení řidiče začátečníka informuje ostatní, že vozidlo řídí méně zkušený řidič. Ostatní řidiči k němu mají brát ohled.",
@@ -6991,7 +7491,11 @@
     "anchor": "p5-1-d",
     "quote": "brát ohled na vozidlo přepravující děti, řidiče začátečníka"
    }
-  ]
+  ],
+  "sign": {
+   "code": "O 3",
+   "name": "Označení vozidla řízeného řidičem začátečníkem"
+  }
  },
  "600": {
   "why": "Značka s nápisem PRŮJEZD ZAKÁZÁN zakazuje vjet bez důvodu. Parkování v oblasti je přijatelný důvod, zkracování cesty nebo objíždění kolony ne.",
@@ -7002,7 +7506,11 @@
     "anchor": "sign-B32",
     "quote": "Je-li na značce uveden nápis „PRŮJEZD ZAKÁZÁN“, nesmí řidič bez důvodu vjet do takto označeného úseku. Za takový důvod se nepovažuje objíždění dopravně složité situace nebo zkracování trasy."
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 32",
+   "name": "Jiný zákaz"
+  }
  },
  "601": {
   "why": "Parkoviště je vyhrazeno pro držitele oprávnění jen od pondělí do pátku od 8 do 20 hodin. Mimo tuto dobu, tedy i v sobotu v poledne, zde smí bezplatně stát kdokoli.",
@@ -7013,7 +7521,11 @@
     "anchor": "sign-IP12",
     "quote": "Mimo dobu, po kterou je parkoviště vyhrazeno, smějí na takto označeném místě zastavit a stát i řidiči jiných vozidel"
    }
-  ]
+  ],
+  "sign": {
+   "code": "IP 12",
+   "name": "Vyhrazené parkoviště"
+  }
  },
  "602": {
   "why": "Kruhová značka s černou a červenou šipkou je Přednost protijedoucích vozidel. V úzkém místě musíte protijedoucí vozidlo pustit, pokud se nemůžete bezpečně vyhnout.",
@@ -7024,7 +7536,11 @@
     "anchor": "sign-P7",
     "quote": "Značka přikazuje řidiči dát přednost v jízdě protijedoucímu vozidlu v případě, kdy se protijedoucí vozidla nemohou bezpečně vyhnout"
    }
-  ]
+  ],
+  "sign": {
+   "code": "P 7",
+   "name": "Přednost protijedoucích vozidel"
+  }
  },
  "603": {
   "why": "Modrá značka s autem je Silnice pro motorová vozidla. V obci na ní smíte jet nejvýše 80 km/h, ne 50 km/h jako na běžné silnici v obci.",
@@ -7041,7 +7557,11 @@
     "anchor": "p18-4",
     "quote": "jde-li o dálnici nebo silnici pro motorová vozidla, nejvýše 80 km.h-1"
    }
-  ]
+  ],
+  "sign": {
+   "code": "IZ 2a",
+   "name": "Silnice pro motorová vozidla"
+  }
  },
  "604": {
   "why": "Jde o vodorovnou značku Prostor pro cyklisty. Vyznačuje místo před stop čárou na křižovatce se semafory, kde cyklisté čekají na zelenou.",
@@ -7052,7 +7572,11 @@
     "anchor": "sign-V19",
     "quote": "Značka vyznačuje prostor určený pro cyklisty čekající na světelný signál „Volno“"
    }
-  ]
+  ],
+  "sign": {
+   "code": "V 19",
+   "name": "Prostor pro cyklisty"
+  }
  },
  "605": {
   "why": "Prostor pro cyklisty je určen jen cyklistům čekajícím na signál Volno. Motocykly ani jiná vozidla do něj vjíždět nesmějí a zastavují před ním.",
@@ -7063,7 +7587,11 @@
     "anchor": "sign-V19",
     "quote": "Značka vyznačuje prostor určený pro cyklisty čekající na světelný signál „Volno“"
    }
-  ]
+  ],
+  "sign": {
+   "code": "V 19",
+   "name": "Prostor pro cyklisty"
+  }
  },
  "606": {
   "why": "Symbol jízdního kola v pruhu odděleném čarou je značka Jízdní pruh pro cyklisty. Piktogramový koridor tvoří jen řada symbolů kola bez souvislého pruhu.",
@@ -7074,7 +7602,11 @@
     "anchor": "sign-V14",
     "quote": "Značka vyznačuje pruh nebo stezku pro cyklisty"
    }
-  ]
+  ],
+  "sign": {
+   "code": "V 14",
+   "name": "Jízdní pruh pro cyklisty"
+  }
  },
  "607": {
   "why": "Za značkou je vyhrazený jízdní pruh pro cyklisty. Ve vyhrazeném pruhu a v jízdním pruhu pro cyklisty je zastavení i stání zakázáno, a to i na krátkou dobu k vystoupení nebo vyložení nákladu.",
@@ -7100,7 +7632,11 @@
     "anchor": "sign-E12a",
     "quote": "Této skutečnosti musí řidič přizpůsobit své chování, zejména stanovenou mu povinnost neohrozit ostatní účastníky provozu"
    }
-  ]
+  ],
+  "sign": {
+   "code": "E 12a",
+   "name": "Jízda cyklistů v protisměru"
+  }
  },
  "610": {
   "why": "Jde o Piktogramový koridor pro cyklisty. Vyznačuje prostor a směr jízdy cyklistů a upozorňuje řidiče na zvýšený provoz cyklistů.",
@@ -7111,7 +7647,11 @@
     "anchor": "sign-V20",
     "quote": "Řidiče motorových vozidel upozorňuje, že se na pozemní komunikaci nachází zvýšený provoz cyklistů"
    }
-  ]
+  ],
+  "sign": {
+   "code": "V 20",
+   "name": "Piktogramový koridor pro cyklisty"
+  }
  },
  "611": {
   "why": "Malá žlutá tabulka se symbolem kola a číslem je Směrová tabulka pro cyklisty. Informuje o čísle cyklistické trasy a jejím průběhu.",
@@ -7122,7 +7662,11 @@
     "anchor": "sign-IS21aIS21bIS21c",
     "quote": "Značka informuje o čísle (popřípadě jiném označení) cyklistické trasy a označuje její průběh"
    }
-  ]
+  ],
+  "sign": {
+   "code": "IS 21a IS 21b IS 21c",
+   "name": "Směrová tabulka pro cyklisty (přímo, vlevo nebo vpravo)"
+  }
  },
  "612": {
   "why": "Značka Zimní výbava přikazuje mít vozidlo vybavené pro zimní provoz bez ohledu na datum a počasí. U vozidel do 3500 kg se tím rozumí zimní pneumatiky s hloubkou hlavních drážek nejméně 4 mm.",
@@ -7133,7 +7677,11 @@
     "anchor": "sign-C15a",
     "quote": "a to bez ohledu na datum a aktuální nebo předpokládané povětrnostní podmínky"
    }
-  ]
+  ],
+  "sign": {
+   "code": "C 15a",
+   "name": "Zimní výbava"
+  }
  },
  "613": {
   "why": "Červené směrové sloupky (na rozdíl od bílých, které lemují okraj silnice) označují místo, kde na silnici vyúsťuje účelová komunikace, například polní nebo lesní cesta.",
@@ -7144,7 +7692,11 @@
     "anchor": "sign-Z11cZ11d",
     "quote": "Sloupky vyznačují vyústění účelové komunikace na jinou pozemní komunikaci"
    }
-  ]
+  ],
+  "sign": {
+   "code": "Z 11c Z 11d",
+   "name": "Směrový sloupek červený levý"
+  }
  },
  "614": {
   "why": "Z vyobrazených značek nevyplývá zákaz ani příkaz, který by řidiči osobního automobilu bránil odbočit vpravo, a zároveň mu odbočení vpravo nepřikazují. Vpravo tedy odbočit může, ale nemusí.",
@@ -7218,7 +7770,11 @@
     "anchor": "sign-A5b",
     "quote": "Značka upozorňuje na úsek pozemní komunikace s prudkým stoupáním"
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 5b",
+   "name": "Nebezpečné stoupání"
+  }
  },
  "624": {
   "why": "Výstražná značka „Cyklisté“ upozorňuje na místo, kde cyklisté vjíždějí na vozovku nebo ji přejíždějí, nebo na úsek, kde se často vyskytují. Neoznačuje cyklistickou stezku ani dětské hřiště.",
@@ -7229,7 +7785,11 @@
     "anchor": "sign-A19",
     "quote": "Značka upozorňuje na místo, kde cyklisté vjíždějí na vozovku nebo ji přejíždějí, anebo na úsek, kde se cyklisté často vyskytují"
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 19",
+   "name": "Cyklisté"
+  }
  },
  "625": {
   "why": "Podélnou čáru souvislou lze přejet jen k objíždění, předjíždění cyklisty nebo k odbočení na místo ležící mimo pozemní komunikaci. Parkoviště obchodního domu je veřejně přístupná pozemní komunikace, ne místo mimo ni, proto se přes čáru odbočit nesmí.",
@@ -7240,7 +7800,11 @@
     "anchor": "sign-V1a",
     "quote": "Značku je zakázáno přejíždět nebo ji nákladem přesahovat, pokud to není nutné k objíždění, předjíždění cyklisty, odbočování na místo ležící mimo pozemní komunikaci"
    }
-  ]
+  ],
+  "sign": {
+   "code": "V 1a",
+   "name": "Podélná čára souvislá"
+  }
  },
  "626": {
   "why": "Garáž u rodinného domu je místo ležící mimo pozemní komunikaci. Odbočení na takové místo je jednou z výjimek, kdy se podélná čára souvislá přejet smí.",
@@ -7251,7 +7815,11 @@
     "anchor": "sign-V1a",
     "quote": "pokud to není nutné k objíždění, předjíždění cyklisty, odbočování na místo ležící mimo pozemní komunikaci"
    }
-  ]
+  ],
+  "sign": {
+   "code": "V 1a",
+   "name": "Podélná čára souvislá"
+  }
  },
  "627": {
   "why": "Zákaz nebo omezení z přenosné značky na vozidle pohyblivého pracoviště platí jen do vzdálenosti 100 m za tímto vozidlem, případně za posledním vozidlem skupiny.",
@@ -7273,7 +7841,11 @@
     "anchor": "sign-V1a",
     "quote": "Značku je zakázáno přejíždět nebo ji nákladem přesahovat, pokud to není nutné k objíždění, předjíždění cyklisty, odbočování na místo ležící mimo pozemní komunikaci nebo vjíždění na pozemní komunikaci z místa ležícího mimo pozemní komunikaci"
    }
-  ]
+  ],
+  "sign": {
+   "code": "V 1a",
+   "name": "Podélná čára souvislá"
+  }
  },
  "629": {
   "why": "Značka „Řadicí pruhy“ ukazuje, kam vede který jízdní pruh. Pruh, ve kterém řidič jede, podle ní vede i do centra, takže v něm může zůstat.",
@@ -7284,7 +7856,11 @@
     "anchor": "sign-IP19",
     "quote": "Značka vyznačuje způsob řazení do jízdních pruhů před křižovatkou nebo místem odbočení a stanovený směr jízdy"
    }
-  ]
+  ],
+  "sign": {
+   "code": "IP 19",
+   "name": "Řadící pruhy"
+  }
  },
  "630": {
   "why": "Značka „Konec nejvyšší dovolené rychlosti“ ukončuje jen předcházející značku „Nejvyšší dovolená rychlost“. Ostatní zákazy, například „Zákaz zastavení“, platí dál.",
@@ -7295,7 +7871,11 @@
     "anchor": "sign-B20b",
     "quote": "Značka ukončuje platnost předcházející značky „Nejvyšší dovolená rychlost“"
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 20b",
+   "name": "Konec nejvyšší dovolené rychlosti"
+  }
  },
  "631": {
   "why": "Je-li na značce „Jiný zákaz“ nápis „PRŮJEZD ZAKÁZÁN“, smí do úseku vjet jen ten, kdo tam má důvod. Zkrácení cesty ani objetí složité dopravní situace se za důvod nepovažuje.",
@@ -7306,7 +7886,11 @@
     "anchor": "sign-B32",
     "quote": "nesmí řidič bez důvodu vjet do takto označeného úseku. Za takový důvod se nepovažuje objíždění dopravně složité situace nebo zkracování trasy"
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 32",
+   "name": "Jiný zákaz"
+  }
  },
  "632": {
   "why": "Výstražná značka „Křižovatka“ upozorňuje na křižovatku, kde přednost v jízdě neupravují svislé dopravní značky. Platí tam tedy přednost zprava.",
@@ -7317,7 +7901,11 @@
     "anchor": "sign-A3",
     "quote": "Značka upozorňuje na křižovatku, kde není přednost v jízdě upravena svislými dopravními značkami"
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 3",
+   "name": "Křižovatka"
+  }
  },
  "633": {
   "why": "Nevidomý se označuje bílou holí s reflexním bílým pruhem širokým 50 mm. Hůl s bílými a červenými pruhy označuje osobu hluchoslepou.",
@@ -7345,7 +7933,11 @@
     "anchor": "sign-A5a",
     "quote": "Značka upozorňuje na úsek pozemní komunikace, kde místní podmínky činí klesání nebezpečným"
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 5a",
+   "name": "Nebezpečné klesání"
+  }
  },
  "635": {
   "why": "Značka „Přednost protijedoucích vozidel“ přikazuje dát přednost protijedoucímu vozidlu, pokud se vozidla nemohou bezpečně vyhnout. Rychlost 20 km/h vyplývá z vyobrazené značky nejvyšší dovolené rychlosti.",
@@ -7356,7 +7948,11 @@
     "anchor": "sign-P7",
     "quote": "Značka přikazuje řidiči dát přednost v jízdě protijedoucímu vozidlu v případě, kdy se protijedoucí vozidla nemohou bezpečně vyhnout"
    }
-  ]
+  ],
+  "sign": {
+   "code": "P 7",
+   "name": "Přednost protijedoucích vozidel"
+  }
  },
  "636": {
   "why": "Dvě vedle sebe umístěná střídavě přerušovaná červená světla znamenají povinnost zastavit před světelným signalizačním zařízením. Pouhé zpomalení nestačí.",
@@ -7395,7 +7991,11 @@
     "anchor": "sign-Z3",
     "quote": "Vodicí tabule označuje zejména nebezpečnou zatáčku, v níž musí řidič výrazně snížit rychlost jízdy, a usměrňuje provoz ve směru šipek"
    }
-  ]
+  ],
+  "sign": {
+   "code": "Z 3",
+   "name": "Vodicí tabule"
+  }
  },
  "639": {
   "why": "Výstražná značka „Nábřeží“ upozorňuje na úsek, který vede na nechráněné nábřeží nebo břeh vodní plochy.",
@@ -7406,7 +8006,11 @@
     "anchor": "sign-A34",
     "quote": "Značka upozorňuje na úsek pozemní komunikace směřující na nechráněné nábřeží nebo břeh vodní plochy"
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 34",
+   "name": "Nábřeží"
+  }
  },
  "640": {
   "why": "Výstražná značka „Pohyblivý most“ upozorňuje na zvedací nebo jiný pohyblivý most.",
@@ -7417,7 +8021,11 @@
     "anchor": "sign-A33",
     "quote": "Značka upozorňuje na zvedací nebo jiný pohyblivý most"
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 33",
+   "name": "Pohyblivý most"
+  }
  },
  "641": {
   "why": "Značka „Doporučená rychlost“ rychlost nepřikazuje ani neomezuje, jen doporučuje rychlost, kterou lze za běžných okolností považovat za bezpečnou.",
@@ -7428,7 +8036,11 @@
     "anchor": "sign-IP5",
     "quote": "Značka řidiči doporučuje, pokud to ostatní okolnosti provozu na pozemních komunikacích dovolují, rychlost jízdy"
    }
-  ]
+  ],
+  "sign": {
+   "code": "IP 5",
+   "name": "Doporučená rychlost"
+  }
  },
  "642": {
   "why": "Značka „Parkoviště K+R“ označuje parkoviště, kde lze zastavit, aby osoby vystoupily nebo nastoupily. Záchytné parkoviště s návazností na hromadnou dopravu je P+R.",
@@ -7439,7 +8051,11 @@
     "anchor": "sign-IP13e",
     "quote": "Značka označuje parkoviště, na kterém lze zastavit za účelem vystoupení a nastoupení osob"
    }
-  ]
+  ],
+  "sign": {
+   "code": "IP 13e",
+   "name": "Parkoviště K+R"
+  }
  },
  "643": {
   "why": "Značka „Křižovatka“ upozorňuje, že přednost na křižovatce neupravují svislé značky. Platí proto obecné pravidlo přednosti zprava, a to i vůči jezdcům na zvířatech, organizované skupině chodců a průvodcům zvířat.",
@@ -7456,7 +8072,11 @@
     "anchor": "p22-2",
     "quote": "musí dát řidič přednost v jízdě vozidlům nebo jezdcům na zvířatech přijíždějícím zprava"
    }
-  ]
+  ],
+  "sign": {
+   "code": "A 3",
+   "name": "Křižovatka"
+  }
  },
  "644": {
   "why": "Sestava jednotlivých šipek za sebou je provedením vodicí tabule. Ta označuje nebezpečnou zatáčku, ve které musí řidič výrazně snížit rychlost, zde vlevo.",
@@ -7473,7 +8093,11 @@
     "anchor": "sign-Z3",
     "quote": "označuje zejména nebezpečnou zatáčku, v níž musí řidič výrazně snížit rychlost jízdy"
    }
-  ]
+  ],
+  "sign": {
+   "code": "Z 3",
+   "name": "Vodicí tabule"
+  }
  },
  "645": {
   "why": "Návěst před křižovatkou informuje o omezení za nejbližší křižovatkou. Symbol na ní odpovídá zákazu vjezdu vozidel, jejichž okamžitá hmotnost přesahuje 6 t, a to bez ohledu na druh vozidla.",
@@ -7501,7 +8125,11 @@
     "anchor": "sign-B19",
     "quote": "Značka zakazuje vjezd vozidlům přepravujícím ropu nebo ropné materiály nebo jiné látky, které by mohly způsobit ohrožení životního prostředí, zejména znečištění vody"
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 19",
+   "name": "Zákaz vjezdu vozidel přepravujících náklad, který může způsobit ohrožení životního prostředí"
+  }
  },
  "647": {
   "why": "U zákazu vjezdu podle délky rozhoduje okamžitá délka celé jízdní soupravy. Automobil 5 m s přívěsem 6 m měří společně přes 8 m, proto do úseku vjet nesmí.",
@@ -7512,7 +8140,11 @@
     "anchor": "sign-B17",
     "quote": "Značka zakazuje vjezd vozidel nebo jízdních souprav, jejichž okamžitá délka včetně nákladu je větší než údaj uvedený na značce"
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 17",
+   "name": "Zákaz vjezdu vozidel nebo souprav, jejichž délka přesahuje vyznačenou mez"
+  }
  },
  "648": {
   "why": "Dodatková tabulka „Největší povolená hmotnost“ omezuje zákaz na vozidla nad vyznačenou hmotnost. U soupravy se sčítají největší povolené hmotnosti všech vozidel: 3 300 + 2 000 kg překračuje údaj na tabulce.",
@@ -7523,7 +8155,11 @@
     "anchor": "sign-E5",
     "quote": "U jízdní soupravy je rozhodný součet nejvyšších povolených hmotností všech vozidel soupravy"
    }
-  ]
+  ],
+  "sign": {
+   "code": "E 5",
+   "name": "Největší povolená hmotnost"
+  }
  },
  "649": {
   "why": "Značka zakazuje vjezd vozidlům, jejichž okamžitá šířka včetně nákladu a zpětných zrcátek přesahuje 2,2 m. Rozhoduje skutečná šířka, ne údaj v technickém průkazu.",
@@ -7534,7 +8170,11 @@
     "anchor": "sign-B15",
     "quote": "Značka zakazuje vjezd vozidel, jejichž okamžitá šířka včetně nákladu a zpětných zrcátek je větší než údaj uvedený na značce"
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 15",
+   "name": "Zákaz vjezdu vozidel, jejichž šířka přesahuje vyznačenou mez"
+  }
  },
  "650": {
   "why": "Dodatková tabulka se vzdáleností pod značkou udává, jak daleko od ní začíná platit značka nad ní. Zákaz vjezdu všech vozidel v obou směrech tedy začíná až za 1500 m.",
@@ -7562,7 +8202,11 @@
     "anchor": "sign-IZ10a",
     "quote": "Značka označuje oblast, kde kromě obecných pravidel provozu na pozemních komunikacích platí zvláštní pravidla pro provoz ve sdílené zóně"
    }
-  ]
+  ],
+  "sign": {
+   "code": "IZ 10a",
+   "name": "Sdílená zóna"
+  }
  },
  "652": {
   "why": "Za značkou „Sdílená zóna“ platí zvláštní pravidla sdílené zóny: zvýšená ohleduplnost k ostatním, chodci a cyklisté smějí užívat celou šířku komunikace a nejvyšší rychlost je 20 km/h.",
@@ -7579,7 +8223,11 @@
     "anchor": "p39b-2",
     "quote": "Ve sdílené zóně musí účastníci provozu na pozemních komunikacích dbát zvýšené ohleduplnosti vůči ostatním účastníkům provozu"
    }
-  ]
+  ],
+  "sign": {
+   "code": "IZ 10a",
+   "name": "Sdílená zóna"
+  }
  },
  "653": {
   "why": "Vyobrazená značka je „Konec sdílené zóny“. Značí místo, kde sdílená zóna končí.",
@@ -7590,7 +8238,11 @@
     "anchor": "sign-IZ10b",
     "quote": "Značka označuje konec sdílené zóny"
    }
-  ]
+  ],
+  "sign": {
+   "code": "IZ 10b",
+   "name": "Konec sdílené zóny"
+  }
  },
  "654": {
   "why": "Značka „Konec sdílené zóny“ ukončuje její zvláštní pravidla. Za ní platí opět jen obecná pravidla podle místa, kde řidič jede, tedy ne automaticky pravidla pro jízdu mimo obec.",
@@ -7607,7 +8259,11 @@
     "anchor": "p39b-1",
     "quote": "konec je označen dopravní značkou „Konec sdílené zóny“"
    }
-  ]
+  ],
+  "sign": {
+   "code": "IZ 10b",
+   "name": "Konec sdílené zóny"
+  }
  },
  "655": {
   "why": "Značka „Parkoviště P+D“ označuje parkoviště pro vozidla, jejichž řidič tu auto nechá a pokračuje jako cestující v jiném vozidle, tedy v rámci spolujízdy.",
@@ -7618,7 +8274,11 @@
     "anchor": "sign-IP13f",
     "quote": "Značka označuje parkoviště, které je určeno pro parkování vozidel, jejichž řidič odtud bezprostředně pokračuje v jízdě jako cestující v jiném vozidle"
    }
-  ]
+  ],
+  "sign": {
+   "code": "IP13f",
+   "name": "Parkoviště P+D"
+  }
  },
  "656": {
   "why": "Značka „Bezpečný odstup“ spolu s vodorovnou značkou (šipkami na vozovce) informuje o bezpečném odstupu mezi jedoucími vozidly. Neukládá pevný odstup 200 m a netýká se parkování.",
@@ -7629,7 +8289,11 @@
     "anchor": "sign-IP32",
     "quote": "Značka ve spojení s příslušnou vodorovnou dopravní značkou „Bezpečný odstup\" informuje o bezpečném odstupu mezi jedoucími vozidly"
    }
-  ]
+  ],
+  "sign": {
+   "code": "IP 32",
+   "name": "Bezpečný odstup"
+  }
  },
  "657": {
   "why": "Značka označuje servisní místo, kde lze vyprázdnit a vyčistit hygienická zařízení obytných automobilů a obytných přívěsů. Není to parkoviště ani tábořiště.",
@@ -7640,7 +8304,11 @@
     "anchor": "sign-IJ15",
     "quote": "Značka označuje servisní místo pro sanitaci hygienických zařízení obytných automobilů a obytných přívěsů"
    }
-  ]
+  ],
+  "sign": {
+   "code": "IJ 15",
+   "name": "Servisní místo pro sanitaci hygienických zařízení obytných vozidel"
+  }
  },
  "658": {
   "why": "Červené směrové sloupky vyznačují vyústění účelové komunikace, typicky polní nebo lesní cesty, na jinou pozemní komunikaci. Okraj silnice označují bílé sloupky.",
@@ -7651,7 +8319,11 @@
     "anchor": "sign-Z11cZ11d",
     "quote": "Sloupky vyznačují vyústění účelové komunikace na jinou pozemní komunikaci"
    }
-  ]
+  ],
+  "sign": {
+   "code": "Z 11c Z 11d",
+   "name": "Směrový sloupek červený levý"
+  }
  },
  "659": {
   "why": "Červené sloupky označují vyústění účelové komunikace. Kdo z ní vyjíždí na jinou pozemní komunikaci, musí dát přednost všem, kdo po ní jedou, bez ohledu na směr.",
@@ -7668,7 +8340,11 @@
     "anchor": "p23-1",
     "quote": "To platí i při vjíždění z účelové pozemní komunikace"
    }
-  ]
+  ],
+  "sign": {
+   "code": "Z 11c Z 11d",
+   "name": "Směrový sloupek červený levý"
+  }
  },
  "660": {
   "why": "Odbočení vpravo nákladnímu automobilu nic nezakazuje. Při odbočování vpravo však musí dát přednost cyklistům v jízdním pruhu pro cyklisty, tedy je nesmí ohrozit ani omezit.",
@@ -7712,7 +8388,11 @@
     "anchor": "sign-V19",
     "quote": "Značka vyznačuje prostor určený pro cyklisty čekající na světelný signál „Volno“"
    }
-  ]
+  ],
+  "sign": {
+   "code": "V 19",
+   "name": "Prostor pro cyklisty"
+  }
  },
  "664": {
   "why": "Značka „Přednost před protijedoucími vozidly“ informuje, že protijedoucí řidič smí do úseku vjet jen tehdy, když se vozidla mohou bezpečně vyhnout. Přednost má tedy řidič, který značku vidí.",
@@ -7723,7 +8403,11 @@
     "anchor": "sign-P8",
     "quote": "Značka informuje řidiče o tom, že řidič protijedoucího vozidla smí do následujícího úseku pozemní komunikace vjet pouze v případě, kdy se jeho a protijedoucí vozidlo mohou bezpečně vyhnout"
    }
-  ]
+  ],
+  "sign": {
+   "code": "P 8",
+   "name": "Přednost před protijedoucími vozidly"
+  }
  },
  "665": {
   "why": "Vyobrazené dopravní značení zakazuje odbočení vpravo právě autobusům, proto řidič autobusu vpravo odbočit nesmí. Ostatní vozidla, například nákladní automobil nebo motocykl, vpravo odbočit mohou.",
@@ -7738,7 +8422,11 @@
     "anchor": "sign-B3",
     "quote": "Značka zakazuje vjezd všech motorových vozidel s výjimkou motocyklů bez postranního vozíku"
    }
-  ]
+  ],
+  "sign": {
+   "code": "B 3",
+   "name": "Zákaz vjezdu všech motorových vozidel s výjimkou motocyklů bez postranního vozíku"
+  }
  },
  "667": {
   "why": "Při zeleném signálu jedete dál, ale odbočující řidiči v protisměru vám musí dát přednost. Přesto je třeba sledovat signály i jejich chování, zda přednost skutečně dají. Vy jim přednost nedáváte.",

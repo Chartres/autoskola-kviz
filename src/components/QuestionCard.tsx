@@ -180,7 +180,7 @@ export function QuestionCard({
       {answered && reveal && explanation?.sign && (
         /* Orbis Pictus: the picture with its number and name, once the learner has answered. */
         <p className="-mt-3 mb-4 flex items-baseline gap-2 text-sm">
-          <span className="font-mono text-xs text-terra-300">{explanation.sign.code}</span>
+          <span className="shrink-0 whitespace-nowrap font-mono text-xs text-terra-300">{explanation.sign.code}</span>
           <span className="text-sand-300">{explanation.sign.name}</span>
         </p>
       )}
@@ -254,7 +254,7 @@ export function QuestionCard({
                   target="_blank"
                   rel="noopener"
                   onClick={() => onSourceOpen?.(s)}
-                  className="font-mono text-xs text-terra-400 underline-offset-2 hover:underline"
+                  className="inline-block min-h-11 py-3 font-mono text-xs text-terra-400 underline-offset-2 hover:underline"
                 >
                   {sourceLabel(s)}
                 </a>
