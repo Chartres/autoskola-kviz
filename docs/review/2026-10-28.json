@@ -1,0 +1,129 @@
+{
+  "product": "autoskola-kviz",
+  "date": "2026-10-28",
+  "url": "https://autoskola.dravec.org",
+  "headline": "The signals gaps are closed and the live pages have their search hygiene; question pages wait on Pavol's pick, and nobody has finished a practice set yet because a set is a whole okruh.",
+  "shipped": [
+    {
+      "title": "Signals contract: allow-list test, drop automated browsers, analytics bundle guard",
+      "pr": 20,
+      "merged": "2026-10-28",
+      "live_checked": "deploy run green with the guard step; live bundle carries https://chgwirzbpspoaoposuwg.supabase.co"
+    },
+    {
+      "title": "Search hygiene on live pages: FAQPage JSON-LD on topic pages, llms.txt",
+      "pr": 21,
+      "merged": "2026-10-28",
+      "live_checked": "/okruh/dopravni-znacky/ serves one FAQPage block and no WebApplication; /llms.txt serves the corrected citation counts; /sitemap.xml has 8 URLs"
+    }
+  ],
+  "signals_fixed": [
+    "Signals contract test added (src/platform/flywheel-events.contract.test.ts + flywheel-events.json, allow-list v2 of 2026-10-27).",
+    "flywheel-client drops events from automated browsers (navigator.webdriver or a bot/headless UA), so Playwright, Lighthouse and crawlers no longer count as visitors.",
+    "Analytics bundle guard in CI (node scripts/check-analytics.mjs dist # flywheel:analytics-guard) on main pushes, right before upload-pages-artifact. The dist is built in the test job, so the guard sits there.",
+    "Guard deviation from the kit: it matches https://<ref>.supabase.co. supabase-js carries '*.supabase.co' in every bundle, so the kit's bare-string check passed a build with no Supabase config.",
+    "CI concurrency confirmed: group ci-${{ github.ref }}, cancel-in-progress only off main. No change was needed.",
+    "Activation wiring verified. A test finishes a practice set through the UI and sees one conversion(); a client test sees conversion() insert an events row named 'conversion'. The live policy 'log known events' lists conversion, and an anon insert in a rolled-back transaction succeeded.",
+    "no_activation explained, not fixed. Live events over 14 days show no session_finish, lesson_complete or exam_finish, so nobody reached a results screen. An okruh practice set is the whole okruh (35–444 questions), and that is a teaching decision for Pavol."
+  ],
+  "signature": {
+    "doc": "docs/SIGNATURE.md",
+    "mechanics": [
+      { "name": "Ze zákona", "from": "Erasmus, ad fontes", "status": "live, awaiting Pavol's review (shipped #17 before rule 10)", "metric": "key_action {action:'source_opened'}; target ≥ 15 % of answered questions" },
+      { "name": "Obraz a jméno", "from": "Komenský, Orbis Pictus (1658)", "status": "live, awaiting Pavol's review (shipped #17 before rule 10)", "metric": "no event yet; share of sign questions right on second sight (progress stats)" },
+      { "name": "Kontrola chyby", "from": "Montessori (1912); Roediger & Karpicke (2006)", "status": "live, awaiting Pavol's review (shipped #17 before rule 10)", "metric": "key_action {action:'errors_corrected', count}; ≥ 80 % of sets with misses reach results" },
+      { "name": "Připravenost", "from": "Bloom, Learning for Mastery (1968)", "status": "proposed", "metric": "exam_finish {passed}; pass rate of people who saw ≥ 43 expected points" }
+    ]
+  },
+  "aio": {
+    "notes": [
+      "IndexNow submitted 2026-10-28T03:50Z: 8 URLs (the full live sitemap). Bing (https://www.bing.com/indexnow) answered HTTP 202; Seznam (https://search.seznam.cz/indexnow) answered HTTP 200.",
+      "Key file: public/9cc2dcb0952bc859471bd181b22e3dcb.txt, served at https://autoskola.dravec.org/9cc2dcb0952bc859471bd181b22e3dcb.txt. It is the flywheel key from #19, which flywheel's daily IndexNow workflow also uses.",
+      "#18's second key (ae860ea4…) and its per-deploy ping were dropped, so the host has one key and one submitter. api.indexnow.org was not used.",
+      "Structured data now live: FAQPage on the 7 okruh pages, WebApplication on home only. llms.txt describes only live features.",
+      "Question pages (1136) and /zkouska-nanecisto/ are not live; they wait on the decision below (PR #18, draft, merge-ready)."
+    ]
+  },
+  "decisions": [
+    {
+      "question": "Question pages: should every official question get its own public page?",
+      "options": [
+        "1: a page per question, as Zbrojní built them (answer + quoted provision, no JS needed, linked from okruh pages)",
+        "2: okruh pages with every question inline",
+        "3: neither"
+      ],
+      "default_taken": "None shipped. #18 is kept as a draft, merged with main and green locally (279 unit, 23 e2e). Recommendation: 1.",
+      "why": "A signature move under rule 10. Option 1 answers each question's own wording with its source, which is what search and assistants cite, and it is proven on Zbrojní. Option 2 gives a 600 KB page per okruh."
+    },
+    {
+      "question": "Mock-exam guide page /zkouska-nanecisto/: ship it?",
+      "options": ["ship with the question pages", "ship alone", "drop"],
+      "default_taken": "Held on #18 with the question pages. Recommendation: ship with Option 1.",
+      "why": "It is a new kind of page, so Pavol picks."
+    },
+    {
+      "question": "Ze zákona (live since #17): keep, change or revert?",
+      "options": ["keep", "change", "revert"],
+      "default_taken": "keep",
+      "why": "Correctness is guarded by a test that quotes must be verbatim in the cited paragraph. It is the main difference from paid competitors, and nothing points to harm."
+    },
+    {
+      "question": "Obraz a jméno (live since #17): keep, change or revert?",
+      "options": ["keep", "change", "revert"],
+      "default_taken": "keep",
+      "why": "144 plates were each checked against their picture, and the 27 ambiguous pictures show none. It adds one line under the picture."
+    },
+    {
+      "question": "Kontrola chyby (live since #17): keep, change or revert?",
+      "options": ["keep", "change", "revert"],
+      "default_taken": "keep",
+      "why": "The conversion fires when the first round ends, so a learner who leaves the correction round still counts. Retries don't change mastery."
+    },
+    {
+      "question": "Activation: an okruh practice set is the whole okruh (35–444 questions), and no one has finished one. Change what a set is?",
+      "options": [
+        "A: okruh practice in sets of 20 with a results screen after each",
+        "B: keep whole-okruh practice and point newcomers to the 10-question daily set first",
+        "C: no change"
+      ],
+      "default_taken": "C: no change this round",
+      "why": "It changes how the product teaches (a signature move), so it waits for Pavol. Recommendation: A, so a set can be finished in one sitting and question-page visitors don't land in '01 / 444'."
+    },
+    {
+      "question": "Contract test lets pending names (start_topic …) pass although the live policy still rejects them. Tighten it?",
+      "options": ["keep the kit as is", "check events minus pending"],
+      "default_taken": "keep the kit as is",
+      "why": "This follows the orchestrator's instruction that the contract test accepts start_topic. Here the typed ACCEPTED_EVENTS in src/analytics.ts still blocks pending names at typecheck, and the app sends none today."
+    },
+    {
+      "question": "IndexNow: keep #18's own key and per-deploy ping alongside the flywheel key from #19?",
+      "options": ["one key, flywheel's daily submission", "both keys and both submitters"],
+      "default_taken": "one key, flywheel's daily submission",
+      "why": "Two keys and two submitters for one host is duplication. The daily run covers new pages within a day."
+    }
+  ],
+  "next": [
+    "Pavol: pick an option for the question pages (and the guide page) and for activation set size; review the three live moves.",
+    "If Option 1: undraft #18, run code-review at high on it, merge, read back /otazka/13-chodec-smi-vstoupit-na-prechod-pro-chodce/ and /sitemap.xml (1145 URLs), and let the daily IndexNow run pick them up.",
+    "flywheel: fix the analytics guard in the kit to match https://<ref>.supabase.co, because supabase-js carries '*.supabase.co' and the bare string passes config-less builds.",
+    "flywheel: the BOT_UA regex matches real phones of the Cubot brand ('CUBOT' hits bot\\b), and the bare 'preview' is broad. Anchor the bot match and drop 'preview' (bingpreview covers the crawler).",
+    "flywheel: the contract test treats pending names as accepted; consider checking events minus pending once the start_topic migration is applied.",
+    "Log the IndexNow submission above in flywheel data/launch-log/autoskola-kviz.jsonl."
+  ],
+  "screenshots": [
+    "docs/review/2026-10-28/opt1-question-page-390.png",
+    "docs/review/2026-10-28/opt1-question-page-1280.png",
+    "docs/review/2026-10-28/opt1-question-page-sign-390.png",
+    "docs/review/2026-10-28/opt1-question-page-sign-1280.png",
+    "docs/review/2026-10-28/opt1-question-page-with-js-390.png",
+    "docs/review/2026-10-28/opt1-question-page-with-js-1280.png",
+    "docs/review/2026-10-28/opt1-topic-page-list-390.png",
+    "docs/review/2026-10-28/opt1-topic-page-list-1280.png",
+    "docs/review/2026-10-28/opt2-topic-inline-mock-390.png",
+    "docs/review/2026-10-28/opt2-topic-inline-mock-1280.png",
+    "docs/review/2026-10-28/opt3-topic-page-live-390.png",
+    "docs/review/2026-10-28/opt3-topic-page-live-1280.png",
+    "docs/review/2026-10-28/exam-guide-page-390.png",
+    "docs/review/2026-10-28/exam-guide-page-1280.png"
+  ]
+}
