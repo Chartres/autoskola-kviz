@@ -1,5 +1,4 @@
 import type { CategoryName, Choice } from '@/domain/types'
-import type { Rng } from '@/domain/rng'
 import { emptyJizdyState, logLesson as jizdyLogLesson, type JizdyState, type LessonRecord } from '@/domain/jizdy'
 import {
   createSession,
@@ -26,7 +25,7 @@ import { buildLesson } from '@/domain/lesson'
 import type { Question } from '@/domain/types'
 import { getQuestion } from '@/domain/questions'
 import type { SavedExam } from '@/domain/storage'
-import { shuffle } from '@/domain/rng'
+import { shuffle, type Rng } from '@/domain/rng'
 import { snapshotRound, restoreRound, type SavedRound } from './round'
 
 // Bottom-tab destinations (persistent nav) + focused full-screen flows.
