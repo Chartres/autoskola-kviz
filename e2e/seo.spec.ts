@@ -94,3 +94,18 @@ test('head carries the share-card block and WebApplication JSON-LD', async ({ pa
   expect(ld.url).toBe('https://autoskola.dravec.org/')
   expect(ld.isAccessibleForFree).toBe(true)
 })
+
+// Structured data: a topic page describes its own FAQ; the app's WebApplication block stays on home.
+test('topic page carries FAQPage JSON-LD matching its visible FAQ, not the app block', async ({ request }) => {
+  const html = await (await request.get('/okruh/dopravni-znacky/')).text()
+  const blocks = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => JSON.parse(m[1]))
+  expect(blocks.map((b) => b['@type'])).toEqual(['FAQPage'])
+  expect(blocks[0].mainEntity[0]).toMatchObject({ '@type': 'Question', name: 'Kolik otázek na značky je u zkoušky?' })
+  expect(html).toContain('Kolik otázek na značky je u zkoušky?</dt>')
+})
+
+test('the IndexNow key file is served at the site root', async ({ request }) => {
+  const key = await request.get('/ae860ea4fbdae2b80e581f3d7f52b94f.txt')
+  expect(key.ok()).toBe(true)
+  expect((await key.text()).trim()).toBe('ae860ea4fbdae2b80e581f3d7f52b94f')
+})

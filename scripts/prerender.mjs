@@ -18,6 +18,23 @@ const countFor = (category) =>
 const esc = (s) =>
   s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;')
 
+/** The built index.html with this page's title, description, canonical, share card and body. */
+function page({ url, title, description, body, jsonld }) {
+  return template
+    // Deep pages describe a topic or a question; the WebApplication block belongs to the home page.
+    .replace(/\s*<script type="application\/ld\+json">\s*\{[^<]*"WebApplication"[^<]*<\/script>/, '')
+    .replace(/<title>[^<]*<\/title>/, `<title>${esc(title)}</title>`)
+    .replace(/(<meta\s+name="description"\s+content=")[^"]*(")/, `$1${esc(description)}$2`)
+    .replace(/<link rel="canonical" href="[^"]*" \/>/, `<link rel="canonical" href="${url}" />`)
+    .replace(/(<meta\s+property="og:url"\s+content=")[^"]*(")/, `$1${url}$2`)
+    .replace(/(<meta\s+property="og:title"\s+content=")[^"]*(")/, `$1${esc(title)}$2`)
+    .replace(/(<meta\s+property="og:description"\s+content=")[^"]*(")/, `$1${esc(description)}$2`)
+    .replace(/(<meta\s+name="twitter:title"\s+content=")[^"]*(")/, `$1${esc(title)}$2`)
+    .replace(/(<meta\s+name="twitter:description"\s+content=")[^"]*(")/, `$1${esc(description)}$2`)
+    .replace('</head>', jsonld ? `<script type="application/ld+json">${jsonld.replaceAll('<', '\\u003c')}</script>\n</head>` : '</head>')
+    .replace(/<!--seo-->[\s\S]*<!--\/seo-->/, `<!--seo-->${body}<!--/seo-->`)
+}
+
 for (const t of topics) {
   const fill = (s) => s.replaceAll('{count}', String(countFor(t.category)))
   const url = `${ORIGIN}/okruh/${t.slug}/`
@@ -47,22 +64,16 @@ for (const t of topics) {
         </ul>
       </div>
 `
-  const html = template
-    .replace(/<title>[^<]*<\/title>/, `<title>${esc(fill(t.title))}</title>`)
-    .replace(
-      /(<meta\s+name="description"\s+content=")[^"]*(")/,
-      `$1${esc(fill(t.description))}$2`,
-    )
-    .replace(
-      /<link rel="canonical" href="[^"]*" \/>/,
-      `<link rel="canonical" href="${url}" />`,
-    )
-    .replace(/(<meta\s+property="og:url"\s+content=")[^"]*(")/, `$1${url}$2`)
-    .replace(/(<meta\s+property="og:title"\s+content=")[^"]*(")/, `$1${esc(fill(t.title))}$2`)
-    .replace(/(<meta\s+property="og:description"\s+content=")[^"]*(")/, `$1${esc(fill(t.description))}$2`)
-    .replace(/(<meta\s+name="twitter:title"\s+content=")[^"]*(")/, `$1${esc(fill(t.title))}$2`)
-    .replace(/(<meta\s+name="twitter:description"\s+content=")[^"]*(")/, `$1${esc(fill(t.description))}$2`)
-    .replace(/<!--seo-->[\s\S]*<!--\/seo-->/, `<!--seo-->${body}<!--/seo-->`)
+  const faqld = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: t.faq.map((f) => ({
+      '@type': 'Question',
+      name: fill(f.q),
+      acceptedAnswer: { '@type': 'Answer', text: fill(f.a) },
+    })),
+  })
+  const html = page({ url, title: fill(t.title), description: fill(t.description), body, jsonld: faqld })
   mkdirSync(`${root}dist/okruh/${t.slug}`, { recursive: true })
   writeFileSync(`${root}dist/okruh/${t.slug}/index.html`, html)
 }
