@@ -34,6 +34,9 @@ jobs:
         env:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY }}
+      # The dist uploaded below must carry the Supabase config, or the live app sends no events.
+      - run: node scripts/check-analytics.mjs dist # flywheel:analytics-guard
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       - uses: actions/upload-pages-artifact@v3
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         with:
@@ -61,8 +64,6 @@ jobs:
       # flywheel scripts/release-tag.sh deploy; never moves a tag, a re-run adds none. A tag pushed
       # with GITHUB_TOKEN triggers no workflow.
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 2 # the IndexNow step below compares with the previous commit
       - name: Tag the deployed commit
         run: |
           remote=$(git ls-remote --tags origin)
@@ -72,23 +73,3 @@ jobs:
           name=$base; [ "$n" -gt 0 ] && name=$base-$((n + 1))
           git push origin "$GITHUB_SHA:refs/tags/$name"
           echo "tagged $name"
-      # IndexNow (Bing, which feeds ChatGPT search and Copilot, and Seznam): announce the sitemap
-      # URLs when a deploy changed pages or their data. Free, no account; the key file is
-      # public/<key>.txt. api.indexnow.org answers 403 for this host, so post to each engine directly.
-      # A failed ping never fails the deploy.
-      - name: Notify IndexNow
-        continue-on-error: true
-        env:
-          HOST: autoskola.dravec.org
-          KEY: ae860ea4fbdae2b80e581f3d7f52b94f
-        run: |
-          git diff --quiet HEAD~1 HEAD -- data public scripts index.html src/content && { echo "no page changes"; exit 0; }
-          sleep 60 # let Pages serve the new build first
-          urls=$(curl -sS "https://$HOST/sitemap.xml" | grep -o '<loc>[^<]*' | sed 's/<loc>//' | jq -R . | jq -sc .)
-          body=$(jq -nc --arg host "$HOST" --arg key "$KEY" --argjson urls "$urls" \
-            '{host: $host, key: $key, keyLocation: "https://\($host)/\($key).txt", urlList: $urls}')
-          for endpoint in https://www.bing.com/indexnow https://search.seznam.cz/indexnow; do
-            code=$(curl -sS -o /dev/null -w '%{http_code}' -X POST "$endpoint" \
-              -H 'Content-Type: application/json; charset=utf-8' -d "$body")
-            echo "IndexNow $endpoint: $(jq length <<<"$urls") URLs, HTTP $code"
-          done
