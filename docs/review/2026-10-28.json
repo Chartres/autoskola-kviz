@@ -71,7 +71,7 @@
       "question": "Obraz a jméno (live since #17): keep, change or revert?",
       "options": ["keep", "change", "revert"],
       "default_taken": "keep",
-      "why": "144 plates were each checked against their picture, and the 27 ambiguous pictures show none. It adds one line under the picture."
+      "why": "144 plates were each checked against their picture, and per #17 the 27 ambiguous sign pictures show none. It adds one line under the picture."
     },
     {
       "question": "Kontrola chyby (live since #17): keep, change or revert?",
