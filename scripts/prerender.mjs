@@ -31,7 +31,8 @@ function page({ url, title, description, body, jsonld }) {
     .replace(/(<meta\s+property="og:description"\s+content=")[^"]*(")/, `$1${esc(description)}$2`)
     .replace(/(<meta\s+name="twitter:title"\s+content=")[^"]*(")/, `$1${esc(title)}$2`)
     .replace(/(<meta\s+name="twitter:description"\s+content=")[^"]*(")/, `$1${esc(description)}$2`)
-    .replace('</head>', jsonld ? `<script type="application/ld+json">${jsonld.replaceAll('<', '\\u003c')}</script>\n</head>` : '</head>')
+    // A function, so a '$' in the JSON is not read as a replacement pattern.
+    .replace('</head>', () => (jsonld ? `<script type="application/ld+json">${jsonld.replaceAll('<', '\\u003c')}</script>\n</head>` : '</head>'))
     .replace(/<!--seo-->[\s\S]*<!--\/seo-->/, `<!--seo-->${body}<!--/seo-->`)
 }
 
