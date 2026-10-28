@@ -37,9 +37,9 @@
   },
   "aio": {
     "notes": [
-      "IndexNow submitted 2026-10-28T03:50Z: 8 URLs (the full live sitemap). Bing (https://www.bing.com/indexnow) answered HTTP 202; Seznam (https://search.seznam.cz/indexnow) answered HTTP 200.",
-      "Key file: public/9cc2dcb0952bc859471bd181b22e3dcb.txt, served at https://autoskola.dravec.org/9cc2dcb0952bc859471bd181b22e3dcb.txt. It is the flywheel key from #19, which flywheel's daily IndexNow workflow also uses.",
-      "#18's second key (ae860ea4…) and its per-deploy ping were dropped, so the host has one key and one submitter. api.indexnow.org was not used.",
+      "Key via #19: public/9cc2dcb0952bc859471bd181b22e3dcb.txt, served at https://autoskola.dravec.org/9cc2dcb0952bc859471bd181b22e3dcb.txt (HTTP 200, checked 2026-10-28). Submission is by flywheel's central daily workflow (04:23 UTC), first run after #19 deployed.",
+      "One manual submission was made before the orchestrator's 'central submission' note reached this session: 2026-10-28T03:50Z, 8 URLs (the full live sitemap), with the #19 key. Bing (https://www.bing.com/indexnow) answered HTTP 202 and Seznam (https://search.seznam.cz/indexnow) HTTP 200. No further submissions from this repo.",
+      "#18's own key (ae860ea4…) and its per-deploy ping were removed from #18 and never shipped. The deployed sitemap.xml lists exactly the 8 live URLs: home and 7 okruh pages, with no question pages.",
       "Structured data now live: FAQPage on the 7 okruh pages, WebApplication on home only. llms.txt describes only live features.",
       "Question pages (1136) and /zkouska-nanecisto/ are not live; they wait on the decision below (PR #18, draft, merge-ready)."
     ]
@@ -108,7 +108,7 @@
     "flywheel: fix the analytics guard in the kit to match https://<ref>.supabase.co, because supabase-js carries '*.supabase.co' and the bare string passes config-less builds.",
     "flywheel: the BOT_UA regex matches real phones of the Cubot brand ('CUBOT' hits bot\\b), and the bare 'preview' is broad. Anchor the bot match and drop 'preview' (bingpreview covers the crawler).",
     "flywheel: the contract test treats pending names as accepted; consider checking events minus pending once the start_topic migration is applied.",
-    "Log the IndexNow submission above in flywheel data/launch-log/autoskola-kviz.jsonl."
+    "Log the one manual IndexNow submission (2026-10-28T03:50Z, 8 URLs, Bing 202, Seznam 200) in flywheel data/launch-log/autoskola-kviz.jsonl."
   ],
   "screenshots": [
     "docs/review/2026-10-28/opt1-question-page-390.png",
