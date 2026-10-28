@@ -1,5 +1,4 @@
 import type { CategoryName, Choice } from '@/domain/types'
-import type { Rng } from '@/domain/rng'
 import { emptyJizdyState, logLesson as jizdyLogLesson, type JizdyState, type LessonRecord } from '@/domain/jizdy'
 import {
   createSession,
@@ -24,7 +23,7 @@ import {
 import { buildLesson } from '@/domain/lesson'
 import { getQuestion } from '@/domain/questions'
 import type { SavedExam } from '@/domain/storage'
-import { shuffle } from '@/domain/rng'
+import { shuffle, type Rng } from '@/domain/rng'
 
 // Bottom-tab destinations (persistent nav) + focused full-screen flows.
 export type TabView = 'home' | 'practice' | 'stats' | 'guide' | 'jizdy'

@@ -42,12 +42,12 @@ describe('progress persistence', () => {
   })
 
   it('survives a thrown setItem (e.g. private mode) silently', () => {
-    const orig = Storage.prototype.setItem
-    Storage.prototype.setItem = () => {
-      throw new Error('quota')
+    const setItem = vi.spyOn(localStorage, 'setItem').mockImplementation(() => { throw new Error('quota') })
+    try {
+      expect(() => saveProgress(emptyProgress())).not.toThrow()
+    } finally {
+      setItem.mockRestore()
     }
-    expect(() => saveProgress(emptyProgress())).not.toThrow()
-    Storage.prototype.setItem = orig
   })
 })
 
@@ -74,10 +74,12 @@ describe('jizdy persistence', () => {
   })
 
   it('survives a thrown setItem silently', () => {
-    const orig = Storage.prototype.setItem
-    Storage.prototype.setItem = () => { throw new Error('quota') }
-    expect(() => saveJizdy(emptyJizdyState())).not.toThrow()
-    Storage.prototype.setItem = orig
+    const setItem = vi.spyOn(localStorage, 'setItem').mockImplementation(() => { throw new Error('quota') })
+    try {
+      expect(() => saveJizdy(emptyJizdyState())).not.toThrow()
+    } finally {
+      setItem.mockRestore()
+    }
   })
 
   it('merges anonymous lessons into an existing per-user log, deduped by id', () => {
@@ -99,7 +101,7 @@ describe('claimAnonymousProgress', () => {
 
   it('keeps the anonymous key when the account copy could not be written (quota, private mode)', () => {
     saveProgress(recordAnswer(emptyProgress(), 3, true, 100))
-    const setItem = vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+    const setItem = vi.spyOn(localStorage, 'setItem').mockImplementation(() => {
       throw new DOMException('full', 'QuotaExceededError')
     })
     try {
