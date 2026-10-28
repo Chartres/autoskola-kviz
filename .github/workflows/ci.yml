@@ -34,6 +34,9 @@ jobs:
         env:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY }}
+      # The dist uploaded below must carry the Supabase config, or the live app sends no events.
+      - run: node scripts/check-analytics.mjs dist # flywheel:analytics-guard
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       - uses: actions/upload-pages-artifact@v3
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         with:

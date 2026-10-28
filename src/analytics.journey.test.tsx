@@ -60,4 +60,22 @@ describe('analytics on the theory journey', () => {
       window.history.replaceState(null, '', '/')
     }
   })
+
+  it('finishing a practice set with no errors sends one conversion (the activation event)', async () => {
+    const { byCategory } = await import('@/domain/questions')
+    render(<App />)
+    act(() => {
+      fireEvent.click(screen.getByRole('button', { name: /Zdravotnická příprava/ }))
+    })
+    const bank = byCategory('Zdravotnická příprava')
+    const letters = ['a', 'b', 'c']
+    for (let i = 0; i < bank.length; i++) {
+      const q = bank.find((x) => x.q === screen.getByRole('heading', { level: 2 }).textContent)!
+      fireEvent.click(document.querySelectorAll<HTMLButtonElement>('button[data-state="idle"]')[letters.indexOf(q.correct)])
+      fireEvent.click(screen.getByRole('button', { name: /Další|Dokončit/ }))
+    }
+    expect(track).toHaveBeenCalledWith('session_finish', expect.objectContaining({ mode: 'practice' }))
+    expect(conversion).toHaveBeenCalledTimes(1)
+    expect(conversion).toHaveBeenCalledWith(expect.objectContaining({ mode: 'practice', total: bank.length }))
+  })
 })
