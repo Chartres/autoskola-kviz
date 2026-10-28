@@ -111,3 +111,18 @@ test('question page serves the answer and its legal source without JavaScript', 
   await expect(page.getByRole('heading', { level: 2, name: 'Chodec smí vstoupit na přechod pro chodce:' })).toBeVisible()
   await expect(page.getByText(/^01 \/ \d+$/)).toBeVisible()
 })
+
+// Structured data: a topic page describes its own FAQ; the app's WebApplication block stays on home.
+test('topic page carries FAQPage JSON-LD matching its visible FAQ, not the app block', async ({ request }) => {
+  const html = await (await request.get('/okruh/dopravni-znacky/')).text()
+  const blocks = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => JSON.parse(m[1]))
+  expect(blocks.map((b) => b['@type'])).toEqual(['FAQPage'])
+  expect(blocks[0].mainEntity[0]).toMatchObject({ '@type': 'Question', name: 'Kolik otázek na značky je u zkoušky?' })
+  expect(html).toContain('Kolik otázek na značky je u zkoušky?</dt>')
+})
+
+test('the IndexNow key file is served at the site root', async ({ request }) => {
+  const key = await request.get('/9cc2dcb0952bc859471bd181b22e3dcb.txt')
+  expect(key.ok()).toBe(true)
+  expect((await key.text()).trim()).toBe('9cc2dcb0952bc859471bd181b22e3dcb')
+})

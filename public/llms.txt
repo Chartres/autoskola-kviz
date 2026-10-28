@@ -3,8 +3,8 @@
 > Bezplatný trenažér testů autoškoly pro Českou republiku: všech 1136 oficiálních zkušebních
 > otázek Ministerstva dopravy (eTesty), procvičování podle okruhů, krátká denní dávka,
 > opakování chyb a zkušební test ve formátu skutečné zkoušky (25 otázek, 30 minut). Každá odpověď
-> je vysvětlená a odkazuje na přesné ustanovení zákona č. 361/2000 Sb. nebo vyhlášky č. 294/2015 Sb.
-> (citace doslovně, s paragrafem nebo číslem značky). Animované dopravní situace jako u zkoušky.
+> je vysvětlená; 972 z 1136 odkazují na přesné ustanovení zákona (hlavně č. 361/2000 Sb. a vyhlášky č. 294/2015 Sb.).
+> Citace jsou doslovné, s paragrafem nebo číslem značky. Animované dopravní situace jako u zkoušky.
 > Bez registrace, bez reklam, bez cookies; funguje offline (PWA) i na mobilu. Česky.
 
 ## What it is
@@ -18,7 +18,7 @@
   Sb., příloha č. 3, značka B 28"), linked to the consolidated text on zakonyprolidi.cz. 972 of the
   1136 explanations cite law; the rest (safe-driving technique, first aid) say why without a
   paragraph, because none states it. Quotes are checked against the stored law texts in CI.
-- The 202 animated "dopravní situace" questions play their official clip.
+- The 202 animated questions (mostly "dopravní situace") play their official clip.
 - Learning design: free topic choice, mastery per okruh instead of grades, immediate
   self-correcting feedback; a wrong answer comes back at the end of the set until it is put right;
   missed questions resurface via spaced repetition. No streak guilt, no paywall, no lives.
