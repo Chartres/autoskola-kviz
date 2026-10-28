@@ -105,7 +105,7 @@ test('topic page carries FAQPage JSON-LD matching its visible FAQ, not the app b
 })
 
 test('the IndexNow key file is served at the site root', async ({ request }) => {
-  const key = await request.get('/ae860ea4fbdae2b80e581f3d7f52b94f.txt')
+  const key = await request.get('/9cc2dcb0952bc859471bd181b22e3dcb.txt')
   expect(key.ok()).toBe(true)
-  expect((await key.text()).trim()).toBe('ae860ea4fbdae2b80e581f3d7f52b94f')
+  expect((await key.text()).trim()).toBe('9cc2dcb0952bc859471bd181b22e3dcb')
 })
