@@ -1,7 +1,7 @@
 # Autoškola kvíz — signature
 The part of Autoškola kvíz that could only have come from Pavol. Nothing in "Signature moves" is built before Pavol has picked it.
 
-The three live moves below shipped in #17 on 27 Oct 2026, before that rule existed. They stay live until Pavol reviews them (keep, change or revert).
+The three live moves below shipped in #17 on 27 Oct 2026, before that rule existed. Pavol reviewed them on 30 Oct 2026 and kept all three.
 
 ## Lineage
 | Source | Year | changes: |
@@ -24,9 +24,11 @@ The three live moves below shipped in #17 on 27 Oct 2026, before that rule exist
 ## Signature moves
 | Move | What the user sees | From | Metric (event in kpi_event_map) | Status |
 |---|---|---|---|---|
-| **Ze zákona** | After answering in practice: one or two plain sentences on why, then the quoted sentence of law with "§ 54 odst. 3 zákona č. 361/2000 Sb." linking to the text. Never in the exam. | Erasmus, *ad fontes* | `key_action {action:'source_opened'}` per explained answer; target ≥ 15 % of answered questions | live (#17, 27 Oct, before rule 10) — awaiting Pavol's review |
-| **Obraz a jméno** | Under a sign picture: the sign's number and official name from the annex of vyhláška 294/2015 (144 plates; per #17, 27 ambiguous sign pictures get none) | Komenský, *Orbis Pictus* | no event yet; share of sign questions right on second sight (progress stats) | live (#17, 27 Oct, before rule 10) — awaiting Pavol's review |
-| **Kontrola chyby** | Missed questions return at the end of the set, labelled "Oprava chyb", until right; results keep the first-attempt score and say how many errors were put right | Montessori; Roediger & Karpicke | `key_action {action:'errors_corrected', count}`; share of sets with misses that reach results ≥ 80 % | live (#17, 27 Oct, before rule 10) — awaiting Pavol's review |
+| **Ze zákona** | After answering in practice: one or two plain sentences on why, then the quoted sentence of law with "§ 54 odst. 3 zákona č. 361/2000 Sb." linking to the text. Never in the exam. | Erasmus, *ad fontes* | `key_action {action:'source_opened'}` per explained answer; target ≥ 15 % of answered questions | approved 2026-10-30 (keep) · live since #17 |
+| **Obraz a jméno** | Under a sign picture: the sign's number and official name from the annex of vyhláška 294/2015 (144 plates; per #17, 27 ambiguous sign pictures get none) | Komenský, *Orbis Pictus* | no event yet; share of sign questions right on second sight (progress stats) | approved 2026-10-30 (keep) · live since #17 |
+| **Kontrola chyby** | Missed questions return at the end of the set, labelled "Oprava chyb", until right; results keep the first-attempt score and say how many errors were put right | Montessori; Roediger & Karpicke | `key_action {action:'errors_corrected', count}`; share of sets with misses that reach results ≥ 80 % | approved 2026-10-30 (keep) · live since #17 |
+| **Sady po 20** | An okruh is practised in sets of 20; after each set a results screen gives the score, what was missed, the okruh's answered-question bar, and "Dalších 20" or "Zpět". Questions not yet answered come first. | Bloom (mastery in short units); Montessori (a work you can finish) | `conversion` and `session_finish {set, sets}` per finished set; activation = share of new visitors with a conversion | approved 2026-10-30 (option A) · live with #23 |
+| **Stránka otázky** | `/otazka/<id>-<slug>/`: one official question, its answer, why, and the quoted provision, in HTML without JS; with JS it opens a set of 20 starting at that question. `/zkouska-nanecisto/` gives the exam format. | the annotated statute; *ad fontes* | page views of `/otazka/` landings; `start_practice {from:'question-page'}` | approved 2026-10-30 (option 1) · live with #18 |
 | **Připravenost** | Expected exam points per okruh against the 43 needed, from mastered questions | Bloom | `exam_finish {passed}`; pass rate of people who saw ≥ 43 expected | proposed |
 
 Status: proposed → approved (dated) → live → or changed / reverted.
@@ -39,7 +41,7 @@ Not built. Screenshots of each option come with the build branch once Pavol has 
 - **Recommendation: B.** It answers the question learners actually ask ("am I ready, and where am I short?") in the exam's own unit, points. The current per-okruh percentage treats 35 first-aid questions worth 1 point the same as 154 situations worth 4 points each.
 
 ### Proposal: question pages (from #18)
-Should each official question get its own public page? Decision 2026-10-28 on the review page; screenshots in `docs/review/2026-10-28/`. #18 is merge-ready and kept as a draft.
+**Decided 2026-10-30: Option 1, with the guide page. Shipped in #18.** Kept below as the record of what was shown. Screenshots in `docs/review/2026-10-28/`.
 - **Option 1, a page per question, as on Zbrojní** (837 such pages live on zbrojnikviz.dravec.org). `/otazka/<id>-<slug>/` shows the question, its picture with the sign plate, the official answer marked, why, and the quoted provision with a link. The page is real HTML without JavaScript, with QAPage JSON-LD. Okruh pages list their questions, and each page links to the previous and next. With JavaScript, the page opens practice of its okruh on that question. Shots: `opt1-question-page-*.png`, `opt1-question-page-sign-*.png`, `opt1-question-page-with-js-*.png`, `opt1-topic-page-list-*.png`. Cost: about 16 MB more per deploy (1136 pages of about 14 KB), and 1136 URLs to keep right; the explanation tests already guard the content.
 - **Option 2, okruh pages with every question inline.** The same content, all on the 7 okruh pages. Shots: `opt2-topic-inline-mock-*.png` (a mock). Cost: a 600 KB page for Dopravní značky (222 questions), long scrolling on a phone, and no URL that answers exactly one question.
 - **Option 3, neither.** The okruh pages stay as they are. Shots: `opt3-topic-page-live-*.png`. Cost: nothing to build. The AIO baseline stays at 0 of 14 queries.
@@ -57,5 +59,14 @@ Constitution articles that bind it: II, VI, VIII.
 | Date | Options shown | Pavol chose | Note |
 |---|---|---|---|
 | 2026-10-27 | — | — | Ze zákona, Obraz a jméno, Kontrola chyby shipped in #17 before rule 10; review pending |
-| 2026-10-28 | Question pages: 1 per question / okruh inline / neither | pending | #18 merge-ready as a draft; recommendation Option 1 |
-| 2026-10-28 | Připravenost: A Home line / B per-okruh bars / C after mock exam | pending | recommendation B |
+| 2026-10-28 | Question pages: 1 per question / okruh inline / neither | see 2026-10-30 | #18 merge-ready as a draft; recommendation Option 1 |
+| 2026-10-28 | Připravenost: A Home line / B per-okruh bars / C after mock exam | pending | recommendation B; still open on the decision page, not built |
+| 2026-10-30 | Question pages: 1 per question / okruh inline / neither | **1** — "a page per question, as Zbrojní built them (answer + quoted provision, no JS needed, linked from okruh pages)" | Shipped in #18 after code-review (high). Two changes from Zbrojní, per his "Dont just blindly copy the pattern though": FAQPage instead of QAPage (QAPage is for user-answered forums), and the guide page no longer starts a timer on load. |
+| 2026-10-30 | Mock-exam guide /zkouska-nanecisto/: with the question pages / alone / drop | **with the question pages** — "ship with the question pages" | Shipped in #18. With JS it opens the Procvičovat tab, whose first button is the timed test. |
+| 2026-10-30 | Ze zákona: keep / change / revert | **keep** | — |
+| 2026-10-30 | Obraz a jméno: keep / change / revert | **keep** | — |
+| 2026-10-30 | Kontrola chyby: keep / change / revert | **keep** | — |
+| 2026-10-30 | Activation: A sets of 20 with results / B daily set first / C no change | **A** — "okruh practice in sets of 20 with a results screen after each" | Shipped in #23. Default taken: questions never answered come first in the queue, so "next 20" moves through the okruh; it applies to any practice selection, not only one okruh. |
+| 2026-10-30 | Explanations: automatically after answering / on tap | **automatically** — "automatically" | Confirmed as the current behaviour: "Proč" opens with the answer in practice (`QuestionCard.tsx`, `answered && reveal`), never in the exam. No change. |
+| 2026-10-30 | Listings (autotrip.cz, "best autoškola app" round-ups): Pavol sends / skip | **Pavol sends** — "Prep this for me." | Five drafts in `docs/outreach/2026-10-30.md`. Nothing sent. |
+| 2026-10-30 | A move approved for one product may be reused by another | **yes** — "Dont just blindly copy the pattern though." | Zbrojní's readiness card is not adopted here; still open. |
