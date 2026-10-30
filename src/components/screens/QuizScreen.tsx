@@ -9,6 +9,7 @@ import { ProgressBar } from '@/components/ui/ProgressBar'
 import { todayStr } from '@/lib/date'
 import { loadExplanations, type Explanations } from '@/domain/explanations'
 import { track, conversion } from '@/analytics'
+import { setPosition } from '@/app/store'
 
 const MODE_LABEL: Record<string, string> = {
   lesson: 'Denní dávka',
@@ -53,6 +54,8 @@ export function QuizScreen() {
   if (!session || !mode) return null
   const question = currentQuestion(session)
   const isExam = mode === 'exam'
+  // Where this set sits in the okruh; hidden in the correction round, which has its own count.
+  const pos = state.practiceSet && !state.correction ? setPosition(state.practiceSet) : null
 
   if (!question) {
     return (
@@ -91,6 +94,11 @@ export function QuizScreen() {
 
       <div className="mb-6">
         <ProgressBar value={Object.keys(session.chosen).length} max={session.questions.length} />
+        {pos && (
+          <p className="mt-2 font-mono text-xs text-sand-500 tabular-nums">
+            {state.practiceSet!.label} · sada {pos.set} z {pos.sets} · otázky {pos.from}–{pos.to} z {state.practiceSet!.queue.length}
+          </p>
+        )}
       </div>
 
       <QuestionCard

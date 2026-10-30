@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { reducer, initialState, resumeExam, type AppState } from './store'
+import { reducer, initialState, resumeExam, SET_SIZE, setPosition, type AppState } from './store'
 import { EXAM } from '@/domain/exam'
 import { getQuestion } from '@/domain/questions'
 import { makeRng } from '@/domain/rng'
@@ -19,7 +19,7 @@ describe('app store', () => {
     s = reducer(s, { type: 'startPractice', rng: makeRng(1) })
     expect(s.view).toBe('quiz')
     expect(s.mode).toBe('practice')
-    expect(s.session?.questions.length).toBe(byCategory('Související předpisy').length)
+    expect(s.session?.questions.length).toBe(Math.min(SET_SIZE, byCategory('Související předpisy').length))
     expect(s.session?.questions.every((q) => q.cat === 'Související předpisy')).toBe(true)
   })
 
@@ -252,6 +252,75 @@ describe('practice that opens on a given question (question pages)', () => {
     const id = byCategory('Zdravotnická příprava')[20].id
     s = reducer(s, { type: 'startPractice', rng: makeRng(1), firstId: id })
     expect(currentQuestion(s.session!)!.id).toBe(id)
-    expect(s.session!.questions.length).toBe(byCategory('Zdravotnická příprava').length)
+    expect(s.session!.questions.length).toBe(SET_SIZE)
+    expect(s.practiceSet!.queue.length).toBe(byCategory('Zdravotnická příprava').length)
+  })
+})
+
+describe('okruh practice in sets of 20', () => {
+  const CAT = 'Dopravní značky' as const
+  const total = byCategory(CAT).length
+  const begin = (progress = emptyProgress()) => {
+    const s = reducer(start({ progress }), { type: 'setCategories', categories: new Set([CAT]) })
+    return reducer(s, { type: 'startPractice', rng: makeRng(5) })
+  }
+  const playRight = (s: AppState) => {
+    while (s.view === 'quiz') {
+      const cur = currentQuestion(s.session!)!
+      s = reducer(s, { type: 'answer', choice: cur.correct, now: 1 })
+      s = reducer(s, { type: 'next' })
+    }
+    return s
+  }
+
+  it('serves 20 questions, then the results screen', () => {
+    let s = begin()
+    expect(s.session!.questions).toHaveLength(SET_SIZE)
+    expect(s.practiceSet).toMatchObject({ offset: 0, label: CAT })
+    expect(setPosition(s.practiceSet!)).toEqual({ set: 1, sets: Math.ceil(total / SET_SIZE), from: 1, to: 20 })
+    s = playRight(s)
+    expect(s.view).toBe('results')
+    expect(s.practiceSet!.offset).toBe(0)
+  })
+
+  it('"next 20" continues the same okruh with questions not yet in a set', () => {
+    let s = playRight(begin())
+    const firstIds = new Set(s.session!.questions.map((q) => q.id))
+    s = reducer(s, { type: 'nextSet' })
+    expect(s.view).toBe('quiz')
+    expect(s.mode).toBe('practice')
+    expect(s.session!.questions).toHaveLength(SET_SIZE)
+    expect(s.session!.questions.some((q) => firstIds.has(q.id))).toBe(false)
+    expect(s.session!.questions.every((q) => q.cat === CAT)).toBe(true)
+    expect(setPosition(s.practiceSet!)).toMatchObject({ set: 2, from: 21, to: 40 })
+  })
+
+  it('the last set is the remainder, and there is no set after it', () => {
+    let s = begin()
+    s = { ...s, practiceSet: { ...s.practiceSet!, offset: Math.floor((total - 1) / SET_SIZE) * SET_SIZE - SET_SIZE } }
+    s = reducer(playRight(s), { type: 'nextSet' })
+    expect(s.session!.questions).toHaveLength(total - s.practiceSet!.offset)
+    const after = reducer(playRight(s), { type: 'nextSet' })
+    expect(after.view).toBe('results')
+  })
+
+  it('questions never answered come before ones already answered', () => {
+    let p = emptyProgress()
+    const seen = byCategory(CAT).slice(0, total - 10)
+    for (const q of seen) p = recordAnswer(p, q.id, true, 1)
+    const s = begin(p)
+    const unseen = new Set(byCategory(CAT).slice(total - 10).map((q) => q.id))
+    expect(s.session!.questions.slice(0, 10).every((q) => unseen.has(q.id))).toBe(true)
+  })
+
+  it('a search-filtered selection is labelled as such, not as an okruh', () => {
+    const s = reducer(reducer(start(), { type: 'setSearch', search: 'chodec' }), { type: 'startPractice', rng: makeRng(1) })
+    expect(s.practiceSet!.label).toBe('Výběr podle hledání')
+  })
+
+  it('other modes and leaving drop the set', () => {
+    const s = begin()
+    expect(reducer(s, { type: 'goMenu' }).practiceSet).toBeNull()
+    expect(reducer(s, { type: 'startReview' }).practiceSet).toBeNull()
   })
 })

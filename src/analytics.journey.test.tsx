@@ -61,21 +61,42 @@ describe('analytics on the theory journey', () => {
     }
   })
 
-  it('finishing a practice set with no errors sends one conversion (the activation event)', async () => {
+  it('an okruh runs in sets of 20: each finished set has a results screen and sends one conversion', async () => {
     const { byCategory } = await import('@/domain/questions')
     render(<App />)
     act(() => {
       fireEvent.click(screen.getByRole('button', { name: /Zdravotnická příprava/ }))
     })
     const bank = byCategory('Zdravotnická příprava')
+    const sets = Math.ceil(bank.length / 20)
     const letters = ['a', 'b', 'c']
-    for (let i = 0; i < bank.length; i++) {
-      const q = bank.find((x) => x.q === screen.getByRole('heading', { level: 2 }).textContent)!
-      fireEvent.click(document.querySelectorAll<HTMLButtonElement>('button[data-state="idle"]')[letters.indexOf(q.correct)])
-      fireEvent.click(screen.getByRole('button', { name: /Další|Dokončit/ }))
+    const playSet = (n: number) => {
+      for (let i = 0; i < n; i++) {
+        const q = bank.find((x) => x.q === screen.getByRole('heading', { level: 2 }).textContent)!
+        fireEvent.click(document.querySelectorAll<HTMLButtonElement>('button[data-state="idle"]')[letters.indexOf(q.correct)])
+        fireEvent.click(screen.getByRole('button', { name: /Další|Dokončit/ }))
+      }
     }
-    expect(track).toHaveBeenCalledWith('session_finish', expect.objectContaining({ mode: 'practice' }))
+    expect(screen.getByText(`Zdravotnická příprava · sada 1 z ${sets} · otázky 1–20 z ${bank.length}`)).toBeTruthy()
+    playSet(20)
+    expect(screen.getByText(new RegExp(`sada 1 z ${sets} hotová`))).toBeTruthy()
+    expect(screen.getByRole('progressbar', { name: 'Zdravotnická příprava: zodpovězené otázky' }).getAttribute('aria-valuenow')).toBe('20')
+    expect(track).toHaveBeenCalledWith('session_finish', expect.objectContaining({ mode: 'practice', total: 20, set: 1, sets }))
     expect(conversion).toHaveBeenCalledTimes(1)
-    expect(conversion).toHaveBeenCalledWith(expect.objectContaining({ mode: 'practice', total: bank.length }))
+    expect(conversion).toHaveBeenCalledWith(expect.objectContaining({ mode: 'practice', total: 20 }))
+
+    const rest = bank.length - 20
+    act(() => {
+      fireEvent.click(screen.getByRole('button', { name: `Dalších ${Math.min(20, rest)}` }))
+    })
+    playSet(Math.min(20, rest))
+    expect(screen.getByText(new RegExp(`sada 2 z ${sets} hotová`))).toBeTruthy()
+    expect(conversion).toHaveBeenCalledTimes(2)
+    // "Dalších" only while questions are left after this set.
+    expect(!!screen.queryByRole('button', { name: /^Dalších/ })).toBe(sets > 2)
+    act(() => {
+      fireEvent.click(screen.getByRole('button', { name: 'Zpět' }))
+    })
+    expect(track).toHaveBeenCalledWith('page_view', { view: 'home' })
   })
 })

@@ -58,7 +58,7 @@ describe('control of error', () => {
     const bank = byCategory('Zdravotnická příprava')
     const letters = ['a', 'b', 'c']
     const missed = screen.getByRole('heading', { level: 2 }).textContent
-    for (let i = 0; i < bank.length; i++) {
+    for (let i = 0; i < 20; i++) { // one set of 20
       // Miss the first question, get the rest right.
       const q = bank.find((x) => x.q === screen.getByRole('heading', { level: 2 }).textContent)!
       const opts = [...document.querySelectorAll<HTMLButtonElement>('button[data-state="idle"]')]
