@@ -1,0 +1,104 @@
+{
+  "product": "autoskola-kviz",
+  "date": "2026-10-30",
+  "url": "https://autoskola.dravec.org",
+  "headline": "Pavol's picks are built and live: 1136 question pages and the mock-exam guide (#18), okruh practice in sets of 20 with a results screen after each (#24), the three signature moves kept, explanations confirmed automatic, and five outreach drafts waiting for him to send.",
+  "shipped": [
+    {
+      "title": "A page per question with its legal source, mock-exam guide page",
+      "pr": 18,
+      "merged": "2026-10-30",
+      "live_checked": "2026-10-30 ~10:50Z: /otazka/13-chodec-smi-vstoupit-na-prechod-pro-chodce/ HTTP 200 with the answer, \"§ 54 odst. 3 zákona č. 361/2000 Sb.\" and FAQPage JSON-LD in the HTML; /sitemap.xml has 1145 <loc>; /zkouska-nanecisto/ HTTP 200; with JS the guide hands off to the app (URL /, Procvičovat tab). 390 px shots without JS."
+    },
+    {
+      "title": "Okruh practice in sets of 20 with a results screen after each; decision log 2026-10-30; outreach drafts",
+      "pr": 24,
+      "merged": "2026-10-30",
+      "live_checked": "2026-10-30 ~11:00Z on the deployed bundle at 390 px: a question page with JS opens \"01 / 20\" with \"Pravidla provozu · sada 1 z 23 · otázky 1–20 z 444\"; a live Dopravní značky set ends in \"sada 1 z 12 hotová\", 14/20, \"Opraveno 6 chyb\", the okruh bar 20/222, buttons Dalších 20 and Zpět, no horizontal overflow. The automated browser is dropped by the analytics client, so this run sent no events."
+    }
+  ],
+  "outreach": {
+    "file": "docs/outreach/2026-10-30.md",
+    "note": "Drafts only, nothing sent. No independent 2024–2026 Czech ranking of autoškola apps was found; the two current pages are eTesty guides, the three list articles are 2020–2022 but still rank. autotrip.cz publishes only an advertising address.",
+    "targets": [
+      { "name": "Autotrip.cz – Autoškola testy 2026 zdarma: zkušební otázky online (Marek Hervíř, 26. 8. 2026)", "url": "https://autotrip.cz/autoskola-testy-online/", "contact": "info@hetramedia.cz — the only address on https://autotrip.cz/kontakt/, stated for advertising; the draft asks for it to be passed to the author" },
+      { "name": "Czechtheworld.com – Autoškola testy online – oficiální od ministerstva dopravy ČR (Matěj Halouska, upd. 28. 6. 2026)", "url": "https://czechtheworld.com/autoskola-testy-online/", "contact": "info@czechtheworld.com (https://czechtheworld.com/kontaktni-udaje/)" },
+      { "name": "Svět Androida – 3 aplikace, díky kterým budou testy v autoškole hračkou (Vašek Švec, upd. 2022)", "url": "https://www.svetandroida.cz/autoskola-testy-otazky-aplikace/", "contact": "media@svetandroida.cz (https://www.svetandroida.cz/o-nas/)" },
+      { "name": "Odolný telefon – Nejlepší aplikace autoškola pro android telefony (2022)", "url": "https://www.odolnytelefon.cz/nejlepsi-aplikace-autoskola-pro-android-telefony/", "contact": "contact form at https://www.odolnytelefon.cz/kontakt/" },
+      { "name": "Letem světem Applem – Jak se připravit na testy v autoškole: 5 aplikací (Pavel Jelič, 2020)", "url": "https://www.letemsvetemapplem.eu/2020/02/23/jak-se-pripravit-na-testy-v-autoskole/", "contact": "jiri.filip@letemsvetemapplem.eu, editor-in-chief (https://www.letemsvetemapplem.eu/kontakt/)" }
+    ]
+  },
+  "decisions": [
+    {
+      "question": "Question pages: structured data type",
+      "options": ["QAPage, as on Zbrojní", "FAQPage with one Question"],
+      "default_taken": "FAQPage with one Question",
+      "why": "Code-review: Google keeps QAPage for forums where users post answers; here the site gives the one official answer. Pavol: 'Dont just blindly copy the pattern though.' One-line change back if wanted."
+    },
+    {
+      "question": "Mock-exam guide /zkouska-nanecisto/ with JavaScript: start the timed exam on load (as proposed) or not?",
+      "options": ["start the 30-minute exam on load", "open the Procvičovat tab, whose first button is Zkušební test"],
+      "default_taken": "open the Procvičovat tab and leave the URL",
+      "why": "Starting a timer for someone who only came to read about the format made failed exams and false start_exam counts, and an expired exam could restart on a later reload."
+    },
+    {
+      "question": "Picture-only answers (23 questions) on question pages",
+      "options": ["leave the empty answer text", "name the answer 'možnost C (obrázek)'"],
+      "default_taken": "name it by letter",
+      "why": "Titles, descriptions and JSON-LD had no answer at all."
+    },
+    {
+      "question": "Sets of 20: in what order does the okruh queue run?",
+      "options": ["plain shuffle", "questions never answered first, then the rest (each shuffled)"],
+      "default_taken": "never answered first",
+      "why": "So 'Dalších 20' moves through the okruh across visits instead of repeating what was seen."
+    },
+    {
+      "question": "Sets of 20: only single-okruh practice, or every practice selection?",
+      "options": ["single okruh only", "every practice selection (several okruhy, all, search)"],
+      "default_taken": "every practice selection; a search selection is labelled 'Výběr podle hledání'",
+      "why": "The same problem (no finishable set) exists for 'all okruhy' (1136). Review, bookmarks, the daily set and the exam are unchanged."
+    },
+    {
+      "question": "Set results: keep 'Opakovat chyby' next to 'Dalších 20' and 'Zpět'?",
+      "options": ["only 'Dalších 20' and 'Zpět'", "all three"],
+      "default_taken": "only 'Dalších 20' and 'Zpět'",
+      "why": "Pavol's words were 'next 20' or 'back'; the set's errors were already put right in the correction round. 'Moje chyby' stays on the Procvičovat tab. Review flagged it; kept."
+    },
+    {
+      "question": "Conversion per set or per okruh?",
+      "options": ["one conversion per finished set of 20", "one per okruh"],
+      "default_taken": "per set, as specified",
+      "why": "Activation counts distinct visitors with a conversion, so it is not inflated; raw conversion event counts now rise with sets played."
+    },
+    {
+      "question": "Outreach: autotrip.cz has no editorial address",
+      "options": ["email the advertising address asking to forward", "comment under the article (public)", "skip"],
+      "default_taken": "draft to the advertising address, asking to forward to the author",
+      "why": "It is the only private channel published. Pavol decides whether to send."
+    },
+    {
+      "question": "Outreach: claim the law is quoted under every answer?",
+      "options": ["'pod každou odpovědí'", "'každá odpověď je vysvětlená a u většiny je doslovná citace'"],
+      "default_taken": "'u většiny'",
+      "why": "972 of 1136 explanations cite a provision; the rest honestly cite nothing. Same correction made in llms.txt and the guide FAQ."
+    }
+  ],
+  "proposals": [
+    "Remember the set position across reloads (queue ids + offset in localStorage), so 'Dalších 20' survives closing the tab. Small; changes nothing about what a set is.",
+    "Results after a set of sign questions: show the sign picture next to each missed question (the list shows the text only, which is thin for 'Tato svislá dopravní značka označuje:').",
+    "Move the LAWS table into data/laws.json shared by src/domain/explanations.ts and scripts/question-pages.mjs (today a parity test guards the copy)."
+  ],
+  "next": [
+    "Pavol: send or drop the five drafts in docs/outreach/2026-10-30.md (nothing has been sent).",
+    "Pavol: Připravenost (readiness, A/B/C) and adopting Zbrojní's readiness card are still open.",
+    "Watch activation: first session_finish/conversion events from sets of 20 should appear within days; compare the share of new visitors with a conversion against the 0 of the last 14 days.",
+    "The daily flywheel IndexNow run picks up the 1137 new URLs (1136 questions + the guide); nothing was submitted from here.",
+    "flywheel: portfolio record stage/links for the question pages."
+  ],
+  "screenshots": [
+    "docs/review/2026-10-30/question-page-390.png",
+    "docs/review/2026-10-30/exam-guide-390.png",
+    "docs/review/2026-10-30/set-results-390.png"
+  ]
+}
