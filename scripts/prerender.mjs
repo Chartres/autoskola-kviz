@@ -1,5 +1,7 @@
-// Post-build prerender: one static, crawlable HTML page per okruh
-// (/okruh/<slug>/) + sitemap.xml. No SSR framework — the pages are copies of
+// Post-build prerender: one static, crawlable HTML page per okruh (/okruh/<slug>/), per official
+// question (/otazka/<id>-<slug>/, needs data/questions.json + data/explanations.json; a question
+// without an explanation fails the build), the mock-exam guide (/zkouska-nanecisto/) and sitemap.xml.
+// No SSR framework — the pages are copies of
 // the built index.html with topic-specific <title>/meta/#root content; the app
 // bundle boots on top and starts that topic's practice (see AppContext).
 // Usage: node scripts/prerender.mjs   (after `vite build`)

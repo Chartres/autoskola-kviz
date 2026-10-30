@@ -31,8 +31,7 @@ export function questionFromPath(pathname: string): number | undefined {
   return getQuestion(id) ? id : undefined
 }
 
-/** The mock-exam guide page (/zkouska-nanecisto/) — with JavaScript it opens the timed exam. */
-export const EXAM_PATH = '/zkouska-nanecisto/'
+/** The mock-exam guide page (/zkouska-nanecisto/) — with JavaScript it opens the Procvičovat tab. */
 export function isExamPath(pathname: string): boolean {
   return /^\/zkouska-nanecisto\/?$/.test(pathname)
 }

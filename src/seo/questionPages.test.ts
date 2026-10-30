@@ -44,10 +44,20 @@ describe('question page content', () => {
 
   it('describes itself as a question with an accepted answer that cites the legislation', () => {
     const ld = JSON.parse(page.jsonld)
-    expect(ld['@type']).toBe('QAPage')
-    expect(ld.mainEntity.name).toBe(q.q)
-    expect(ld.mainEntity.acceptedAnswer.text).toContain(q[q.correct]!)
-    expect(ld.mainEntity.acceptedAnswer.citation[0]['@type']).toBe('Legislation')
+    expect(ld['@type']).toBe('FAQPage')
+    expect(ld.mainEntity[0].name).toBe(q.q)
+    expect(ld.mainEntity[0].acceptedAnswer.text).toContain(q[q.correct]!)
+    expect(ld.mainEntity[0].acceptedAnswer.citation[0]['@type']).toBe('Legislation')
+  })
+
+  it('names the answer of a picture-only question by its letter', () => {
+    const pic = ALL_QUESTIONS.find((x) => x.id === 448)!
+    const p = questionPage(pic, ex[448], { origin: ORIGIN, topicSlug: 't' })
+    const letter = pic.correct.toUpperCase()
+    expect(p.title).toContain(`: možnost ${letter} (obrázek) |`)
+    expect(p.title).not.toContain('.:')
+    expect(p.description).toMatch(new RegExp(`^Správná odpověď: možnost ${letter} \\(obrázek\\)\\. `))
+    expect(JSON.parse(p.jsonld).mainEntity[0].acceptedAnswer.text).toMatch(/^možnost/)
   })
 
   it('titles are unique across the bank', () => {

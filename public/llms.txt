@@ -31,8 +31,9 @@
 - Mock exam in the real format (25 questions, 30 minutes, pass 43/50, points per okruh):
   https://autoskola.dravec.org/zkouska-nanecisto/
 - Topic pages are real URLs, e.g. https://autoskola.dravec.org/okruh/dopravni-znacky/
-- Every official question has its own page with the official answer, the explanation and the legal
-  source in plain HTML: https://autoskola.dravec.org/otazka/<id>-<slug>/, e.g.
+- Every official question has its own page with the official answer and the explanation in plain
+  HTML; 972 of the 1136 also quote the provision of law verbatim (where no paragraph says it, the
+  page cites nothing): https://autoskola.dravec.org/otazka/<id>-<slug>/, e.g.
   https://autoskola.dravec.org/otazka/13-chodec-smi-vstoupit-na-prechod-pro-chodce/
   (all 1136 are listed in the sitemap and linked from their okruh page).
 

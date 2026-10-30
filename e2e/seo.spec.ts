@@ -102,7 +102,7 @@ test('question page serves the answer and its legal source without JavaScript', 
   expect(html).toContain('<h1')
   expect(html).toContain('Správná odpověď')
   expect(html).toMatch(/§ \d+ odst\. \d+ zákona č\. 361\/2000 Sb\./)
-  expect(html).toContain('"@type":"QAPage"')
+  expect(html).toContain('"@type":"FAQPage"')
   expect(html).not.toContain('"WebApplication"') // the app's own JSON-LD stays on the home page
   const sitemap = await (await request.get('/sitemap.xml')).text()
   expect(sitemap).toContain('/otazka/13-chodec-smi-vstoupit-na-prechod-pro-chodce/')

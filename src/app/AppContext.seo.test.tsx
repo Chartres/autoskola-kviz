@@ -48,9 +48,11 @@ describe('question page', () => {
 })
 
 describe('mock-exam guide page', () => {
-  it('/zkouska-nanecisto/ opens the timed mock exam', () => {
+  it('/zkouska-nanecisto/ opens the Procvičovat tab without starting a timed exam, and leaves the URL', () => {
     window.history.replaceState(null, '', '/zkouska-nanecisto/')
     render(<AppProvider><View /></AppProvider>)
-    expect(screen.getByRole('button').textContent).toBe('exam')
+    expect(screen.getByRole('button').textContent).toBe('practice')
+    expect(window.location.pathname).toBe('/')
+    expect(localStorage.getItem('autoskola-kviz:exam:v1')).toBeNull()
   })
 })

@@ -58,10 +58,12 @@ const OPTIONS = ['a', 'b', 'c']
 export function questionPage(q, e, ctx) {
   const { origin, topicSlug } = ctx
   const url = `${origin}${questionPath(q)}`
-  const correct = q[q.correct] ?? `možnost ${q.correct.toUpperCase()}`
-  const stem = q.q.replace(/[:\s]+$/, '')
+  // 23 questions answer with pictures only: their option text is '' and the answer is named by letter.
+  const correct = q[q.correct] || `možnost ${q.correct.toUpperCase()} (obrázek)`
+  const answer = /[.!?…]$/.test(correct) ? correct : `${correct}.`
+  const stem = q.q.replace(/[:.\s]+$/, '')
   const title = `${clip(`${stem}: ${correct}`, 95)} | Autoškola kvíz (${q.id})`
-  const description = clip(`Správná odpověď: ${correct} ${e.why}`, 160)
+  const description = clip(`Správná odpověď: ${answer} ${e.why}`, 160)
   const media = (name) => `${origin}/media/${name}`
 
   const options = OPTIONS.filter((o) => q[o] !== null && q[o] !== undefined)
@@ -121,16 +123,16 @@ export function questionPage(q, e, ctx) {
   }))
   const jsonld = JSON.stringify({
     '@context': 'https://schema.org',
-    '@type': 'QAPage',
+    // FAQPage, not QAPage: Google keeps QAPage for forums where users post answers; here the
+    // site gives the one official answer.
+    '@type': 'FAQPage',
     url,
     inLanguage: 'cs',
-    mainEntity: {
+    mainEntity: [{
       '@type': 'Question',
       name: q.q,
-      text: q.q,
-      answerCount: 1,
-      acceptedAnswer: { '@type': 'Answer', text: `${correct} ${e.why}`, url, ...(citation.length ? { citation } : {}) },
-    },
+      acceptedAnswer: { '@type': 'Answer', text: `${answer} ${e.why}`, url, ...(citation.length ? { citation } : {}) },
+    }],
   })
 
   return { url, title, description, body, jsonld }
@@ -158,13 +160,13 @@ export function examGuidePage(meta, { origin }) {
     ['Jsou otázky v testu nanečisto stejné jako u zkoušky?',
       'Ano. Jde o oficiální zkušební otázky Ministerstva dopravy (eTesty) v doslovném znění, včetně animovaných dopravních situací, a test se skládá podle stejného klíče jako u zkoušky.'],
     ['Proč je správná odpověď správná?',
-      'U každé otázky je vysvětlení a citace ustanovení zákona č. 361/2000 Sb. nebo vyhlášky č. 294/2015 Sb., ze kterého odpověď vychází.'],
+      'U každé otázky je vysvětlení. U většiny z nich je i doslovná citace ustanovení zákona č. 361/2000 Sb. nebo vyhlášky č. 294/2015 Sb., ze kterého odpověď vychází; kde žádný paragraf odpověď neříká (zásady bezpečné jízdy, první pomoc), vysvětlení to přizná a nic necituje.'],
   ]
   const body = `
       <article class="mx-auto w-full max-w-xl px-4 py-6">
         <h1 class="font-display text-2xl font-bold tracking-tight text-sand-50">Zkušební test jak u zkoušky — zdarma</h1>
         <p class="mt-3 text-sand-300">Test nanečisto ve stejném formátu jako teoretická zkouška v autoškole (skupina B): ${e.totalQuestions} otázek, ${e.timeLimitMinutes} minut, ${e.maxPoints} bodů, k úspěchu ${e.passThreshold}. Oficiální otázky Ministerstva dopravy, bez reklam a bez registrace.</p>
-        <p class="mt-3"><a class="text-terra-400 hover:underline" href="${url}">Spustit zkušební test</a></p>
+        <p class="mt-3"><a class="text-terra-400 hover:underline" href="${origin}/">Spustit zkušební test v aplikaci</a></p>
         <h2 class="mt-6 font-display text-lg font-semibold text-sand-50">Složení testu</h2>
         <table class="mt-2 w-full text-sm text-sand-300">
           <thead><tr><th class="py-1 pr-3 text-left">Okruh</th><th class="py-1 pr-3 text-right">Otázek</th><th class="py-1 pr-3 text-right">Bodů za otázku</th><th class="py-1 text-right">Celkem</th></tr></thead>
