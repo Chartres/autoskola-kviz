@@ -9,13 +9,15 @@ import {
 import { reducer, initialState, resumeExam, type AppState, type Action } from './store'
 import { loadProgress, saveProgress, loadJizdy, saveJizdy, loadExam, saveExam, claimAnonymousProgress, progressKey, JIZDY_KEY } from '@/domain/storage'
 import { emptyJizdyState } from '@/domain/jizdy'
-import { topicFromPath } from '@/lib/topics'
+import { topicFromPath, questionFromPath, isExamPath } from '@/lib/topics'
+import { getQuestion } from '@/domain/questions'
 import { freshRng } from '@/domain/rng'
 import { useAuth, registerBeforeSignOut } from '@/auth/AuthContext'
 import { supabaseStore } from '@/auth/supabaseStore'
 import { syncProgress, canonical } from '@/auth/sync'
 import { mergeProgress, type ProgressData } from '@/domain/progress'
 import { track } from '@/analytics'
+import type { CategoryName } from '@/domain/types'
 
 interface AppContextValue {
   state: AppState
@@ -103,24 +105,32 @@ export function AppProvider({ children }: { children: ReactNode }) {
     return () => window.removeEventListener('storage', onStorage)
   }, [])
 
-  // SEO topic page (/okruh/<slug>/): start that okruh's practice directly.
+  // SEO landing pages: /okruh/<slug>/ starts that okruh's practice; /otazka/<id>-…/ starts the
+  // practice of the question's okruh on that question; /zkouska-nanecisto/ opens the Procvičovat
+  // tab, whose first button starts the timed exam (loading the guide must not start a timer).
   useEffect(() => {
-    const topic = topicFromPath(window.location.pathname)
+    const landing = landingFrom(window.location.pathname)
+    const leaveUrl = () => window.history.replaceState(null, '', '/' + window.location.search)
+    if (landing?.kind === 'exam') {
+      if (state.view === 'home') dispatch({ type: 'navigate', view: 'practice' })
+      leaveUrl()
+    }
     // A resumed exam wins over the topic page the exam was started from.
-    if (topic && state.view === 'home') {
-      dispatch({ type: 'setCategories', categories: new Set([topic.category]) })
-      dispatch({ type: 'startPractice', rng: freshRng() })
-      track('start_practice', { topic: topic.category, from: 'seo-page' })
-    } else if (topic) {
+    else if (landing && state.view === 'home') {
+      dispatch({ type: 'setCategories', categories: new Set([landing.category]) })
+      dispatch({ type: 'startPractice', rng: freshRng(), firstId: landing.firstId })
+      track('start_practice', { topic: landing.category, from: landing.from })
+    } else if (landing) {
       // Leave the topic URL so the next reload after the exam doesn't start that practice.
-      window.history.replaceState(null, '', '/' + window.location.search)
+      leaveUrl()
     }
     track('app_open')
   }, [])
 
   // One page_view per screen (tabs and full-screen flows alike); views are not URLs here.
-  // A topic landing page opens straight into practice: its first 'home' never shows.
-  const landingRef = useRef(!!topicFromPath(window.location.pathname))
+  // A landing page opens straight into practice or a tab: its first 'home' never shows.
+  const landingRef = useRef<boolean | null>(null)
+  if (landingRef.current === null) landingRef.current = !!landingFrom(window.location.pathname)
   useEffect(() => {
     const skip = landingRef.current && state.view === 'home'
     landingRef.current = false
@@ -131,8 +141,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
   // auth redirect returns to the app instead of restarting that practice.
   const seoPracticeRef = useRef(false)
   useEffect(() => {
-    if (state.view === 'quiz') {
-      seoPracticeRef.current = !!topicFromPath(window.location.pathname)
+    if (state.view === 'quiz' || state.view === 'exam') {
+      seoPracticeRef.current = !!landingFrom(window.location.pathname)
     } else if (seoPracticeRef.current) {
       seoPracticeRef.current = false
       window.history.replaceState(null, '', '/' + window.location.search)
@@ -284,6 +294,19 @@ export function AppProvider({ children }: { children: ReactNode }) {
       {children}
     </AppContext.Provider>
   )
+}
+
+/** What a prerendered landing page opens: an okruh's practice (from a topic or question page) or the exam guide. */
+type Landing =
+  | { kind: 'practice'; category: CategoryName; firstId: number | undefined; from: 'seo-page' | 'question-page' }
+  | { kind: 'exam' }
+function landingFrom(pathname: string): Landing | undefined {
+  if (isExamPath(pathname)) return { kind: 'exam' }
+  const topic = topicFromPath(pathname)
+  if (topic) return { kind: 'practice', category: topic.category, firstId: undefined, from: 'seo-page' }
+  const id = questionFromPath(pathname)
+  const q = id === undefined ? undefined : getQuestion(id)
+  return q ? { kind: 'practice', category: q.cat, firstId: q.id, from: 'question-page' } : undefined
 }
 
 export function useApp(): AppContextValue {

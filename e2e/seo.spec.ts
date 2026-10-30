@@ -95,6 +95,23 @@ test('head carries the share-card block and WebApplication JSON-LD', async ({ pa
   expect(ld.isAccessibleForFree).toBe(true)
 })
 
+// AI-search visibility: each official question is a prerendered page with the answer and its
+// legal source in the HTML itself (crawlers mostly don't run JS); with JS it opens practice there.
+test('question page serves the answer and its legal source without JavaScript', async ({ page, request }) => {
+  const html = await (await request.get('/otazka/13-chodec-smi-vstoupit-na-prechod-pro-chodce/')).text()
+  expect(html).toContain('<h1')
+  expect(html).toContain('Správná odpověď')
+  expect(html).toMatch(/§ \d+ odst\. \d+ zákona č\. 361\/2000 Sb\./)
+  expect(html).toContain('"@type":"FAQPage"')
+  expect(html).not.toContain('"WebApplication"') // the app's own JSON-LD stays on the home page
+  const sitemap = await (await request.get('/sitemap.xml')).text()
+  expect(sitemap).toContain('/otazka/13-chodec-smi-vstoupit-na-prechod-pro-chodce/')
+
+  await page.goto('/otazka/13-chodec-smi-vstoupit-na-prechod-pro-chodce/')
+  await expect(page.getByRole('heading', { level: 2, name: 'Chodec smí vstoupit na přechod pro chodce:' })).toBeVisible()
+  await expect(page.getByText(/^01 \/ \d+$/)).toBeVisible()
+})
+
 // Structured data: a topic page describes its own FAQ; the app's WebApplication block stays on home.
 test('topic page carries FAQPage JSON-LD matching its visible FAQ, not the app block', async ({ request }) => {
   const html = await (await request.get('/okruh/dopravni-znacky/')).text()

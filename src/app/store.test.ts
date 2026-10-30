@@ -245,3 +245,13 @@ describe('control of error: timing', () => {
     expect(s.progress.streak.lastDate).toBe('2026-06-06')
   })
 })
+
+describe('practice that opens on a given question (question pages)', () => {
+  it('puts that question first, then the rest of its okruh', () => {
+    let s = reducer(start(), { type: 'setCategories', categories: new Set(['Zdravotnická příprava']) })
+    const id = byCategory('Zdravotnická příprava')[20].id
+    s = reducer(s, { type: 'startPractice', rng: makeRng(1), firstId: id })
+    expect(currentQuestion(s.session!)!.id).toBe(id)
+    expect(s.session!.questions.length).toBe(byCategory('Zdravotnická příprava').length)
+  })
+})

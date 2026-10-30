@@ -110,7 +110,7 @@ export type Action =
   | { type: 'setCategories'; categories: Set<CategoryName> }
   | { type: 'setSearch'; search: string }
   | { type: 'startLesson'; rng: Rng }
-  | { type: 'startPractice'; rng: Rng }
+  | { type: 'startPractice'; rng: Rng; /** open on this question (question pages) */ firstId?: number }
   | { type: 'startReview' }
   | { type: 'startBookmarks'; rng: Rng }
   | { type: 'startExam'; rng: Rng; now: number }
@@ -153,10 +153,12 @@ export function reducer(state: AppState, action: Action): AppState {
       )
 
     case 'startPractice': {
-      const qs = buildPractice(
+      let qs = buildPractice(
         { categories: state.selectedCategories, search: state.search },
         action.rng,
       )
+      const first = qs.find((q) => q.id === action.firstId)
+      if (first) qs = [first, ...qs.filter((q) => q !== first)]
       return begin(state, 'practice', createSession(qs))
     }
 

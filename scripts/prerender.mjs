@@ -1,22 +1,25 @@
-// Post-build prerender: one static, crawlable HTML page per okruh
-// (/okruh/<slug>/) + sitemap.xml. No SSR framework — the pages are copies of
+// Post-build prerender: one static, crawlable HTML page per okruh (/okruh/<slug>/), per official
+// question (/otazka/<id>-<slug>/, needs data/questions.json + data/explanations.json; a question
+// without an explanation fails the build), the mock-exam guide (/zkouska-nanecisto/) and sitemap.xml.
+// No SSR framework — the pages are copies of
 // the built index.html with topic-specific <title>/meta/#root content; the app
 // bundle boots on top and starts that topic's practice (see AppContext).
 // Usage: node scripts/prerender.mjs   (after `vite build`)
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
+import { questionPage, questionPath, examGuidePage, esc } from './question-pages.mjs'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
 const ORIGIN = 'https://autoskola.dravec.org'
 const topics = JSON.parse(readFileSync(`${root}data/topics.json`, 'utf8'))
 const meta = JSON.parse(readFileSync(`${root}data/meta.json`, 'utf8'))
 const template = readFileSync(`${root}dist/index.html`, 'utf8')
+const questions = JSON.parse(readFileSync(`${root}data/questions.json`, 'utf8'))
+const explanations = JSON.parse(readFileSync(`${root}data/explanations.json`, 'utf8'))
+const inTopic = (category) => questions.filter((q) => q.cat === category)
 
 const countFor = (category) =>
   meta.categories.find((c) => c.name === category).count
-
-const esc = (s) =>
-  s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;')
 
 /** The built index.html with this page's title, description, canonical, share card and body. */
 function page({ url, title, description, body, jsonld }) {
@@ -54,6 +57,14 @@ for (const t of topics) {
           )
           .join('')}
         </dl>
+        <h2 class="mt-6 font-display text-lg font-semibold text-sand-50">Všechny otázky s vysvětlením</h2>
+        <ol class="mt-2 text-sand-300">${inTopic(t.category)
+          .map(
+            (q) => `
+          <li><a class="text-terra-400 hover:underline" href="${ORIGIN}${questionPath(q)}">${esc(q.q)}</a></li>`,
+          )
+          .join('')}
+        </ol>
         <h2 class="mt-6 font-display text-lg font-semibold text-sand-50">Další okruhy</h2>
         <ul class="mt-2 text-sand-300">
           <li><a class="text-terra-400 hover:underline" href="${ORIGIN}/">Všechny testy autoškoly zdarma</a></li>${others
@@ -79,12 +90,28 @@ for (const t of topics) {
   writeFileSync(`${root}dist/okruh/${t.slug}/index.html`, html)
 }
 
+// One page per official question, linked from its okruh page and to its neighbours.
+for (const t of topics) {
+  const qs = inTopic(t.category)
+  qs.forEach((q, i) => {
+    const p = questionPage(q, explanations[q.id], { origin: ORIGIN, topicSlug: t.slug, prev: qs[i - 1], next: qs[i + 1] })
+    const dir = `${root}dist${questionPath(q)}`
+    mkdirSync(dir, { recursive: true })
+    writeFileSync(`${dir}index.html`, page(p))
+  })
+}
+
+// The mock-exam guide; with JavaScript the page opens the timed exam.
+const guide = examGuidePage(meta, { origin: ORIGIN })
+mkdirSync(`${root}dist/zkouska-nanecisto`, { recursive: true })
+writeFileSync(`${root}dist/zkouska-nanecisto/index.html`, page(guide))
+
 const today = new Date().toISOString().slice(0, 10)
-const urls = ['/', ...topics.map((t) => `/okruh/${t.slug}/`)]
+const urls = ['/', '/zkouska-nanecisto/', ...topics.map((t) => `/okruh/${t.slug}/`), ...questions.map(questionPath)]
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls.map((u) => `  <url><loc>${ORIGIN}${u}</loc><lastmod>${today}</lastmod></url>`).join('\n')}
 </urlset>
 `
 writeFileSync(`${root}dist/sitemap.xml`, sitemap)
-console.log(`prerendered ${topics.length} topic pages + sitemap.xml`)
+console.log(`prerendered ${topics.length} topic pages, ${questions.length} question pages + sitemap.xml`)

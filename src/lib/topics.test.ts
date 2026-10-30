@@ -25,3 +25,27 @@ describe('topics', () => {
     expect(topicFromPath('/okruh/%/extra')).toBeUndefined()
   })
 })
+
+describe('questionFromPath (/otazka/<id>-<slug>/)', () => {
+  it('reads the question id from a question page URL', async () => {
+    const { questionFromPath } = await import('./topics')
+    expect(questionFromPath('/otazka/13-chodec-vstupujici-na-prechod/')).toBe(13)
+    expect(questionFromPath('/otazka/13/')).toBe(13)
+  })
+
+  it('ignores other paths and unknown ids', async () => {
+    const { questionFromPath } = await import('./topics')
+    expect(questionFromPath('/')).toBeUndefined()
+    expect(questionFromPath('/okruh/dopravni-znacky/')).toBeUndefined()
+    expect(questionFromPath('/otazka/999999-x/')).toBeUndefined()
+  })
+})
+
+describe('isExamPath (/zkouska-nanecisto/)', () => {
+  it('matches the mock-exam guide page only', async () => {
+    const { isExamPath } = await import('./topics')
+    expect(isExamPath('/zkouska-nanecisto/')).toBe(true)
+    expect(isExamPath('/zkouska-nanecisto')).toBe(true)
+    expect(isExamPath('/')).toBe(false)
+  })
+})

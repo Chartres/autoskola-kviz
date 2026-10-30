@@ -27,10 +27,15 @@
 
 ## How to use it
 - https://autoskola.dravec.org/ — pick an okruh, run the daily set, or start a mock exam;
-  progress is kept on the device. The mock exam has the real format (25 questions, 30 minutes,
-  pass 43/50, points per okruh).
+  progress is kept on the device.
+- Mock exam in the real format (25 questions, 30 minutes, pass 43/50, points per okruh):
+  https://autoskola.dravec.org/zkouska-nanecisto/
 - Topic pages are real URLs, e.g. https://autoskola.dravec.org/okruh/dopravni-znacky/
-  (all of them are listed in the sitemap).
+- Every official question has its own page with the official answer and the explanation in plain
+  HTML; 972 of the 1136 also quote the provision of law verbatim (where no paragraph says it, the
+  page cites nothing): https://autoskola.dravec.org/otazka/<id>-<slug>/, e.g.
+  https://autoskola.dravec.org/otazka/13-chodec-smi-vstoupit-na-prechod-pro-chodce/
+  (all 1136 are listed in the sitemap and linked from their okruh page).
 
 ## Data & provenance
 - Questions and answer keys are the official public bank; the app shows the official wording
