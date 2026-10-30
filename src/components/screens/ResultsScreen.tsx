@@ -5,6 +5,8 @@ import { score, wrongAnswers } from '@/domain/session'
 import { getQuestion } from '@/domain/questions'
 import { imageUrl } from '@/lib/assets'
 import { freshRng } from '@/domain/rng'
+import { statFor } from '@/domain/progress'
+import { setPosition, SET_SIZE } from '@/app/store'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import { FeedbackCard } from '@/components/FeedbackCard'
 
@@ -22,11 +24,16 @@ export function ResultsScreen() {
   const wrong = session ? wrongAnswers(session) : []
   // Left blank when the exam timer ran out.
   const unanswered = session ? session.questions.filter((q) => session.chosen[q.id] === undefined) : []
+  // Okruh practice in sets of 20: where this set sits in the okruh, and what is left.
+  const ps = mode === 'practice' ? state.practiceSet : null
+  const pos = ps ? setPosition(ps) : null
+  const remaining = ps ? ps.queue.length - (ps.offset + SET_SIZE) : 0
+  const answeredInOkruh = ps ? ps.queue.filter((q) => statFor(state.progress, q.id).seen > 0).length : 0
 
   useEffect(() => {
     if (!session) return
     const name = isExam ? 'exam_finish' : isLesson ? 'lesson_complete' : 'session_finish'
-    track(name, { mode, score: correct, total, passed: examResult?.passed })
+    track(name, { mode, score: correct, total, passed: examResult?.passed, ...(pos && { set: pos.set, sets: pos.sets }) })
     // The canonical activation KPI: a finished set of any kind (lesson, practice, review,
     // bookmarks, exam). Weekly distinct visitors with a conversion = the North Star.
     // A set with corrections was counted when its first round ended (QuizScreen).
@@ -41,6 +48,12 @@ export function ResultsScreen() {
   return (
     <div className="mx-auto w-full max-w-2xl px-4 py-10">
       <div className="rounded-card border border-sand-700 bg-sand-800/40 p-6 text-center">
+        {ps && pos && (
+          <p className="mb-3 font-mono text-xs uppercase tracking-[0.15em] text-sand-400">
+            {ps.label} · sada {pos.set} z {pos.sets} hotová
+            {remaining <= 0 && ' · poslední sada okruhu'}
+          </p>
+        )}
         {isLesson && (
           <div className="mb-4">
             <div className="font-display text-2xl font-bold tracking-tight text-moss-400">
@@ -87,6 +100,12 @@ export function ResultsScreen() {
           </p>
         )}
       </div>
+
+      {ps && (
+        <section className="mt-6">
+          <ProgressBar label={`${ps.label}: zodpovězené otázky`} value={answeredInOkruh} max={ps.queue.length} tone="moss" />
+        </section>
+      )}
 
       {isExam && examResult && (
         <section className="mt-6 space-y-3">
@@ -151,7 +170,16 @@ export function ResultsScreen() {
             Další lekce
           </button>
         )}
-        {wrong.length > 0 && (
+        {ps && remaining > 0 && (
+          <button
+            type="button"
+            onClick={() => dispatch({ type: 'nextSet' })}
+            className="glow-terra rounded-card bg-terra-500 px-5 py-2.5 font-display font-semibold text-sand-950 hover:bg-terra-400"
+          >
+            Dalších {Math.min(SET_SIZE, remaining)}
+          </button>
+        )}
+        {!ps && wrong.length > 0 && (
           <button
             type="button"
             onClick={() => dispatch({ type: 'startReview' })}
@@ -165,7 +193,7 @@ export function ResultsScreen() {
           onClick={() => dispatch({ type: 'goMenu' })}
           className="rounded-card border border-sand-600 px-5 py-2.5 font-semibold text-sand-200 hover:border-sand-400"
         >
-          Zpět na rozcestník
+          {ps ? 'Zpět' : 'Zpět na rozcestník'}
         </button>
       </div>
 

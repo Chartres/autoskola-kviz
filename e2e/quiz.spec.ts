@@ -11,16 +11,16 @@ test('topic journey: home tile → answer → feedback → summary', async ({ pa
 
   // Free topic choice: the "Dopravní značky" tile (222 sign questions).
   await page.getByRole('button', { name: /Dopravní značky/ }).click()
-  await expect(page.getByText('01 / 222')).toBeVisible()
+  await expect(page.getByText('01 / 20')).toBeVisible()
   await page.screenshot({ path: 'e2e/shots/question-image.png', fullPage: true })
 
   await page.locator('button[data-state="idle"]').first().click()
   await expect(page.locator('button[data-state="correct"]')).toBeVisible()
   await page.screenshot({ path: 'e2e/shots/feedback.png', fullPage: true })
 
-  // real bank: 222 sign questions → the journey continues to the next one
+  // a set of 20 from the 222 sign questions → the journey continues to the next one
   await page.getByRole('button', { name: /Další/ }).click()
-  await expect(page.getByText('02 / 222')).toBeVisible()
+  await expect(page.getByText('02 / 20')).toBeVisible()
   await page.screenshot({ path: 'e2e/shots/summary.png', fullPage: true })
 })
 

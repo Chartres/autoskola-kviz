@@ -9,6 +9,7 @@ import { ProgressBar } from '@/components/ui/ProgressBar'
 import { todayStr } from '@/lib/date'
 import { loadExplanations, type Explanations } from '@/domain/explanations'
 import { track, conversion } from '@/analytics'
+import { setPosition } from '@/app/store'
 
 const MODE_LABEL: Record<string, string> = {
   lesson: 'Denní dávka',
@@ -91,6 +92,14 @@ export function QuizScreen() {
 
       <div className="mb-6">
         <ProgressBar value={Object.keys(session.chosen).length} max={session.questions.length} />
+        {state.practiceSet && (() => {
+          const p = setPosition(state.practiceSet)
+          return (
+            <p className="mt-2 font-mono text-xs text-sand-500 tabular-nums">
+              {state.practiceSet.label} · sada {p.set} z {p.sets} · otázky {p.from}–{p.to} z {state.practiceSet.queue.length}
+            </p>
+          )
+        })()}
       </div>
 
       <QuestionCard

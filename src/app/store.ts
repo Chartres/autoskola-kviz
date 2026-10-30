@@ -15,6 +15,7 @@ import {
 } from '@/domain/selection'
 import { buildExam, evaluateExam, EXAM, type ExamResult } from '@/domain/exam'
 import {
+  statFor,
   emptyProgress,
   recordAnswer,
   recordLessonComplete,
@@ -22,6 +23,7 @@ import {
   type ProgressData,
 } from '@/domain/progress'
 import { buildLesson } from '@/domain/lesson'
+import type { Question } from '@/domain/types'
 import { getQuestion } from '@/domain/questions'
 import type { SavedExam } from '@/domain/storage'
 import { shuffle } from '@/domain/rng'
@@ -45,10 +47,33 @@ export interface AppState {
   /** Second attempts at a set's missed questions (control of error). `first` keeps the
    * first-attempt round, which the results score; `missed` is how many it had. */
   correction: { first: SessionState; missed: number; today?: string } | null
+  /** Okruh practice runs in sets of SET_SIZE: the whole ordered queue and where this set starts. */
+  practiceSet: PracticeSet | null
   progress: ProgressData
   selectedCategories: Set<CategoryName>
   search: string
   jizdyState: JizdyState
+}
+
+/** Questions per practice set: finishable in one sitting, with a results screen after each. */
+export const SET_SIZE = 20
+
+export interface PracticeSet {
+  queue: Question[]
+  /** Index in `queue` of this set's first question. */
+  offset: number
+  /** What is being practised: one okruh's name, or a description of the selection. */
+  label: string
+}
+
+/** 1-based number of the current set and how many sets the queue has. */
+export function setPosition(ps: PracticeSet): { set: number; sets: number; from: number; to: number } {
+  return {
+    set: Math.floor(ps.offset / SET_SIZE) + 1,
+    sets: Math.ceil(ps.queue.length / SET_SIZE),
+    from: ps.offset + 1,
+    to: Math.min(ps.offset + SET_SIZE, ps.queue.length),
+  }
 }
 
 export function initialState(): AppState {
@@ -59,6 +84,7 @@ export function initialState(): AppState {
     examResult: null,
     examEndsAt: null,
     correction: null,
+    practiceSet: null,
     progress: emptyProgress(),
     selectedCategories: new Set(),
     search: '',
@@ -111,6 +137,7 @@ export type Action =
   | { type: 'setSearch'; search: string }
   | { type: 'startLesson'; rng: Rng }
   | { type: 'startPractice'; rng: Rng; /** open on this question (question pages) */ firstId?: number }
+  | { type: 'nextSet' }
   | { type: 'startReview' }
   | { type: 'startBookmarks'; rng: Rng }
   | { type: 'startExam'; rng: Rng; now: number }
@@ -130,6 +157,7 @@ function begin(state: AppState, mode: Mode, questions: SessionState): AppState {
     session: questions,
     examResult: null,
     correction: null,
+    practiceSet: null,
     view: mode === 'exam' ? 'exam' : 'quiz',
   }
 }
@@ -157,9 +185,27 @@ export function reducer(state: AppState, action: Action): AppState {
         { categories: state.selectedCategories, search: state.search },
         action.rng,
       )
+      // Questions not yet answered come first, so "next 20" moves through the okruh.
+      const unseen = (q: Question) => statFor(state.progress, q.id).seen === 0
+      qs = [...qs.filter(unseen), ...qs.filter((q) => !unseen(q))]
       const first = qs.find((q) => q.id === action.firstId)
       if (first) qs = [first, ...qs.filter((q) => q !== first)]
-      return begin(state, 'practice', createSession(qs))
+      const cats = [...state.selectedCategories]
+      const label = cats.length === 1 ? cats[0] : cats.length ? 'Vybrané okruhy' : 'Všechny okruhy'
+      return {
+        ...begin(state, 'practice', createSession(qs.slice(0, SET_SIZE))),
+        practiceSet: { queue: qs, offset: 0, label },
+      }
+    }
+
+    case 'nextSet': {
+      const ps = state.practiceSet
+      if (!ps || ps.offset + SET_SIZE >= ps.queue.length) return state
+      const offset = ps.offset + SET_SIZE
+      return {
+        ...begin(state, 'practice', createSession(ps.queue.slice(offset, offset + SET_SIZE))),
+        practiceSet: { ...ps, offset },
+      }
     }
 
     case 'startReview':
@@ -247,6 +293,7 @@ export function reducer(state: AppState, action: Action): AppState {
       return {
         ...state,
         correction: null,
+        practiceSet: null,
         view: 'home',
         mode: null,
         session: null,
