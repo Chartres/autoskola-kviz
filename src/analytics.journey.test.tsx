@@ -92,7 +92,8 @@ describe('analytics on the theory journey', () => {
     playSet(Math.min(20, rest))
     expect(screen.getByText(new RegExp(`sada 2 z ${sets} hotová`))).toBeTruthy()
     expect(conversion).toHaveBeenCalledTimes(2)
-    if (sets === 2) expect(screen.queryByRole('button', { name: /^Dalších/ })).toBeNull()
+    // "Dalších" only while questions are left after this set.
+    expect(!!screen.queryByRole('button', { name: /^Dalších/ })).toBe(sets > 2)
     act(() => {
       fireEvent.click(screen.getByRole('button', { name: 'Zpět' }))
     })

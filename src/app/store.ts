@@ -66,6 +66,11 @@ export interface PracticeSet {
   label: string
 }
 
+/** Questions left in the queue after the current set (0: this is the last set). */
+export function remainingAfter(ps: PracticeSet): number {
+  return Math.max(0, ps.queue.length - (ps.offset + SET_SIZE))
+}
+
 /** 1-based number of the current set and how many sets the queue has. */
 export function setPosition(ps: PracticeSet): { set: number; sets: number; from: number; to: number } {
   return {
@@ -186,12 +191,16 @@ export function reducer(state: AppState, action: Action): AppState {
         action.rng,
       )
       // Questions not yet answered come first, so "next 20" moves through the okruh.
-      const unseen = (q: Question) => statFor(state.progress, q.id).seen === 0
-      qs = [...qs.filter(unseen), ...qs.filter((q) => !unseen(q))]
+      const unseen: Question[] = []
+      const seen: Question[] = []
+      for (const q of qs) (statFor(state.progress, q.id).seen === 0 ? unseen : seen).push(q)
+      qs = [...unseen, ...seen]
       const first = qs.find((q) => q.id === action.firstId)
       if (first) qs = [first, ...qs.filter((q) => q !== first)]
       const cats = [...state.selectedCategories]
-      const label = cats.length === 1 ? cats[0] : cats.length ? 'Vybrané okruhy' : 'Všechny okruhy'
+      const label = state.search.trim()
+        ? 'Výběr podle hledání'
+        : cats.length === 1 ? cats[0] : cats.length ? 'Vybrané okruhy' : 'Všechny okruhy'
       return {
         ...begin(state, 'practice', createSession(qs.slice(0, SET_SIZE))),
         practiceSet: { queue: qs, offset: 0, label },
@@ -200,7 +209,7 @@ export function reducer(state: AppState, action: Action): AppState {
 
     case 'nextSet': {
       const ps = state.practiceSet
-      if (!ps || ps.offset + SET_SIZE >= ps.queue.length) return state
+      if (!ps || !remainingAfter(ps)) return state
       const offset = ps.offset + SET_SIZE
       return {
         ...begin(state, 'practice', createSession(ps.queue.slice(offset, offset + SET_SIZE))),

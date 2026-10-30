@@ -15,10 +15,14 @@ test('okruh practice in sets of 20, with a results screen after each', async ({ 
   // Round one: the first option every time (some wrong); then answer from what the app revealed,
   // so the correction round (Kontrola chyby) ends and the results show.
   const known = new Map<string, number>()
+  const done = page.getByText(/hotová/)
+  const question = page.getByRole('group', { name: 'Možnosti odpovědi' })
   for (let step = 0; step < 80; step++) {
-    if (await page.getByText(/hotová/).isVisible()) break
+    // Wait for either the next question or the results, so a slow render can't skip a step.
+    await expect(question.or(done).first()).toBeVisible()
+    if (await done.isVisible()) break
     await answerFromMemory(page, known)
-    await page.getByRole('button', { name: /Další|Dokončit|Opravit chyby/ }).click()
+    await page.getByRole('button', { name: /^(Další(?!ch)|Dokončit|Opravit chyby)/ }).click()
   }
   await expect(page.getByText(/sada 1 z \d+ hotová/)).toBeVisible()
   await expect(page.getByText(/ \/ 20$/)).toBeVisible()

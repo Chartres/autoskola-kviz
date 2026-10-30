@@ -313,6 +313,11 @@ describe('okruh practice in sets of 20', () => {
     expect(s.session!.questions.slice(0, 10).every((q) => unseen.has(q.id))).toBe(true)
   })
 
+  it('a search-filtered selection is labelled as such, not as an okruh', () => {
+    const s = reducer(reducer(start(), { type: 'setSearch', search: 'chodec' }), { type: 'startPractice', rng: makeRng(1) })
+    expect(s.practiceSet!.label).toBe('Výběr podle hledání')
+  })
+
   it('other modes and leaving drop the set', () => {
     const s = begin()
     expect(reducer(s, { type: 'goMenu' }).practiceSet).toBeNull()

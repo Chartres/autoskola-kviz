@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useApp } from '@/app/AppContext'
 import { track, conversion } from '@/analytics'
 import { score, wrongAnswers } from '@/domain/session'
@@ -6,7 +6,7 @@ import { getQuestion } from '@/domain/questions'
 import { imageUrl } from '@/lib/assets'
 import { freshRng } from '@/domain/rng'
 import { statFor } from '@/domain/progress'
-import { setPosition, SET_SIZE } from '@/app/store'
+import { setPosition, remainingAfter, SET_SIZE } from '@/app/store'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import { FeedbackCard } from '@/components/FeedbackCard'
 
@@ -27,8 +27,11 @@ export function ResultsScreen() {
   // Okruh practice in sets of 20: where this set sits in the okruh, and what is left.
   const ps = mode === 'practice' ? state.practiceSet : null
   const pos = ps ? setPosition(ps) : null
-  const remaining = ps ? ps.queue.length - (ps.offset + SET_SIZE) : 0
-  const answeredInOkruh = ps ? ps.queue.filter((q) => statFor(state.progress, q.id).seen > 0).length : 0
+  const remaining = ps ? remainingAfter(ps) : 0
+  const answeredInOkruh = useMemo(
+    () => (ps ? ps.queue.filter((q) => statFor(state.progress, q.id).seen > 0).length : 0),
+    [ps, state.progress],
+  )
 
   useEffect(() => {
     if (!session) return
@@ -51,7 +54,7 @@ export function ResultsScreen() {
         {ps && pos && (
           <p className="mb-3 font-mono text-xs uppercase tracking-[0.15em] text-sand-400">
             {ps.label} · sada {pos.set} z {pos.sets} hotová
-            {remaining <= 0 && ' · poslední sada okruhu'}
+            {remaining === 0 && ' · poslední sada'}
           </p>
         )}
         {isLesson && (
