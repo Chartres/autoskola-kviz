@@ -26,6 +26,7 @@ write committed screenshots to `e2e/shots/` for visual review (Standard: persona
 ## Run / verify a change in the real app
 `npm run dev` → http://localhost:5173. Primary journeys to eyeball:
 - **Theory**: home → okruh tile → answer → immediate feedback → summary. "Dopravní značky" has an image.
+- **Resume**: okruh tile → answer 8 → "← Konec" → reload → "Rozpracovaná sada" on Home → Pokračovat opens question 9 of the same set (`e2e/resume.journey.spec.ts`).
 - **Jízdy**: Jízdy tab → log-lesson form (date + duration + skill chips) → submit → "Jízda zaznamenána" + checklist updates → navigate away + back → state persists. Cross-promo CTA on HomeScreen when theory mastery ≥ 70%.
 
 ## Explanations from the law (ad fontes)

@@ -149,3 +149,27 @@ export function saveExam(exam: SavedExam | null): void {
     }
   }
 }
+
+// An okruh or daily set left unfinished (see src/app/round.ts). Per device, never synced.
+export const ROUND_KEY = 'autoskola-kviz:round:v1'
+
+export function loadRound<T>(): T | null {
+  try {
+    const raw = storage()?.getItem(ROUND_KEY)
+    const r = raw ? JSON.parse(raw) : null
+    return r && typeof r === 'object' && Array.isArray(r.ids) && Array.isArray(r.records) ? (r as T) : null
+  } catch {
+    return null
+  }
+}
+
+export function saveRound(round: unknown | null): void {
+  if (round) writeJson(ROUND_KEY, round)
+  else {
+    try {
+      storage()?.removeItem(ROUND_KEY)
+    } catch {
+      // storage unavailable: nothing was saved either
+    }
+  }
+}

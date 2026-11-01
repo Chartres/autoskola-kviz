@@ -9,6 +9,7 @@ import { AuthPanel } from '@/components/AuthPanel'
 import { todayStr } from '@/lib/date'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import type { CategoryName } from '@/domain/types'
+import { roundSummary } from '@/app/round'
 
 export function HomeScreen() {
   const { state, dispatch } = useApp()
@@ -54,6 +55,9 @@ export function HomeScreen() {
           <AuthPanel />
         </div>
       </header>
+
+      {/* A set left partway waits here: same questions, from the first unanswered one. */}
+      {state.pendingRound && <ResumeCard />}
 
       {/* Primary job: today's short set */}
       <button
@@ -193,5 +197,52 @@ function Mini({
         {label}
       </div>
     </div>
+  )
+}
+
+function ResumeCard() {
+  const { state, dispatch } = useApp()
+  const r = roundSummary(state.pendingRound!)
+  return (
+    <section
+      aria-labelledby="resume-title"
+      className="mb-3 rounded-card border border-sand-600 bg-sand-800/60 p-5"
+    >
+      <div className="font-mono text-xs uppercase tracking-[0.2em] text-sand-400">
+        Rozpracovaná sada
+      </div>
+      <h2 id="resume-title" className="mt-1 font-display text-xl font-bold tracking-tight text-sand-50">
+        {r.title}
+      </h2>
+      <p className="mt-1 text-sm text-sand-300 tabular-nums">
+        {r.correcting
+          ? `Oprava chyb · zodpovězeno ${r.answered} z ${r.total}`
+          : `Zodpovězeno ${r.answered} z ${r.total}`}
+      </p>
+      <div className="mt-3 flex flex-wrap gap-2">
+        <button
+          type="button"
+          onClick={() => {
+            track('key_action', { action: 'round_resumed', mode: state.pendingRound!.mode, answered: r.answered, total: r.total })
+            dispatch({ type: 'resumeRound' })
+          }}
+          className="min-h-11 rounded-card bg-terra-500 px-4 py-2 font-display text-sm font-semibold text-sand-950 hover:bg-terra-400"
+        >
+          Pokračovat →
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            const saved = state.pendingRound!
+            if (saved.mode === 'lesson') track('start_lesson', { from: 'resume-prompt' })
+            else track('start_practice', { topic: saved.practiceSet?.label, from: 'resume-prompt' })
+            dispatch({ type: 'newRound', rng: freshRng() })
+          }}
+          className="min-h-11 rounded-card border border-sand-600 px-4 py-2 text-sm font-semibold text-sand-200 hover:border-sand-400"
+        >
+          Nový trénink
+        </button>
+      </div>
+    </section>
   )
 }
