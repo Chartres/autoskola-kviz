@@ -7,7 +7,8 @@ import {
   type ReactNode,
 } from 'react'
 import { reducer, initialState, resumeExam, type AppState, type Action } from './store'
-import { loadProgress, saveProgress, loadJizdy, saveJizdy, loadExam, saveExam, claimAnonymousProgress, progressKey, JIZDY_KEY } from '@/domain/storage'
+import { snapshotRound, validRound, type SavedRound } from './round'
+import { loadProgress, saveProgress, loadJizdy, saveJizdy, loadExam, saveExam, loadRound, saveRound, ROUND_KEY, claimAnonymousProgress, progressKey, JIZDY_KEY } from '@/domain/storage'
 import { emptyJizdyState } from '@/domain/jizdy'
 import { topicFromPath, questionFromPath, isExamPath } from '@/lib/topics'
 import { getQuestion } from '@/domain/questions'
@@ -29,13 +30,11 @@ const AppContext = createContext<AppContextValue | null>(null)
 export function AppProvider({ children }: { children: ReactNode }) {
   // Load from storage in the lazy initializer so persist effects never see
   // emptyProgress() on first render (fixes mount-order overwrite).
-  const [state, dispatch] = useReducer(reducer, undefined, () =>
-    resumeExam(
-      { ...initialState(), progress: loadProgress(), jizdyState: loadJizdy() },
-      loadExam(),
-      Date.now(),
-    ),
-  )
+  const [state, dispatch] = useReducer(reducer, undefined, () => {
+    const base = { ...initialState(), progress: loadProgress(), jizdyState: loadJizdy() }
+    // A waiting set that no longer fits the bank, or damaged storage, is dropped here.
+    return resumeExam({ ...base, pendingRound: validRound(base, loadRound<SavedRound>()) }, loadExam(), Date.now())
+  })
   const { user } = useAuth()
 
   // Always-current progress snapshot for in-flight-answer recovery (M2).
@@ -90,6 +89,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
     const onStorage = (e: StorageEvent) => {
       if (e.key === progressKey(ownerRef.current)) {
         adopt(loadProgress(ownerRef.current))
+      } else if (e.key === ROUND_KEY) {
+        // Another tab left, finished or replaced a set: keep the waiting one in step.
+        dispatch({ type: 'setPendingRound', round: validRound(initialState(), loadRound<SavedRound>()) })
       } else if (e.key?.startsWith(JIZDY_KEY)) {
         const ours = jizdyRef.current
         const seen = new Set(ours.lessons.map((l) => l.id))
@@ -115,6 +117,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
       if (state.view === 'home') dispatch({ type: 'navigate', view: 'practice' })
       leaveUrl()
     }
+    // A set waiting (left partway, or a reload mid-set on this landing page) wins over the
+    // landing page: Home shows it with Pokračovat / Nový trénink.
+    else if (landing && state.view === 'home' && state.pendingRound) {
+      leaveUrl()
+    }
     // A resumed exam wins over the topic page the exam was started from.
     else if (landing && state.view === 'home') {
       dispatch({ type: 'setCategories', categories: new Set([landing.category]) })
@@ -130,7 +137,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   // One page_view per screen (tabs and full-screen flows alike); views are not URLs here.
   // A landing page opens straight into practice or a tab: its first 'home' never shows.
   const landingRef = useRef<boolean | null>(null)
-  if (landingRef.current === null) landingRef.current = !!landingFrom(window.location.pathname)
+  if (landingRef.current === null) landingRef.current = !!landingFrom(window.location.pathname) && !state.pendingRound
   useEffect(() => {
     const skip = landingRef.current && state.view === 'home'
     landingRef.current = false
@@ -163,6 +170,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
         : null,
     )
   }, [state.view, state.session, state.examEndsAt]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Keep the okruh or daily set in play saved, so leaving it, a reload or a dropped tab lets it
+  // wait on Home; drop it once it is finished or replaced.
+  useEffect(() => {
+    saveRound(snapshotRound(state) ?? state.pendingRound)
+  }, [state.view, state.session, state.correction, state.pendingRound]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Persist progress locally whenever it changes (offline-first source of truth), under the
   // key of the account it belongs to.

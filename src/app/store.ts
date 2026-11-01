@@ -27,6 +27,7 @@ import type { Question } from '@/domain/types'
 import { getQuestion } from '@/domain/questions'
 import type { SavedExam } from '@/domain/storage'
 import { shuffle } from '@/domain/rng'
+import { snapshotRound, restoreRound, type SavedRound } from './round'
 
 // Bottom-tab destinations (persistent nav) + focused full-screen flows.
 export type TabView = 'home' | 'practice' | 'stats' | 'guide' | 'jizdy'
@@ -46,13 +47,15 @@ export interface AppState {
   examEndsAt: number | null
   /** Second attempts at a set's missed questions (control of error). `first` keeps the
    * first-attempt round, which the results score; `missed` is how many it had. */
-  correction: { first: SessionState; missed: number; today?: string } | null
+  correction: { first: SessionState; missed: number; today?: string; /** conversion already sent (a resumed round) */ counted?: boolean } | null
   /** Okruh practice runs in sets of SET_SIZE: the whole ordered queue and where this set starts. */
   practiceSet: PracticeSet | null
   progress: ProgressData
   selectedCategories: Set<CategoryName>
   search: string
   jizdyState: JizdyState
+  /** An okruh or daily set left unfinished: it waits on Home with "Pokračovat" / "Nový trénink". */
+  pendingRound: SavedRound | null
 }
 
 /** Questions per practice set: finishable in one sitting, with a results screen after each. */
@@ -94,6 +97,7 @@ export function initialState(): AppState {
     selectedCategories: new Set(),
     search: '',
     jizdyState: emptyJizdyState(),
+    pendingRound: null,
   }
 }
 
@@ -151,6 +155,12 @@ export type Action =
   | { type: 'finishExam' }
   | { type: 'toggleBookmark'; id: number }
   | { type: 'goMenu' }
+  /** Pokračovat: the waiting set, same questions, at its first unanswered one. */
+  | { type: 'resumeRound' }
+  /** Nový trénink: drop the waiting set and start a fresh one of the same kind. */
+  | { type: 'newRound'; rng: Rng }
+  /** Another tab saved or dropped the waiting set. */
+  | { type: 'setPendingRound'; round: SavedRound | null }
   | { type: 'navigate'; view: TabView }
   | { type: 'logLesson'; record: LessonRecord }
   | { type: 'hydrateJizdy'; state: JizdyState }
@@ -179,11 +189,11 @@ export function reducer(state: AppState, action: Action): AppState {
       return { ...state, search: action.search }
 
     case 'startLesson':
-      return begin(
-        state,
-        'lesson',
-        createSession(buildLesson(state.progress, action.rng)),
-      )
+      return {
+        ...begin(state, 'lesson', createSession(buildLesson(state.progress, action.rng))),
+        // A new set replaces the one waiting.
+        pendingRound: null,
+      }
 
     case 'startPractice': {
       let qs = buildPractice(
@@ -204,6 +214,7 @@ export function reducer(state: AppState, action: Action): AppState {
       return {
         ...begin(state, 'practice', createSession(qs.slice(0, SET_SIZE))),
         practiceSet: { queue: qs, offset: 0, label },
+        pendingRound: null,
       }
     }
 
@@ -298,9 +309,32 @@ export function reducer(state: AppState, action: Action): AppState {
     case 'toggleBookmark':
       return { ...state, progress: toggleBookmark(state.progress, action.id) }
 
+    case 'resumeRound':
+      return (state.pendingRound && restoreRound(state, state.pendingRound)) ?? { ...state, pendingRound: null }
+
+    case 'setPendingRound':
+      return { ...state, pendingRound: action.round }
+
+    case 'newRound': {
+      const saved = state.pendingRound
+      if (!saved) return state
+      if (saved.mode === 'lesson') return reducer(state, { type: 'startLesson', rng: action.rng })
+      const sel = saved.practiceSet
+      return reducer(
+        {
+          ...state,
+          selectedCategories: new Set(sel?.categories ?? []),
+          search: sel?.search ?? '',
+        },
+        { type: 'startPractice', rng: action.rng },
+      )
+    }
+
     case 'goMenu':
       return {
         ...state,
+        // Leaving an okruh or daily set partway: it waits. Its answers are already in progress.
+        pendingRound: snapshotRound(state) ?? state.pendingRound,
         correction: null,
         practiceSet: null,
         view: 'home',

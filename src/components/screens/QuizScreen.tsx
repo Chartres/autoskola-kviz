@@ -42,6 +42,8 @@ export function QuizScreen() {
   useEffect(() => {
     if (!first || counted.current === first) return
     counted.current = first
+    // A correction round resumed after leaving: its first round was counted when it ended.
+    if (state.correction!.counted) return
     conversion({ mode, score: score(first), total: first.questions.length, corrections: state.correction!.missed })
   }, [first]) // eslint-disable-line react-hooks/exhaustive-deps
 
