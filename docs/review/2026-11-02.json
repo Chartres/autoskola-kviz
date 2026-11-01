@@ -57,7 +57,7 @@
   ],
   "proposals": [],
   "next": [
-    "Carry the same rule to the other quiz apps (logika-kviz has it already; zbrojni-kviz is next) using the same shape.",
+    "Carry the same rule to the other quiz apps (logika-kviz PR #14 is the reference; zbrojni-kviz shares this engine).",
     "Připravenost (Bloom readiness) is still waiting for Pavol's pick: A / B / C; the recommendation is B.",
     "Watch key_action round_resumed against the number of sets left unfinished, to see whether the card is used."
   ],
