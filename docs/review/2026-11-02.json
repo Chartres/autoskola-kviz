@@ -1,0 +1,70 @@
+{
+  "product": "autoskola-kviz",
+  "date": "2026-11-02",
+  "url": "https://autoskola.dravec.org",
+  "headline": "Pavol's 1 Nov rule for quiz apps is live (#26). An okruh or daily set left partway waits on Home as \"Rozpracovaná sada\". Pokračovat resumes the same set at the first unanswered question; Nový trénink starts a fresh set that skips answered questions. A mock exam left early keeps its answers and records no score.",
+  "shipped": [
+    {
+      "title": "An unfinished set waits on Home: Pokračovat or Nový trénink",
+      "pr": 26,
+      "merged": "2026-11-01",
+      "live_checked": "2026-11-01 ~18:55Z on the deployed site at 390 px. Tested flow: a Dopravní značky set, 8 answered, ← Konec, reload. Home showed the card \"Rozpracovaná sada · Dopravní značky · Zodpovězeno 8 z 20\" with Pokračovat → and Nový trénink, with no horizontal overflow. Pokračovat opened \"09 / 20\", \"Dopravní značky · sada 1 z 12 · otázky 1–20 z 222\", on the same question that was 9th before leaving. Mock-exam behaviour and the correction-round resume were checked in unit and journey tests, not on live."
+    }
+  ],
+  "decisions": [
+    {
+      "question": "Rule 1: does an answer already count when given, and does a new set skip answered questions?",
+      "options": ["already true, test it", "rework selection"],
+      "default_taken": "already true, test it",
+      "why": "Progress was already recorded on every tap, okruh sets put never-answered questions first, and the daily set's review share is capped at 40 %, which is a minority. Tests now cover it: a new set after leaving at 8 contains none of those 8."
+    },
+    {
+      "question": "Which sets wait when left unfinished?",
+      "options": ["okruh sets and the daily set", "also Moje chyby and Záložky"],
+      "default_taken": "okruh sets and the daily set",
+      "why": "This is the scope in the brief. Moje chyby and Záložky rebuild from progress each time, and starting them (or an exam) leaves a waiting set alone. Only starting a new okruh or daily set replaces it."
+    },
+    {
+      "question": "Does a set left with zero answers wait?",
+      "options": ["no", "yes"],
+      "default_taken": "no",
+      "why": "Nothing to come back to; the card would be noise."
+    },
+    {
+      "question": "When does the set's conversion fire if it has a correction round?",
+      "options": ["at the end of the first round (as before)", "only after corrections"],
+      "default_taken": "at the end of the first round (as before)",
+      "why": "Every question has then been answered, which keeps the existing Kontrola chyby metric. A resumed correction round is flagged so the conversion is not sent twice. The streak still lands only on the results screen, with no partial threshold."
+    },
+    {
+      "question": "Opening a /okruh/ or /otazka/ link (or reloading one mid-set) while a set waits",
+      "options": ["show Home with the waiting set", "start the landing page's practice and drop the waiting set"],
+      "default_taken": "show Home with the waiting set",
+      "why": "Without this, a reload mid-set on an SEO landing page silently replaced the set. This was found by the independent review."
+    },
+    {
+      "question": "Analytics for the prompt",
+      "options": ["existing taxonomy", "new event names"],
+      "default_taken": "existing taxonomy",
+      "why": "Pokračovat sends key_action {action:'round_resumed', mode, answered, total}. Nový trénink sends start_lesson or start_practice with from:'resume-prompt'. No new event names, as asked."
+    },
+    {
+      "question": "Whose is the snapshot after sign-out?",
+      "options": ["the device's (shown to whoever uses it)", "per account"],
+      "default_taken": "the device's",
+      "why": "The brief says per-device localStorage, not synced. Answers given after resuming go to whoever is signed in."
+    }
+  ],
+  "proposals": [],
+  "next": [
+    "Carry the same rule to the other quiz apps (logika-kviz has it already; zbrojni-kviz is next) using the same shape.",
+    "Připravenost (Bloom readiness) is still waiting for Pavol's pick: A / B / C; the recommendation is B.",
+    "Watch key_action round_resumed against the number of sets left unfinished, to see whether the card is used."
+  ],
+  "screenshots": [
+    "docs/review/2026-11-02/resume-prompt-390.png",
+    "docs/review/2026-11-02/resumed-set-390.png",
+    "e2e/shots/resume-prompt.png",
+    "e2e/shots/resume-resumed.png"
+  ]
+}
