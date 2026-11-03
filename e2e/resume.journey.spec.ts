@@ -7,7 +7,12 @@ import { answerFromMemory } from './answers'
 test.use({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true })
 
 const counter = (n: number) => `${String(n).padStart(2, '0')} / 20`
-const heading = (page: import('@playwright/test').Page) => page.locator('h2').first().textContent()
+// A question's identity on screen: its text and its picture (sign questions share texts).
+const heading = (page: import('@playwright/test').Page) =>
+  page.evaluate(() => {
+    const media = document.querySelector('article img, article video source')
+    return `${document.querySelector('h2')?.textContent}|${media?.getAttribute('src') ?? ''}`
+  })
 
 test('a set left partway waits on Home and resumes at the first unanswered question', async ({ page }) => {
   await page.goto('/')

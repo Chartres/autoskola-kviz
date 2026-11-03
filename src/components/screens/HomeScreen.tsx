@@ -10,6 +10,7 @@ import { todayStr } from '@/lib/date'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import type { CategoryName } from '@/domain/types'
 import { roundSummary } from '@/app/round'
+import { readiness, formatPoints, MIN_ANSWERS } from '@/domain/readiness'
 
 export function HomeScreen() {
   const { state, dispatch } = useApp()
@@ -24,6 +25,7 @@ export function HomeScreen() {
   const streak = isStreakActive(state.progress.streak, todayStr())
     ? state.progress.streak.current
     : 0
+  const ready = useMemo(() => readiness(state.progress), [state.progress])
   const showJizdyCta = sum.total > 0 && sum.mastered / sum.total >= 0.7
 
   // Free topic choice from day 1 — no locked path (Montessori).
@@ -99,31 +101,74 @@ export function HomeScreen() {
         </button>
       )}
 
-      {/* Free topic choice — every okruh open from day 1 */}
-      <section className="mb-3">
-        <h2 className="mb-2 font-mono text-xs font-medium uppercase tracking-[0.2em] text-sand-400">
-          Okruhy
+      {/* Free topic choice — every okruh open from day 1. Each tile shows the points the okruh
+          is expected to bring in the exam (Připravenost, Bloom), against what it carries. */}
+      <section className="mb-3" aria-labelledby="okruhy-title">
+        <h2 id="okruhy-title" className="mb-1 font-mono text-xs font-medium uppercase tracking-[0.2em] text-sand-400">
+          Okruhy · body u zkoušky
         </h2>
+        <p data-testid="readiness-total" className="mb-2 text-sm text-sand-300">
+          {ready.expected !== null ? (
+            <>
+              Odhad u zkoušky:{' '}
+              <span className="font-mono font-semibold tabular-nums text-terra-300">{formatPoints(ready.expected)}</span>{' '}
+              z {ready.max} bodů · potřeba {ready.needed}
+            </>
+          ) : (
+            <>
+              {ready.okruhy.some((o) => o.expected !== null)
+                ? 'Celkový odhad se ukáže, až bude odhad u všech okruhů.'
+                : `Odhad bodů se u okruhu ukáže po ${MIN_ANSWERS} zodpovězených otázkách.`}{' '}
+              K úspěchu je potřeba {ready.needed} z {ready.max}.
+            </>
+          )}
+        </p>
         <div className="grid grid-cols-2 gap-2">
           {META.categories.map((c) => {
-            const b = sum.byCategory[c.name]
-            const mastered = b ? b.mastered : 0
+            const r = ready.okruhy.find((o) => o.cat === c.name)
+            const weakest = ready.weakest === c.name
             return (
               <button
                 key={c.id}
                 type="button"
                 onClick={() => startTopic(c.name)}
-                className="rounded-card border border-sand-700 bg-sand-800/40 p-3 text-left transition-colors hover:border-terra-400"
+                className={`rounded-card border bg-sand-800/40 p-3 text-left transition-colors hover:border-terra-400 ${
+                  weakest ? 'border-terra-500' : 'border-sand-700'
+                }`}
               >
                 <div className="text-sm font-semibold leading-snug text-sand-100">
                   {c.name}
                 </div>
-                <div className="mt-1 font-mono text-xs text-sand-500 tabular-nums">
-                  {mastered} / {c.count} zvládnuto
-                </div>
-                <div className="mt-2">
-                  <ProgressBar value={mastered} max={c.count} tone="moss" />
-                </div>
+                {weakest && (
+                  <div className="mt-1 font-mono text-[0.65rem] uppercase tracking-[0.12em] text-terra-300">
+                    Nejvíc ztrát
+                  </div>
+                )}
+                {r && r.expected !== null ? (
+                  <>
+                    <div className="mt-1 font-mono text-xs text-sand-500 tabular-nums">
+                      {formatPoints(r.expected)} z {r.max} {r.max === 1 ? 'bodu' : 'bodů'}
+                    </div>
+                    <div className="mt-2">
+                      <ProgressBar
+                        value={r.expected}
+                        max={r.max}
+                        tone="moss"
+                        ariaLabel={`${c.name}: odhad bodů`}
+                        valueText={`${formatPoints(r.expected)} z ${r.max} ${r.max === 1 ? 'bodu' : 'bodů'}`}
+                      />
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="mt-1 font-mono text-xs text-sand-500 tabular-nums">
+                      max. {r ? points(r.max) : ''}
+                      <span className="block">zatím {r?.answered ?? 0}/{MIN_ANSWERS} otázek</span>
+                    </div>
+                    {/* No bar yet: an empty one would read as zero points. */}
+                    <div aria-hidden className="mt-2 h-1.5 border-t border-dashed border-sand-700" />
+                  </>
+                )}
               </button>
             )
           })}
@@ -245,4 +290,9 @@ function ResumeCard() {
       </div>
     </section>
   )
+}
+
+/** "1 bod", "2 body", "8 bodů". */
+function points(n: number): string {
+  return `${n} ${n === 1 ? 'bod' : n < 5 ? 'body' : 'bodů'}`
 }
