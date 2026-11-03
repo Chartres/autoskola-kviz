@@ -36,7 +36,7 @@ describe('analytics on the theory journey', () => {
     render(<App />)
     expect(track).toHaveBeenCalledWith('page_view', { view: 'home' })
     act(() => {
-      fireEvent.click(screen.getAllByText(/zvládnuto/)[0].closest('button')!)
+      fireEvent.click(screen.getByRole('button', { name: /^Pravidla provozu/ }))
     })
     expect(track).toHaveBeenCalledWith('page_view', { view: 'quiz' })
   })
@@ -44,7 +44,7 @@ describe('analytics on the theory journey', () => {
   it('starting an okruh from Home sends only event names the database accepts', () => {
     render(<App />)
     act(() => {
-      fireEvent.click(screen.getAllByText(/zvládnuto/)[0].closest('button')!)
+      fireEvent.click(screen.getByRole('button', { name: /^Pravidla provozu/ }))
     })
     expect(sent().filter((e) => !DB_ACCEPTS.includes(e))).toEqual([])
     expect(track).toHaveBeenCalledWith('start_practice', expect.objectContaining({ topic: expect.any(String) }))
