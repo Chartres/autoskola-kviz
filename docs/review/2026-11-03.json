@@ -1,0 +1,75 @@
+{
+  "product": "autoskola-kviz",
+  "date": "2026-11-03",
+  "url": "https://autoskola.dravec.org",
+  "headline": "Pavol's pick for Připravenost (option B) is live (#28). Each okruh tile on Home shows the points it is expected to bring in the exam against the points it carries, the okruh losing most is marked \"Nejvíc ztrát\", and the total against the 43 needed appears once every okruh has an estimate. A new learner sees each okruh's maximum and a count toward 10 answers, with no invented numbers.",
+  "shipped": [
+    {
+      "title": "Připravenost on Home: expected exam points per okruh against the 43 needed",
+      "pr": 28,
+      "url": "https://github.com/Chartres/autoskola-kviz/pull/28",
+      "merged": "2026-11-03",
+      "live_checked": "2026-11-03 ~16:45Z on the deployed site at 390 px, no horizontal overflow. New visitor: \"Odhad bodů se u okruhu ukáže po 10 zodpovězených otázkách. K úspěchu je potřeba 43 z 50.\" The Dopravní situace tile read \"max. 12 bodů / zatím 0/10 otázek\" with no bar. Seeded history (12 answers per okruh, 5 wrong in situace): \"Odhad u zkoušky: 45 z 50 bodů · potřeba 43\", and the situace tile read \"Nejvíc ztrát / 7 z 12 bodů\" and had the highlighted border."
+    }
+  ],
+  "decisions": [
+    {
+      "question": "Where did Pavol's pick come from?",
+      "options": ["the decision card relayed by the orchestrating session", "wait for a primary source"],
+      "default_taken": "the decision card relayed by the orchestrating session",
+      "why": "The message came on the channel that assigned this session's work. It quotes card v6.autoskola-kviz.readiness, 2026-11-03 11:49:48 UTC, \"B: a bar per okruh on Home\", which matches the option in SIGNATURE.md. The decision page is not reachable from this session. The log entry names the source, and the change reverts cleanly."
+    },
+    {
+      "question": "How is an okruh's expected score estimated?",
+      "options": ["share of right answers over recorded answers × okruh points", "share of mastered questions × okruh points", "latest answer per question"],
+      "default_taken": "share of right answers over recorded answers × okruh points",
+      "why": "The brief asked for the learner's own first-attempt answers. Retries in Oprava chyb are never recorded, so recorded answers are the first attempts made in sets. Mastery (two right in a row) would read 0 for someone answering everything right once. Because all recorded answers count, early mistakes stay in the estimate for a while."
+    },
+    {
+      "question": "When is an estimate shown?",
+      "options": ["10 distinct answered questions per okruh; total once all seven have one", "show partial totals"],
+      "default_taken": "10 per okruh; total once all seven have one",
+      "why": "This avoids invented numbers. A partial total would add up only the okruhy that have data and present the sum as an exam score."
+    },
+    {
+      "question": "How are the numbers rounded?",
+      "options": ["to a tenth, rounded down; total = sum of the tiles", "whole points, rounded"],
+      "default_taken": "to a tenth, rounded down; total = sum of the tiles",
+      "why": "The independent review found that rounding the total and the tiles separately can make them disagree, and can show 42,6 as \"43\", which reads as a pass."
+    },
+    {
+      "question": "When does \"Nejvíc ztrát\" appear?",
+      "options": ["once two okruhy have an estimate", "from the first estimate"],
+      "default_taken": "once two okruhy have an estimate",
+      "why": "With only one estimate, the mark has nothing to compare against."
+    },
+    {
+      "question": "What happens to the mastery count on the Home tiles?",
+      "options": ["replaced by expected points (as proposal B said); mastery stays on Postup", "show both"],
+      "default_taken": "replaced; mastery stays on Postup",
+      "why": "Proposal B as Pavol picked it said the bars replace the mastery percentages. Showing two numbers per small tile on a phone would be cluttered."
+    },
+    {
+      "question": "Does this add a new analytics event?",
+      "options": ["none", "key_action readiness_shown"],
+      "default_taken": "none",
+      "why": "The SIGNATURE metric (exam_finish {passed} against expected ≥ 43) can be measured later from existing events. There are no new event names and no Supabase SQL."
+    },
+    {
+      "question": "What to do about the flaky resume e2e from #26",
+      "options": ["identify a question by text + picture", "leave it"],
+      "default_taken": "identify a question by text + picture",
+      "why": "Sign questions share their text (\"Tato dopravní značka:\"), so comparing text alone gave false repeats. With the fix the test passed five repeats in a row. This changed the test only."
+    }
+  ],
+  "proposals": [],
+  "next": [
+    "Weight recent answers more (for example, the last answer per question), so the estimate catches up with learning. This is a technical choice and can be revisited once real data shows how far behind the estimate is.",
+    "Read the pass rate of learners whose estimate reached 43 or more against exam_finish {passed}, once there is traffic."
+  ],
+  "screenshots": [
+    "docs/review/2026-11-03/readiness-home-390.png",
+    "e2e/shots/readiness-home.png",
+    "e2e/shots/readiness-empty.png"
+  ]
+}
