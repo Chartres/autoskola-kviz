@@ -8,7 +8,7 @@ import {
 } from 'react'
 import { reducer, initialState, resumeExam, type AppState, type Action } from './store'
 import { snapshotRound, validRound, type SavedRound } from './round'
-import { loadProgress, saveProgress, loadJizdy, saveJizdy, loadExam, saveExam, loadRound, saveRound, ROUND_KEY, claimAnonymousProgress, progressKey, JIZDY_KEY } from '@/domain/storage'
+import { loadProgress, saveProgress, loadJizdy, saveJizdy, loadExam, saveExam, loadRound, saveRound, ROUND_KEY, claimAnonymousProgress, claimAnonymousJizdy, progressKey, JIZDY_KEY } from '@/domain/storage'
 import { emptyJizdyState } from '@/domain/jizdy'
 import { topicFromPath, questionFromPath, isExamPath } from '@/lib/topics'
 import { getQuestion } from '@/domain/questions'
@@ -229,8 +229,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
     const uid = user.id
     signedInUidRef.current = uid
-    // C3H2: load this user's jizdy lessons from their scoped key.
-    dispatch({ type: 'hydrateJizdy', state: loadJizdy(uid) })
+    // C3H2: load this user's jizdy lessons from their scoped key; claim+clear the anonymous
+    // key so lessons from before sign-in move into exactly one account.
+    dispatch({ type: 'hydrateJizdy', state: claimAnonymousJizdy(uid) })
     // Switch the in-memory progress to this account's local copy (plus anonymous progress,
     // which moves into the first account that signs in) before anything else reads it.
     // Without this, the previous account's progress (a direct A → B switch) or answers
