@@ -74,10 +74,12 @@ describe('jizdy persistence', () => {
   })
 
   it('survives a thrown setItem silently', () => {
-    const orig = Storage.prototype.setItem
-    Storage.prototype.setItem = () => { throw new Error('quota') }
-    expect(() => saveJizdy(emptyJizdyState())).not.toThrow()
-    Storage.prototype.setItem = orig
+    const spy = vi.spyOn(localStorage, 'setItem').mockImplementation(() => { throw new Error('quota') })
+    try {
+      expect(() => saveJizdy(emptyJizdyState())).not.toThrow()
+    } finally {
+      spy.mockRestore()
+    }
   })
 
   it('merges anonymous lessons into an existing per-user log, deduped by id', () => {
