@@ -99,7 +99,7 @@ describe('claimAnonymousProgress', () => {
 
   it('keeps the anonymous key when the account copy could not be written (quota, private mode)', () => {
     saveProgress(recordAnswer(emptyProgress(), 3, true, 100))
-    const setItem = vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+    const setItem = vi.spyOn(localStorage, 'setItem').mockImplementation(() => {
       throw new DOMException('full', 'QuotaExceededError')
     })
     try {
