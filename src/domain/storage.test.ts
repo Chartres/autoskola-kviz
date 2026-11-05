@@ -42,12 +42,12 @@ describe('progress persistence', () => {
   })
 
   it('survives a thrown setItem (e.g. private mode) silently', () => {
-    const orig = Storage.prototype.setItem
-    Storage.prototype.setItem = () => {
-      throw new Error('quota')
+    const spy = vi.spyOn(localStorage, 'setItem').mockImplementation(() => { throw new Error('quota') })
+    try {
+      expect(() => saveProgress(emptyProgress())).not.toThrow()
+    } finally {
+      spy.mockRestore()
     }
-    expect(() => saveProgress(emptyProgress())).not.toThrow()
-    Storage.prototype.setItem = orig
   })
 })
 
