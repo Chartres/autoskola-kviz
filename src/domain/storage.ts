@@ -56,6 +56,15 @@ function writeJson(key: string, value: unknown): boolean {
   }
 }
 
+/** Best-effort delete: if storage is unavailable, the key stays and re-merging it is harmless. */
+function removeKey(key: string): void {
+  try {
+    storage()?.removeItem(key)
+  } catch {
+    // storage unavailable
+  }
+}
+
 export function saveProgress(data: ProgressData, uid?: string): void {
   writeJson(progressKey(uid), data)
 }
@@ -71,11 +80,7 @@ export function claimAnonymousProgress(uid: string): ProgressData {
   const merged = mergeProgress(own, loadProgress())
   // Empty the anonymous key only once the account holds the answers on disk.
   if (!writeJson(progressKey(uid), merged)) return merged
-  try {
-    s.removeItem(STORAGE_KEY)
-  } catch {
-    // storage unavailable: the anonymous copy stays, merging again is harmless for this user
-  }
+  removeKey(STORAGE_KEY)
   return merged
 }
 
@@ -128,11 +133,7 @@ export function claimAnonymousJizdy(uid: string): JizdyState {
   if (!s?.getItem(JIZDY_KEY)) return loadJizdy(uid)
   const merged = loadJizdy(uid) // loadJizdy already merges anonymous into the uid key
   if (!writeJson(jizdyKey(uid), merged)) return merged
-  try {
-    s.removeItem(JIZDY_KEY)
-  } catch {
-    // storage unavailable: anonymous copy stays, re-merging is harmless
-  }
+  removeKey(JIZDY_KEY)
   return merged
 }
 
@@ -158,13 +159,7 @@ export function loadExam(): SavedExam | null {
 
 export function saveExam(exam: SavedExam | null): void {
   if (exam) writeJson(EXAM_KEY, exam)
-  else {
-    try {
-      storage()?.removeItem(EXAM_KEY)
-    } catch {
-      // storage unavailable: nothing was saved either
-    }
-  }
+  else removeKey(EXAM_KEY)
 }
 
 // An okruh or daily set left unfinished (see src/app/round.ts). Per device, never synced.
@@ -182,11 +177,5 @@ export function loadRound<T>(): T | null {
 
 export function saveRound(round: unknown | null): void {
   if (round) writeJson(ROUND_KEY, round)
-  else {
-    try {
-      storage()?.removeItem(ROUND_KEY)
-    } catch {
-      // storage unavailable: nothing was saved either
-    }
-  }
+  else removeKey(ROUND_KEY)
 }
