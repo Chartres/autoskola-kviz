@@ -119,6 +119,23 @@ export function saveJizdy(state: JizdyState, uid?: string): void {
   writeJson(jizdyKey(uid), state)
 }
 
+/**
+ * On sign-in: fold the anonymous Jízdy lessons into this account's log and clear the
+ * anonymous key, so lessons move into exactly one account. Returns the account's local state.
+ */
+export function claimAnonymousJizdy(uid: string): JizdyState {
+  const s = storage()
+  if (!s?.getItem(JIZDY_KEY)) return loadJizdy(uid)
+  const merged = loadJizdy(uid) // loadJizdy already merges anonymous into the uid key
+  if (!writeJson(jizdyKey(uid), merged)) return merged
+  try {
+    s.removeItem(JIZDY_KEY)
+  } catch {
+    // storage unavailable: anonymous copy stays, re-merging is harmless
+  }
+  return merged
+}
+
 // The exam in progress, so a reload, a back gesture or the browser dropping the tab does not
 // throw it away. Only ids are stored; questions come from the bundled dataset.
 export const EXAM_KEY = 'autoskola-kviz:exam:v1'
