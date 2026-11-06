@@ -101,6 +101,8 @@ export function initialState(): AppState {
   }
 }
 
+const EXAM_MS = EXAM.timeLimitMinutes * 60 * 1000
+
 /** An exam whose time ran out longer ago than this is dropped on load instead of shown. */
 export const STALE_EXAM_MS = 60 * 60 * 1000
 
@@ -114,7 +116,7 @@ export function resumeExam(state: AppState, saved: SavedExam | null, now: number
   if (!found.length || found.some((q) => !q)) return state
   const questions = found as NonNullable<(typeof found)[number]>[]
   // Damaged storage, or a deadline beyond one exam length (clock moved back): start clean.
-  if (saved.endsAt > now + EXAM.timeLimitMinutes * 60 * 1000) return state
+  if (saved.endsAt > now + EXAM_MS) return state
   const byId = new Map(questions.map((q) => [q.id, q]))
   const valid = saved.records.every(
     (r) => !!r && typeof r === 'object' && byId.has(r.id) && ['a', 'b', 'c'].includes(r.choice),
@@ -245,7 +247,7 @@ export function reducer(state: AppState, action: Action): AppState {
     case 'startExam':
       return {
         ...begin(state, 'exam', createSession(buildExam(action.rng))),
-        examEndsAt: action.now + EXAM.timeLimitMinutes * 60 * 1000,
+        examEndsAt: action.now + EXAM_MS,
       }
 
     case 'answer': {

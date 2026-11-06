@@ -7,7 +7,8 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, act } from '@testing-library/react'
 import { AppProvider, useApp } from './AppContext'
 import { emptyProgress, recordAnswer, type ProgressData } from '@/domain/progress'
-import { saveProgress } from '@/domain/storage'
+import { saveProgress, saveJizdy } from '@/domain/storage'
+import { emptyJizdyState, logLesson, type LessonRecord } from '@/domain/jizdy'
 
 const { auth, cloud, flush, failSaves } = vi.hoisted(() => ({
   auth: { user: null as { id: string } | null },
@@ -40,7 +41,13 @@ function Spy() {
   dispatch = app.dispatch
   return <div data-testid="ids">{Object.keys(app.state.progress.stats).sort().join(',')}</div>
 }
+function JizdySpy() {
+  const app = useApp()
+  return <div data-testid="jizdy-ids">{app.state.jizdyState.lessons.map((l) => l.id).join(',')}</div>
+}
 const ui = () => <AppProvider><Spy /><Track /></AppProvider>
+const jizdyUi = () => <AppProvider><JizdySpy /><Track /></AppProvider>
+const shownJizdy = () => screen.getByTestId('jizdy-ids').textContent
 const shown = () => screen.getByTestId('ids').textContent
 const cloudIds = (uid: string) => Object.keys(cloud.get(uid)?.stats ?? {}).sort().join(',')
 const settle = () => act(async () => { await new Promise((r) => setTimeout(r, 0)) })
@@ -140,5 +147,33 @@ describe('account progress on reload', () => {
     mount()
     await settle()
     expect(shown()).toBe('5')
+  })
+})
+
+describe('jizdy isolation across accounts', () => {
+  it('anonymous Jizdy lessons move into the first account that signs in, not into later ones', async () => {
+    const lesson: LessonRecord = { id: 'anon-1', date: '2026-11-06', durationMin: 60, skills: ['rozjezd'] }
+    saveJizdy(logLesson(emptyJizdyState(), lesson))
+    const { rerender } = render(jizdyUi())
+    expect(shownJizdy()).toBe('anon-1')
+
+    // Sign in as A: claimAnonymousJizdy runs and claims+clears the anonymous key.
+    auth.user = { id: 'A' }
+    rerender(jizdyUi())
+    await settle()
+    expect(shownJizdy()).toBe('anon-1')   // A gets the anonymous lessons
+
+    // Sign out: in-memory state clears.
+    if (flush.current) await act(async () => { await flush.current!() })
+    auth.user = null
+    rerender(jizdyUi())
+    await settle()
+    expect(shownJizdy()).toBe('')          // anonymous key was cleared; nothing shown
+
+    // Sign in as B: B gets no lessons because the anonymous key was already cleared.
+    auth.user = { id: 'B' }
+    rerender(jizdyUi())
+    await settle()
+    expect(shownJizdy()).toBe('')          // B gets none of A's anonymous lessons
   })
 })
