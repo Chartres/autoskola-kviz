@@ -16,11 +16,12 @@ vi.mock('@/analytics', async (importActual) => ({
 }))
 
 // Copy of the insert policy on flywheel-core public.events ("log known events"),
-// read 2026-10-25.
+// read 2026-10-25; v4 (exam_result_reported) read back by the orchestrator 2026-11-07 16:27 UTC.
 const DB_ACCEPTS = [
   'page_view', 'signup_started', 'signup_completed', 'conversion', 'key_action',
   'feedback_given', 'error', 'app_open', 'start_lesson', 'start_practice', 'start_exam',
   'start_review', 'start_bookmarks', 'lesson_complete', 'exam_finish', 'session_finish',
+  'exam_result_reported', // allow-list v4, live 2026-11-07
 ]
 
 const sent = () => track.mock.calls.map(([e]) => e as string)

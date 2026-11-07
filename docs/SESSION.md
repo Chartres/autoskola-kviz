@@ -33,18 +33,17 @@ An unfinished set waits on Home with Pokračovat and Nový trénink (#26). Test 
 
 ## Open threads
 - **Test A (sell the result).** Runs 2026-11-07 → 2026-12-19. Stop if there are fewer than 30 real results, or if the AUC is below 0.7.
-  - The event `exam_result_reported` waits for flywheel allow-list v4. Until then it is sent as `key_action`.
+  - Since the deploy of #34 (2026-11-07), the event is sent as `exam_result_reported`. Earlier answers went out as `key_action {action:'exam_result_reported'}`, so the reading counts both names.
 - **Test B (technical submissions).** Same dates. Stop if AI search still finds the app in 0 of 14 queries and visitors rose less than 20 %.
   - Nothing has been submitted: every place needs an account or Pavol's name or email.
   - Drafts for Pavol are in `docs/outreach/2026-11-07.md` (MŠMT Na dálku, Asociace autoškol ČR) and `docs/outreach/2026-10-30.md` (five article authors).
 - **For the platform session:** visitor and referring-domain baselines for the week before 2026-11-07.
 
 ## Last three packages
-1. **2026-11-07, After the App, tests A and B.** Test A shipped in #31: reviewed, the blocking bug (an answer saved under the wrong date) fixed, checked live. The hand-back and drafts are in #32. Done.
-2. **2026-11-03, Připravenost, option B.** Shipped in #28: reviewed, the blocking bug (rounding across 43) fixed, checked live. The hand-back is in #29. Done.
-3. **2026-11-01, an unfinished set waits.** Shipped in #26, checked live. The hand-back is in #27. Done.
+1. **2026-11-07, allow-list v4.** Vendored v4 and switched test A to its own event name (#34). The live card was checked without clicking an answer. Done.
+2. **2026-11-07, After the App, tests A and B.** Test A shipped in #31: reviewed, the blocking bug (an answer saved under the wrong date) fixed, checked live. The hand-back and drafts are in #32. Done.
+3. **2026-11-03, Připravenost, option B.** Shipped in #28: reviewed, the blocking bug (rounding across 43) fixed, checked live. The hand-back is in #29. Done.
 
 ## Next
 - 2026-12-19: compute the AUC of `readiness_bucket` against passed/failed, counting answers other than 'none' and one per visitor. Apply both stop rules.
-- Once v4 is approved, switch the result event to its own name (one line in `src/components/ExamResult.tsx`).
 - An idea, not decided: weight recent answers more in Připravenost.

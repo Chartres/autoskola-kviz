@@ -26,6 +26,7 @@ export const ACCEPTED_EVENTS = [
   'page_view', 'signup_started', 'signup_completed', 'conversion', 'key_action',
   'feedback_given', 'error', 'app_open', 'start_lesson', 'start_practice', 'start_exam',
   'start_review', 'start_bookmarks', 'lesson_complete', 'exam_finish', 'session_finish',
+  'exam_result_reported',
 ] as const
 export type AppEvent = (typeof ACCEPTED_EVENTS)[number]
 

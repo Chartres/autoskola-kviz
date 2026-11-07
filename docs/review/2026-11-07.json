@@ -13,10 +13,28 @@
       "event_for_allowlist_v4": {
         "name": "exam_result_reported",
         "props": {
-          "result": ["passed", "failed", "not_yet"],
-          "readiness_bucket": ["none", "lt35", "35_39", "40_42", "43_45", "46_50"]
+          "result": [
+            "passed",
+            "failed",
+            "not_yet"
+          ],
+          "readiness_bucket": [
+            "none",
+            "lt35",
+            "35_39",
+            "40_42",
+            "43_45",
+            "46_50"
+          ]
         },
-        "note": "Until v4 adds this name, the app sends key_action {action:'exam_result_reported', result, readiness_bucket}, which the events table accepts today, so no results are lost. Moving to the dedicated name is a one-line change in src/components/ExamResult.tsx. The props carry no free text, no dates and no personal data. As with every event, rows also carry the platform's visitor_id and session_id, plus flywheel_uid for signed-in learners."
+        "note": "Superseded on 2026-11-07: see event_switch."
+      },
+      "event_switch": {
+        "date": "2026-11-07",
+        "pr": 34,
+        "what": "From the deploy of #34 on 2026-11-07 (after the orchestrator read allow-list v4 back at 16:27 UTC), answers are sent as exam_result_reported {result, readiness_bucket}. Before that deploy, the same answers were sent as key_action {action:'exam_result_reported', result, readiness_bucket}.",
+        "reading": "The reading on 2026-12-19 must count both names: exam_result_reported events, plus key_action events whose action is 'exam_result_reported'. Remove duplicates by visitor.",
+        "note": "Vendored from flywheel 24879ea (#171), where exam_result_reported is live (out of 'pending'). A contract test fails if it is ever pending in the vendored copy."
       }
     },
     {
@@ -43,37 +61,55 @@
   "decisions": [
     {
       "question": "The event name exam_result_reported is not on the allow-list yet",
-      "options": ["send it as key_action now", "wait and lose the results"],
+      "options": [
+        "send it as key_action now",
+        "wait and lose the results"
+      ],
       "default_taken": "send it as key_action now",
       "why": "The database drops unlisted names. key_action is accepted today and carries the same props."
     },
     {
       "question": "When is the result asked?",
-      "options": ["on every visit after the date until answered", "only on the first visit"],
+      "options": [
+        "on every visit after the date until answered",
+        "only on the first visit"
+      ],
       "default_taken": "on every visit after the date until answered",
       "why": "A learner who skips the card on that visit would otherwise give no result. 'Ještě ne' ends it for that date, and a new date asks again after it."
     },
     {
       "question": "Which date does an answer belong to?",
-      "options": ["the date it was asked about", "the date set when the button is tapped"],
+      "options": [
+        "the date it was asked about",
+        "the date set when the button is tapped"
+      ],
       "default_taken": "the date it was asked about",
       "why": "Found by the independent review: a retake date typed before answering would otherwise make the app never ask about the retake."
     },
     {
       "question": "Readiness at what moment?",
-      "options": ["when answering", "on the exam day"],
+      "options": [
+        "when answering",
+        "on the exam day"
+      ],
       "default_taken": "when answering",
       "why": "No readiness history is stored. The card sits at the top of Home, so the gap is usually small; the analysis should note it."
     },
     {
       "question": "What counts as a 'technical submission' Claude may make alone?",
-      "options": ["only forms needing no account, payment, public post, or Pavol's name or email", "also forms asking for a contact email"],
+      "options": [
+        "only forms needing no account, payment, public post, or Pavol's name or email",
+        "also forms asking for a contact email"
+      ],
       "default_taken": "only forms needing no account, payment, public post, or Pavol's name or email",
       "why": "A contact email is Pavol's name on the request. None of the 8 places met the bar, so all became drafts. Search engines already get every URL through flywheel's central IndexNow job."
     },
     {
       "question": "The ad-fontes e2e failed now and then",
-      "options": ["open question 13, which cites § 54 odst. 3", "retry until green"],
+      "options": [
+        "open question 13, which cites § 54 odst. 3",
+        "retry until green"
+      ],
       "default_taken": "open question 13, which cites § 54 odst. 3",
       "why": "Root cause: it answered a random Pravidla provozu question, and some explanations rightly cite no law. It now opens a fixed question. Test change only."
     }

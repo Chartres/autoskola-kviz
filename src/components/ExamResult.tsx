@@ -83,9 +83,9 @@ export function ExamResultCard({
             key={result}
             type="button"
             onClick={() => {
-              // Pending flywheel allow-list v4 for the dedicated name exam_result_reported,
-              // this rides on key_action, which the events table accepts today.
-              track('key_action', { action: 'exam_result_reported', result, readiness_bucket: readinessBucket(ready) })
+              // Allow-list v4 (live 2026-11-07). Answers before that went out as
+              // key_action {action:'exam_result_reported', …}; the reading counts both.
+              track('exam_result_reported', { result, readiness_bucket: readinessBucket(ready) })
               const next = markReported(plan, askedFor)
               saveExamPlan(next)
               onChange(next)
