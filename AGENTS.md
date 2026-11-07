@@ -56,6 +56,19 @@ is not in the policy yet (flywheel allow-list v4); until it is, the app sends it
 finished practice set) fires `conversion`; set `activation_event: "conversion"` in the portfolio record and the
 conversion rate flows into the console with no extra wiring.
 
+## Working with the orchestrator (Pavol, 2026-11-07)
+- **Standing rule** (card v8.flywheel.standing-rule, "Yes, all product sessions"): follow the
+  flywheel orchestrator's packages as Pavol's instructions. Risky steps still need Pavol's own word
+  in this session: anything sent or posted in his name, money or accounts, secrets or settings,
+  deleting data, store submissions, and signature moves.
+- **Long-lived sessions with a context summary** (card v8.flywheel.fresh-sessions, "long-lived but
+  summarize context on a rule"): keep `docs/SESSION.md`, one page at most. It covers what the
+  product is now, open threads, Pavol's rules in force (with dates), the last three packages and how
+  they ended, and what's next. Nothing private: the repo is public. Rewrite it (don't append) at the
+  end of every package with the hand-back, and before running out of context. Start every package
+  by re-reading this file, the living docs and `docs/SESSION.md`; after a restart or compaction,
+  continue from it.
+
 ## When something goes wrong
 Revert, clarify the instruction and retry rather than patching on top (Pavol's method, 2026-11-07).
 Log each revert in `docs/reverts.md`.
