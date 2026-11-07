@@ -27,6 +27,7 @@ write committed screenshots to `e2e/shots/` for visual review (Standard: persona
 `npm run dev` → http://localhost:5173. Primary journeys to eyeball:
 - **Theory**: home → okruh tile → answer → immediate feedback → summary. "Dopravní značky" has an image.
 - **Resume**: okruh tile → answer 8 → "← Konec" → reload → "Rozpracovaná sada" on Home → Pokračovat opens question 9 of the same set (`e2e/resume.journey.spec.ts`).
+- **Exam result (test A, from 2026-11-07)**: Home → "Termín zkoušky" date (kept on the device, `autoskola-kviz:exam-plan:v1`) → on a visit after that date, "Jak dopadla zkouška?" once → Složil(a) / Nesložil(a) / Ještě ne → "Díky za odpověď." (`e2e/exam-result.journey.spec.ts`).
 - **Jízdy**: Jízdy tab → log-lesson form (date + duration + skill chips) → submit → "Jízda zaznamenána" + checklist updates → navigate away + back → state persists. Cross-promo CTA on HomeScreen when theory mastery ≥ 70%.
 
 ## Explanations from the law (ad fontes)
@@ -49,9 +50,15 @@ Adoption is read from web KPIs — no extra telemetry needed.
 Vendored client: `src/platform/flywheel-client.ts` (`app: 'autoskola-kviz'`). Fire the shared
 taxonomy (`page_view`, `signup_*`, `conversion`, `key_action`, `feedback_given`, `error`). `track()` is
 typed to `ACCEPTED_EVENTS` in `src/analytics.ts`, a copy of the `events` insert policy: the database
-silently rejects any other name, so add a name to the policy before using it. The aha moment (any
+silently rejects any other name, so add a name to the policy before using it. Pending name: `exam_result_reported {result: passed|failed|not_yet, readiness_bucket: none|lt35|35_39|40_42|43_45|46_50}`
+is not in the policy yet (flywheel allow-list v4); until it is, the app sends it as
+`key_action {action:'exam_result_reported', result, readiness_bucket}`, which is accepted. The aha moment (any
 finished practice set) fires `conversion`; set `activation_event: "conversion"` in the portfolio record and the
 conversion rate flows into the console with no extra wiring.
+
+## When something goes wrong
+Revert, clarify the instruction and retry rather than patching on top (Pavol's method, 2026-11-07).
+Log each revert in `docs/reverts.md`.
 
 ## Done means
 Green CI · released (URL) · portfolio record updated (stage/gate/links) · storefront link live ·
