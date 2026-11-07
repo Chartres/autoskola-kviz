@@ -31,7 +31,9 @@ const home = () =>
       </AppProvider>
     </AuthProvider>,
   )
-const resultEvents = () => track.mock.calls.filter(([, p]) => (p as { action?: string })?.action === 'exam_result_reported')
+const resultEvents = () => track.mock.calls.filter(([name]) => name === 'exam_result_reported')
+// Before allow-list v4 the answer rode on key_action; it must not be sent that way any more.
+const legacyEvents = () => track.mock.calls.filter(([, p]) => (p as { action?: string })?.action === 'exam_result_reported')
 
 beforeEach(() => {
   localStorage.clear()
@@ -56,7 +58,7 @@ describe('exam date and result question on Home', () => {
     expect(screen.getByRole('heading', { name: 'Jak dopadla zkouška?' })).toBeTruthy()
     fireEvent.click(screen.getByRole('button', { name: 'Složil(a)' }))
     expect(resultEvents()).toEqual([
-      ['key_action', { action: 'exam_result_reported', result: 'passed', readiness_bucket: 'none' }],
+      ['exam_result_reported', { result: 'passed', readiness_bucket: 'none' }],
     ])
     expect(screen.getByRole('status').textContent).toBe('Díky za odpověď.')
     expect(screen.queryByRole('button', { name: 'Nesložil(a)' })).toBeNull()
@@ -82,7 +84,8 @@ describe('exam date and result question on Home', () => {
     localStorage.setItem(EXAM_PLAN_KEY, JSON.stringify({ date: day(-1), reportedFor: null }))
     home()
     fireEvent.click(screen.getByRole('button', { name: 'Nesložil(a)' }))
-    expect(Object.keys(resultEvents()[0][1] as object).sort()).toEqual(['action', 'readiness_bucket', 'result'])
+    expect(Object.keys(resultEvents()[0][1] as object).sort()).toEqual(['readiness_bucket', 'result'])
+    expect(legacyEvents()).toEqual([])
   })
 
   it('a retake date entered before answering: the answer belongs to the first date, the retake is asked after it', () => {
@@ -112,7 +115,7 @@ describe('exam date and result question on Home', () => {
     localStorage.setItem(EXAM_PLAN_KEY, JSON.stringify({ date: day(-1), reportedFor: null }))
     home()
     fireEvent.click(screen.getByRole('button', { name: 'Složil(a)' }))
-    expect(resultEvents()[0][1]).toEqual({ action: 'exam_result_reported', result: 'passed', readiness_bucket: '43_45' })
+    expect(resultEvents()[0][1]).toEqual({ result: 'passed', readiness_bucket: '43_45' })
   })
 
   it('the date field is named "Termín zkoušky" and described by the on-device note', () => {

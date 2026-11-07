@@ -13,6 +13,7 @@
 // track('key_action', { action: 'drill' }) needs no policy change.
 import { describe, expect, it } from 'vitest'
 import allow from './flywheel-events.json'
+import { ACCEPTED_EVENTS } from '@/analytics'
 
 const sources = import.meta.glob(['/src/**/*.{ts,tsx,js,jsx}', '!/src/**/*.test.*', '!/src/**/*.spec.*'], {
   query: '?raw',
@@ -50,6 +51,17 @@ describe('signals contract', () => {
       for (const n of extractEventNames(text)) if (!allowed.has(n)) rejected.push(`${n} (${file})`)
     }
     expect(rejected, 'add these to flywheel data/signals/allowlist.json first, or send key_action + props').toEqual([])
+  })
+
+  it("track()'s typed list only holds names on the shared allow-list", () => {
+    expect(ACCEPTED_EVENTS.filter((n) => !allowed.has(n))).toEqual([])
+  })
+
+  it('allow-list v4: test A sends its own event name, not key_action', () => {
+    expect(allowed.has('exam_result_reported')).toBe(true)
+    expect((ACCEPTED_EVENTS as readonly string[]).includes('exam_result_reported')).toBe(true)
+    const src = Object.entries(sources).find(([f]) => f.endsWith('/components/ExamResult.tsx'))![1]
+    expect([...extractEventNames(src)]).toEqual(['exam_result_reported'])
   })
 
   it('the extractor still sees calls (guards against a silent regex break)', () => {
