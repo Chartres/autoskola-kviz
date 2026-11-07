@@ -34,7 +34,7 @@
         "pr": 34,
         "what": "From the deploy of #34 on 2026-11-07 (after the orchestrator read allow-list v4 back at 16:27 UTC), answers are sent as exam_result_reported {result, readiness_bucket}. Before that deploy, the same answers were sent as key_action {action:'exam_result_reported', result, readiness_bucket}.",
         "reading": "The reading on 2026-12-19 must count both names: exam_result_reported events, plus key_action events whose action is 'exam_result_reported'. Remove duplicates by visitor.",
-        "note": "flywheel's data/signals/allowlist.json (v4) still lists exam_result_reported under 'pending'. The orchestrator reported the live policy accepts it, so flywheel should remove it from 'pending'. The vendored copy here is unchanged."
+        "note": "Vendored from flywheel 24879ea (#171), where exam_result_reported is live (out of 'pending'). A contract test fails if it is ever pending in the vendored copy."
       }
     },
     {

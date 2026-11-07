@@ -59,6 +59,8 @@ describe('signals contract', () => {
 
   it('allow-list v4: test A sends its own event name, not key_action', () => {
     expect(allowed.has('exam_result_reported')).toBe(true)
+    // Live, not pending: vendored from flywheel 24879ea (#171) or later.
+    expect((allow as { pending?: string[] }).pending ?? []).not.toContain('exam_result_reported')
     expect((ACCEPTED_EVENTS as readonly string[]).includes('exam_result_reported')).toBe(true)
     const src = Object.entries(sources).find(([f]) => f.endsWith('/components/ExamResult.tsx'))![1]
     expect([...extractEventNames(src)]).toEqual(['exam_result_reported'])
