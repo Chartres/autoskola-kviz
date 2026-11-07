@@ -6,8 +6,10 @@ import { answerFromMemory } from './answers'
 test.use({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true })
 
 test('ad fontes: the answer explained from the law, with a link to the paragraph', async ({ page }) => {
-  await page.goto('/')
-  await page.getByRole('button', { name: /Pravidla provozu/ }).click()
+  // Question 13 cites § 54 odst. 3 zákona č. 361/2000 Sb.; a random question may be one of the
+  // explanations that rightly cite no law (zásady, first aid) and have no link.
+  await page.goto('/otazka/13-chodec-smi-vstoupit-na-prechod-pro-chodce/')
+  await expect(page.getByRole('heading', { level: 2, name: /přechod pro chodce/ })).toBeVisible()
   await page.locator('button[data-state="idle"]').first().click()
   const why = page.getByRole('region', { name: 'Proč' })
   await expect(why).toBeVisible()

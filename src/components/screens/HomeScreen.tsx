@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { useApp } from '@/app/AppContext'
 import { ALL_QUESTIONS, META } from '@/domain/questions'
 import { summary, missedIds, isStreakActive } from '@/domain/progress'
@@ -11,6 +11,8 @@ import { ProgressBar } from '@/components/ui/ProgressBar'
 import type { CategoryName } from '@/domain/types'
 import { roundSummary } from '@/app/round'
 import { readiness, formatPoints, MIN_ANSWERS } from '@/domain/readiness'
+import { loadExamPlan, shouldAskResult } from '@/domain/examPlan'
+import { ExamDateField, ExamResultCard } from '@/components/ExamResult'
 
 export function HomeScreen() {
   const { state, dispatch } = useApp()
@@ -26,6 +28,10 @@ export function HomeScreen() {
     ? state.progress.streak.current
     : 0
   const ready = useMemo(() => readiness(state.progress), [state.progress])
+  // Exam date on this device; after it, ask once how the exam went (decided per visit, so the
+  // card can thank the learner after an answer instead of vanishing).
+  const [examPlan, setExamPlan] = useState(loadExamPlan)
+  const [askResult] = useState(() => shouldAskResult(examPlan, todayStr()))
   const showJizdyCta = sum.total > 0 && sum.mastered / sum.total >= 0.7
 
   // Free topic choice from day 1 — no locked path (Montessori).
@@ -57,6 +63,8 @@ export function HomeScreen() {
           <AuthPanel />
         </div>
       </header>
+
+      {askResult && <ExamResultCard plan={examPlan} ready={ready} onChange={setExamPlan} />}
 
       {/* A set left partway waits here: same questions, from the first unanswered one. */}
       {state.pendingRound && <ResumeCard />}
@@ -123,6 +131,7 @@ export function HomeScreen() {
             </>
           )}
         </p>
+        <ExamDateField plan={examPlan} onChange={setExamPlan} />
         <div className="grid grid-cols-2 gap-2">
           {META.categories.map((c) => {
             const r = ready.okruhy.find((o) => o.cat === c.name)
