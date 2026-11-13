@@ -24,6 +24,12 @@ export function logLesson(state: JizdyState, record: LessonRecord): JizdyState {
   return { ...state, lessons: [...state.lessons, record] }
 }
 
+/** `own` plus the lessons of `other` it lacks. Lessons are append-only, so dedup by id is enough. */
+export function mergeLessons(own: JizdyState, other: JizdyState): JizdyState {
+  const seen = new Set(own.lessons.map((l) => l.id))
+  return { ...own, lessons: [...own.lessons, ...other.lessons.filter((l) => !seen.has(l.id))] }
+}
+
 /** Rep count per skill id across all logged lessons. */
 export function skillCoverage(
   state: JizdyState,

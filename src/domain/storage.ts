@@ -5,7 +5,7 @@ import {
   PROGRESS_VERSION,
   type ProgressData,
 } from './progress'
-import { emptyJizdyState, type JizdyState } from './jizdy'
+import { emptyJizdyState, mergeLessons, type JizdyState } from './jizdy'
 import type { AnswerRecord } from './session'
 
 // Anonymous progress lives under STORAGE_KEY; a signed-in account's under STORAGE_KEY:<uid>,
@@ -114,10 +114,7 @@ export function loadJizdy(uid?: string): JizdyState {
   // On sign-in, merge lessons logged while signed out (and pre-C3H2 data) into the
   // user's log, same as progress merges on sign-in. Sign-out empties the anonymous
   // key, so it only holds lessons logged on this device since the last sign-out.
-  // Lessons are append-only, so dedup by id is enough.
-  const own = readJizdy(s, jizdyKey(uid))
-  const seen = new Set(own.lessons.map((l) => l.id))
-  return { version: 1, lessons: [...own.lessons, ...anon.lessons.filter((l) => !seen.has(l.id))] }
+  return mergeLessons(readJizdy(s, jizdyKey(uid)), anon)
 }
 
 export function saveJizdy(state: JizdyState, uid?: string): void {
