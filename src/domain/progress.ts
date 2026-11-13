@@ -234,10 +234,15 @@ export function mergeProgress(
   let latest: Streak
   if (sb.lastDate !== sa.lastDate) {
     const [early, late] = sb.lastDate > sa.lastDate ? [sa, sb] : [sb, sa]
-    // A lone lesson the day after the other device's last one continues its streak.
+    // The late streak extends the early one when it started the day after early's last day,
+    // i.e. the gap in days equals the length of the late streak (1 day for a single lesson,
+    // 2 days for a 2-day run, etc.).
+    const [ey, em, ed] = early.lastDate.split('-').map(Number)
+    const [ly, lm, ld] = late.lastDate.split('-').map(Number)
+    const daysApart = (Date.UTC(ly, lm - 1, ld) - Date.UTC(ey, em - 1, ed)) / 86_400_000
     latest =
-      late.current === 1 && early.current > 0 && isNextDay(early.lastDate, late.lastDate)
-        ? { ...late, current: early.current + 1 }
+      early.current > 0 && daysApart === late.current
+        ? { ...late, current: early.current + late.current }
         : late
   }
   // On a date tie, keep the longer current streak (not the remote by default).
