@@ -9,7 +9,7 @@ import {
 import { reducer, initialState, resumeExam, type AppState, type Action } from './store'
 import { snapshotRound, validRound, type SavedRound } from './round'
 import { loadProgress, saveProgress, loadJizdy, saveJizdy, loadExam, saveExam, loadRound, saveRound, ROUND_KEY, claimAnonymousProgress, progressKey, JIZDY_KEY } from '@/domain/storage'
-import { emptyJizdyState } from '@/domain/jizdy'
+import { emptyJizdyState, mergeLessons } from '@/domain/jizdy'
 import { topicFromPath, questionFromPath, isExamPath } from '@/lib/topics'
 import { getQuestion } from '@/domain/questions'
 import { freshRng } from '@/domain/rng'
@@ -94,10 +94,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
         dispatch({ type: 'setPendingRound', round: validRound(initialState(), loadRound<SavedRound>()) })
       } else if (e.key?.startsWith(JIZDY_KEY)) {
         const ours = jizdyRef.current
-        const seen = new Set(ours.lessons.map((l) => l.id))
-        const added = loadJizdy(userRef.current?.id).lessons.filter((l) => !seen.has(l.id))
-        if (added.length) {
-          const state = { ...ours, lessons: [...ours.lessons, ...added] }
+        const state = mergeLessons(ours, loadJizdy(userRef.current?.id))
+        if (state.lessons.length > ours.lessons.length) {
           jizdyRef.current = state
           dispatch({ type: 'hydrateJizdy', state })
         }
