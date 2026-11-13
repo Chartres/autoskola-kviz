@@ -59,7 +59,7 @@ export function JizdyScreen() {
       skills: Array.from(selected),
     }
     dispatch({ type: 'logLesson', record })
-    track('key_action', { feature: 'jizdy' })
+    track('key_action', { action: 'lesson_logged', feature: 'jizdy' })
     setDate(todayStr())
     setDuration('')
     setSelected(new Set())
