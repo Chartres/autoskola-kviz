@@ -217,6 +217,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
         // C3H2: no jizdy wipe — lessons live under the user-scoped key; just reset
         // in-memory state so the next account (or anonymous) starts clean.
         dispatch({ type: 'hydrateJizdy', state: emptyJizdyState() })
+        // F8: clear the pending round so the next user doesn't see account A's set.
+        saveRound(null)
+        dispatch({ type: 'setPendingRound', round: null })
         // Sign-out: show the anonymous progress. The account's own copy stays under its key,
         // so answers the cloud never confirmed upload on that account's next sign-in.
         const anon = loadProgress()
