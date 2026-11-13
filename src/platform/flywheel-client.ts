@@ -21,13 +21,6 @@ export type TaxonomyEvent = (typeof TAXONOMY)[number]
 /** Minimal shape of the bits of supabase-js we use — keeps this dep-free + testable. */
 export interface SupabaseLike {
   from(table: string): { insert(row: unknown): { then?: (ok: () => void, err: () => void) => void } | Promise<unknown> }
-  auth?: {
-    signInWithOtp(args: { email: string; options?: unknown }): Promise<unknown>
-    signInWithOAuth(args: { provider: string; options?: unknown }): Promise<unknown>
-    signOut(): Promise<unknown>
-    getUser?(): Promise<{ data: { user: { id: string } | null } }>
-    onAuthStateChange?(cb: (event: string, session: { user?: { id: string } } | null) => void): unknown
-  }
 }
 
 export interface FlywheelClientConfig {
@@ -118,9 +111,6 @@ export interface FlywheelClient {
   identify(flywheelUid: string | null): void
   feedback(input: { sean_ellis?: string; score?: number; text?: string }): void
   logError(err: unknown, context?: Record<string, unknown>): void
-  signInWithEmail(email: string): Promise<void>
-  signInWithGoogle(): Promise<void>
-  signOut(): Promise<void>
 }
 
 export function createFlywheelClient(config: FlywheelClientConfig): FlywheelClient {
@@ -172,18 +162,6 @@ export function createFlywheelClient(config: FlywheelClientConfig): FlywheelClie
     logError: (err, context = {}) => {
       const message = err instanceof Error ? err.message : String(err)
       track('error', { message: message.slice(0, 500), ...context })
-    },
-    signInWithEmail: async (email) => {
-      // OTP code + magic link (template includes {{ .Token }}); survives
-      // link-prefetch scanners and cross-device opens (docs/research/auth.md).
-      await supabase?.auth?.signInWithOtp({ email })
-    },
-    signInWithGoogle: async () => {
-      await supabase?.auth?.signInWithOAuth({ provider: 'google' })
-    },
-    signOut: async () => {
-      await supabase?.auth?.signOut()
-      flywheelUid = null
     },
   }
 }
