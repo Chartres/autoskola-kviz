@@ -265,6 +265,8 @@ export function reducer(state: AppState, action: Action): AppState {
       if (!state.session) return state
       const session = advance(state.session)
       if (isFinished(session)) {
+        // The day the set was played, for the lesson streak, even if corrections run late.
+        const today = state.correction?.today ?? action.today
         // Control of error: outside the exam, a set isn't over while one of its answers is wrong.
         const missed = session.questions.filter((q) => session.chosen[q.id] !== q.correct)
         if (state.mode !== 'exam' && missed.length) {
@@ -274,8 +276,7 @@ export function reducer(state: AppState, action: Action): AppState {
             correction: {
               first: state.correction?.first ?? session,
               missed: state.correction?.missed ?? missed.length,
-              // The day the set was played, for the lesson streak, even if corrections run late.
-              today: state.correction?.today ?? action.today,
+              today,
             },
           }
         }
@@ -288,8 +289,8 @@ export function reducer(state: AppState, action: Action): AppState {
           // navigation (finishExam and goMenu already clear it; this path did not).
           examEndsAt: null,
           progress:
-            state.mode === 'lesson' && (state.correction?.today ?? action.today)
-              ? recordLessonComplete(state.progress, (state.correction?.today ?? action.today)!)
+            state.mode === 'lesson' && today
+              ? recordLessonComplete(state.progress, today)
               : state.progress,
         }
       }
