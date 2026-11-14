@@ -44,14 +44,16 @@ export function emptyProgress(): ProgressData {
   }
 }
 
+/** Whole days from `from` to `to` (YYYY-MM-DD); NaN when either is empty. */
+function daysBetween(from: string, to: string): number {
+  const [fy, fm, fd] = from.split('-').map(Number)
+  const [ty, tm, td] = to.split('-').map(Number)
+  return (Date.UTC(ty, tm - 1, td) - Date.UTC(fy, fm - 1, fd)) / 86_400_000
+}
+
 /** True if `today` (YYYY-MM-DD) is exactly the day after `prev`. */
 function isNextDay(prev: string, today: string): boolean {
-  if (!prev) return false
-  const [py, pm, pd] = prev.split('-').map(Number)
-  const [ty, tm, td] = today.split('-').map(Number)
-  const a = Date.UTC(py, pm - 1, pd)
-  const b = Date.UTC(ty, tm - 1, td)
-  return b - a === 86_400_000
+  return daysBetween(prev, today) === 1
 }
 
 /**
@@ -237,11 +239,8 @@ export function mergeProgress(
     // The late streak extends the early one when it started the day after early's last day,
     // i.e. the gap in days equals the length of the late streak (1 day for a single lesson,
     // 2 days for a 2-day run, etc.).
-    const [ey, em, ed] = early.lastDate.split('-').map(Number)
-    const [ly, lm, ld] = late.lastDate.split('-').map(Number)
-    const daysApart = (Date.UTC(ly, lm - 1, ld) - Date.UTC(ey, em - 1, ed)) / 86_400_000
     latest =
-      early.current > 0 && daysApart === late.current
+      early.current > 0 && daysBetween(early.lastDate, late.lastDate) === late.current
         ? { ...late, current: early.current + late.current }
         : late
   }
