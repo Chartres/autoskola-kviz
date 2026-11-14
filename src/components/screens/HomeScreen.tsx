@@ -136,6 +136,9 @@ export function HomeScreen() {
           {META.categories.map((c) => {
             const r = ready.okruhy.find((o) => o.cat === c.name)
             const weakest = ready.weakest === c.name
+            const pointsText = r && r.expected !== null
+              ? `${formatPoints(r.expected)} z ${r.max} ${r.max === 1 ? 'bodu' : 'bodů'}`
+              : undefined
             return (
               <button
                 key={c.id}
@@ -156,7 +159,7 @@ export function HomeScreen() {
                 {r && r.expected !== null ? (
                   <>
                     <div className="mt-1 font-mono text-xs text-sand-500 tabular-nums">
-                      {formatPoints(r.expected)} z {r.max} {r.max === 1 ? 'bodu' : 'bodů'}
+                      {pointsText}
                     </div>
                     <div className="mt-2">
                       <ProgressBar
@@ -164,7 +167,7 @@ export function HomeScreen() {
                         max={r.max}
                         tone="moss"
                         ariaLabel={`${c.name}: odhad bodů`}
-                        valueText={`${formatPoints(r.expected)} z ${r.max} ${r.max === 1 ? 'bodu' : 'bodů'}`}
+                        valueText={pointsText}
                       />
                     </div>
                   </>
