@@ -53,14 +53,14 @@ export function snapshotRound(state: AppState): SavedRound | null {
   }
 }
 
-function questionsFor(ids: unknown): Question[] | null {
+export function questionsFor(ids: unknown): Question[] | null {
   if (!Array.isArray(ids) || !ids.length) return null
   const qs = ids.map((id) => getQuestion(Number(id)))
   return qs.every((q) => q) ? (qs as Question[]) : null
 }
 
 /** Rebuild a session; scored against today's answer key, in case a deploy corrected one. */
-function sessionFor(questions: Question[], records: unknown): SessionState | null {
+export function sessionFor(questions: Question[], records: unknown): SessionState | null {
   if (!Array.isArray(records)) return null
   const byId = new Map(questions.map((q) => [q.id, q]))
   const seen = new Set<number>()

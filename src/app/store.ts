@@ -24,10 +24,9 @@ import {
 } from '@/domain/progress'
 import { buildLesson } from '@/domain/lesson'
 import type { Question } from '@/domain/types'
-import { getQuestion } from '@/domain/questions'
 import type { SavedExam } from '@/domain/storage'
 import { shuffle } from '@/domain/rng'
-import { snapshotRound, restoreRound, type SavedRound } from './round'
+import { snapshotRound, restoreRound, questionsFor, sessionFor, type SavedRound } from './round'
 
 // Bottom-tab destinations (persistent nav) + focused full-screen flows.
 export type TabView = 'home' | 'practice' | 'stats' | 'guide' | 'jizdy'
@@ -110,23 +109,15 @@ export const STALE_EXAM_MS = 60 * 60 * 1000
  */
 export function resumeExam(state: AppState, saved: SavedExam | null, now: number): AppState {
   if (!saved) return state
-  const found = saved.ids.map(getQuestion)
-  if (!found.length || found.some((q) => !q)) return state
-  const questions = found as NonNullable<(typeof found)[number]>[]
   // Damaged storage, or a deadline beyond one exam length (clock moved back): start clean.
   if (saved.endsAt > now + EXAM.timeLimitMinutes * 60 * 1000) return state
-  const byId = new Map(questions.map((q) => [q.id, q]))
-  const valid = saved.records.every(
-    (r) => !!r && typeof r === 'object' && byId.has(r.id) && ['a', 'b', 'c'].includes(r.choice),
-  )
-  if (!valid) return state
-  // Score against today's answer key, in case a deploy corrected one meanwhile.
-  const records = saved.records.map((r) => ({ ...r, correct: r.choice === byId.get(r.id)!.correct }))
+  // Same validation and rescoring as a saved practice round; the exam keeps its own index.
+  const questions = questionsFor(saved.ids)
+  const restored = questions && sessionFor(questions, saved.records)
+  if (!restored) return state
   const session: SessionState = {
-    questions,
-    index: Math.max(0, Math.min(Number(saved.index) || 0, questions.length)),
-    records,
-    chosen: Object.fromEntries(records.map((r) => [r.id, r.choice])),
+    ...restored,
+    index: Math.max(0, Math.min(Number(saved.index) || 0, restored.questions.length)),
   }
   if (now < saved.endsAt && !isFinished(session)) {
     return { ...begin(state, 'exam', session), examEndsAt: saved.endsAt }
