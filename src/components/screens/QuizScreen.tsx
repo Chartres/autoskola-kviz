@@ -10,6 +10,8 @@ import { todayStr } from '@/lib/date'
 import { loadExplanations, type Explanations } from '@/domain/explanations'
 import { track, conversion } from '@/analytics'
 import { setPosition } from '@/app/store'
+import { noteAfterAnswer } from '@/domain/passenger'
+import { PassengerNote, usePassenger } from '@/components/Passenger'
 
 const MODE_LABEL: Record<string, string> = {
   lesson: 'Denní dávka',
@@ -23,6 +25,7 @@ export function QuizScreen() {
   const { state, dispatch } = useApp()
   const { session, mode } = state
   const onExpire = useCallback(() => dispatch({ type: 'finishExam' }), [dispatch])
+  const passenger = usePassenger()
   // Explanations load as their own chunk; practice works without them meanwhile.
   const [explanations, setExplanations] = useState<Explanations | null>(null)
   useEffect(() => {
@@ -58,6 +61,12 @@ export function QuizScreen() {
   const isExam = mode === 'exam'
   // Where this set sits in the okruh; hidden in the correction round, which has its own count.
   const pos = state.practiceSet && !state.correction ? setPosition(state.practiceSet) : null
+  // The spolujezdec remarks on this set's answers so far; silent in the exam.
+  const outcomes = session.questions
+    .slice(0, session.index + 1)
+    .filter((q) => session.chosen[q.id] !== undefined)
+    .map((q) => session.chosen[q.id] === q.correct)
+  const remark = passenger && !isExam ? noteAfterAnswer(passenger, outcomes, question?.cat) : null
 
   if (!question) {
     return (
@@ -118,6 +127,11 @@ export function QuizScreen() {
         }
         explanation={explanations?.[question.id]}
         willCorrect={!isExam && session.questions.some((q) => session.chosen[q.id] !== undefined && session.chosen[q.id] !== q.correct)}
+        note={
+          passenger && remark ? (
+            <PassengerNote passenger={passenger} text={remark} mood={outcomes[outcomes.length - 1] ? 'up' : 'down'} />
+          ) : null
+        }
         onSourceOpen={(s) =>
           track('key_action', { action: 'source_opened', question: question.id, law: s.law, ref: s.ref })
         }

@@ -9,12 +9,15 @@ import { statFor } from '@/domain/progress'
 import { setPosition, remainingAfter, SET_SIZE } from '@/app/store'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import { FeedbackCard } from '@/components/FeedbackCard'
+import { noteForResult } from '@/domain/passenger'
+import { PassengerNote, usePassenger } from '@/components/Passenger'
 
 export function ResultsScreen() {
   const { state, dispatch } = useApp()
   const { session, examResult, mode } = state
   // Errors the learner put right in the correction rounds (score above is the first attempt).
   const corrected = state.correction?.missed ?? 0
+  const passenger = usePassenger()
 
   const isExam = mode === 'exam'
   const isLesson = mode === 'lesson'
@@ -103,6 +106,14 @@ export function ResultsScreen() {
           </p>
         )}
       </div>
+
+      {passenger && session && (
+        <PassengerNote
+          passenger={passenger}
+          text={noteForResult(passenger, { exam: isExam, passed: examResult?.passed, wrong: wrong.length, corrected })}
+          mood={(isExam ? examResult?.passed : wrong.length === 0 || corrected >= wrong.length) ? 'up' : 'down'}
+        />
+      )}
 
       {ps && (
         <section className="mt-6">

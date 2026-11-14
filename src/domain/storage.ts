@@ -150,6 +150,26 @@ export function saveExam(exam: SavedExam | null): void {
   }
 }
 
+// The chosen spolujezdec (see src/domain/passenger.ts). Per device, never synced.
+export const PASSENGER_KEY = 'autoskola-kviz:passenger:v1'
+
+export function loadPassenger(): string | null {
+  try {
+    return storage()?.getItem(PASSENGER_KEY) ?? null
+  } catch {
+    return null
+  }
+}
+
+export function savePassenger(id: string | null): void {
+  try {
+    if (id) storage()?.setItem(PASSENGER_KEY, id)
+    else storage()?.removeItem(PASSENGER_KEY)
+  } catch {
+    // storage unavailable: the choice lasts for this page only
+  }
+}
+
 // An okruh or daily set left unfinished (see src/app/round.ts). Per device, never synced.
 export const ROUND_KEY = 'autoskola-kviz:round:v1'
 

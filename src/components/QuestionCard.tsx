@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import type { Choice, Question } from '@/domain/types'
 import { imageUrl } from '@/lib/assets'
 import { sourceLabel, sourceUrl, type Explanation, type LawSource } from '@/domain/explanations'
@@ -20,6 +20,8 @@ export interface QuestionCardProps {
   onSourceOpen?: (source: LawSource) => void
   /** The set has errors to put right after this question (control of error). */
   willCorrect?: boolean
+  /** The spolujezdec's remark on this answer; practice only, under the explanation. */
+  note?: ReactNode
 }
 
 const ALL_OPTIONS: Choice[] = ['a', 'b', 'c']
@@ -82,6 +84,7 @@ export function QuestionCard({
   explanation,
   onSourceOpen,
   willCorrect,
+  note,
 }: QuestionCardProps) {
   const answered = chosen !== undefined
   const isCorrect = answered && chosen === question.correct
@@ -267,6 +270,8 @@ export function QuestionCard({
           ))}
         </section>
       )}
+
+      {answered && reveal && note}
 
       {answered && (
         <footer

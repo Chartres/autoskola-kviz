@@ -10,6 +10,7 @@ import { todayStr } from '@/lib/date'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import type { CategoryName } from '@/domain/types'
 import { roundSummary } from '@/app/round'
+import { PassengerPicker } from '@/components/Passenger'
 import { readiness, formatPoints, MIN_ANSWERS } from '@/domain/readiness'
 import { loadExamPlan, shouldAskResult } from '@/domain/examPlan'
 import { ExamDateField, ExamResultCard } from '@/components/ExamResult'
@@ -183,6 +184,8 @@ export function HomeScreen() {
           })}
         </div>
       </section>
+
+      <PassengerPicker />
 
       {/* Cross-promo: nudge strong theory learners to start practical lessons */}
       {showJizdyCta && (

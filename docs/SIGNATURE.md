@@ -12,6 +12,7 @@ The three live moves below shipped in #17 on 27 Oct 2026, before that rule exist
 | Roediger & Karpicke, the testing effect, *Psychological Science* 17(3) — https://doi.org/10.1111/j.1467-9280.2006.01693.x; Ebbinghaus, spacing (1885) | 2006 | The second attempt is a retrieval, not a reread: the options come back, the explanation doesn't. The daily set spaces review of weak questions. |
 | Benjamin Bloom, "Learning for Mastery" — https://en.wikipedia.org/wiki/Mastery_learning | 1968 | Mastery is a threshold, not a grade: a question counts as mastered after two right answers in a row. Readiness is shown per okruh in the exam's own unit, points, against the points the okruh carries (Připravenost, adapted from Zbrojní's readiness card). |
 | *Roadcraft*, UK police system of car control and commentary driving — https://en.wikipedia.org/wiki/Roadcraft | 1955 | Not a move yet. Idea for the 202 animated questions: name the hazard before seeing the options. Needs hazard notes per clip. |
+| Accursius, *Glossa ordinaria*, the marginal gloss to the Corpus Juris — https://en.wikipedia.org/wiki/Glossa_ordinaria_(Accursius); and the "Průvodce číslem" of the Czech magazine ČILICHILI (2006–2009), a character who comments through an issue | c. 1230; 2006 | Not a move yet. Proposal below: a passenger (spolujezdec) who remarks in the margin of an answer. The law stays in the text; the gloss only reacts. |
 
 ## Refused
 - Toy design: confetti, mascots, cartoon emoji, badges for their own sake, leaderboards.
@@ -32,6 +33,30 @@ The three live moves below shipped in #17 on 27 Oct 2026, before that rule exist
 | **Připravenost** | On Home each okruh tile shows the points it is expected to bring in the exam against what it carries ("7,2 z 12 bodů"), from the learner's own recorded answers; the okruh losing most points is marked "Nejvíc ztrát" once two have an estimate; the total "Odhad u zkoušky: 45 z 50 bodů · potřeba 43" appears once every okruh has ≥ 10 answered questions. Before that: "max. 12 bodů · zatím 3/10 otázek", no bar, no number. | Bloom; adapts Zbrojní's readiness card | `exam_finish {passed}`; pass rate of people who saw ≥ 43 expected | approved 2026-11-03 (option B) · live with #28 |
 
 Status: proposed → approved (dated) → live → or changed / reverted.
+
+### Proposal: Spolujezdec (the gloss in the margin)
+**Proposed 2026-11-14. Built on branch `spolujezdec` as a draft, not merged.** Pavol asked to "go with the top passengers and see how it would look"; he has not picked an option. Screenshots: `e2e/shots/spolujezdec-*.png` (390 px).
+
+**It collides with a line in "Refused": "Toy design: … mascots".** A passenger with a face is a mascot by any plain reading. Merging it means changing that line, and that is Pavol's call. What the branch does to stay inside the rest of the list: no confetti, badges or rewards; nothing is pushed or counted; the passenger is off until chosen and can be dismissed with one tap.
+
+What the learner sees:
+- On Home, a "Spolujezdec" card: four passengers and "Nikdo" (the default). The chosen one introduces itself in the first person, under a plate set like a sign plate: "Dopravní kužel · Z 1 · příloha č. 10 vyhlášky č. 294/2015 Sb."
+- In practice, under "Proč" and the quoted law, one line from the passenger after a mistake, and once at five and at ten right answers in a row. Kužel: "Nic si z toho nedělej. Mě dneska porazili třikrát." Pan Karel: "Hm. Já bych brzdil. Já jsem brzdil."
+- On the results of a set, one closing line.
+
+Rules, each held by a test (`src/domain/passenger.test.ts`, `e2e/spolujezdec.journey.spec.ts`):
+- The passenger never states a rule of the road: no paragraph signs, speeds, distances or right of way in any line. The explanation from the law does that.
+- Silent in the mock exam and on first-aid questions.
+- No line addresses the learner in a gendered past tense.
+- The nth mistake of a set gets the nth line, so a set does not repeat itself.
+
+The four: Dopravní kužel (gets knocked over, stays on your side), Testovací panák (Hybrid III, has seen worse), Vonný stromeček (hangs there, nothing is urgent), Pan Karel (thirty years an instructor, sighs as praise). The first three use "ty"; Pan Karel uses "vy", as the app does.
+
+- **Option A, the gloss as built.** Off by default, practice only. Cost: built; about 250 lines and four small drawings. Risk: the app reads less calm for those who turn it on.
+- **Option B, Home and results only.** The passenger introduces itself and closes a set, and says nothing during questions. Cost: remove one prop. Keeps question pages exactly as they are.
+- **Option C, not merged.** "Refused: mascots" stands. The branch stays as a record.
+- **Recommendation: A**, with the Refused line reworded to what it was guarding against: characters that cheer, reward or pressure. The gloss has a tradition older than the app store, it is the learner's choice, and no other Czech trainer has a voice (competition check of 2026-11-14).
+- **Metric if merged:** `key_action {action:'passenger_chosen', passenger}`; share of weekly set completers with a passenger chosen; sets finished per completer with and without one.
 
 ### Proposal: Připravenost (Bloom readiness)
 **Decided 2026-11-03: Option B. Built in #28.** Kept below as the record of what was shown.
@@ -73,4 +98,5 @@ Constitution articles that bind it: II, VI, VIII.
 | 2026-10-30 | A move approved for one product may be reused by another | **yes** — "Dont just blindly copy the pattern though." | Zbrojní's readiness card is not adopted here; still open. |
 | 2026-11-01 | For all quiz apps: 1 every answer counts when given / 2 an unfinished set waits with Pokračovat and Nový trénink / 3 a mock exam left early keeps its answers | **1, 2 and 3, without the half rule** — "For all quiz apps, remember the user's solution to a question even if they dont complete the round. Eg I start, complete 8 out of 12, then start again, I should [not] get another set of the first 8"; then "123 but without the half rule" | Answers already counted in progress on tap; new sets put never-answered questions first, and the daily set's review share stays ≤ 40 %. Added: an okruh or daily set left partway (or lost to a reload) waits on Home as "Rozpracovaná sada" with Pokračovat (same questions, first unanswered one, Oprava chyb included) and Nový trénink (a fresh set of the same kind). Streak and `conversion` only on a finished set; no partial threshold. A mock exam left early keeps its answers and records no attempt or score. Snapshot per device in localStorage (`autoskola-kviz:round:v1`), not synced. |
 | 2026-11-03 | Připravenost: A Home line / B per-okruh bars / C after mock exam | **B** — "B: a bar per okruh on Home" (decision page card v6.autoskola-kviz.readiness, 11:49 UTC; relayed by the orchestrating session; no note) | Built in #28. Adopts Zbrojní's readiness card under the 30 Oct reuse rule, fitted to this exam rather than copied: weights from the official composition (pravidla 20, situace 12, zásady 8, předpisy 4, značky 3, podmínky 2, zdravověda 1 = 50, pass 43); estimate = the okruh's share of right answers over its recorded practice answers (Oprava chyb retries are not recorded) × its points, shown to a tenth and rounded down, the total being the sum of the tiles (never rounded up across 43); "Nejvíc ztrát" once two okruhy have an estimate; shown after ≥ 10 answered questions per okruh, total only when all seven have one. It replaces the mastery count on the Home tiles; mastery stays on Postup. |
+| 2026-11-14 | Spolujezdec: A the gloss as built / B Home and results only / C not merged | pending | Draft on branch `spolujezdec`. Needs Pavol's word because it is a signature move and it changes a line in "Refused". |
 | 2026-11-07 | "After the App" directions (flywheel): sell the result / distribution through submissions / … | **Sell the result: Pursue. Technical submissions: Test first** — "Test this through technical submissions, I am still uneasy posting on social media, but the email to the Met and Danish museum was great because it was in response to their call for sharing." (relayed by the orchestrating session) | Test A built in #31: exam date on the device, then once "Jak dopadla zkouška?" (složil(a) / nesložil(a) / ještě ne) as one event with the readiness bucket. No money or guarantee wording. Stop after 6 weeks if < 30 real results or readiness predicts pass/fail with AUC < 0.7. Test B: research and drafts in `docs/outreach/2026-11-07.md`; stop after 6 weeks if AI search still finds the app in 0 of 14 queries and visitors rose < 20 %. |
