@@ -8,6 +8,7 @@ import { render, screen, act } from '@testing-library/react'
 import { AppProvider, useApp } from './AppContext'
 import { emptyProgress, recordAnswer, type ProgressData } from '@/domain/progress'
 import { saveProgress } from '@/domain/storage'
+import type { LessonRecord } from '@/domain/jizdy'
 
 const { auth, cloud, flush, failSaves } = vi.hoisted(() => ({
   auth: { user: null as { id: string } | null },
@@ -40,8 +41,12 @@ function Spy() {
   dispatch = app.dispatch
   return <div data-testid="ids">{Object.keys(app.state.progress.stats).sort().join(',')}</div>
 }
-const ui = () => <AppProvider><Spy /><Track /></AppProvider>
+function LessonCount() {
+  return <div data-testid="lesson-count">{useApp().state.jizdyState.lessons.length}</div>
+}
+const ui = () => <AppProvider><Spy /><Track /><LessonCount /></AppProvider>
 const shown = () => screen.getByTestId('ids').textContent
+const lessonShown = () => screen.getByTestId('lesson-count').textContent
 const cloudIds = (uid: string) => Object.keys(cloud.get(uid)?.stats ?? {}).sort().join(',')
 const settle = () => act(async () => { await new Promise((r) => setTimeout(r, 0)) })
 
@@ -78,7 +83,20 @@ function mount() {
   return rerender
 }
 
+const lesson: LessonRecord = { id: 'x1', date: '2026-09-01', durationMin: 60, skills: [] }
+
 describe('two accounts on one device', () => {
+  it('sign out A, sign in B: B does not get A’s Jízdy lessons', async () => {
+    const re = mount()
+    await as('A', re)
+    act(() => dispatch({ type: 'logLesson', record: lesson }))
+    await settle()
+    expect(lessonShown()).toBe('1')
+    await as(null, re)
+    await as('B', re)
+    expect(lessonShown()).toBe('0')
+  })
+
   it('sign out A with an unsynced answer, sign in B: B does not get A’s answer', async () => {
     cloud.set('B', recordAnswer(emptyProgress(), 2, true, 100))
     const re = mount()

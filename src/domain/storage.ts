@@ -5,7 +5,7 @@ import {
   PROGRESS_VERSION,
   type ProgressData,
 } from './progress'
-import { emptyJizdyState, type JizdyState } from './jizdy'
+import { emptyJizdyState, mergeLessons, type JizdyState } from './jizdy'
 import type { AnswerRecord } from './session'
 
 // Anonymous progress lives under STORAGE_KEY; a signed-in account's under STORAGE_KEY:<uid>,
@@ -56,6 +56,14 @@ function writeJson(key: string, value: unknown): boolean {
   }
 }
 
+function removeKey(key: string): void {
+  try {
+    storage()?.removeItem(key)
+  } catch {
+    // storage unavailable: nothing was saved either
+  }
+}
+
 export function saveProgress(data: ProgressData, uid?: string): void {
   writeJson(progressKey(uid), data)
 }
@@ -71,11 +79,8 @@ export function claimAnonymousProgress(uid: string): ProgressData {
   const merged = mergeProgress(own, loadProgress())
   // Empty the anonymous key only once the account holds the answers on disk.
   if (!writeJson(progressKey(uid), merged)) return merged
-  try {
-    s.removeItem(STORAGE_KEY)
-  } catch {
-    // storage unavailable: the anonymous copy stays, merging again is harmless for this user
-  }
+  // If removal fails the anonymous copy stays; merging again is harmless for this user.
+  removeKey(STORAGE_KEY)
   return merged
 }
 
@@ -109,10 +114,11 @@ export function loadJizdy(uid?: string): JizdyState {
   // On sign-in, merge lessons logged while signed out (and pre-C3H2 data) into the
   // user's log, same as progress merges on sign-in. Sign-out empties the anonymous
   // key, so it only holds lessons logged on this device since the last sign-out.
-  // Lessons are append-only, so dedup by id is enough.
-  const own = readJizdy(s, jizdyKey(uid))
-  const seen = new Set(own.lessons.map((l) => l.id))
-  return { version: 1, lessons: [...own.lessons, ...anon.lessons.filter((l) => !seen.has(l.id))] }
+  const merged = mergeLessons(readJizdy(s, jizdyKey(uid)), anon)
+  // Clear the anonymous key after merging so they can't re-merge into the next account.
+  // Guard with writeJson first so the data isn't lost if the write fails (quota, private mode).
+  if (anon.lessons.length > 0 && writeJson(jizdyKey(uid), merged)) removeKey(JIZDY_KEY)
+  return merged
 }
 
 export function saveJizdy(state: JizdyState, uid?: string): void {
@@ -141,13 +147,7 @@ export function loadExam(): SavedExam | null {
 
 export function saveExam(exam: SavedExam | null): void {
   if (exam) writeJson(EXAM_KEY, exam)
-  else {
-    try {
-      storage()?.removeItem(EXAM_KEY)
-    } catch {
-      // storage unavailable: nothing was saved either
-    }
-  }
+  else removeKey(EXAM_KEY)
 }
 
 // An okruh or daily set left unfinished (see src/app/round.ts). Per device, never synced.
@@ -165,11 +165,5 @@ export function loadRound<T>(): T | null {
 
 export function saveRound(round: unknown | null): void {
   if (round) writeJson(ROUND_KEY, round)
-  else {
-    try {
-      storage()?.removeItem(ROUND_KEY)
-    } catch {
-      // storage unavailable: nothing was saved either
-    }
-  }
+  else removeKey(ROUND_KEY)
 }

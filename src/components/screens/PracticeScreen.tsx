@@ -118,7 +118,9 @@ export function PracticeScreen() {
           type="button"
           disabled={practiceCount === 0}
           onClick={() => {
-            track('start_practice')
+            const cats = [...state.selectedCategories]
+            const topic = cats.length === 0 ? 'all' : cats.length === 1 ? cats[0] : 'custom'
+            track('start_practice', { topic, from: 'practice' })
             dispatch({ type: 'startPractice', rng: freshRng() })
           }}
           className="glow-terra mt-3 w-full rounded-card bg-terra-500 px-5 py-3 font-display font-semibold text-sand-950 transition-colors hover:bg-terra-400 disabled:cursor-not-allowed disabled:opacity-50"

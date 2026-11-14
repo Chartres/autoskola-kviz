@@ -277,4 +277,14 @@ describe('mergeProgress streak across devices', () => {
   it('ignores an empty streak', () => {
     expect(cur(emptyProgress() as never, withStreak(4, '2026-06-10')).current).toBe(4)
   })
+
+  it('extends the earlier streak when the later run spans multiple days adjacent to it', () => {
+    // device A: 10-day streak ending Monday 2026-06-09
+    // device B: 2-day streak ending Wednesday 2026-06-11 (Tuesday + Wednesday)
+    // Tuesday immediately follows Monday → merged streak = 10 + 2 = 12
+    const a = withStreak(10, '2026-06-09')
+    const b = withStreak(2, '2026-06-11')
+    expect(cur(a, b)).toMatchObject({ current: 12, best: 12, lastDate: '2026-06-11' })
+    expect(cur(b, a)).toMatchObject({ current: 12, lastDate: '2026-06-11' })
+  })
 })
