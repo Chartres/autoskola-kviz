@@ -99,3 +99,15 @@ test('the passenger keeps quiet in the mock exam', async ({ page }) => {
   await expect(page.getByText('Uloženo')).toBeVisible()
   await expect(page.getByTestId('passenger-note')).toHaveCount(0)
 })
+
+test('the guide opens with the leaflet; "Užít první dávku" starts the daily set', async ({ page }) => {
+  await page.goto('/')
+  await page.getByRole('button', { name: 'Průvodce' }).click()
+  const leaflet = page.getByRole('region', { name: 'Příbalová informace' })
+  await expect(leaflet).toContainText('všech 1136 oficiálních otázek')
+  await expect(leaflet).toContainText('účinná dávka 43 bodů')
+  await leaflet.screenshot({ path: 'e2e/shots/letak.png' })
+  await leaflet.getByRole('button', { name: 'Užít první dávku' }).click()
+  await expect(page.getByText('Denní dávka')).toBeVisible()
+  await expect(page.getByRole('group', { name: 'Možnosti odpovědi' })).toBeVisible()
+})

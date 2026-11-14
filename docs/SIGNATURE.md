@@ -57,6 +57,8 @@ The four: Dopravní kužel (gets knocked over, stays on your side), Testovací p
 - Each passenger has 63 lines: 24 for a mistake, and sets for the third mistake in a row, five and ten right in a row, a pass, a fail, a near miss, a clean set and a corrected set. A set of 20 never repeats a line, and the starting point changes from set to set.
 - **The bold design.** The branch also re-themes the app: off-white paper, ink frames with hard shadows, sign red, yellow, blue and green, headings in Anton, text in Bitter. Home opens with the number that matters, a cropped "43" on red. This replaces the sand, terracotta and moss palette described under "Visual signature" and in `docs/DESIGN-BRIEF.md`; those two texts are not yet rewritten and wait for his look at the screenshots.
 
+- **The leaflet.** The guide (Průvodce) opens with "Příbalová informace": what the app is, set as a medicine leaflet with the exam's own numbers ("účinná dávka 43 bodů"), and a button "Užít první dávku" that starts the daily set. Pavol picked this copy on 2026-11-14.
+
 - **Option A, the gloss as built.** Off by default, practice only. Cost: built; about 250 lines and four small drawings. Risk: the app reads less calm for those who turn it on.
 - **Option B, Home and results only.** The passenger introduces itself and closes a set, and says nothing during questions. Cost: remove one prop. Keeps question pages exactly as they are.
 - **Option C, not merged.** "Refused: mascots" stands. The branch stays as a record.
