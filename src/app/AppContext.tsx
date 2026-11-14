@@ -60,7 +60,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const justHydratedRef = useRef(false)
   // M5: uid of the signed-in user, to detect the signed-in → signed-out transition.
   const signedInUidRef = useRef<string | null>(null)
-  const cloudSave = (uid: string, data: ProgressData) => supabaseStore.save(uid, data)
   // Fold `incoming` into the in-memory progress; dispatch only if it changed anything.
   // ponytail: bookmarks stay as this copy has them (a union would undo removals); true
   // cross-device removal needs deletion markers.
@@ -78,7 +77,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     const remote = await supabaseStore.fetch(uid)
     const merged = remote ? { ...mergeProgress(local, remote), bookmarks: local.bookmarks } : local
     // Equal to the cloud (bookmarks included): nothing to upload.
-    if (!remote || canonical(merged) !== canonical(remote)) await cloudSave(uid, merged).catch(() => {})
+    if (!remote || canonical(merged) !== canonical(remote)) await supabaseStore.save(uid, merged).catch(() => {})
     if (signedInUidRef.current !== uid) return
     adopt(merged)
   }
@@ -244,7 +243,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     syncingRef.current = true // H1: block debounced save while fetch is in flight
     let uploadFailed = false
     const save = (id: string, d: ProgressData) =>
-      cloudSave(id, d).catch((e) => {
+      supabaseStore.save(id, d).catch((e) => {
         uploadFailed = true
         throw e
       })
