@@ -1,46 +1,49 @@
 @import 'tailwindcss';
 
 /*
-  Autoškola kvíz — bright, calm, Montessori-warm.
-  Warm paper neutrals, a terracotta accent, soft rounded corners.
+  Autoškola kvíz — the bold version (proposal on branch `spolujezdec`).
+  Off-white paper, ink frames, the colours of road signs: red, yellow, blue, green.
+  Headings in Anton, text in Bitter, numbers in Plex Mono.
 
   NOTE: the sand scale is SEMANTIC, not literal lightness:
   950 = the page surface (lightest), 50 = the strongest ink (darkest).
-  This keeps every `text-sand-50 on bg-sand-950` pairing high-contrast
-  without touching each component.
 */
 @theme {
-  /* Warm paper → ink */
-  --color-sand-950: #faf6ee; /* page background */
-  --color-sand-900: #f4eee1; /* deep panel */
-  --color-sand-800: #ede4d2; /* panel */
-  --color-sand-700: #d9cdb6; /* borders */
-  --color-sand-600: #8f806b; /* subtle text / disabled */
-  --color-sand-500: #7a6c58; /* muted text */
-  --color-sand-400: #64573f; /* secondary text */
-  --color-sand-300: #524632; /* body text */
-  --color-sand-200: #423827; /* strong text */
-  --color-sand-100: #332b1e; /* near-ink */
-  --color-sand-50: #241e14; /* ink — headings */
+  /* Paper → ink */
+  --color-sand-950: #f7f4ec; /* page background */
+  --color-sand-900: #efebdf; /* deep panel */
+  --color-sand-800: #e9e4d5; /* panel */
+  --color-sand-700: #16140f; /* frames: every border is an ink line */
+  --color-sand-600: #6b675e; /* subtle text / disabled */
+  --color-sand-500: #5e5a52; /* muted text */
+  --color-sand-400: #4a4740; /* secondary text */
+  --color-sand-300: #33312c; /* body text */
+  --color-sand-200: #262420; /* strong text */
+  --color-sand-100: #1b1a16; /* near-ink */
+  --color-sand-50: #111111; /* ink — headings */
 
-  /* Terracotta accent — primary actions, focus, streak */
-  --color-terra-300: #8a3d18; /* accent text on paper */
-  --color-terra-400: #9c4a20; /* hover / icons */
-  --color-terra-500: #b05a2b; /* primary button surface (paper text on top) */
-  --color-terra-600: #7c360f;
+  /* Primary surface is ink; the accent on paper is sign red */
+  --color-terra-300: #c3140f; /* accent text on paper */
+  --color-terra-400: #c3140f; /* hover / icons */
+  --color-terra-500: #111111; /* primary button surface (paper text on top) */
+  --color-terra-600: #8f0f0b;
 
-  /* Calm semantic feedback */
-  --color-moss-400: #3c7a4e; /* correct — readable on paper */
-  --color-moss-500: #2f6b41;
-  --color-rust-400: #b03a2e; /* wrong — a learning moment, not an alarm */
-  --color-rust-500: #96281e;
+  /* Feedback in sign colours */
+  --color-moss-400: #0a7d3c; /* correct */
+  --color-moss-500: #0a7d3c;
+  --color-rust-400: #c3140f; /* wrong */
+  --color-rust-500: #c3140f;
 
-  --font-sans: 'Nunito', ui-sans-serif, system-ui, sans-serif;
-  --font-display: 'Nunito', ui-sans-serif, system-ui, sans-serif;
+  --color-sign-red: #e2231a;
+  --color-sign-yellow: #ffd21f;
+  --color-sign-blue: #1356a8;
+  --color-road: #2f3236;
+
+  --font-sans: 'Bitter', Georgia, 'Times New Roman', serif;
+  --font-display: 'Anton', Impact, 'Arial Narrow', sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', monospace;
 
-  /* Soft, friendly corners */
-  --radius-card: 14px;
+  --radius-card: 4px;
 }
 
 :root {
@@ -61,11 +64,6 @@ body {
   font-feature-settings: 'tnum' 1; /* tabular numerals for scores */
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  /* warm paper with a soft morning-light wash at the top */
-  background-image:
-    radial-gradient(1100px 620px at 50% -12%, rgba(176, 90, 43, 0.07), transparent 60%),
-    linear-gradient(180deg, #fdfaf4 0%, var(--color-sand-950) 45%);
-  background-repeat: no-repeat;
 }
 
 /* Prevent horizontal overflow (e.g. edge tooltips) without breaking sticky/fixed. */
@@ -78,29 +76,60 @@ body {
   color: var(--color-sand-50);
 }
 
-/* Soft warm emphasis for the active/primary surface */
+/* Frames: two-point ink lines and a hard offset shadow instead of a glow */
+.rounded-card.border {
+  border-width: 2px;
+}
 .glow-terra {
-  box-shadow:
-    0 0 0 1px color-mix(in srgb, var(--color-terra-500) 30%, transparent),
-    0 6px 18px -10px color-mix(in srgb, var(--color-terra-500) 55%, transparent);
+  box-shadow: 4px 4px 0 var(--color-sign-yellow), 4px 4px 0 2px var(--color-sand-50);
 }
 .glow-moss {
-  box-shadow:
-    0 0 0 1px color-mix(in srgb, var(--color-moss-500) 40%, transparent),
-    0 6px 18px -10px color-mix(in srgb, var(--color-moss-400) 55%, transparent);
+  box-shadow: 4px 4px 0 var(--color-moss-400);
 }
 
-/* Visible, warm focus ring across all interactive elements */
+/* Focus: a yellow sign-plate ring with an ink edge */
 *:focus-visible {
   outline: none;
   box-shadow:
-    0 0 0 2px var(--color-sand-950),
-    0 0 0 4px var(--color-terra-500);
+    0 0 0 3px var(--color-sign-yellow),
+    0 0 0 5px var(--color-sand-50);
 }
 
+/* Anton has one weight and wants capitals */
 .font-display {
   font-family: var(--font-display);
-  letter-spacing: -0.01em;
+  font-weight: 400 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.012em;
+  line-height: 1.05;
+}
+
+/* A black slab behind a line of display type, as on a road-works board */
+.slab {
+  display: inline;
+  background: var(--color-sand-50);
+  color: var(--color-sand-950);
+  padding: 0.06em 0.3em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* The lane line: a dashed divider between sections */
+.lane {
+  height: 6px;
+  background: repeating-linear-gradient(90deg, var(--color-sand-50) 0 28px, transparent 28px 46px);
+}
+
+/* A rubber stamp for a result */
+.stamp {
+  display: inline-block;
+  transform: rotate(-6deg);
+  border: 3px solid currentColor;
+  padding: 0.3rem 0.7rem;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 /* Prose styling for the study guide (no typography plugin) */

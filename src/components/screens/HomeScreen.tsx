@@ -45,12 +45,23 @@ export function HomeScreen() {
 
   return (
     <div className="mx-auto w-full max-w-xl px-4 pt-2">
-      <header className="mb-4 flex flex-wrap items-center justify-between gap-x-2 gap-y-2">
-        <h1 className="font-display text-2xl font-bold tracking-tight text-sand-50">
+      {/* The number that matters, as the picture: 43 of 50 points pass the exam. */}
+      <header className="relative -mx-4 mb-4 overflow-hidden border-b-4 border-sand-50 bg-sign-red px-4 pb-4 pt-3 sm:mx-0 sm:border-4">
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-3 -top-7 select-none font-display text-[13.5rem] leading-none text-white"
+          style={{ letterSpacing: '-0.03em' }}
+        >
+          43
+        </span>
+        <h1 className="relative font-display text-3xl tracking-tight text-white">
           Autoškola kvíz
         </h1>
-        <div className="ml-auto flex items-center gap-2">
-          <div className="flex items-center gap-2 rounded-card border border-sand-700 px-3 py-1.5">
+        <p className="relative mt-3 max-w-[13.5rem] font-display text-[1.35rem]" style={{ lineHeight: 1.5 }}>
+          <span className="slab">43 bodů z 50. Víc nepotřebujete. Míň nestačí.</span>
+        </p>
+        <div className="relative mt-4 flex items-center gap-2">
+          <div className="flex items-center gap-2 rounded-card border border-sand-700 bg-sand-950 px-3 py-1.5">
             <span aria-hidden className="text-terra-400">
               ▲
             </span>
@@ -77,9 +88,9 @@ export function HomeScreen() {
           track('start_lesson')
           dispatch({ type: 'startLesson', rng: freshRng() })
         }}
-        className="glow-terra mb-3 block w-full rounded-card border border-terra-500/50 bg-terra-500/10 p-5 text-left transition-colors hover:bg-terra-500/20"
+        className="mb-4 block w-full rounded-card border border-sand-700 bg-sign-yellow p-5 text-left shadow-[5px_5px_0_var(--color-sand-50)] transition-transform hover:-translate-y-0.5"
       >
-        <div className="font-mono text-xs uppercase tracking-[0.2em] text-terra-400">
+        <div className="font-mono text-xs uppercase tracking-[0.2em] text-sand-50">
           Denní dávka
         </div>
         <div className="mt-1 font-display text-2xl font-bold tracking-tight text-sand-50">
@@ -89,7 +100,7 @@ export function HomeScreen() {
           Krátká dávka na míru — opakování slabých míst i nové otázky.
         </div>
         <div className="mt-3 inline-flex items-center gap-2 rounded-card bg-terra-500 px-4 py-2 font-display text-sm font-semibold text-sand-950">
-          Začít →
+          Užít dnešní dávku →
         </div>
       </button>
 
@@ -134,7 +145,7 @@ export function HomeScreen() {
         </p>
         <ExamDateField plan={examPlan} onChange={setExamPlan} />
         <div className="grid grid-cols-2 gap-2">
-          {META.categories.map((c) => {
+          {META.categories.map((c, i) => {
             const r = ready.okruhy.find((o) => o.cat === c.name)
             const weakest = ready.weakest === c.name
             return (
@@ -146,8 +157,12 @@ export function HomeScreen() {
                   weakest ? 'border-terra-500' : 'border-sand-700'
                 }`}
               >
-                <div className="text-sm font-semibold leading-snug text-sand-100">
-                  {c.name}
+                <div className="flex items-start gap-2 text-sm font-semibold leading-snug text-sand-100">
+                  {/* The seven okruhy as numbered stops on the way to the exam. */}
+                  <span aria-hidden="true" className="flex h-6 w-6 flex-none items-center justify-center rounded-full bg-sand-50 font-mono text-xs text-sand-950">
+                    {i + 1}
+                  </span>
+                  <span>{c.name}</span>
                 </div>
                 {weakest && (
                   <div className="mt-1 font-mono text-[0.65rem] uppercase tracking-[0.12em] text-terra-300">
@@ -185,6 +200,7 @@ export function HomeScreen() {
         </div>
       </section>
 
+      <div className="lane my-5" aria-hidden="true" />
       <PassengerPicker />
 
       {/* Cross-promo: nudge strong theory learners to start practical lessons */}

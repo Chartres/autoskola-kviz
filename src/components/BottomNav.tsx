@@ -39,7 +39,7 @@ export function BottomNav() {
   return (
     <nav
       aria-label="Hlavní navigace"
-      className="sticky bottom-0 z-30 border-t border-sand-800 bg-sand-950/95 backdrop-blur"
+      className="sticky bottom-0 z-30 border-t-4 border-sign-yellow bg-road"
       style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
     >
       <ul className="mx-auto flex max-w-md">
@@ -52,7 +52,7 @@ export function BottomNav() {
                 onClick={() => dispatch({ type: 'navigate', view: tab })}
                 aria-current={active ? 'page' : undefined}
                 className={`flex w-full flex-col items-center gap-1 py-2.5 text-[0.7rem] font-medium transition-colors ${
-                  active ? 'text-terra-400' : 'text-sand-500 hover:text-sand-300'
+                  active ? 'text-sign-yellow' : 'text-sand-900 hover:text-white'
                 }`}
               >
                 <svg

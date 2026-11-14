@@ -10,7 +10,7 @@ import { todayStr } from '@/lib/date'
 import { loadExplanations, type Explanations } from '@/domain/explanations'
 import { track, conversion } from '@/analytics'
 import { setPosition } from '@/app/store'
-import { noteAfterAnswer } from '@/domain/passenger'
+import { noteAfterAnswer, seedFor } from '@/domain/passenger'
 import { PassengerNote, usePassenger } from '@/components/Passenger'
 
 const MODE_LABEL: Record<string, string> = {
@@ -66,7 +66,7 @@ export function QuizScreen() {
     .slice(0, session.index + 1)
     .filter((q) => session.chosen[q.id] !== undefined)
     .map((q) => session.chosen[q.id] === q.correct)
-  const remark = passenger && !isExam ? noteAfterAnswer(passenger, outcomes, question?.cat) : null
+  const remark = passenger && !isExam ? noteAfterAnswer(passenger, outcomes, question?.cat, seedFor(session.questions.map((q) => q.id))) : null
 
   if (!question) {
     return (

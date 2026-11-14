@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+<defs>
+<linearGradient id="ka-skin" x1="0" x2="1"><stop offset="0" stop-color="#f3d7b7"/><stop offset="1" stop-color="#d9b089"/></linearGradient>
+<linearGradient id="ka-jacket" x1="0" x2="1"><stop offset="0" stop-color="#86795f"/><stop offset="1" stop-color="#584e3c"/></linearGradient>
+<linearGradient id="ka-cap" x1="0" x2="1"><stop offset="0" stop-color="#7b6850"/><stop offset="1" stop-color="#4b3d2e"/></linearGradient>
+<linearGradient id="ka-steel" x1="0" x2="1"><stop offset="0" stop-color="#e3dfd3"/><stop offset=".5" stop-color="#bdb8ab"/><stop offset="1" stop-color="#8d887c"/></linearGradient>
+</defs>
+<g class="ka-body">
+<path d="M12 204Q16 152 60 143L92 162L124 143Q168 152 172 204Z" fill="url(#ka-jacket)" stroke="#241e14" stroke-width="4" stroke-linejoin="round"/>
+<path d="M72 147L92 174L112 147L104 139H80Z" fill="#f4eee1" stroke="#241e14" stroke-width="3" stroke-linejoin="round"/>
+<path d="M60 143L84 178M124 143L100 178" stroke="#241e14" stroke-width="3" stroke-linecap="round"/>
+<rect x="34" y="168" width="17" height="17" rx="3.5" fill="#2f5d8a" stroke="#241e14" stroke-width="2.6"/><path d="M40 172v9h6" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g class="ka-head">
+<rect x="80" y="120" width="24" height="26" fill="#d9b089" stroke="#241e14" stroke-width="3"/>
+<ellipse cx="54" cy="91" rx="6.5" ry="9.5" fill="#e6c29d" stroke="#241e14" stroke-width="3"/><ellipse cx="130" cy="91" rx="6.5" ry="9.5" fill="#d9b089" stroke="#241e14" stroke-width="3"/>
+<path d="M56 82Q56 43 92 43Q128 43 128 82Q128 113 110 127Q92 137 74 127Q56 113 56 82Z" fill="url(#ka-skin)" stroke="#241e14" stroke-width="4" stroke-linejoin="round"/>
+<path d="M57 80q-3-12 5-19l3 16zM127 80q3-12-5-19l-3 16z" fill="#bcb6aa" stroke="#241e14" stroke-width="2.4" stroke-linejoin="round"/>
+<path d="M50 63Q52 30 92 28Q134 28 136 61Q114 52 92 52Q68 52 50 63Z" fill="url(#ka-cap)" stroke="#241e14" stroke-width="4" stroke-linejoin="round"/>
+<path d="M62 44q14-10 34-10M70 52q10-5 22-5" fill="none" stroke="#a08a6c" stroke-width="2" opacity=".6"/>
+<path d="M50 63Q70 52 96 54Q130 56 151 69Q147 78 136 75Q112 63 86 65Q66 67 52 73Z" fill="#3f3428" stroke="#241e14" stroke-width="4" stroke-linejoin="round"/>
+<circle cx="93" cy="30" r="3.2" fill="#3f3428" stroke="#241e14" stroke-width="2"/>
+<path class="ka-brow-l" d="M65 80q9-6 19-2" fill="none" stroke="#6b655a" stroke-width="5.2" stroke-linecap="round"/>
+<path class="ka-brow-r" d="M100 78q10-4 19 2" fill="none" stroke="#6b655a" stroke-width="5.2" stroke-linecap="round"/>
+<circle cx="76" cy="92" r="11.5" fill="#fff" fill-opacity=".38" stroke="#241e14" stroke-width="3"/><circle cx="108" cy="92" r="11.5" fill="#fff" fill-opacity=".38" stroke="#241e14" stroke-width="3"/>
+<path d="M87.5 91q4.500-4 9 0M64.500 90L56 87M119.500 90L128 87" fill="none" stroke="#241e14" stroke-width="3" stroke-linecap="round"/>
+<path d="M69 86l5-4M101 86l5-4" stroke="#fff" stroke-width="2.6" stroke-linecap="round" opacity=".95"/>
+<g class="ka-eyes"><circle cx="77" cy="93.500" r="2.800" fill="#241e14"/><circle cx="108" cy="93.500" r="2.800" fill="#241e14"/><path d="M68 90q9-5 17 0M100 90q8-5 17 0" fill="none" stroke="#241e14" stroke-width="2.400" stroke-linecap="round"/></g>
+<path d="M92 94q-8 14-2 19q5 3 10-1" fill="#e2bb93" stroke="#241e14" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M85 124h13" stroke="#241e14" stroke-width="2.600" stroke-linecap="round"/>
+<path class="ka-stache" d="M92 110q-10-8-24-2q-7 4-9 11q11 2 19-2q8-2 14-6q6 4 14 6q8 4 19 2q-2-7-9-11q-14-6-24 2z" fill="#a39d92" stroke="#241e14" stroke-width="3" stroke-linejoin="round"/>
+<g class="ka-sigh" fill="#fffdf8" stroke="#241e14" stroke-width="2.200"><circle cx="134" cy="121" r="6"/><circle cx="143" cy="117" r="8"/><circle cx="153" cy="121" r="5.500"/></g>
+</g>
+<g class="ka-thermos">
+<g class="ka-steam" fill="none" stroke="#241e14" stroke-width="2.600" stroke-linecap="round" opacity=".55"><path class="ka-s1" d="M160 90q-6-8 0-16q6-8 0-16"/><path class="ka-s2" d="M171 92q-5-7 0-14q5-7 0-13"/></g>
+<rect x="153" y="97" width="24" height="21" rx="5" fill="#b05a2b" stroke="#241e14" stroke-width="4"/>
+<path d="M180 130q13 4 13 18q0 13-13 15" fill="none" stroke="#241e14" stroke-width="4" stroke-linecap="round"/>
+<rect x="150" y="113" width="30" height="72" rx="8" fill="url(#ka-steel)" stroke="#241e14" stroke-width="4"/>
+<rect x="150" y="150" width="30" height="11" fill="#b05a2b" stroke="#241e14" stroke-width="3"/>
+<path d="M157 120v24" stroke="#fff" stroke-width="3.500" stroke-linecap="round" opacity=".7"/>
+<path d="M146 152q-9 4-7 17q2 12 14 12h9v-27z" fill="#e6c29d" stroke="#241e14" stroke-width="3.500" stroke-linejoin="round"/>
+<path d="M141 162h13M141 170h13" stroke="#241e14" stroke-width="2.200" stroke-linecap="round" opacity=".7"/>
+</g>
+</svg>

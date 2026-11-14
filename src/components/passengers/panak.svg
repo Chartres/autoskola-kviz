@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+<defs>
+<linearGradient id="pn-y" x1="0" x2="1"><stop offset="0" stop-color="#f3cf63"/><stop offset=".55" stop-color="#e0ae35"/><stop offset="1" stop-color="#b98522"/></linearGradient>
+<g id="pn-q"><circle r="12" fill="#fffdf8" stroke="#241e14" stroke-width="3"/><path d="M0 0V-12A12 12 0 0 1 12 0Z" fill="#241e14"/><path d="M0 0V12A12 12 0 0 1-12 0Z" fill="#241e14"/></g>
+</defs>
+<g class="pn-all">
+<path d="M32 204Q34 140 70 129H130Q166 140 168 204Z" fill="url(#pn-y)" stroke="#241e14" stroke-width="4" stroke-linejoin="round"/>
+<circle cx="47" cy="153" r="13" fill="#aaa598" stroke="#241e14" stroke-width="4"/><circle cx="47" cy="153" r="3" fill="#241e14"/>
+<circle cx="153" cy="153" r="13" fill="#aaa598" stroke="#241e14" stroke-width="4"/><circle cx="153" cy="153" r="3" fill="#241e14"/>
+<path d="M141 128L159 136L80 204H54Z" fill="#3b352c" stroke="#241e14" stroke-width="3" stroke-linejoin="round"/>
+<path d="M148 134L68 202" stroke="#f4eee1" stroke-width="1.6" stroke-dasharray="5 5" opacity=".55"/>
+<g class="pn-disc pn-disc-chest" transform="translate(134 180)"><use href="#pn-q"/></g>
+<rect x="86" y="103" width="28" height="10" rx="4" fill="#3b352c" stroke="#241e14" stroke-width="3"/><rect x="89" y="112" width="22" height="9" rx="4" fill="#4a4338" stroke="#241e14" stroke-width="3"/><rect x="85" y="120" width="30" height="11" rx="4" fill="#3b352c" stroke="#241e14" stroke-width="3"/>
+<g class="pn-head">
+<path class="pn-cable" d="M72 38q-24-10-33 9q-7 16 7 25" fill="none" stroke="#241e14" stroke-width="3.2" stroke-linecap="round"/>
+<path d="M63 66Q63 25 100 25Q137 25 137 66Q137 93 124 103Q112 111 100 111Q88 111 76 103Q63 93 63 66Z" fill="url(#pn-y)" stroke="#241e14" stroke-width="4" stroke-linejoin="round"/>
+<path d="M74 36Q84 29 96 29" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".4"/>
+<path d="M69 88Q100 99 131 88" fill="none" stroke="#241e14" stroke-width="2" opacity=".45"/>
+<circle cx="63" cy="70" r="4.5" fill="#aaa598" stroke="#241e14" stroke-width="2.4"/><circle cx="137" cy="70" r="4.5" fill="#aaa598" stroke="#241e14" stroke-width="2.4"/>
+<g class="pn-disc pn-disc-head" transform="translate(124 46) scale(.85)"><use href="#pn-q"/></g>
+<circle cx="84" cy="43" r="5.5" fill="#fffdf8" stroke="#241e14" stroke-width="2"/><path d="M84 37.5v11M78.5 43h11" stroke="#241e14" stroke-width="1.6"/>
+<circle class="pn-led" cx="106" cy="36" r="3.2" fill="#7a6c58" stroke="#241e14" stroke-width="1.6"/>
+<circle cx="87" cy="69" r="5" fill="#241e14"/><circle cx="88.7" cy="67.2" r="1.6" fill="#fff"/>
+<circle cx="113" cy="69" r="5" fill="#241e14"/><circle cx="114.7" cy="67.2" r="1.6" fill="#fff"/>
+<path d="M100 73v8q0 3-4 3" fill="none" stroke="#241e14" stroke-width="2.6" stroke-linecap="round"/>
+<path d="M89 93h22" stroke="#241e14" stroke-width="3.6" stroke-linecap="round"/>
+</g>
+<g class="pn-impact" fill="none" stroke="#b05a2b" stroke-width="4" stroke-linecap="round"><path d="M150 40l14-9"/><path d="M154 58h17"/><path d="M150 76l14 9"/></g>
+</g>
+</svg>

@@ -9,7 +9,7 @@ import { statFor } from '@/domain/progress'
 import { setPosition, remainingAfter, SET_SIZE } from '@/app/store'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import { FeedbackCard } from '@/components/FeedbackCard'
-import { noteForResult } from '@/domain/passenger'
+import { noteForResult, resultMoment, seedFor, type ResultKind } from '@/domain/passenger'
 import { PassengerNote, usePassenger } from '@/components/Passenger'
 
 export function ResultsScreen() {
@@ -77,7 +77,7 @@ export function ResultsScreen() {
         )}
         {isExam && examResult && (
           <div
-            className={`mb-3 inline-block border px-4 py-1 font-mono text-sm font-semibold uppercase tracking-[0.15em] ${
+            className={`stamp mb-4 ${
               examResult.passed
                 ? 'border-moss-500 text-moss-400'
                 : 'border-rust-500 text-rust-400'
@@ -107,13 +107,24 @@ export function ResultsScreen() {
         )}
       </div>
 
-      {passenger && session && (
-        <PassengerNote
-          passenger={passenger}
-          text={noteForResult(passenger, { exam: isExam, passed: examResult?.passed, wrong: wrong.length, corrected })}
-          mood={(isExam ? examResult?.passed : wrong.length === 0 || corrected >= wrong.length) ? 'up' : 'down'}
-        />
-      )}
+      {passenger && session && (() => {
+        const kind: ResultKind = {
+          exam: isExam,
+          passed: examResult?.passed,
+          score: examResult?.score,
+          needed: examResult?.passThreshold,
+          wrong: wrong.length + (isExam ? unanswered.length : 0),
+          corrected,
+        }
+        const moment = resultMoment(kind)
+        return (
+          <PassengerNote
+            passenger={passenger}
+            text={noteForResult(passenger, kind, seedFor(session.questions.map((q) => q.id)))}
+            mood={moment === 'failed' || moment === 'almost' ? 'down' : 'up'}
+          />
+        )
+      })()}
 
       {ps && (
         <section className="mt-6">

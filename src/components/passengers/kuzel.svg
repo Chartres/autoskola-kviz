@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+<defs>
+<linearGradient id="kz-body" x1="0" x2="1"><stop offset="0" stop-color="#ee9a5f"/><stop offset=".5" stop-color="#cf6a31"/><stop offset="1" stop-color="#9a471d"/></linearGradient>
+<linearGradient id="kz-band" x1="0" x2="1"><stop offset="0" stop-color="#fffdf8"/><stop offset="1" stop-color="#d5c8ae"/></linearGradient>
+</defs>
+<ellipse class="kz-shadow" cx="100" cy="184" rx="70" ry="8" fill="#241e14" opacity=".16"/>
+<g class="kz-all"><g class="kz-hop">
+<path d="M40 160h120a8 8 0 0 1 8 8v8a8 8 0 0 1-8 8H40a8 8 0 0 1-8-8v-8a8 8 0 0 1 8-8z" fill="#b25526" stroke="#241e14" stroke-width="4" stroke-linejoin="round"/>
+<path d="M42 166h116" stroke="#ee9a5f" stroke-width="3" stroke-linecap="round" opacity=".85"/>
+<path d="M85 27Q100 16 115 27L148 161H52Z" fill="url(#kz-body)" stroke="#241e14" stroke-width="4" stroke-linejoin="round"/>
+<path d="M75.3 66H124.7L131.1 92H68.9Z" fill="url(#kz-band)" stroke="#241e14" stroke-width="3" stroke-linejoin="round"/>
+<path d="M63.7 113H136.3L141.5 134H58.5Z" fill="url(#kz-band)" stroke="#241e14" stroke-width="3" stroke-linejoin="round"/>
+<path d="M90 33L80 62M66 98L62 110M57 138L54 152" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".32"/>
+<path d="M121 141l11 6M126 149l7 3M68 143l8 7M112 153l4 2" fill="none" stroke="#241e14" stroke-width="2.6" stroke-linecap="round" opacity=".38"/>
+<g transform="rotate(-18 131 104)"><rect x="121" y="100" width="21" height="9" rx="4.5" fill="#f1d9bb" stroke="#241e14" stroke-width="2.2"/><rect x="128" y="101.5" width="7" height="6" rx="1.5" fill="#fbf1e1"/></g>
+<ellipse cx="79" cy="98" rx="5.5" ry="3.2" fill="#f7b98c" opacity=".75"/><ellipse cx="121" cy="98" rx="5.5" ry="3.2" fill="#f7b98c" opacity=".75"/>
+<g class="kz-brows" fill="none" stroke="#241e14" stroke-width="3.6" stroke-linecap="round"><path d="M79 61L92 55"/><path d="M108 55L121 61"/></g>
+<g class="kz-eyes"><ellipse cx="89" cy="79" rx="5" ry="6.6" fill="#241e14"/><circle cx="90.8" cy="76.4" r="1.8" fill="#fff"/><ellipse cx="111" cy="79" rx="5" ry="6.6" fill="#241e14"/><circle cx="112.8" cy="76.4" r="1.8" fill="#fff"/></g>
+<g class="kz-eyes-up" fill="none" stroke="#241e14" stroke-width="3.6" stroke-linecap="round"><path d="M83 82q6-9 12 0"/><path d="M105 82q6-9 12 0"/></g>
+<path class="kz-mouth-calm" d="M92 101q8 6 16 0" fill="none" stroke="#241e14" stroke-width="3.4" stroke-linecap="round"/>
+<path class="kz-mouth-down" d="M90 106q10-9 20 0" fill="none" stroke="#241e14" stroke-width="3.4" stroke-linecap="round"/>
+<path class="kz-mouth-up" d="M89 99q11 14 22 0z" fill="#6b2d0c" stroke="#241e14" stroke-width="3" stroke-linejoin="round"/>
+</g></g>
+</svg>

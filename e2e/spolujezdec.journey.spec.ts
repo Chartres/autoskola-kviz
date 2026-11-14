@@ -78,7 +78,8 @@ test('the passenger closes a finished set with one line', async ({ page }) => {
     await page.getByRole('button', { name: /Další|Dokončit|Opravit chyby/ }).click()
   }
   await expect(page.getByText(/první pokus/)).toBeVisible()
-  await expect(page.getByTestId('passenger-note')).toContainText('Všechno narovnáno')
+  // Which closing line it gets depends on the set; it is always the cone's.
+  await expect(page.getByTestId('passenger-note')).toContainText('Dopravní kužel')
   await page.screenshot({ path: 'e2e/shots/spolujezdec-vysledek-kuzel.png' })
 })
 

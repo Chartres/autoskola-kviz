@@ -1,25 +1,30 @@
 import { describe, expect, it } from 'vitest'
-import { PASSENGERS, getPassenger, noteAfterAnswer, noteForResult } from './passenger'
+import { PASSENGERS, getPassenger, noteAfterAnswer, noteForResult, resultMoment, seedFor, type Moment } from './passenger'
 
 const kuzel = getPassenger('kuzel')!
+const MOMENTS: Moment[] = ['wrong', 'tilt', 'streak5', 'streak10', 'passed', 'failed', 'almost', 'perfect', 'corrected']
 
 describe('passenger roster', () => {
-  it('has four passengers, each with an intro, a plate and lines for every moment', () => {
+  it('has four passengers, each with an intro, a plate and a battery of lines for every moment', () => {
     expect(PASSENGERS.map((p) => p.id)).toEqual(['kuzel', 'panak', 'stromecek', 'karel'])
     for (const p of PASSENGERS) {
       expect(p.intro.length).toBeGreaterThan(40)
       expect(p.plate).toBeTruthy()
-      expect(p.lines.wrong.length).toBeGreaterThanOrEqual(6)
-      for (const m of ['streak5', 'streak10', 'passed', 'failed', 'corrected'] as const) {
-        expect(p.lines[m].length, `${p.id} ${m}`).toBeGreaterThanOrEqual(1)
-      }
+      // A set of 20 with every answer wrong still never repeats a line.
+      expect(p.lines.wrong.length, p.id).toBeGreaterThanOrEqual(20)
+      for (const m of MOMENTS) expect(p.lines[m].length, `${p.id} ${m}`).toBeGreaterThanOrEqual(3)
     }
   })
 
-  it('never addresses the learner in a gendered past tense ("prošel jsi", "spadla jsi")', () => {
+  it('no passenger says the same thing twice, and no two passengers share a line', () => {
+    const all = PASSENGERS.flatMap((p) => Object.values(p.lines).flat())
+    expect(new Set(all).size).toBe(all.length)
+  })
+
+  it('never addresses the learner in a gendered past tense ("prošel jsi", "věděla jste")', () => {
     for (const p of PASSENGERS) {
       for (const line of [p.intro, ...Object.values(p.lines).flat()]) {
-        expect(line, `${p.id}: ${line}`).not.toMatch(/\b\p{L}+l[a]? jsi\b|\bjsi \p{L}+l[a]?\b/u)
+        expect(line, `${p.id}: ${line}`).not.toMatch(/\b\p{L}+l[a]? js(i|te)\b|\bjs(i|te) \p{L}+l[ai]?\b/u)
       }
     }
   })
@@ -43,17 +48,25 @@ describe('noteAfterAnswer', () => {
     expect(noteAfterAnswer(kuzel, [false])).toBe(kuzel.lines.wrong[0])
   })
 
-  it('does not repeat itself: the nth mistake of a set gets the nth line, then wraps', () => {
-    const n = kuzel.lines.wrong.length
+  it('does not repeat itself within a set: twenty separate mistakes get twenty different lines', () => {
     const seen = new Set<string>()
     const outcomes: boolean[] = []
-    for (let i = 0; i < n; i++) {
-      outcomes.push(false)
-      seen.add(noteAfterAnswer(kuzel, outcomes)!)
+    for (let i = 0; i < 20; i++) {
+      outcomes.push(true, false) // never three in a row
+      seen.add(noteAfterAnswer(kuzel, outcomes, undefined, 7)!)
     }
-    expect(seen.size).toBe(n)
-    outcomes.push(false)
-    expect(noteAfterAnswer(kuzel, outcomes)).toBe(kuzel.lines.wrong[0])
+    expect(seen.size).toBe(20)
+  })
+
+  it('starts somewhere else in another set', () => {
+    expect(noteAfterAnswer(kuzel, [false], undefined, 0)).not.toBe(noteAfterAnswer(kuzel, [false], undefined, 5))
+    expect(seedFor(['12', '40', '7'])).not.toBe(seedFor(['13', '40', '7']))
+    expect(seedFor(['12', '40', '7'])).toBe(seedFor(['12', '40', '7']))
+  })
+
+  it('the third mistake in a row gets a line of its own', () => {
+    expect(kuzel.lines.tilt).toContain(noteAfterAnswer(kuzel, [true, false, false, false]))
+    expect(kuzel.lines.wrong).toContain(noteAfterAnswer(kuzel, [false, false, false, false]))
   })
 
   it('stays quiet on an ordinary right answer', () => {
@@ -80,18 +93,22 @@ describe('noteAfterAnswer', () => {
   })
 })
 
-describe('noteForResult', () => {
-  it('a passed or failed mock exam gets the matching line', () => {
-    expect(noteForResult(kuzel, { exam: true, passed: true, wrong: 2, corrected: 0 })).toBe(kuzel.lines.passed[0])
-    expect(noteForResult(kuzel, { exam: true, passed: false, wrong: 9, corrected: 0 })).toBe(kuzel.lines.failed[0])
+describe('results', () => {
+  it('names the moment of a mock exam: passed, failed, almost, perfect', () => {
+    expect(resultMoment({ exam: true, passed: true, score: 46, needed: 43, wrong: 2, corrected: 0 })).toBe('passed')
+    expect(resultMoment({ exam: true, passed: false, score: 30, needed: 43, wrong: 9, corrected: 0 })).toBe('failed')
+    expect(resultMoment({ exam: true, passed: false, score: 41, needed: 43, wrong: 4, corrected: 0 })).toBe('almost')
+    expect(resultMoment({ exam: true, passed: true, score: 50, needed: 43, wrong: 0, corrected: 0 })).toBe('perfect')
   })
 
-  it('a practice set with every mistake put right gets the "corrected" line', () => {
+  it('names the moment of a practice set: perfect, corrected, failed', () => {
+    expect(resultMoment({ exam: false, wrong: 0, corrected: 0 })).toBe('perfect')
+    expect(resultMoment({ exam: false, wrong: 3, corrected: 3 })).toBe('corrected')
+    expect(resultMoment({ exam: false, wrong: 4, corrected: 0 })).toBe('failed')
+  })
+
+  it('picks the line for that moment, by seed', () => {
     expect(noteForResult(kuzel, { exam: false, wrong: 3, corrected: 3 })).toBe(kuzel.lines.corrected[0])
-  })
-
-  it('a clean practice set counts as passed; one left with open mistakes as failed', () => {
-    expect(noteForResult(kuzel, { exam: false, wrong: 0, corrected: 0 })).toBe(kuzel.lines.passed[0])
-    expect(noteForResult(kuzel, { exam: false, wrong: 4, corrected: 0 })).toBe(kuzel.lines.failed[0])
+    expect(noteForResult(kuzel, { exam: false, wrong: 3, corrected: 3 }, 2)).toBe(kuzel.lines.corrected[2])
   })
 })
