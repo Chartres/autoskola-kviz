@@ -114,7 +114,11 @@ export function loadJizdy(uid?: string): JizdyState {
   // On sign-in, merge lessons logged while signed out (and pre-C3H2 data) into the
   // user's log, same as progress merges on sign-in. Sign-out empties the anonymous
   // key, so it only holds lessons logged on this device since the last sign-out.
-  return mergeLessons(readJizdy(s, jizdyKey(uid)), anon)
+  const merged = mergeLessons(readJizdy(s, jizdyKey(uid)), anon)
+  // Clear the anonymous key after merging so they can't re-merge into the next account.
+  // Guard with writeJson first so the data isn't lost if the write fails (quota, private mode).
+  if (anon.lessons.length > 0 && writeJson(jizdyKey(uid), merged)) removeKey(JIZDY_KEY)
+  return merged
 }
 
 export function saveJizdy(state: JizdyState, uid?: string): void {
