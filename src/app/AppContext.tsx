@@ -52,6 +52,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const ownerRef = useRef<string | undefined>(undefined)
   const jizdyRef = useRef(state.jizdyState)
   jizdyRef.current = state.jizdyState
+  const pendingRoundRef = useRef(state.pendingRound)
+  pendingRoundRef.current = state.pendingRound
 
   // H1: block debounced save while a cloud fetch is outstanding.
   const syncingRef = useRef(false)
@@ -90,7 +92,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
         adopt(loadProgress(ownerRef.current))
       } else if (e.key === ROUND_KEY) {
         // Another tab left, finished or replaced a set: keep the waiting one in step.
-        dispatch({ type: 'setPendingRound', round: validRound(initialState(), loadRound<SavedRound>()) })
+        // Skip if the incoming round is identical to our current one — prevents a cross-tab
+        // save loop where both tabs echo each other's ROUND_KEY writes forever.
+        const incoming = validRound(initialState(), loadRound<SavedRound>())
+        if (canonical(incoming) !== canonical(pendingRoundRef.current)) {
+          dispatch({ type: 'setPendingRound', round: incoming })
+        }
       } else if (e.key?.startsWith(JIZDY_KEY)) {
         const ours = jizdyRef.current
         const state = mergeLessons(ours, loadJizdy(userRef.current?.id))
