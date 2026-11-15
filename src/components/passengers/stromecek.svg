@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+<defs><linearGradient id="st-g" x1="0" x2="1"><stop offset="0" stop-color="#2c94a4"/><stop offset=".55" stop-color="#007082"/><stop offset="1" stop-color="#00505e"/></linearGradient><pattern id="st-hatch" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)"><rect width="4" height="1.300" fill="#002333" opacity=".4"/></pattern></defs>
+<g class="st-waves" fill="none" stroke="#007082" stroke-width="3.2" stroke-linecap="round">
+<path class="st-wave st-w1" d="M24 112q-8-8 0-16q8-8 0-16"/><path class="st-wave st-w2" d="M178 118q8-8 0-16q-8-8 0-16"/><path class="st-wave st-w3" d="M160 62q7-7 0-14q-7-7 0-14"/>
+</g>
+<g class="st-swing">
+<path d="M100 0V36" stroke="var(--color-sand-50,#002333)" stroke-width="2.6" stroke-linecap="round"/>
+<g class="st-flip"><g transform="translate(100 30) scale(1.13) translate(-100 -30)">
+<path d="M100 28L127 66H114L141 103H126L156 144H117V176H83V144H44L74 103H59L86 66H73Z" fill="url(#st-g)" stroke="var(--color-sand-50,#002333)" stroke-width="4" stroke-linejoin="round"/>
+<path d="M100 28L127 66H114L141 103H126L156 144H117V176H83V144H44L74 103H59L86 66H73Z" fill="none" stroke="#99c7d1" stroke-width="2" stroke-linejoin="round" opacity=".6" transform="translate(100 108) scale(.82) translate(-100 -108)"/>
+<path d="M100 28L127 66H114L141 103H126L156 144H117V176H100Z" fill="url(#st-hatch)"/><path d="M92 46L80 62M70 84L62 96M58 124L50 136" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".28"/>
+<circle cx="100" cy="43" r="4.6" fill="#fefbf4" stroke="var(--color-sand-50,#002333)" stroke-width="2.6"/>
+<path d="M90 156h20M90 163h13" stroke="#002333" stroke-width="2.4" stroke-linecap="round" opacity=".55"/>
+<ellipse cx="87" cy="117" rx="8" ry="9" fill="#fefbf4" stroke="var(--color-sand-50,#002333)" stroke-width="2.6"/><circle class="st-pupil" cx="88" cy="119.5" r="3.5" fill="var(--color-sand-50,#002333)"/>
+<ellipse cx="113" cy="117" rx="8" ry="9" fill="#fefbf4" stroke="var(--color-sand-50,#002333)" stroke-width="2.6"/><circle class="st-pupil" cx="114" cy="119.5" r="3.5" fill="var(--color-sand-50,#002333)"/>
+<g class="st-lids" fill="#007082" stroke="var(--color-sand-50,#002333)" stroke-width="2.6" stroke-linejoin="round"><path d="M78.6 117a8.4 9.4 0 0 1 16.8 0z"/><path d="M104.6 117a8.4 9.4 0 0 1 16.8 0z"/></g>
+<path class="st-mouth-calm" d="M92 133q8 5 16 0" fill="none" stroke="var(--color-sand-50,#002333)" stroke-width="3.2" stroke-linecap="round"/>
+<path class="st-mouth-down" d="M93 135q7-2 14 0" fill="none" stroke="var(--color-sand-50,#002333)" stroke-width="3.2" stroke-linecap="round"/>
+<path class="st-mouth-up" d="M90 131q10 11 20 0" fill="none" stroke="var(--color-sand-50,#002333)" stroke-width="3.4" stroke-linecap="round"/>
+</g></g></g>
+</svg>

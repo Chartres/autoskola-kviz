@@ -9,12 +9,15 @@ import { statFor } from '@/domain/progress'
 import { setPosition, remainingAfter, SET_SIZE } from '@/app/store'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import { FeedbackCard } from '@/components/FeedbackCard'
+import { noteForResult, resultMoment, seedFor, type ResultKind } from '@/domain/passenger'
+import { PassengerNote, usePassenger } from '@/components/Passenger'
 
 export function ResultsScreen() {
   const { state, dispatch } = useApp()
   const { session, examResult, mode } = state
   // Errors the learner put right in the correction rounds (score above is the first attempt).
   const corrected = state.correction?.missed ?? 0
+  const passenger = usePassenger()
 
   const isExam = mode === 'exam'
   const isLesson = mode === 'lesson'
@@ -74,7 +77,7 @@ export function ResultsScreen() {
         )}
         {isExam && examResult && (
           <div
-            className={`mb-3 inline-block border px-4 py-1 font-mono text-sm font-semibold uppercase tracking-[0.15em] ${
+            className={`stamp mb-4 ${
               examResult.passed
                 ? 'border-moss-500 text-moss-400'
                 : 'border-rust-500 text-rust-400'
@@ -103,6 +106,25 @@ export function ResultsScreen() {
           </p>
         )}
       </div>
+
+      {passenger && session && (() => {
+        const kind: ResultKind = {
+          exam: isExam,
+          passed: examResult?.passed,
+          score: examResult?.score,
+          needed: examResult?.passThreshold,
+          wrong: wrong.length + (isExam ? unanswered.length : 0),
+          corrected,
+        }
+        const moment = resultMoment(kind)
+        return (
+          <PassengerNote
+            passenger={passenger}
+            text={noteForResult(passenger, kind, seedFor(session.questions.map((q) => q.id)))}
+            mood={moment === 'failed' || moment === 'almost' ? 'down' : 'up'}
+          />
+        )
+      })()}
 
       {ps && (
         <section className="mt-6">

@@ -10,6 +10,8 @@ import { todayStr } from '@/lib/date'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import type { CategoryName } from '@/domain/types'
 import { roundSummary } from '@/app/round'
+import { PassengerPicker, PassengerPortrait } from '@/components/Passenger'
+import heroArt from '@/components/passengers/hero.svg?raw'
 import { readiness, formatPoints, MIN_ANSWERS } from '@/domain/readiness'
 import { loadExamPlan, shouldAskResult } from '@/domain/examPlan'
 import { ExamDateField, ExamResultCard } from '@/components/ExamResult'
@@ -44,12 +46,30 @@ export function HomeScreen() {
 
   return (
     <div className="mx-auto w-full max-w-xl px-4 pt-2">
-      <header className="mb-4 flex flex-wrap items-center justify-between gap-x-2 gap-y-2">
-        <h1 className="font-display text-2xl font-bold tracking-tight text-sand-50">
-          Autoškola kvíz
-        </h1>
-        <div className="ml-auto flex items-center gap-2">
-          <div className="flex items-center gap-2 rounded-card border border-sand-700 px-3 py-1.5">
+      {/* The poster: the number that matters on the horizon, 43 of 50 points. Two passengers
+          live in it; the drawing is our own SVG and takes its inks from the theme. */}
+      <header className="relative -mx-4 mb-5 overflow-hidden sm:mx-0 sm:rounded-card">
+        <div aria-hidden="true" className="hero-art" dangerouslySetInnerHTML={{ __html: heroArt }} />
+        {/* The tree hangs from the mirror; the cone stands by the road. */}
+        <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-[2.1rem] -translate-x-1/2">
+          <PassengerPortrait id="stromecek" size={58} />
+        </div>
+        <div aria-hidden="true" className="pointer-events-none absolute bottom-[1.9rem] left-[17%]">
+          <PassengerPortrait id="kuzel" size={50} />
+        </div>
+        <div className="absolute inset-x-0 top-0 px-4 pt-7">
+          <h1 className="font-mono text-xs font-medium uppercase tracking-[0.22em] text-sand-400">
+            Autoškola kvíz
+          </h1>
+          <p className="mt-1 max-w-[9rem] font-display text-[1.6rem] text-sand-50">
+            43 bodů z 50.
+          </p>
+          <p className="mt-1 max-w-[8.5rem] text-sm leading-snug text-sand-300">
+            Víc nepotřebujete. Míň nestačí.
+          </p>
+        </div>
+        <div className="absolute bottom-1.5 right-3 flex items-center gap-2">
+          <div className="flex items-center gap-2 rounded-card bg-sand-950/90 px-3 py-1.5 backdrop-blur">
             <span aria-hidden className="text-terra-400">
               ▲
             </span>
@@ -76,9 +96,9 @@ export function HomeScreen() {
           track('start_lesson')
           dispatch({ type: 'startLesson', rng: freshRng() })
         }}
-        className="glow-terra mb-3 block w-full rounded-card border border-terra-500/50 bg-terra-500/10 p-5 text-left transition-colors hover:bg-terra-500/20"
+        className="glow-terra mb-4 block w-full rounded-card bg-sign-yellow p-5 text-left transition-transform hover:-translate-y-0.5"
       >
-        <div className="font-mono text-xs uppercase tracking-[0.2em] text-terra-400">
+        <div className="font-mono text-xs uppercase tracking-[0.2em] text-sand-50">
           Denní dávka
         </div>
         <div className="mt-1 font-display text-2xl font-bold tracking-tight text-sand-50">
@@ -88,7 +108,7 @@ export function HomeScreen() {
           Krátká dávka na míru — opakování slabých míst i nové otázky.
         </div>
         <div className="mt-3 inline-flex items-center gap-2 rounded-card bg-terra-500 px-4 py-2 font-display text-sm font-semibold text-sand-950">
-          Začít →
+          Užít dnešní dávku →
         </div>
       </button>
 
@@ -133,7 +153,7 @@ export function HomeScreen() {
         </p>
         <ExamDateField plan={examPlan} onChange={setExamPlan} />
         <div className="grid grid-cols-2 gap-2">
-          {META.categories.map((c) => {
+          {META.categories.map((c, i) => {
             const r = ready.okruhy.find((o) => o.cat === c.name)
             const weakest = ready.weakest === c.name
             return (
@@ -141,12 +161,15 @@ export function HomeScreen() {
                 key={c.id}
                 type="button"
                 onClick={() => startTopic(c.name)}
-                className={`rounded-card border bg-sand-800/40 p-3 text-left transition-colors hover:border-terra-400 ${
+                className={`sheet rounded-card border p-3 text-left transition-colors hover:border-sand-400 ${
                   weakest ? 'border-terra-500' : 'border-sand-700'
                 }`}
               >
-                <div className="text-sm font-semibold leading-snug text-sand-100">
-                  {c.name}
+                <div className="flex items-center gap-2.5 text-sm font-semibold leading-snug text-sand-100">
+                  <span aria-hidden="true" className="flex h-9 w-9 flex-none items-center justify-center rounded-full bg-second-soft">
+                    <OkruhIcon i={i} />
+                  </span>
+                  <span>{c.name}</span>
                 </div>
                 {weakest && (
                   <div className="mt-1 font-mono text-[0.65rem] uppercase tracking-[0.12em] text-terra-300">
@@ -183,6 +206,9 @@ export function HomeScreen() {
           })}
         </div>
       </section>
+
+      <div className="lane my-5" aria-hidden="true" />
+      <PassengerPicker />
 
       {/* Cross-promo: nudge strong theory learners to start practical lessons */}
       {showJizdyCta && (
@@ -298,6 +324,33 @@ function ResumeCard() {
         </button>
       </div>
     </section>
+  )
+}
+
+/** A small drawing for each okruh, in the two inks of the poster. Order follows META.categories. */
+function OkruhIcon({ i }: { i: number }) {
+  const ink = 'var(--color-sand-50)'
+  const red = 'var(--color-sign-red)'
+  const paths = [
+    // pravidla: a road running to the horizon
+    <><path d="M7 21L10.500 3h3L17 21z" fill={ink} /><path d="M12 5v2.500M12 10v3M12 16v4" stroke="var(--color-raised)" strokeWidth="1.400" /></>,
+    // značky: a warning sign on its post
+    <><path d="M12 14v8" stroke={ink} strokeWidth="1.800" /><path d="M12 2.500l8 13H4z" fill="var(--color-raised)" stroke={red} strokeWidth="2.200" strokeLinejoin="round" /><path d="M12 7.500v4M12 13.300v.2" stroke={ink} strokeWidth="1.800" strokeLinecap="round" /></>,
+    // situace: a crossroads from above, one car waiting
+    <><path d="M9 2h6v7h7v6h-7v7H9v-7H2V9h7z" fill={ink} /><rect x="10.500" y="16.500" width="3" height="4.500" rx="1" fill={red} /></>,
+    // zásady: a steering wheel
+    <><circle cx="12" cy="12" r="8.800" fill="none" stroke={ink} strokeWidth="2.400" /><circle cx="12" cy="12" r="2.300" fill={red} /><path d="M3.500 11h6M14.500 11h6M12 14.300V20" stroke={ink} strokeWidth="2" /></>,
+    // podmínky provozu: a tyre
+    <><circle cx="12" cy="12" r="8.500" fill={ink} /><circle cx="12" cy="12" r="4" fill="var(--color-raised)" /><circle cx="12" cy="12" r="1.400" fill={red} /><path d="M12 3.500v2M12 18.500v2M3.500 12h2M18.500 12h2M6 6l1.400 1.400M16.600 16.600L18 18M6 18l1.400-1.400M16.600 7.400L18 6" stroke="var(--color-raised)" strokeWidth="1.300" /></>,
+    // předpisy: a sheet with a paragraph sign
+    <><path d="M5.500 2.500h9l4 4v15h-13z" fill="var(--color-raised)" stroke={ink} strokeWidth="1.800" strokeLinejoin="round" /><text x="12" y="17" textAnchor="middle" fontSize="11" fontWeight="700" fill={red} fontFamily="Georgia, serif">§</text></>,
+    // zdravověda: a first-aid cross
+    <><rect x="3" y="3" width="18" height="18" rx="4.500" fill={ink} /><path d="M12 7v10M7 12h10" stroke="var(--color-raised)" strokeWidth="3.200" /></>,
+  ]
+  return (
+    <svg viewBox="0 0 24 24" width="22" height="22">
+      {paths[i] ?? paths[0]}
+    </svg>
   )
 }
 

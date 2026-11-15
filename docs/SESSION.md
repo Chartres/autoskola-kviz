@@ -1,4 +1,4 @@
-# Session summary — Autoškola kvíz (rewritten 2026-11-07)
+# Session summary — Autoškola kvíz (rewritten 2026-11-07; Spolujezdec thread added 2026-11-14)
 
 Rewrite this page, don't append to it, at the end of every package and before context runs out. Keep it to one page and put nothing private in it, because the repo is public.
 
@@ -32,6 +32,8 @@ An unfinished set waits on Home with Pokračovat and Nový trénink (#26). Test 
 - **2026-11-07:** No licence change (12:45 UTC), so there is no NPI nomination.
 
 ## Open threads
+- **Bold design, Spolujezdec and the leaflet (proposal, 2026-11-15).** Draft PR #36 on branch `spolujezdec`, not merged. Pavol asked for the passengers, for animated drawings with a large battery of lines, and for "the full bold design as discussed"; he has not yet seen the result. `docs/SIGNATURE.md` has the proposal and his words. On merge: rewrite `docs/DESIGN-BRIEF.md` and the "Visual signature" paragraph, and reword "Refused: mascots".
+  - Seen while testing: `storage.test.ts` ("keeps the anonymous key when the account copy could not be written") fails on main under Node 26 locally; CI runs Node 22.
 - **Test A (sell the result).** Runs 2026-11-07 → 2026-12-19. Stop if there are fewer than 30 real results, or if the AUC is below 0.7.
   - Since the deploy of #34 (2026-11-07), the event is sent as `exam_result_reported`. Earlier answers went out as `key_action {action:'exam_result_reported'}`, so the reading counts both names.
 - **Test B (technical submissions).** Same dates. Stop if AI search still finds the app in 0 of 14 queries and visitors rose less than 20 %.

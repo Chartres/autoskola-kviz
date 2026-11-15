@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import type { Choice, Question } from '@/domain/types'
 import { imageUrl } from '@/lib/assets'
 import { sourceLabel, sourceUrl, type Explanation, type LawSource } from '@/domain/explanations'
@@ -20,6 +20,8 @@ export interface QuestionCardProps {
   onSourceOpen?: (source: LawSource) => void
   /** The set has errors to put right after this question (control of error). */
   willCorrect?: boolean
+  /** The spolujezdec's remark on this answer; practice only, under the explanation. */
+  note?: ReactNode
 }
 
 const ALL_OPTIONS: Choice[] = ['a', 'b', 'c']
@@ -54,8 +56,8 @@ function optionState(
 }
 
 const STATE_CLASS: Record<OptionState, string> = {
-  idle: 'border-sand-700 bg-sand-800/50 hover:border-terra-400 hover:bg-sand-700/50',
-  selected: 'border-terra-500 bg-sand-700/70 glow-terra',
+  idle: 'border-sand-700 bg-raised hover:border-sand-400 hover:bg-second-soft',
+  selected: 'border-sand-50 bg-second-soft glow-terra',
   correct: 'border-moss-500 bg-moss-500/12 text-sand-50 glow-moss',
   wrong: 'border-rust-500 bg-rust-500/12 text-sand-50',
   muted: 'border-sand-800 bg-sand-900/50 text-sand-400 opacity-60',
@@ -82,6 +84,7 @@ export function QuestionCard({
   explanation,
   onSourceOpen,
   willCorrect,
+  note,
 }: QuestionCardProps) {
   const answered = chosen !== undefined
   const isCorrect = answered && chosen === question.correct
@@ -268,9 +271,11 @@ export function QuestionCard({
         </section>
       )}
 
+      {answered && reveal && note}
+
       {answered && (
         <footer
-          className="sticky bottom-0 z-10 -mx-4 mt-5 flex items-center justify-between gap-3 border-t border-sand-700 bg-sand-950/95 px-4 py-3 backdrop-blur sm:rounded-card sm:border"
+          className="sticky bottom-0 z-10 -mx-4 mt-5 flex items-center justify-between gap-3 border-t border-sand-700 bg-raised px-4 py-3 shadow-[0_-12px_24px_-18px_rgba(0,35,51,.4)] sm:rounded-card sm:border"
           style={{ paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))' }}
         >
           {reveal ? (

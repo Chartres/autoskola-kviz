@@ -1,7 +1,55 @@
-import { META } from '@/domain/questions'
+import { ALL_QUESTIONS, META } from '@/domain/questions'
+import { LESSON_SIZE } from '@/domain/lesson'
+import { freshRng } from '@/domain/rng'
+import { useApp } from '@/app/AppContext'
+import { track } from '@/analytics'
 import { LESSONS } from '@/content/studyGuide'
 import { imageUrl } from '@/lib/assets'
 import { AuthPanel } from '@/components/AuthPanel'
+
+/** What the app is, set as the leaflet that comes in a box of medicine. Every number is the exam's. */
+function Leaflet() {
+  const { dispatch } = useApp()
+  const items: [string, string][] = [
+    ['Co je Autoškola kvíz a k čemu se používá', `Obsahuje všech ${ALL_QUESTIONS.length} oficiálních otázek Ministerstva dopravy v aktuálním znění. Používá se před zkouškou z předpisů o provozu na pozemních komunikacích.`],
+    ['Dávkování', `Denní dávka je ${LESSON_SIZE} otázek. Zkušební test má 25 otázek a trvá 30 minut. Nejvyšší dávka je 50 bodů, účinná dávka 43 bodů. Při nižší dávce opakujte.`],
+    ['Možné nežádoucí účinky', 'Velmi časté: opravování řidiče z místa spolujezdce. Časté: klid na křižovatkách. Vzácné: radost z kruhového objezdu.'],
+    ['Jak přípravek uchovávat', 'V telefonu. Otázky fungují i bez signálu. Chyby se uchovávají samy a vracejí se, dokud nezmizí.'],
+    ['Cena a výdej', '0 Kč. Bez reklam, bez registrace, bez receptu.'],
+    ['Upozornění', 'Přednost zprava není nežádoucí účinek. Je to zákon.'],
+  ]
+  return (
+    <section aria-labelledby="letak-title" className="sheet mt-5 rounded-card border border-sand-700 p-5">
+      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-sand-50 pb-2">
+        <h2 id="letak-title" className="font-display text-2xl text-sand-50">Příbalová informace</h2>
+        <span className="font-mono text-[0.7rem] uppercase tracking-[0.15em] text-sand-500">k vnitřnímu užití hlavou</span>
+      </div>
+      <p className="mt-3 rounded-md border border-sand-50 px-3 py-2 text-sm font-semibold text-sand-50">
+        Přečtěte si tuto stránku dříve, než sednete za volant.
+      </p>
+      <ol className="mt-3 gap-x-6 text-sm leading-relaxed text-sand-300 sm:columns-2">
+        {items.map(([title, text], i) => (
+          <li key={title} className="mb-3 break-inside-avoid">
+            <span className="block font-mono text-xs font-semibold uppercase tracking-wide text-sand-50">
+              {i + 1}. {title}
+            </span>
+            {text}
+          </li>
+        ))}
+      </ol>
+      <button
+        type="button"
+        onClick={() => {
+          track('start_lesson', { from: 'leaflet' })
+          dispatch({ type: 'startLesson', rng: freshRng() })
+        }}
+        className="glow-terra min-h-11 rounded-card bg-terra-500 px-5 py-2.5 font-display text-sand-950 hover:bg-terra-400"
+      >
+        Užít první dávku
+      </button>
+    </section>
+  )
+}
 
 export function StudyScreen() {
   return (
@@ -24,6 +72,8 @@ export function StudyScreen() {
         </a>
         .
       </p>
+
+      <Leaflet />
 
       {/* Table of contents */}
       <nav aria-label="Obsah" className="mt-5 rounded-card border border-sand-700 bg-sand-800/40 p-4">
