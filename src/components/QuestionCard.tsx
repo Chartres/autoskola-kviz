@@ -56,8 +56,8 @@ function optionState(
 }
 
 const STATE_CLASS: Record<OptionState, string> = {
-  idle: 'border-sand-700 bg-white hover:bg-sign-yellow',
-  selected: 'border-sand-700 bg-sign-yellow glow-terra',
+  idle: 'border-sand-700 bg-raised hover:border-sand-400 hover:bg-second-soft',
+  selected: 'border-sand-50 bg-second-soft glow-terra',
   correct: 'border-moss-500 bg-moss-500/12 text-sand-50 glow-moss',
   wrong: 'border-rust-500 bg-rust-500/12 text-sand-50',
   muted: 'border-sand-800 bg-sand-900/50 text-sand-400 opacity-60',

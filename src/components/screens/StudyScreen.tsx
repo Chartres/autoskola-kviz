@@ -19,12 +19,12 @@ function Leaflet() {
     ['Upozornění', 'Přednost zprava není nežádoucí účinek. Je to zákon.'],
   ]
   return (
-    <section aria-labelledby="letak-title" className="mt-5 rounded-card border border-sand-700 bg-white p-5 shadow-[5px_5px_0_var(--color-sand-50)]">
-      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b-2 border-sand-50 pb-2">
+    <section aria-labelledby="letak-title" className="sheet mt-5 rounded-card border border-sand-700 p-5">
+      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-sand-50 pb-2">
         <h2 id="letak-title" className="font-display text-2xl text-sand-50">Příbalová informace</h2>
         <span className="font-mono text-[0.7rem] uppercase tracking-[0.15em] text-sand-500">k vnitřnímu užití hlavou</span>
       </div>
-      <p className="mt-3 border-2 border-sand-50 px-3 py-2 text-sm font-semibold text-sand-50">
+      <p className="mt-3 rounded-md border border-sand-50 px-3 py-2 text-sm font-semibold text-sand-50">
         Přečtěte si tuto stránku dříve, než sednete za volant.
       </p>
       <ol className="mt-3 gap-x-6 text-sm leading-relaxed text-sand-300 sm:columns-2">

@@ -1,49 +1,56 @@
 @import 'tailwindcss';
 
 /*
-  Autoškola kvíz — the bold version (proposal on branch `spolujezdec`).
-  Off-white paper, ink frames, the colours of road signs: red, yellow, blue, green.
-  Headings in Anton, text in Bitter, numbers in Plex Mono.
+  Autoškola kvíz — the print-poster version (proposal on branch `spolujezdec`).
+
+  The palette is built by rule in OKLCH (experiments: palette.py), not picked by eye:
+  - two complementary inks, 180° apart: vermilion at 33° and petrol at 213°–233°;
+  - paper and mustard share one hue, 85°, at two lightnesses;
+  - a fixed lightness ladder (paper 0.97, mustard 0.85, vermilion 0.60, petrol 0.24), so text
+    pairs clear 4.5:1 (petrol on paper is 14.7:1; the muted text step is 4.7:1);
+  - area roughly 60 % paper, 30 % petrol, 10 % vermilion and mustard.
 
   NOTE: the sand scale is SEMANTIC, not literal lightness:
   950 = the page surface (lightest), 50 = the strongest ink (darkest).
 */
 @theme {
-  /* Paper → ink */
-  --color-sand-950: #f7f4ec; /* page background */
-  --color-sand-900: #efebdf; /* deep panel */
-  --color-sand-800: #e9e4d5; /* panel */
-  --color-sand-700: #16140f; /* frames: every border is an ink line */
-  --color-sand-600: #6b675e; /* subtle text / disabled */
-  --color-sand-500: #5e5a52; /* muted text */
-  --color-sand-400: #4a4740; /* secondary text */
-  --color-sand-300: #33312c; /* body text */
-  --color-sand-200: #262420; /* strong text */
-  --color-sand-100: #1b1a16; /* near-ink */
-  --color-sand-50: #111111; /* ink — headings */
+  /* Paper (hue 85°) → petrol ink (hue 233°) */
+  --color-sand-950: #f9f3e7; /* page background */
+  --color-sand-900: #f3ead8; /* deep panel */
+  --color-sand-800: #eadec7; /* panel */
+  --color-sand-700: #cdc3af; /* hairlines */
+  --color-sand-600: #55707f; /* subtle text / disabled */
+  --color-sand-500: #4a6575; /* muted text */
+  --color-sand-400: #3b5a6a; /* secondary text */
+  --color-sand-300: #1a3c4e; /* body text */
+  --color-sand-200: #12303f; /* strong text */
+  --color-sand-100: #0a2a3a; /* near-ink */
+  --color-sand-50: #002333; /* ink — headings */
 
-  /* Primary surface is ink; the accent on paper is sign red */
-  --color-terra-300: #c3140f; /* accent text on paper */
-  --color-terra-400: #c3140f; /* hover / icons */
-  --color-terra-500: #111111; /* primary button surface (paper text on top) */
-  --color-terra-600: #8f0f0b;
+  /* Primary surface is petrol ink; the accent on paper is vermilion */
+  --color-terra-300: #b61e00; /* accent text on paper */
+  --color-terra-400: #b61e00; /* hover / icons */
+  --color-terra-500: #002333; /* primary button surface (paper text on top) */
+  --color-terra-600: #901500;
 
-  /* Feedback in sign colours */
-  --color-moss-400: #0a7d3c; /* correct */
-  --color-moss-500: #0a7d3c;
-  --color-rust-400: #c3140f; /* wrong */
-  --color-rust-500: #c3140f;
+  --color-moss-400: #0b7643; /* correct */
+  --color-moss-500: #0b7643;
+  --color-rust-400: #b61e00; /* wrong */
+  --color-rust-500: #b61e00;
 
-  --color-sign-red: #e2231a;
-  --color-sign-yellow: #ffd21f;
-  --color-sign-blue: #1356a8;
-  --color-road: #2f3236;
+  --color-sign-red: #de3f20; /* vermilion, for pictures and large type only */
+  --color-sign-yellow: #f8c64e; /* mustard */
+  --color-sign-blue: #007082; /* petrol, mid */
+  --color-road: #002333;
+  --color-raised: #fefbf4; /* a sheet lying on the paper */
+  --color-second-soft: #fde5b3;
+  --color-mid-soft: #99c7d1;
 
-  --font-sans: 'Bitter', Georgia, 'Times New Roman', serif;
-  --font-display: 'Anton', Impact, 'Arial Narrow', sans-serif;
+  --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', monospace;
 
-  --radius-card: 4px;
+  --radius-card: 16px;
 }
 
 :root {
@@ -64,6 +71,8 @@ body {
   font-feature-settings: 'tnum' 1; /* tabular numerals for scores */
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  /* paper grain, drawn by the browser */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 .2 0 0 0 0 .14 0 0 0 0 .06 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 /* Prevent horizontal overflow (e.g. edge tooltips) without breaking sticky/fixed. */
@@ -76,60 +85,66 @@ body {
   color: var(--color-sand-50);
 }
 
-/* Frames: two-point ink lines and a hard offset shadow instead of a glow */
-.rounded-card.border {
-  border-width: 2px;
-}
+/* Depth comes from a soft shadow under a sheet, as on a printed card */
 .glow-terra {
-  box-shadow: 4px 4px 0 var(--color-sign-yellow), 4px 4px 0 2px var(--color-sand-50);
+  box-shadow:
+    0 1px 0 rgba(0, 35, 51, 0.06),
+    0 14px 28px -16px rgba(0, 35, 51, 0.45);
 }
 .glow-moss {
-  box-shadow: 4px 4px 0 var(--color-moss-400);
+  box-shadow: 0 0 0 1px var(--color-moss-400), 0 12px 24px -16px rgba(11, 118, 67, 0.5);
+}
+.sheet {
+  background: var(--color-raised);
+  box-shadow:
+    0 1px 0 rgba(0, 35, 51, 0.05),
+    0 18px 34px -22px rgba(0, 35, 51, 0.4);
 }
 
-/* Focus: a yellow sign-plate ring with an ink edge */
 *:focus-visible {
   outline: none;
   box-shadow:
-    0 0 0 3px var(--color-sign-yellow),
-    0 0 0 5px var(--color-sand-50);
+    0 0 0 2px var(--color-sand-950),
+    0 0 0 4px var(--color-sign-blue);
 }
 
-/* Anton has one weight and wants capitals */
+/* Fraunces: a soft old-style display face, set tight, in sentence case */
 .font-display {
   font-family: var(--font-display);
-  font-weight: 400 !important;
-  text-transform: uppercase;
-  letter-spacing: 0.012em;
-  line-height: 1.05;
+  font-weight: 700;
+  font-variation-settings: 'opsz' 96;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
 }
 
-/* A black slab behind a line of display type, as on a road-works board */
-.slab {
-  display: inline;
-  background: var(--color-sand-50);
-  color: var(--color-sand-950);
-  padding: 0.06em 0.3em;
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
+.hero-art {
+  line-height: 0;
+}
+.hero-art svg {
+  display: block;
+  width: 100%;
+  height: 17.5rem;
 }
 
 /* The lane line: a dashed divider between sections */
 .lane {
-  height: 6px;
-  background: repeating-linear-gradient(90deg, var(--color-sand-50) 0 28px, transparent 28px 46px);
+  height: 3px;
+  background: repeating-linear-gradient(90deg, var(--color-sand-400) 0 22px, transparent 22px 36px);
+  opacity: 0.55;
 }
 
 /* A rubber stamp for a result */
 .stamp {
   display: inline-block;
-  transform: rotate(-6deg);
-  border: 3px solid currentColor;
-  padding: 0.3rem 0.7rem;
-  font-family: var(--font-display);
-  font-size: 1.5rem;
+  transform: rotate(-5deg);
+  border: 2.5px solid currentColor;
+  border-radius: 6px;
+  padding: 0.25rem 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.12em;
 }
 
 /* Prose styling for the study guide (no typography plugin) */

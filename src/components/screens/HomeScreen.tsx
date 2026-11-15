@@ -10,7 +10,8 @@ import { todayStr } from '@/lib/date'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import type { CategoryName } from '@/domain/types'
 import { roundSummary } from '@/app/round'
-import { PassengerPicker } from '@/components/Passenger'
+import { PassengerPicker, PassengerPortrait } from '@/components/Passenger'
+import heroArt from '@/components/passengers/hero.svg?raw'
 import { readiness, formatPoints, MIN_ANSWERS } from '@/domain/readiness'
 import { loadExamPlan, shouldAskResult } from '@/domain/examPlan'
 import { ExamDateField, ExamResultCard } from '@/components/ExamResult'
@@ -45,23 +46,29 @@ export function HomeScreen() {
 
   return (
     <div className="mx-auto w-full max-w-xl px-4 pt-2">
-      {/* The number that matters, as the picture: 43 of 50 points pass the exam. */}
-      <header className="relative -mx-4 mb-4 overflow-hidden border-b-4 border-sand-50 bg-sign-red px-4 pb-4 pt-3 sm:mx-0 sm:border-4">
-        <span
-          aria-hidden="true"
-          className="pointer-events-none absolute -right-3 -top-7 select-none font-display text-[13.5rem] leading-none text-white"
-          style={{ letterSpacing: '-0.03em' }}
-        >
-          43
-        </span>
-        <h1 className="relative font-display text-3xl tracking-tight text-white">
-          Autoškola kvíz
-        </h1>
-        <p className="relative mt-3 max-w-[13.5rem] font-display text-[1.35rem]" style={{ lineHeight: 1.5 }}>
-          <span className="slab">43 bodů z 50. Víc nepotřebujete. Míň nestačí.</span>
-        </p>
-        <div className="relative mt-4 flex items-center gap-2">
-          <div className="flex items-center gap-2 rounded-card border border-sand-700 bg-sand-950 px-3 py-1.5">
+      {/* The poster: the number that matters on the horizon, 43 of 50 points. Two passengers
+          live in it; the drawing is our own SVG and takes its inks from the theme. */}
+      <header className="relative -mx-4 mb-5 overflow-hidden sm:mx-0 sm:rounded-card">
+        <div aria-hidden="true" className="hero-art" dangerouslySetInnerHTML={{ __html: heroArt }} />
+        <div aria-hidden="true" className="pointer-events-none absolute right-5 top-0">
+          <PassengerPortrait id="stromecek" size={64} />
+        </div>
+        <div aria-hidden="true" className="pointer-events-none absolute bottom-1 left-3">
+          <PassengerPortrait id="kuzel" size={58} />
+        </div>
+        <div className="absolute inset-x-0 top-0 px-4 pt-4">
+          <h1 className="font-mono text-xs font-medium uppercase tracking-[0.22em] text-sand-400">
+            Autoškola kvíz
+          </h1>
+          <p className="mt-1 max-w-[12rem] font-display text-[1.65rem] text-sand-50">
+            43 bodů z 50.
+          </p>
+          <p className="mt-1 max-w-[11rem] text-sm leading-snug text-sand-300">
+            Víc nepotřebujete. Míň nestačí.
+          </p>
+        </div>
+        <div className="absolute bottom-3 right-3 flex items-center gap-2">
+          <div className="flex items-center gap-2 rounded-card bg-sand-950/90 px-3 py-1.5 backdrop-blur">
             <span aria-hidden className="text-terra-400">
               ▲
             </span>
@@ -88,7 +95,7 @@ export function HomeScreen() {
           track('start_lesson')
           dispatch({ type: 'startLesson', rng: freshRng() })
         }}
-        className="mb-4 block w-full rounded-card border border-sand-700 bg-sign-yellow p-5 text-left shadow-[5px_5px_0_var(--color-sand-50)] transition-transform hover:-translate-y-0.5"
+        className="glow-terra mb-4 block w-full rounded-card bg-sign-yellow p-5 text-left transition-transform hover:-translate-y-0.5"
       >
         <div className="font-mono text-xs uppercase tracking-[0.2em] text-sand-50">
           Denní dávka
@@ -153,7 +160,7 @@ export function HomeScreen() {
                 key={c.id}
                 type="button"
                 onClick={() => startTopic(c.name)}
-                className={`rounded-card border bg-sand-800/40 p-3 text-left transition-colors hover:border-terra-400 ${
+                className={`sheet rounded-card border p-3 text-left transition-colors hover:border-sand-400 ${
                   weakest ? 'border-terra-500' : 'border-sand-700'
                 }`}
               >

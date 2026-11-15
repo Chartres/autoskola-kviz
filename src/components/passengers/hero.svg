@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 268" preserveAspectRatio="xMidYMax slice">
+<defs>
+<filter id="hero-grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0.16  0 0 0 0 0.1  0 0 0 0 0.04  0 0 0 0.5 0"/></filter>
+<linearGradient id="hero-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--color-sand-950)"/><stop offset="1" stop-color="var(--color-second-soft)"/></linearGradient>
+<clipPath id="hero-clip"><rect width="390" height="268"/></clipPath>
+</defs>
+<g clip-path="url(#hero-clip)">
+<rect width="390" height="268" fill="url(#hero-sky)"/>
+<circle cx="274" cy="110" r="78" fill="var(--color-sign-yellow)"/>
+<g font-family="Fraunces, Georgia, serif" font-weight="900" font-size="186" letter-spacing="-8">
+<text x="150" y="190" fill="var(--color-sand-100)" opacity=".85" transform="translate(5 5)">43</text>
+<text x="150" y="190" fill="var(--color-sign-red)">43</text>
+</g>
+<path d="M-10 190C40 160 96 150 150 168S250 196 300 176S372 150 400 158V268H-10Z" fill="var(--color-mid-soft)"/>
+<path d="M-10 214C50 182 120 186 176 204S270 226 322 204S380 190 400 196V268H-10Z" fill="var(--color-sign-blue)"/>
+<g fill="var(--color-road)"><path d="M40 190l7-16l7 16zM58 186l8-19l8 19zM318 188l7-16l7 16zM338 192l6-14l6 14z"/></g>
+<path d="M-10 240C60 214 140 226 200 236S320 244 400 222V268H-10Z" fill="var(--color-road)"/>
+<path d="M118 268C150 236 178 216 196 204C200 201 206 200 210 202C236 214 262 238 286 268Z" fill="var(--color-sand-100)"/>
+<path d="M118 268C150 236 178 216 196 204C200 201 206 200 210 202C236 214 262 238 286 268Z" fill="none" stroke="var(--color-sand-950)" stroke-width="1.5" opacity=".5"/>
+<path d="M203 268C203 246 203.500 226 204 208" fill="none" stroke="var(--color-sand-950)" stroke-width="3" stroke-dasharray="12 9" opacity=".9"/>
+<rect width="390" height="268" filter="url(#hero-grain)" opacity=".42" style="mix-blend-mode:multiply"/>
+</g>
+</svg>

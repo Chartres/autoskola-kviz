@@ -64,7 +64,7 @@ export function PassengerPicker() {
     track('key_action', { action: 'passenger_chosen', passenger: id ?? 'none' })
   }
   return (
-    <section className="mb-4 rounded-card border border-sand-700 bg-white p-5 shadow-[5px_5px_0_var(--color-sand-50)]" aria-labelledby="spolujezdec-title">
+    <section className="sheet mb-4 rounded-card border border-sand-700 p-5" aria-labelledby="spolujezdec-title">
       <h2 id="spolujezdec-title" className="font-mono text-xs font-medium uppercase tracking-[0.2em] text-sand-400">
         Spolujezdec
       </h2>
@@ -80,7 +80,7 @@ export function PassengerPicker() {
             aria-label={p.name}
             onClick={() => pick(p.id)}
             className={`flex min-h-16 items-center justify-center rounded-card border py-1.5 transition-colors ${
-              current?.id === p.id ? 'border-sand-700 bg-sign-yellow' : 'border-sand-700 bg-sand-950 hover:bg-sand-900'
+              current?.id === p.id ? 'border-sand-50 bg-second-soft' : 'border-sand-700 bg-sand-950 hover:bg-sand-900'
             }`}
           >
             <PassengerPortrait id={p.id} size={50} />
@@ -91,7 +91,7 @@ export function PassengerPicker() {
           aria-pressed={!current}
           onClick={() => pick(null)}
           className={`min-h-16 rounded-card border px-1 text-sm text-sand-300 transition-colors ${
-            !current ? 'border-sand-700 bg-sign-yellow' : 'border-sand-700 bg-sand-950 hover:bg-sand-900'
+            !current ? 'border-sand-50 bg-second-soft' : 'border-sand-700 bg-sand-950 hover:bg-sand-900'
           }`}
         >
           Nikdo
