@@ -32,13 +32,21 @@
 <g class="ka-sigh" fill="#fffdf8" stroke="#241e14" stroke-width="2.200"><circle cx="134" cy="121" r="6"/><circle cx="143" cy="117" r="8"/><circle cx="153" cy="121" r="5.500"/></g>
 </g>
 <g class="ka-thermos">
-<g class="ka-steam" fill="none" stroke="#241e14" stroke-width="2.600" stroke-linecap="round" opacity=".55"><path class="ka-s1" d="M160 90q-6-8 0-16q6-8 0-16"/><path class="ka-s2" d="M171 92q-5-7 0-14q5-7 0-13"/></g>
-<rect x="153" y="97" width="24" height="21" rx="5" fill="#b05a2b" stroke="#241e14" stroke-width="4"/>
-<path d="M180 130q13 4 13 18q0 13-13 15" fill="none" stroke="#241e14" stroke-width="4" stroke-linecap="round"/>
-<rect x="150" y="113" width="30" height="72" rx="8" fill="url(#ka-steel)" stroke="#241e14" stroke-width="4"/>
-<rect x="150" y="150" width="30" height="11" fill="#b05a2b" stroke="#241e14" stroke-width="3"/>
-<path d="M157 120v24" stroke="#fff" stroke-width="3.500" stroke-linecap="round" opacity=".7"/>
-<path d="M146 152q-9 4-7 17q2 12 14 12h9v-27z" fill="#e6c29d" stroke="#241e14" stroke-width="3.500" stroke-linejoin="round"/>
-<path d="M141 162h13M141 170h13" stroke="#241e14" stroke-width="2.200" stroke-linecap="round" opacity=".7"/>
+<g class="ka-steam" fill="none" stroke="#241e14" stroke-width="2.600" stroke-linecap="round" opacity=".55"><path class="ka-s1" d="M161 84q-6-8 0-16q6-8 0-15"/><path class="ka-s2" d="M170 86q-5-7 0-14q5-7 0-12"/></g>
+<path d="M108 206Q112 176 139 164L152 181Q138 189 136 206Z" fill="url(#ka-jacket)" stroke="#241e14" stroke-width="4" stroke-linejoin="round"/>
+<path d="M139 164L152 181" stroke="#241e14" stroke-width="3" stroke-linecap="round"/>
+<path d="M141 160q-7 6-5 17q3 9 12 9l6-22z" fill="#d9b089" stroke="#241e14" stroke-width="3.200" stroke-linejoin="round"/>
+<rect x="155" y="92" width="20" height="16" rx="3" fill="#8d887c" stroke="#241e14" stroke-width="3.500"/>
+<ellipse cx="165" cy="93" rx="8" ry="2.600" fill="#241e14"/>
+<rect x="149" y="104" width="32" height="84" rx="9" fill="url(#ka-steel)" stroke="#241e14" stroke-width="4"/>
+<rect x="149" y="112" width="32" height="9" fill="#b05a2b" stroke="#241e14" stroke-width="3"/>
+<path d="M156 126v9M156 172v8" stroke="#fff" stroke-width="3.500" stroke-linecap="round" opacity=".7"/>
+<g fill="#e6c29d" stroke="#241e14" stroke-width="2.800" stroke-linejoin="round">
+<rect x="143" y="138" width="33" height="9.500" rx="4.750"/>
+<rect x="142" y="146.500" width="35" height="9.500" rx="4.750"/>
+<rect x="142" y="155" width="34" height="9.500" rx="4.750"/>
+<rect x="144" y="163.500" width="30" height="9" rx="4.500"/>
+<path d="M146 139q-6-9 0-13q6-2 8 4l1 9z"/>
+</g>
 </g>
 </svg>
