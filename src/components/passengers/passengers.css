@@ -126,9 +126,15 @@
 @keyframes ka-sigh { 0% { opacity: 0; transform: translate(-14px, 4px) scale(0.4); } 30% { opacity: 0.95; } 100% { opacity: 0; transform: translate(30px, -12px) scale(1.5); } }
 @keyframes ka-putdown { 0% { transform: translateY(0); } 70% { transform: translateY(30px); } 85% { transform: translateY(26px); } 100% { transform: translateY(28px); } }
 
+/* ---------- The poster on Home: the learner car bobs along and puffs ---------- */
+.hero-art .hero-car { animation: hero-bob 0.9s ease-in-out infinite alternate; }
+.hero-art .hero-puff { transform-origin: 213px 246px; animation: hero-puff 1.6s ease-out infinite; }
+@keyframes hero-bob { from { transform: translateY(0); } to { transform: translateY(-1.2px); } }
+@keyframes hero-puff { 0% { opacity: 0; transform: translate(4px, -2px) scale(0.5); } 30% { opacity: 0.8; } 100% { opacity: 0; transform: translate(-8px, 3px) scale(1.6); } }
+
 @keyframes sp-blink { 0%, 93%, 100% { transform: scaleY(1); } 96% { transform: scaleY(0.08); } }
 
 @media (prefers-reduced-motion: reduce) {
-  .sp *, .sp.is-down *, .sp.is-up * { animation: none !important; transition: none !important; }
+  .sp *, .sp.is-down *, .sp.is-up *, .hero-art * { animation: none !important; transition: none !important; }
   .sp.is-up .ka-thermos { transform: translateY(28px); }
 }

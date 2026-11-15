@@ -1,23 +1,79 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 268" preserveAspectRatio="xMidYMax slice">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 300" preserveAspectRatio="xMidYMax slice">
 <defs>
-<filter id="hero-grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0.16  0 0 0 0 0.1  0 0 0 0 0.04  0 0 0 0.5 0"/></filter>
-<linearGradient id="hero-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--color-sand-950)"/><stop offset="1" stop-color="var(--color-second-soft)"/></linearGradient>
-<clipPath id="hero-clip"><rect width="390" height="268"/></clipPath>
+<filter id="hero-grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="11" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0.16  0 0 0 0 0.1  0 0 0 0 0.04  0 0 0 0.5 0"/></filter>
+<linearGradient id="hero-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--color-sand-950)"/><stop offset=".7" stop-color="var(--color-second-soft)"/></linearGradient>
+<pattern id="hero-dots" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(28)"><circle cx="2.5" cy="2.5" r="1" fill="var(--color-sign-blue)" opacity=".5"/></pattern>
+<pattern id="hero-hatch" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)"><rect width="4" height="1.3" fill="var(--color-terra-600)" opacity=".55"/></pattern>
+<pattern id="hero-field" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(-14)"><rect width="7" height="1.2" fill="var(--color-mid-soft)" opacity=".28"/></pattern>
+<clipPath id="hero-clip"><rect width="390" height="300"/></clipPath>
+<clipPath id="hero-num-shade"><rect x="160" y="60" width="240" height="140" transform="skewX(-18)"/></clipPath>
 </defs>
 <g clip-path="url(#hero-clip)">
-<rect width="390" height="268" fill="url(#hero-sky)"/>
-<circle cx="274" cy="110" r="78" fill="var(--color-sign-yellow)"/>
-<g font-family="Fraunces, Georgia, serif" font-weight="900" font-size="186" letter-spacing="-8">
-<text x="150" y="190" fill="var(--color-sand-100)" opacity=".85" transform="translate(5 5)">43</text>
-<text x="150" y="190" fill="var(--color-sign-red)">43</text>
+<rect width="390" height="300" fill="url(#hero-sky)"/>
+<!-- sun with printed rings -->
+<circle cx="292" cy="116" r="96" fill="none" stroke="var(--color-sign-yellow)" stroke-width="1.5" stroke-dasharray="2 5" opacity=".7"/>
+<circle cx="292" cy="116" r="80" fill="none" stroke="var(--color-sign-yellow)" stroke-width="2.500" opacity=".55"/>
+<circle cx="292" cy="116" r="64" fill="var(--color-sign-yellow)"/>
+<!-- clouds -->
+<g fill="var(--color-raised)" opacity=".92"><path d="M18 96q5-13 19-9q8-13 24-5q13-3 15 9q9 1 9 9H14q-4-8 4-4z"/><path d="M196 62q4-9 14-6q7-9 18-3q9-1 10 7q6 1 6 6h-52q-2-5 4-4z"/></g>
+<!-- 43: one ink, a hatched shade, a soft cast shadow -->
+<g font-family="Fraunces, Georgia, serif" font-weight="900" font-size="164" letter-spacing="-5" style="font-variation-settings:'opsz' 9">
+<text x="134" y="198" fill="var(--color-sand-50)" opacity=".2" transform="translate(7 6)">43</text>
+<text x="134" y="198" fill="var(--color-sign-red)">43</text>
+<text x="134" y="198" fill="url(#hero-hatch)" clip-path="url(#hero-num-shade)">43</text>
 </g>
-<path d="M-10 190C40 160 96 150 150 168S250 196 300 176S372 150 400 158V268H-10Z" fill="var(--color-mid-soft)"/>
-<path d="M-10 214C50 182 120 186 176 204S270 226 322 204S380 190 400 196V268H-10Z" fill="var(--color-sign-blue)"/>
-<g fill="var(--color-road)"><path d="M40 190l7-16l7 16zM58 186l8-19l8 19zM318 188l7-16l7 16zM338 192l6-14l6 14z"/></g>
-<path d="M-10 240C60 214 140 226 200 236S320 244 400 222V268H-10Z" fill="var(--color-road)"/>
-<path d="M118 268C150 236 178 216 196 204C200 201 206 200 210 202C236 214 262 238 286 268Z" fill="var(--color-sand-100)"/>
-<path d="M118 268C150 236 178 216 196 204C200 201 206 200 210 202C236 214 262 238 286 268Z" fill="none" stroke="var(--color-sand-950)" stroke-width="1.5" opacity=".5"/>
-<path d="M203 268C203 246 203.500 226 204 208" fill="none" stroke="var(--color-sand-950)" stroke-width="3" stroke-dasharray="12 9" opacity=".9"/>
-<rect width="390" height="268" filter="url(#hero-grain)" opacity=".42" style="mix-blend-mode:multiply"/>
+<!-- far hills, halftone -->
+<path d="M-10 178C36 150 92 146 146 164S246 190 296 172S366 150 400 156V300H-10Z" fill="var(--color-mid-soft)"/>
+<path d="M-10 178C36 150 92 146 146 164S246 190 296 172S366 150 400 156V300H-10Z" fill="url(#hero-dots)"/>
+<!-- village -->
+<g stroke="var(--color-sand-50)" stroke-width="1" stroke-linejoin="round">
+<ellipse cx="34" cy="151" rx="3.200" ry="9" fill="var(--color-sign-blue)"/><ellipse cx="41" cy="153" rx="2.800" ry="7.500" fill="var(--color-sign-blue)"/>
+<rect x="48" y="146" width="12" height="11" fill="var(--color-raised)"/><path d="M46.500 146.500L54 139.500L61.500 146.500Z" fill="var(--color-sign-red)"/>
+<rect x="64" y="136" width="6.500" height="21" fill="var(--color-raised)"/><path d="M63.500 136.500q3.750-9 7.500 0z" fill="var(--color-sign-red)"/><path d="M67.250 127.500v-5M65.500 124.500h3.500" fill="none"/>
+<rect x="70.500" y="145" width="13" height="12" fill="var(--color-raised)"/><path d="M69 145.500L77 138.500L85 145.500Z" fill="var(--color-sign-red)"/>
+<rect x="89" y="149" width="10" height="9" fill="var(--color-raised)"/><path d="M87.500 149.500L94 144L100.500 149.500Z" fill="var(--color-sign-red)"/>
+<ellipse cx="106" cy="152" rx="3" ry="8.500" fill="var(--color-sign-blue)"/>
+</g>
+<!-- middle hills with field rows -->
+<path d="M-10 206C52 176 122 182 178 198S270 218 322 198S380 184 400 190V300H-10Z" fill="var(--color-sign-blue)"/>
+<path d="M-10 206C52 176 122 182 178 198S270 218 322 198S380 184 400 190V300H-10Z" fill="url(#hero-field)"/>
+<g fill="var(--color-sand-50)"><path d="M300 199l5-13l5 13zM312 201l6-16l6 16zM328 198l4.500-11l4.500 11zM20 200l5-12l5 12zM31 198l6-15l6 15z"/></g>
+<!-- near ground -->
+<path d="M-10 236C70 212 150 224 210 232S330 236 400 214V300H-10Z" fill="var(--color-sand-300)"/>
+<!-- road, tapering to the horizon -->
+<path d="M132 300C150 262 196 240 214 218C224 205 216 194 212 186L216 186C224 194 238 204 236 220C234 246 262 268 296 300Z" fill="var(--color-sand-50)"/>
+<path d="M132 300C150 262 196 240 214 218C224 205 216 194 212 186M216 186C224 194 238 204 236 220C234 246 262 268 296 300" fill="none" stroke="var(--color-raised)" stroke-width="1.200" opacity=".55"/>
+<path d="M212 300C214 270 222 246 225 222" fill="none" stroke="var(--color-raised)" stroke-width="3.400" stroke-dasharray="11 9"/>
+<path d="M225 220C226 208 220 198 215 189" fill="none" stroke="var(--color-raised)" stroke-width="1.600" stroke-dasharray="5 5"/>
+<!-- roadside posts -->
+<g><rect x="286" y="262" width="4.500" height="15" rx="1" fill="var(--color-raised)"/><rect x="286" y="266" width="4.500" height="4" fill="var(--color-sand-50)"/><rect x="287.200" y="267" width="2" height="2" fill="var(--color-sign-red)"/>
+<rect x="258" y="240" width="3.400" height="11" rx=".8" fill="var(--color-raised)"/><rect x="258" y="243" width="3.400" height="3" fill="var(--color-sand-50)"/>
+<rect x="243" y="222" width="2.600" height="8" rx=".6" fill="var(--color-raised)"/><rect x="243" y="224" width="2.600" height="2.200" fill="var(--color-sand-50)"/>
+<rect x="150" y="262" width="4.500" height="15" rx="1" fill="var(--color-raised)"/><rect x="150" y="266" width="4.500" height="4" fill="var(--color-sand-50)"/>
+<rect x="190" y="236" width="3.200" height="10" rx=".8" fill="var(--color-raised)"/><rect x="190" y="239" width="3.200" height="2.800" fill="var(--color-sand-50)"/></g>
+<!-- the learner car, seen from behind -->
+<g class="hero-car">
+<g class="hero-puff" fill="var(--color-raised)" opacity=".8"><circle cx="213" cy="246" r="2.600"/><circle cx="209" cy="249" r="1.800"/></g>
+<rect x="216" y="228" width="26" height="15" rx="4" fill="var(--color-raised)" stroke="var(--color-sand-50)" stroke-width="1.600"/>
+<path d="M219.500 229L222 220.500H236L238.500 229Z" fill="var(--color-raised)" stroke="var(--color-sand-50)" stroke-width="1.600" stroke-linejoin="round"/>
+<path d="M222.200 227.500L224 222.500H234L235.800 227.500Z" fill="var(--color-sign-blue)"/>
+<rect x="225" y="215.500" width="8" height="5.500" rx="1" fill="#2f5d8a" stroke="var(--color-sand-50)" stroke-width="1"/><path d="M228 216.800v3h2.200" fill="none" stroke="#fff" stroke-width="1"/>
+<rect x="217.500" y="232" width="5" height="3" rx="1" fill="var(--color-sign-red)"/><rect x="235.500" y="232" width="5" height="3" rx="1" fill="var(--color-sign-red)"/>
+<rect x="224.500" y="236.500" width="9" height="3.500" rx=".8" fill="var(--color-sand-950)" stroke="var(--color-sand-50)" stroke-width=".8"/>
+<rect x="217.500" y="242" width="5" height="4.500" rx="1.200" fill="var(--color-sand-50)"/><rect x="235.500" y="242" width="5" height="4.500" rx="1.200" fill="var(--color-sand-50)"/>
+</g>
+<!-- grass tufts -->
+<g fill="none" stroke="var(--color-mid-soft)" stroke-width="1.300" stroke-linecap="round" opacity=".7"><path d="M40 262l2-6M44 262l0-7M48 262l-2-6M332 250l2-6M336 250l0-7M340 250l-2-6M92 248l2-5M96 248v-6"/></g>
+<!-- the windscreen: roof lining and the mirror stalk -->
+<path d="M0 0H390V10Q195 26 0 10Z" fill="var(--color-sand-50)"/>
+<rect x="191" y="12" width="8" height="12" fill="var(--color-sand-50)"/>
+<rect x="158" y="20" width="74" height="22" rx="8" fill="var(--color-sand-50)"/>
+<rect x="162" y="23.500" width="66" height="15" rx="5.500" fill="var(--color-sand-300)"/>
+<path d="M168 36l10-10M176 37l8-8" stroke="var(--color-mid-soft)" stroke-width="1.500" stroke-linecap="round" opacity=".5"/>
+<!-- the dashboard -->
+<path d="M0 300V276Q195 252 390 276V300Z" fill="var(--color-sand-50)"/>
+<path d="M0 276Q195 252 390 276" fill="none" stroke="var(--color-sand-400)" stroke-width="1.500"/>
+<g fill="none" stroke="var(--color-sand-400)" stroke-width="1.600" stroke-linecap="round"><path d="M22 284h30M22 289h30M22 294h30"/></g>
+<rect width="390" height="300" filter="url(#hero-grain)" opacity=".42" style="mix-blend-mode:multiply"/>
 </g>
 </svg>
