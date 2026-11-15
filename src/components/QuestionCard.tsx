@@ -275,7 +275,7 @@ export function QuestionCard({
 
       {answered && (
         <footer
-          className="sticky bottom-0 z-10 -mx-4 mt-5 flex items-center justify-between gap-3 border-t border-sand-700 bg-sand-950/95 px-4 py-3 backdrop-blur sm:rounded-card sm:border"
+          className="sticky bottom-0 z-10 -mx-4 mt-5 flex items-center justify-between gap-3 border-t border-sand-700 bg-raised px-4 py-3 shadow-[0_-12px_24px_-18px_rgba(0,35,51,.4)] sm:rounded-card sm:border"
           style={{ paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))' }}
         >
           {reveal ? (
