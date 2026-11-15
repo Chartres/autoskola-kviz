@@ -29,7 +29,7 @@
 <g stroke="var(--color-sand-50)" stroke-width="1" stroke-linejoin="round">
 <ellipse cx="34" cy="151" rx="3.200" ry="9" fill="var(--color-sign-blue)"/><ellipse cx="41" cy="153" rx="2.800" ry="7.500" fill="var(--color-sign-blue)"/>
 <rect x="48" y="146" width="12" height="11" fill="var(--color-raised)"/><path d="M46.500 146.500L54 139.500L61.500 146.500Z" fill="var(--color-sign-red)"/>
-<rect x="64" y="136" width="6.500" height="21" fill="var(--color-raised)"/><path d="M63.500 136.500q3.750-9 7.500 0z" fill="var(--color-sign-red)"/><path d="M67.250 127.500v-5M65.500 124.500h3.500" fill="none"/>
+<rect x="64" y="136" width="6.500" height="21" fill="var(--color-raised)"/><path d="M63.500 136.500q3.750-9 7.500 0z" fill="var(--color-sign-red)"/><path d="M67.250 132.200v-8M65.250 127h4" fill="none"/>
 <rect x="70.500" y="145" width="13" height="12" fill="var(--color-raised)"/><path d="M69 145.500L77 138.500L85 145.500Z" fill="var(--color-sign-red)"/>
 <rect x="89" y="149" width="10" height="9" fill="var(--color-raised)"/><path d="M87.500 149.500L94 144L100.500 149.500Z" fill="var(--color-sign-red)"/>
 <ellipse cx="106" cy="152" rx="3" ry="8.500" fill="var(--color-sign-blue)"/>
@@ -43,8 +43,8 @@
 <!-- road, tapering to the horizon -->
 <path d="M132 300C150 262 196 240 214 218C224 205 216 194 212 186L216 186C224 194 238 204 236 220C234 246 262 268 296 300Z" fill="var(--color-sand-50)"/>
 <path d="M132 300C150 262 196 240 214 218C224 205 216 194 212 186M216 186C224 194 238 204 236 220C234 246 262 268 296 300" fill="none" stroke="var(--color-raised)" stroke-width="1.200" opacity=".55"/>
-<path d="M212 300C214 270 222 246 225 222" fill="none" stroke="var(--color-raised)" stroke-width="3.400" stroke-dasharray="11 9"/>
-<path d="M225 220C226 208 220 198 215 189" fill="none" stroke="var(--color-raised)" stroke-width="1.600" stroke-dasharray="5 5"/>
+<path d="M214 300C206 265 215 243 225 219" fill="none" stroke="var(--color-raised)" stroke-width="3.400" stroke-dasharray="11 9"/>
+<path d="M225 219C231 204.500 220 194 214 186" fill="none" stroke="var(--color-raised)" stroke-width="1.600" stroke-dasharray="5 5"/>
 <!-- roadside posts -->
 <g><rect x="286" y="262" width="4.500" height="15" rx="1" fill="var(--color-raised)"/><rect x="286" y="266" width="4.500" height="4" fill="var(--color-sand-50)"/><rect x="287.200" y="267" width="2" height="2" fill="var(--color-sign-red)"/>
 <rect x="258" y="240" width="3.400" height="11" rx=".8" fill="var(--color-raised)"/><rect x="258" y="243" width="3.400" height="3" fill="var(--color-sand-50)"/>
@@ -52,7 +52,7 @@
 <rect x="150" y="262" width="4.500" height="15" rx="1" fill="var(--color-raised)"/><rect x="150" y="266" width="4.500" height="4" fill="var(--color-sand-50)"/>
 <rect x="190" y="236" width="3.200" height="10" rx=".8" fill="var(--color-raised)"/><rect x="190" y="239" width="3.200" height="2.800" fill="var(--color-sand-50)"/></g>
 <!-- the learner car, seen from behind -->
-<g class="hero-car">
+<g class="hero-car"><g transform="translate(9 0)">
 <g class="hero-puff" fill="var(--color-raised)" opacity=".8"><circle cx="213" cy="246" r="2.600"/><circle cx="209" cy="249" r="1.800"/></g>
 <rect x="216" y="228" width="26" height="15" rx="4" fill="var(--color-raised)" stroke="var(--color-sand-50)" stroke-width="1.600"/>
 <path d="M219.500 229L222 220.500H236L238.500 229Z" fill="var(--color-raised)" stroke="var(--color-sand-50)" stroke-width="1.600" stroke-linejoin="round"/>
@@ -61,7 +61,7 @@
 <rect x="217.500" y="232" width="5" height="3" rx="1" fill="var(--color-sign-red)"/><rect x="235.500" y="232" width="5" height="3" rx="1" fill="var(--color-sign-red)"/>
 <rect x="224.500" y="236.500" width="9" height="3.500" rx=".8" fill="var(--color-sand-950)" stroke="var(--color-sand-50)" stroke-width=".8"/>
 <rect x="217.500" y="242" width="5" height="4.500" rx="1.200" fill="var(--color-sand-50)"/><rect x="235.500" y="242" width="5" height="4.500" rx="1.200" fill="var(--color-sand-50)"/>
-</g>
+</g></g>
 <!-- grass tufts -->
 <g fill="none" stroke="var(--color-mid-soft)" stroke-width="1.300" stroke-linecap="round" opacity=".7"><path d="M40 262l2-6M44 262l0-7M48 262l-2-6M332 250l2-6M336 250l0-7M340 250l-2-6M92 248l2-5M96 248v-6"/></g>
 <!-- the windscreen: roof lining and the mirror stalk -->
