@@ -18,7 +18,6 @@ interface AuthContextValue {
   configured: boolean
   loading: boolean
   user: AuthUser | null
-  signInWithGoogle: () => Promise<void>
   signInWithEmail: (email: string) => Promise<{ ok: boolean; error?: string }>
   signOut: () => Promise<void>
   /** Czech message when the user came back through a failed (expired/used) magic link. */
@@ -91,13 +90,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     configured: isAuthConfigured,
     loading,
     user,
-    async signInWithGoogle() {
-      if (!supabase) return
-      await supabase.auth.signInWithOAuth({
-        provider: 'google',
-        options: { redirectTo: window.location.href },
-      })
-    },
     async signInWithEmail(email: string) {
       if (!supabase) return { ok: false, error: 'Přihlášení není nakonfigurováno.' }
       const { error } = await supabase.auth.signInWithOtp({
@@ -122,12 +114,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (!supabase) return
       // Flush pending progress while the session is still valid. A failed or slow flush
       // does not block sign-out: AppContext keeps unconfirmed local progress instead of
-      // wiping it. ponytail: fixed 3 s cap; make it configurable if slow networks complain.
+      // wiping it.
+      // ponytail: fixed 3 s cap; make it configurable if slow networks complain.
       if (_beforeSignOut) {
+        let tid: ReturnType<typeof setTimeout>
         await Promise.race([
           _beforeSignOut().catch(() => {}),
-          new Promise((r) => setTimeout(r, 3000)),
+          new Promise((r) => { tid = setTimeout(r, 3000) }),
         ])
+        clearTimeout(tid!)
       }
       await supabase.auth.signOut()
     },

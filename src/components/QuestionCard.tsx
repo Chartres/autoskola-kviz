@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import type { Choice, Question } from '@/domain/types'
 import { imageUrl } from '@/lib/assets'
 import { sourceLabel, sourceUrl, type Explanation, type LawSource } from '@/domain/explanations'
@@ -85,7 +85,8 @@ export function QuestionCard({
 }: QuestionCardProps) {
   const answered = chosen !== undefined
   const isCorrect = answered && chosen === question.correct
-  const options = optionsFor(question)
+  // Stable per question, so the keydown effect does not re-register on every render.
+  const options = useMemo(() => optionsFor(question), [question])
   // Images that failed to load (e.g. offline, not yet in the runtime cache).
   const [failed, setFailed] = useState<ReadonlySet<string>>(new Set())
   const markFailed = (src: string) => setFailed((f) => new Set(f).add(src))

@@ -85,6 +85,16 @@ describe('supabaseStore.fetch', () => {
     expect(result?.streak).toBeDefined()
   })
 
+  it('fills missing fields of a current-version row instead of returning it half-empty (F11)', async () => {
+    const partial = { version: PROGRESS_VERSION, stats: { 4: { seen: 1, correct: 1, streak: 1, lastSeen: 9, lastCorrect: true } } } as unknown as ProgressData
+    mockSupabaseHolder.client = fakeSupabase(partial) as ReturnType<typeof fakeSupabase>
+    const result = await supabaseStore.fetch('user-1')
+    expect(result?.bookmarks).toEqual([])
+    expect(result?.streak).toBeDefined()
+    expect(result?.updatedAt).toBe(0)
+    expect(result?.stats[4]?.seen).toBe(1)
+  })
+
   it('throws when the underlying query returns an error', async () => {
     mockSupabaseHolder.client = fakeSupabase(null, {
       fetchError: new Error('db error'),

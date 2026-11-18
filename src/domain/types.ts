@@ -77,5 +77,4 @@ export interface Meta {
   totalQuestions: number
   categories: Category[]
   exam: ExamConfig
-  duplicatePairs: [number, number][]
 }
