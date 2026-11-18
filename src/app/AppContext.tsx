@@ -9,7 +9,7 @@ import {
 import { reducer, initialState, resumeExam, type AppState, type Action } from './store'
 import { snapshotRound, validRound, type SavedRound } from './round'
 import { loadProgress, saveProgress, loadJizdy, saveJizdy, loadExam, saveExam, loadRound, saveRound, ROUND_KEY, claimAnonymousProgress, claimAnonymousJizdy, progressKey, JIZDY_KEY } from '@/domain/storage'
-import { emptyJizdyState } from '@/domain/jizdy'
+import { emptyJizdyState, mergeLessons } from '@/domain/jizdy'
 import { topicFromPath, questionFromPath, isExamPath } from '@/lib/topics'
 import { getQuestion } from '@/domain/questions'
 import { freshRng } from '@/domain/rng'
@@ -60,7 +60,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const justHydratedRef = useRef(false)
   // M5: uid of the signed-in user, to detect the signed-in → signed-out transition.
   const signedInUidRef = useRef<string | null>(null)
-  const cloudSave = (uid: string, data: ProgressData) => supabaseStore.save(uid, data)
   // Fold `incoming` into the in-memory progress; dispatch only if it changed anything.
   // ponytail: bookmarks stay as this copy has them (a union would undo removals); true
   // cross-device removal needs deletion markers.
@@ -78,7 +77,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     const remote = await supabaseStore.fetch(uid)
     const merged = remote ? { ...mergeProgress(local, remote), bookmarks: local.bookmarks } : local
     // Equal to the cloud (bookmarks included): nothing to upload.
-    if (!remote || canonical(merged) !== canonical(remote)) await cloudSave(uid, merged).catch(() => {})
+    if (!remote || canonical(merged) !== canonical(remote)) await supabaseStore.save(uid, merged).catch(() => {})
     if (signedInUidRef.current !== uid) return
     adopt(merged)
   }
@@ -94,10 +93,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
         dispatch({ type: 'setPendingRound', round: validRound(initialState(), loadRound<SavedRound>()) })
       } else if (e.key?.startsWith(JIZDY_KEY)) {
         const ours = jizdyRef.current
-        const seen = new Set(ours.lessons.map((l) => l.id))
-        const added = loadJizdy(userRef.current?.id).lessons.filter((l) => !seen.has(l.id))
-        if (added.length) {
-          const state = { ...ours, lessons: [...ours.lessons, ...added] }
+        const state = mergeLessons(ours, loadJizdy(userRef.current?.id))
+        if (state.lessons.length > ours.lessons.length) {
           jizdyRef.current = state
           dispatch({ type: 'hydrateJizdy', state })
         }
@@ -217,6 +214,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
         // C3H2: no jizdy wipe — lessons live under the user-scoped key; just reset
         // in-memory state so the next account (or anonymous) starts clean.
         dispatch({ type: 'hydrateJizdy', state: emptyJizdyState() })
+        // F8: clear the pending round so the next user doesn't see account A's set.
+        saveRound(null)
+        dispatch({ type: 'setPendingRound', round: null })
         // Sign-out: show the anonymous progress. The account's own copy stays under its key,
         // so answers the cloud never confirmed upload on that account's next sign-in.
         const anon = loadProgress()
@@ -244,7 +244,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     syncingRef.current = true // H1: block debounced save while fetch is in flight
     let uploadFailed = false
     const save = (id: string, d: ProgressData) =>
-      cloudSave(id, d).catch((e) => {
+      supabaseStore.save(id, d).catch((e) => {
         uploadFailed = true
         throw e
       })

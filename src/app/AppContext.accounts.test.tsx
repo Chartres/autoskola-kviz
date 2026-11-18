@@ -7,7 +7,8 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, act } from '@testing-library/react'
 import { AppProvider, useApp } from './AppContext'
 import { emptyProgress, recordAnswer, type ProgressData } from '@/domain/progress'
-import { saveProgress, saveJizdy } from '@/domain/storage'
+import { saveProgress, saveJizdy, ROUND_KEY } from '@/domain/storage'
+import { byCategory } from '@/domain/questions'
 import { emptyJizdyState, logLesson, type LessonRecord } from '@/domain/jizdy'
 
 const { auth, cloud, flush, failSaves } = vi.hoisted(() => ({
@@ -45,10 +46,17 @@ function JizdySpy() {
   const app = useApp()
   return <div data-testid="jizdy-ids">{app.state.jizdyState.lessons.map((l) => l.id).join(',')}</div>
 }
-const ui = () => <AppProvider><Spy /><Track /></AppProvider>
+function LessonCount() {
+  return <div data-testid="lesson-count">{useApp().state.jizdyState.lessons.length}</div>
+}
+function RoundSpy() {
+  return <div data-testid="round">{useApp().state.pendingRound ? 'waiting' : 'none'}</div>
+}
+const ui = () => <AppProvider><Spy /><Track /><LessonCount /><RoundSpy /></AppProvider>
 const jizdyUi = () => <AppProvider><JizdySpy /><Track /></AppProvider>
 const shownJizdy = () => screen.getByTestId('jizdy-ids').textContent
 const shown = () => screen.getByTestId('ids').textContent
+const lessonShown = () => screen.getByTestId('lesson-count').textContent
 const cloudIds = (uid: string) => Object.keys(cloud.get(uid)?.stats ?? {}).sort().join(',')
 const settle = () => act(async () => { await new Promise((r) => setTimeout(r, 0)) })
 
@@ -85,7 +93,31 @@ function mount() {
   return rerender
 }
 
+const lesson: LessonRecord = { id: 'x1', date: '2026-09-01', durationMin: 60, skills: [] }
+
 describe('two accounts on one device', () => {
+  it('sign out A: the next person does not get A’s unfinished set (F8)', async () => {
+    const ids = byCategory('Zdravotnická příprava').slice(0, 10).map((q) => q.id)
+    localStorage.setItem(ROUND_KEY, JSON.stringify({ mode: 'lesson', ids, records: [] }))
+    const re = mount()
+    await as('A', re)
+    expect(screen.getByTestId('round').textContent).toBe('waiting')
+    await as(null, re)
+    expect(screen.getByTestId('round').textContent).toBe('none')
+    expect(localStorage.getItem(ROUND_KEY)).toBeNull()
+  })
+
+  it('sign out A, sign in B: B does not get A’s Jízdy lessons', async () => {
+    const re = mount()
+    await as('A', re)
+    act(() => dispatch({ type: 'logLesson', record: lesson }))
+    await settle()
+    expect(lessonShown()).toBe('1')
+    await as(null, re)
+    await as('B', re)
+    expect(lessonShown()).toBe('0')
+  })
+
   it('sign out A with an unsynced answer, sign in B: B does not get A’s answer', async () => {
     cloud.set('B', recordAnswer(emptyProgress(), 2, true, 100))
     const re = mount()
