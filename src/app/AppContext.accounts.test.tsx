@@ -176,4 +176,17 @@ describe('jizdy isolation across accounts', () => {
     await settle()
     expect(shownJizdy()).toBe('')          // B gets none of A's anonymous lessons
   })
+
+  it('direct switch A → B: B does not get the lessons A claimed at sign-in', async () => {
+    saveJizdy(logLesson(emptyJizdyState(), { id: 'anon-1', date: '2026-11-06', durationMin: 60, skills: ['rozjezd'] }))
+    const { rerender } = render(jizdyUi())
+    auth.user = { id: 'A' }
+    rerender(jizdyUi())
+    await settle()
+    expect(shownJizdy()).toBe('anon-1')
+    auth.user = { id: 'B' }
+    rerender(jizdyUi())
+    await settle()
+    expect(shownJizdy()).toBe('')
+  })
 })
