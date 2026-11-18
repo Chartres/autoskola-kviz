@@ -9,9 +9,9 @@ import { ProgressBar } from '@/components/ui/ProgressBar'
 import { todayStr } from '@/lib/date'
 import { loadExplanations, type Explanations } from '@/domain/explanations'
 import { track, conversion } from '@/analytics'
-import { setPosition } from '@/app/store'
+import { setPosition, type Mode } from '@/app/store'
 
-const MODE_LABEL: Record<string, string> = {
+const MODE_LABEL: Record<Mode, string> = {
   lesson: 'Denní dávka',
   practice: 'Procvičování',
   review: 'Moje chyby',

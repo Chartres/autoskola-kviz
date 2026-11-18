@@ -113,7 +113,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     async signOut() {
       if (!supabase) return
       // Flush pending progress while the session is still valid. A failed or slow flush
-      // does not block sign-out: AppContext always wipes local progress afterwards.
+      // does not block sign-out: AppContext keeps unconfirmed local progress instead of
+      // wiping it.
       // ponytail: fixed 3 s cap; make it configurable if slow networks complain.
       if (_beforeSignOut) {
         let tid: ReturnType<typeof setTimeout>
