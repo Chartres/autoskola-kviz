@@ -159,6 +159,23 @@ export function saveExam(exam: SavedExam | null): void {
   else removeKey(EXAM_KEY)
 }
 
+// The account last signed in on this device. The waiting set and the running exam (one per
+// device) are its own; sign-out clears this, so a set or exam left after that is anonymous.
+const ACCOUNT_KEY = 'autoskola-kviz:account:v1'
+
+/** Record `uid` (null: signed out) as this device's account; returns the previous one. */
+export function swapDeviceAccount(uid: string | null): string | null {
+  const s = storage()
+  try {
+    const prev = s?.getItem(ACCOUNT_KEY) ?? null
+    if (uid) s?.setItem(ACCOUNT_KEY, uid)
+    else s?.removeItem(ACCOUNT_KEY)
+    return prev
+  } catch {
+    return null
+  }
+}
+
 // An okruh or daily set left unfinished (see src/app/round.ts). Per device, never synced.
 export const ROUND_KEY = 'autoskola-kviz:round:v1'
 

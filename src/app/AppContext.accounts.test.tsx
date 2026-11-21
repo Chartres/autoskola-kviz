@@ -4,10 +4,11 @@
  * into another, and must never delete them either.
  */
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { render, screen, act } from '@testing-library/react'
+import { render, screen, act, cleanup } from '@testing-library/react'
 import { AppProvider, useApp } from './AppContext'
 import { emptyProgress, recordAnswer, type ProgressData } from '@/domain/progress'
-import { saveProgress, saveJizdy, ROUND_KEY } from '@/domain/storage'
+import { saveProgress, saveJizdy, ROUND_KEY, EXAM_KEY } from '@/domain/storage'
+import { freshRng } from '@/domain/rng'
 import { byCategory } from '@/domain/questions'
 import { emptyJizdyState, logLesson, type LessonRecord } from '@/domain/jizdy'
 
@@ -52,7 +53,10 @@ function LessonCount() {
 function RoundSpy() {
   return <div data-testid="round">{useApp().state.pendingRound ? 'waiting' : 'none'}</div>
 }
-const ui = () => <AppProvider><Spy /><Track /><LessonCount /><RoundSpy /></AppProvider>
+function ViewSpy() {
+  return <div data-testid="view">{useApp().state.view}</div>
+}
+const ui = () => <AppProvider><Spy /><Track /><LessonCount /><RoundSpy /><ViewSpy /></AppProvider>
 const jizdyUi = () => <AppProvider><JizdySpy /><Track /></AppProvider>
 const shownJizdy = () => screen.getByTestId('jizdy-ids').textContent
 const shown = () => screen.getByTestId('ids').textContent
@@ -140,6 +144,50 @@ describe('two accounts on one device', () => {
     expect(shown()).toBe('')
     await act(async () => { await new Promise((r) => setTimeout(r, 1700)) })
     expect(cloudIds('B')).toBe('')
+  })
+
+  it('direct switch A → B: B does not get A’s waiting set', async () => {
+    const ids = byCategory('Zdravotnická příprava').slice(0, 10).map((q) => q.id)
+    localStorage.setItem(ROUND_KEY, JSON.stringify({ mode: 'lesson', ids, records: [] }))
+    const re = mount()
+    await as('A', re)
+    expect(screen.getByTestId('round').textContent).toBe('waiting')
+    await as('B', re)
+    expect(screen.getByTestId('round').textContent).toBe('none')
+    expect(localStorage.getItem(ROUND_KEY)).toBeNull()
+  })
+
+  it('B’s link opened on a fresh page after A left a set or an exam: B gets neither', async () => {
+    const re = mount()
+    await as('A', re)
+    act(() => dispatch({ type: 'startExam', rng: freshRng(), now: Date.now() }))
+    act(() => dispatch({ type: 'answer', choice: 'a', now: Date.now() }))
+    expect(localStorage.getItem(EXAM_KEY)).not.toBeNull()
+    const ids = byCategory('Zdravotnická příprava').slice(0, 10).map((q) => q.id)
+    localStorage.setItem(ROUND_KEY, JSON.stringify({ mode: 'lesson', ids, records: [] }))
+    cleanup()
+    auth.user = null
+    const re2 = mount()
+    expect(screen.getByTestId('view').textContent).toBe('exam')
+    await as('B', re2)
+    expect(screen.getByTestId('view').textContent).toBe('home')
+    expect(screen.getByTestId('round').textContent).toBe('none')
+    expect(localStorage.getItem(ROUND_KEY)).toBeNull()
+    expect(localStorage.getItem(EXAM_KEY)).toBeNull()
+  })
+
+  it('a reload keeps the account’s own waiting set and exam', async () => {
+    const re = mount()
+    await as('A', re)
+    act(() => dispatch({ type: 'startExam', rng: freshRng(), now: Date.now() }))
+    const ids = byCategory('Zdravotnická příprava').slice(0, 10).map((q) => q.id)
+    localStorage.setItem(ROUND_KEY, JSON.stringify({ mode: 'lesson', ids, records: [] }))
+    cleanup()
+    auth.user = null
+    const re2 = mount()
+    await as('A', re2)
+    expect(screen.getByTestId('view').textContent).toBe('exam')
+    expect(screen.getByTestId('round').textContent).toBe('waiting')
   })
 
   it('A’s unsynced answer stays on the device and reaches A’s cloud on A’s next sign-in', async () => {

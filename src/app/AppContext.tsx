@@ -8,7 +8,7 @@ import {
 } from 'react'
 import { reducer, initialState, resumeExam, type AppState, type Action } from './store'
 import { snapshotRound, validRound, type SavedRound } from './round'
-import { loadProgress, saveProgress, loadJizdy, saveJizdy, loadExam, saveExam, loadRound, saveRound, ROUND_KEY, claimAnonymousProgress, claimAnonymousJizdy, progressKey, JIZDY_KEY } from '@/domain/storage'
+import { loadProgress, saveProgress, loadJizdy, saveJizdy, loadExam, saveExam, loadRound, saveRound, ROUND_KEY, swapDeviceAccount, claimAnonymousProgress, claimAnonymousJizdy, progressKey, JIZDY_KEY } from '@/domain/storage'
 import { emptyJizdyState, mergeLessons } from '@/domain/jizdy'
 import { topicFromPath, questionFromPath, isExamPath } from '@/lib/topics'
 import { getQuestion } from '@/domain/questions'
@@ -222,6 +222,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
         dispatch({ type: 'hydrateJizdy', state: emptyJizdyState() })
         // F8: clear the pending round so the next user doesn't see account A's set.
         saveRound(null)
+        saveExam(null)
+        swapDeviceAccount(null)
         dispatch({ type: 'setPendingRound', round: null })
         // Sign-out: show the anonymous progress. The account's own copy stays under its key,
         // so answers the cloud never confirmed upload on that account's next sign-in.
@@ -235,6 +237,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
     const uid = user.id
     signedInUidRef.current = uid
+    // The waiting set and a running exam are per device: drop the ones another account left
+    // (a direct A → B switch, or B's link opened after A left a set). An anonymous one stays.
+    const prev = swapDeviceAccount(uid)
+    if (prev && prev !== uid) {
+      saveRound(null)
+      saveExam(null)
+      dispatch({ type: 'setPendingRound', round: null })
+      if (state.mode === 'exam') dispatch({ type: 'goMenu' })
+    }
     // C3H2: load this user's jizdy lessons from their scoped key; claim+clear the anonymous
     // key so lessons from before sign-in move into exactly one account.
     dispatch({ type: 'hydrateJizdy', state: claimAnonymousJizdy(uid) })
