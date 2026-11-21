@@ -58,14 +58,22 @@ export function AppProvider({ children }: { children: ReactNode }) {
   // M4: set to true after hydrate so the immediately-following debounced save is skipped
   // (syncProgress already wrote the same blob to the cloud).
   const justHydratedRef = useRef(false)
+  // Canonical form of progress already in the cloud or on its way there: no save for it.
+  const uploadedRef = useRef<string | null>(null)
   // M5: uid of the signed-in user, to detect the signed-in → signed-out transition.
   const signedInUidRef = useRef<string | null>(null)
   // Fold `incoming` into the in-memory progress; dispatch only if it changed anything.
   // ponytail: bookmarks stay as this copy has them (a union would undo removals); true
   // cross-device removal needs deletion markers.
-  const adopt = (incoming: ProgressData) => {
+  // `uploaded`: wherever `incoming` came from saves it to the cloud itself (the cloud merge
+  // just saved it; another tab uploads what it wrote). If adopting adds nothing of ours, this
+  // copy has nothing to upload either.
+  // ponytail: another tab closed within the 1.5 s debounce leaves its answer local until the
+  // next save or sign-in, as a single tab would.
+  const adopt = (incoming: ProgressData, uploaded: boolean) => {
     const next = { ...mergeProgress(progressRef.current, incoming), bookmarks: progressRef.current.bookmarks }
     if (canonical(next) !== canonical(progressRef.current)) {
+      if (uploaded && canonical(next) === canonical(incoming)) uploadedRef.current = canonical(next)
       progressRef.current = next
       dispatch({ type: 'hydrate', progress: next })
     }
@@ -77,9 +85,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
     const remote = await supabaseStore.fetch(uid)
     const merged = remote ? { ...mergeProgress(local, remote), bookmarks: local.bookmarks } : local
     // Equal to the cloud (bookmarks included): nothing to upload.
-    if (!remote || canonical(merged) !== canonical(remote)) await supabaseStore.save(uid, merged).catch(() => {})
+    let uploaded = true
+    if (!remote || canonical(merged) !== canonical(remote)) {
+      await supabaseStore.save(uid, merged).catch(() => { uploaded = false })
+    }
     if (signedInUidRef.current !== uid) return
-    adopt(merged)
+    adopt(merged, uploaded)
   }
 
   // Another tab on this device saved: fold its progress and lessons into ours, so our next
@@ -87,7 +98,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const onStorage = (e: StorageEvent) => {
       if (e.key === progressKey(ownerRef.current)) {
-        adopt(loadProgress(ownerRef.current))
+        adopt(loadProgress(ownerRef.current), true)
       } else if (e.key === ROUND_KEY) {
         // Another tab left, finished or replaced a set: keep the waiting one in step.
         dispatch({ type: 'setPendingRound', round: validRound(initialState(), loadRound<SavedRound>()) })
@@ -317,6 +328,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       justHydratedRef.current = false
       return
     }
+    if (uploadedRef.current === canonical(state.progress)) return
     const uid = user.id
     const t = setTimeout(() => {
       cloudMerge(uid, state.progress).catch(() => {})

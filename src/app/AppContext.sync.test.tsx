@@ -509,6 +509,58 @@ describe('AppContext debounced cloud save', () => {
     expect(screen.getByTestId('answered').textContent).toBe('2')
   })
 
+  it('adopting what a save merged in does not schedule another fetch', async () => {
+    vi.useFakeTimers()
+    const { supabaseStore } = await import('@/auth/supabaseStore')
+    mockUserHolder.user = { id: 'adopt-once' }
+    let capturedDispatch: ReturnType<typeof useApp>['dispatch'] | null = null
+    function DispatchCapture() {
+      capturedDispatch = useApp().dispatch
+      return null
+    }
+    render(
+      <AppProvider>
+        <Spy />
+        <DispatchCapture />
+      </AppProvider>,
+    )
+    await act(async () => {
+      syncResolvers.resolve(emptyProgress())
+    })
+    vi.mocked(supabaseStore.fetch).mockResolvedValueOnce(recordAnswer(emptyProgress(), 2, true, 2000))
+    await act(async () => {
+      capturedDispatch!({ type: 'hydrate', progress: recordAnswer(emptyProgress(), 1, true, 3000) })
+    })
+    await act(async () => { vi.advanceTimersByTime(2000) })
+    expect(screen.getByTestId('answered').textContent).toBe('2')
+    await act(async () => { vi.advanceTimersByTime(2000) })
+    expect(supabaseStore.fetch).toHaveBeenCalledTimes(1)
+    expect(fakeSave).toHaveBeenCalledTimes(1)
+  })
+
+  it('an answer another signed-in tab saved is uploaded by that tab, not again by this one', async () => {
+    vi.useFakeTimers()
+    const { supabaseStore } = await import('@/auth/supabaseStore')
+    const { saveProgress, progressKey } = await import('@/domain/storage')
+    mockUserHolder.user = { id: 'two-tabs' }
+    render(
+      <AppProvider>
+        <Spy />
+      </AppProvider>,
+    )
+    await act(async () => {
+      syncResolvers.resolve(emptyProgress())
+    })
+    await act(async () => { vi.advanceTimersByTime(2000) })
+    // The other tab answered question 5 and saved its whole copy.
+    saveProgress(recordAnswer(emptyProgress(), 5, true, 4000), 'two-tabs')
+    act(() => { window.dispatchEvent(new StorageEvent('storage', { key: progressKey('two-tabs') })) })
+    expect(screen.getByTestId('answered').textContent).toBe('1')
+    await act(async () => { vi.advanceTimersByTime(2000) })
+    expect(supabaseStore.fetch).not.toHaveBeenCalled()
+    expect(fakeSave).not.toHaveBeenCalled()
+  })
+
   it('a removed bookmark stays removed after a save (cloud and screen)', async () => {
     vi.useFakeTimers()
     const { supabaseStore } = await import('@/auth/supabaseStore')
