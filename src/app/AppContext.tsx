@@ -132,9 +132,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, [])
 
   // One page_view per screen (tabs and full-screen flows alike); views are not URLs here.
-  // A landing page opens straight into practice or a tab: its first 'home' never shows.
+  // A landing page opens straight into practice or a tab: its first 'home' never shows. With a
+  // set waiting, a topic page stays on Home; the exam guide still opens its tab.
   const landingRef = useRef<boolean | null>(null)
-  if (landingRef.current === null) landingRef.current = !!landingFrom(window.location.pathname) && !state.pendingRound
+  if (landingRef.current === null) {
+    const landing = landingFrom(window.location.pathname)
+    landingRef.current = !!landing && (landing.kind === 'exam' || !state.pendingRound)
+  }
   useEffect(() => {
     const skip = landingRef.current && state.view === 'home'
     landingRef.current = false

@@ -62,6 +62,21 @@ describe('analytics on the theory journey', () => {
     }
   })
 
+  it('the exam guide landing with a set waiting counts the Procvičovat tab, not a home view that never showed', async () => {
+    const { byCategory } = await import('@/domain/questions')
+    const { ROUND_KEY } = await import('@/domain/storage')
+    const ids = byCategory('Zdravotnická příprava').slice(0, 10).map((q) => q.id)
+    localStorage.setItem(ROUND_KEY, JSON.stringify({ mode: 'lesson', ids, records: [{ id: ids[0], choice: 'a' }] }))
+    window.history.replaceState(null, '', '/zkouska-nanecisto/')
+    try {
+      render(<App />)
+      expect(track).not.toHaveBeenCalledWith('page_view', { view: 'home' })
+      expect(track).toHaveBeenCalledWith('page_view', { view: 'practice' })
+    } finally {
+      window.history.replaceState(null, '', '/')
+    }
+  })
+
   it('an okruh runs in sets of 20: each finished set has a results screen and sends one conversion', async () => {
     const { byCategory } = await import('@/domain/questions')
     render(<App />)
