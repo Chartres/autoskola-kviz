@@ -172,7 +172,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
   // wait on Home; drop it once it is finished or replaced.
   useEffect(() => {
     saveRound(snapshotRound(state) ?? state.pendingRound)
-  }, [state.view, state.session, state.correction, state.pendingRound]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [state.view, state.session, state.correction]) // eslint-disable-line react-hooks/exhaustive-deps
+  // The waiting set changed alone (another tab saved one, sign-out cleared it): save it only
+  // when no set is on screen. Rewriting ours here would answer the other tab's write with
+  // one of our own, and the two tabs would overwrite each other without end.
+  useEffect(() => {
+    if (!snapshotRound(state)) saveRound(state.pendingRound)
+  }, [state.pendingRound]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Persist progress locally whenever it changes (offline-first source of truth), under the
   // key of the account it belongs to.

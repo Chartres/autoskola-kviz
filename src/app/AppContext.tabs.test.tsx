@@ -2,7 +2,9 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, act } from '@testing-library/react'
 import { AppProvider, useApp } from './AppContext'
 import { emptyProgress, recordAnswer } from '@/domain/progress'
-import { STORAGE_KEY, loadProgress, saveJizdy } from '@/domain/storage'
+import { STORAGE_KEY, ROUND_KEY, loadProgress, saveJizdy } from '@/domain/storage'
+import { byCategory } from '@/domain/questions'
+import { freshRng } from '@/domain/rng'
 
 vi.mock('@/auth/AuthContext', () => ({
   useAuth: () => ({ user: null }),
@@ -43,5 +45,19 @@ describe('AppProvider across tabs on one device', () => {
     saveJizdy({ version: 1, lessons: [{ id: 'a', date: '2026-09-01', durationMin: 60, skills: [] }] })
     otherTabWrote('jizdy-v1')
     expect(screen.getByTestId('n').textContent).toBe('0/1')
+  })
+
+  it("does not write its own set back when another tab saves a set (no ping-pong)", () => {
+    render(<AppProvider><Spy /></AppProvider>)
+    // This tab is partway through its own set.
+    act(() => dispatch({ type: 'startLesson', rng: freshRng() }))
+    act(() => dispatch({ type: 'answer', choice: 'a', now: 1000 }))
+    expect(localStorage.getItem(ROUND_KEY)).not.toBeNull()
+    // The other tab saves its set: this tab must leave it in storage.
+    const ids = byCategory('Zdravotnická příprava').slice(0, 10).map((q) => q.id)
+    const theirs = JSON.stringify({ mode: 'lesson', ids, records: [{ id: ids[0], choice: 'a' }] })
+    localStorage.setItem(ROUND_KEY, theirs)
+    otherTabWrote(ROUND_KEY)
+    expect(localStorage.getItem(ROUND_KEY)).toBe(theirs)
   })
 })
