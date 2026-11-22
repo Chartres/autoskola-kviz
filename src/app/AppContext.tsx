@@ -268,8 +268,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
     if ((prev && prev !== uid) || (prevInTab && prevInTab !== uid)) {
       saveRound(null)
       saveExam(null)
+      // Close A's exam or set on screen (its next answer would count for B). goMenu leaves the
+      // set waiting, so it goes first and the waiting set is cleared after it.
+      if (state.session) dispatch({ type: 'goMenu' })
       dispatch({ type: 'setPendingRound', round: null })
-      if (state.mode === 'exam') dispatch({ type: 'goMenu' })
     }
     // C3H2: load this user's jizdy lessons from their scoped key; claim+clear the anonymous
     // key so lessons from before sign-in move into exactly one account.

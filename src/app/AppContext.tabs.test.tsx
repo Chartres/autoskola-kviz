@@ -84,4 +84,18 @@ describe('AppProvider across tabs on one device', () => {
     expect(screen.getByTestId('view').textContent).toBe('home')
     expect(localStorage.getItem(EXAM_KEY)).toBeNull()
   })
+
+  it("closes account A's okruh set on screen when B's sign-in link opened in another tab switches this tab to B", async () => {
+    const ui = () => <AppProvider><Spy /><ViewSpy /></AppProvider>
+    auth.user = { id: 'A' }
+    const { rerender } = render(ui())
+    act(() => dispatch({ type: 'startLesson', rng: freshRng() }))
+    act(() => dispatch({ type: 'answer', choice: 'a', now: Date.now() }))
+    expect(localStorage.getItem(ROUND_KEY)).not.toBeNull()
+    swapDeviceAccount('B')
+    auth.user = { id: 'B' }
+    await act(async () => rerender(ui()))
+    expect(screen.getByTestId('view').textContent).toBe('home')
+    expect(localStorage.getItem(ROUND_KEY)).toBeNull()
+  })
 })
