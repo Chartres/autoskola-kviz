@@ -722,35 +722,3 @@ describe('AppContext debounced cloud save', () => {
     expect(fakeSave).toHaveBeenCalledTimes(1)
   })
 })
-
-describe('AppContext session gone before this page load', () => {
-  it('a reload after a sign-out elsewhere drops the account’s waiting set and exam', async () => {
-    const { cleanup } = await import('@testing-library/react')
-    const { freshRng } = await import('@/domain/rng')
-    const { byCategory } = await import('@/domain/questions')
-    const { ROUND_KEY, EXAM_KEY } = await import('@/domain/storage')
-    function View() {
-      const { state } = useApp()
-      return <div data-testid="view">{state.view}/{state.pendingRound ? 'waiting' : 'none'}</div>
-    }
-    let capturedDispatch: ReturnType<typeof useApp>['dispatch'] | null = null
-    function DispatchCapture() {
-      capturedDispatch = useApp().dispatch
-      return null
-    }
-    mockUserHolder.user = { id: 'A' }
-    render(<AppProvider><DispatchCapture /></AppProvider>)
-    act(() => capturedDispatch!({ type: 'startExam', rng: freshRng(), now: Date.now() }))
-    act(() => capturedDispatch!({ type: 'answer', choice: 'a', now: Date.now() }))
-    const ids = byCategory('Zdravotnická příprava').slice(0, 10).map((q) => q.id)
-    localStorage.setItem(ROUND_KEY, JSON.stringify({ mode: 'lesson', ids, records: [] }))
-    cleanup()
-    // A signed out on another device: this page load finds no session.
-    mockUserHolder.user = null
-    render(<AppProvider><View /></AppProvider>)
-    expect(screen.getByTestId('view').textContent).toBe('home/none')
-    expect(localStorage.getItem(ROUND_KEY)).toBeNull()
-    expect(localStorage.getItem(EXAM_KEY)).toBeNull()
-    expect(localStorage.getItem('autoskola-kviz:account:v1')).toBeNull()
-  })
-})

@@ -35,7 +35,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     // A waiting set that no longer fits the bank, or damaged storage, is dropped here.
     return resumeExam({ ...base, pendingRound: validRound(base, loadRound<SavedRound>()) }, loadExam(), Date.now())
   })
-  const { user, loading } = useAuth()
+  const { user } = useAuth()
 
   // Always-current progress snapshot for in-flight-answer recovery (M2).
   const progressRef = useRef(state.progress)
@@ -315,17 +315,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
       syncingRef.current = false
     }
   }, [user?.id]) // eslint-disable-line react-hooks/exhaustive-deps
-
-  // The session resolved to nobody while the device still names an account (a sign-out on
-  // another device, an expired session): the sign-out this tab never saw. Drop that account's
-  // waiting set and exam, so a set left signed out is not dropped at the next sign-in.
-  useEffect(() => {
-    if (loading !== false || user || !swapDeviceAccount(null)) return
-    saveRound(null)
-    saveExam(null)
-    dispatch({ type: 'setPendingRound', round: null })
-    if (state.mode === 'exam') dispatch({ type: 'goMenu' })
-  }, [loading]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Back online: retry the upload a failed fetch or save left behind (nothing else would
   // trigger it until the next answer).
