@@ -258,11 +258,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
       return
     }
     const uid = user.id
+    const prevInTab = signedInUidRef.current
     signedInUidRef.current = uid
     // The waiting set and a running exam are per device: drop the ones another account left
     // (a direct A → B switch, or B's link opened after A left a set). An anonymous one stays.
+    // B's link opened in another tab has already recorded B as the device account: this tab
+    // knows A from its own sign-in.
     const prev = swapDeviceAccount(uid)
-    if (prev && prev !== uid) {
+    if ((prev && prev !== uid) || (prevInTab && prevInTab !== uid)) {
       saveRound(null)
       saveExam(null)
       dispatch({ type: 'setPendingRound', round: null })
