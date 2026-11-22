@@ -8,7 +8,7 @@ import {
 } from 'react'
 import { reducer, initialState, resumeExam, type AppState, type Action } from './store'
 import { snapshotRound, validRound, type SavedRound } from './round'
-import { loadProgress, saveProgress, loadJizdy, saveJizdy, loadExam, saveExam, loadRound, saveRound, ROUND_KEY, claimAnonymousProgress, claimAnonymousJizdy, progressKey, JIZDY_KEY } from '@/domain/storage'
+import { loadProgress, saveProgress, loadJizdy, saveJizdy, loadExam, saveExam, loadRound, saveRound, ROUND_KEY, swapDeviceAccount, claimAnonymousProgress, claimAnonymousJizdy, progressKey, JIZDY_KEY } from '@/domain/storage'
 import { emptyJizdyState, mergeLessons } from '@/domain/jizdy'
 import { topicFromPath, questionFromPath, isExamPath } from '@/lib/topics'
 import { getQuestion } from '@/domain/questions'
@@ -58,14 +58,22 @@ export function AppProvider({ children }: { children: ReactNode }) {
   // M4: set to true after hydrate so the immediately-following debounced save is skipped
   // (syncProgress already wrote the same blob to the cloud).
   const justHydratedRef = useRef(false)
+  // Canonical form of progress already in the cloud or on its way there: no save for it.
+  const uploadedRef = useRef<string | null>(null)
   // M5: uid of the signed-in user, to detect the signed-in → signed-out transition.
   const signedInUidRef = useRef<string | null>(null)
   // Fold `incoming` into the in-memory progress; dispatch only if it changed anything.
   // ponytail: bookmarks stay as this copy has them (a union would undo removals); true
   // cross-device removal needs deletion markers.
-  const adopt = (incoming: ProgressData) => {
+  // `uploaded`: wherever `incoming` came from saves it to the cloud itself (the cloud merge
+  // just saved it; another tab uploads what it wrote). If adopting adds nothing of ours, this
+  // copy has nothing to upload either.
+  // ponytail: another tab closed within the 1.5 s debounce leaves its answer local until the
+  // next save or sign-in, as a single tab would.
+  const adopt = (incoming: ProgressData, uploaded: boolean) => {
     const next = { ...mergeProgress(progressRef.current, incoming), bookmarks: progressRef.current.bookmarks }
     if (canonical(next) !== canonical(progressRef.current)) {
+      if (uploaded && canonical(next) === canonical(incoming)) uploadedRef.current = canonical(next)
       progressRef.current = next
       dispatch({ type: 'hydrate', progress: next })
     }
@@ -77,9 +85,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
     const remote = await supabaseStore.fetch(uid)
     const merged = remote ? { ...mergeProgress(local, remote), bookmarks: local.bookmarks } : local
     // Equal to the cloud (bookmarks included): nothing to upload.
-    if (!remote || canonical(merged) !== canonical(remote)) await supabaseStore.save(uid, merged).catch(() => {})
+    let uploaded = true
+    if (!remote || canonical(merged) !== canonical(remote)) {
+      await supabaseStore.save(uid, merged).catch(() => { uploaded = false })
+    }
     if (signedInUidRef.current !== uid) return
-    adopt(merged)
+    adopt(merged, uploaded)
   }
 
   // Another tab on this device saved: fold its progress and lessons into ours, so our next
@@ -87,7 +98,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const onStorage = (e: StorageEvent) => {
       if (e.key === progressKey(ownerRef.current)) {
-        adopt(loadProgress(ownerRef.current))
+        adopt(loadProgress(ownerRef.current), true)
       } else if (e.key === ROUND_KEY) {
         // Another tab left, finished or replaced a set: keep the waiting one in step.
         dispatch({ type: 'setPendingRound', round: validRound(initialState(), loadRound<SavedRound>()) })
@@ -104,6 +115,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
     return () => window.removeEventListener('storage', onStorage)
   }, [])
 
+  // The practice a landing page started, until its first answer: the session is known a render
+  // after mount, so a signed-in user's set is built again from the account's progress.
+  const landingPracticeRef = useRef<number | undefined | null>(null)
+  useEffect(() => {
+    if (state.view !== 'quiz' || state.session?.records.length) landingPracticeRef.current = null
+  }, [state.view, state.session])
   // SEO landing pages: /okruh/<slug>/ starts that okruh's practice; /otazka/<id>-…/ starts the
   // practice of the question's okruh on that question; /zkouska-nanecisto/ opens the Procvičovat
   // tab, whose first button starts the timed exam (loading the guide must not start a timer).
@@ -123,6 +140,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     else if (landing && state.view === 'home') {
       dispatch({ type: 'setCategories', categories: new Set([landing.category]) })
       dispatch({ type: 'startPractice', rng: freshRng(), firstId: landing.firstId })
+      landingPracticeRef.current = landing.firstId
       track('start_practice', { topic: landing.category, from: landing.from })
     } else if (landing) {
       // Leave the topic URL so the next reload after the exam doesn't start that practice.
@@ -132,9 +150,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, [])
 
   // One page_view per screen (tabs and full-screen flows alike); views are not URLs here.
-  // A landing page opens straight into practice or a tab: its first 'home' never shows.
+  // A landing page opens straight into practice or a tab: its first 'home' never shows. With a
+  // set waiting, a topic page stays on Home; the exam guide still opens its tab.
   const landingRef = useRef<boolean | null>(null)
-  if (landingRef.current === null) landingRef.current = !!landingFrom(window.location.pathname) && !state.pendingRound
+  if (landingRef.current === null) {
+    const landing = landingFrom(window.location.pathname)
+    landingRef.current = !!landing && (landing.kind === 'exam' || !state.pendingRound)
+  }
   useEffect(() => {
     const skip = landingRef.current && state.view === 'home'
     landingRef.current = false
@@ -172,7 +194,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
   // wait on Home; drop it once it is finished or replaced.
   useEffect(() => {
     saveRound(snapshotRound(state) ?? state.pendingRound)
-  }, [state.view, state.session, state.correction, state.pendingRound]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [state.view, state.session, state.correction]) // eslint-disable-line react-hooks/exhaustive-deps
+  // The waiting set changed alone (another tab saved one, sign-out cleared it): save it only
+  // when no set is on screen. Rewriting ours here would answer the other tab's write with
+  // one of our own, and the two tabs would overwrite each other without end.
+  useEffect(() => {
+    if (!snapshotRound(state)) saveRound(state.pendingRound)
+  }, [state.pendingRound]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Persist progress locally whenever it changes (offline-first source of truth), under the
   // key of the account it belongs to.
@@ -216,6 +244,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
         dispatch({ type: 'hydrateJizdy', state: emptyJizdyState() })
         // F8: clear the pending round so the next user doesn't see account A's set.
         saveRound(null)
+        saveExam(null)
+        swapDeviceAccount(null)
+        // Close the account's exam or set on screen (signed out in another tab): its next
+        // answer would save it again as anonymous. goMenu leaves the set waiting, so it goes first.
+        if (state.session) dispatch({ type: 'goMenu' })
         dispatch({ type: 'setPendingRound', round: null })
         // Sign-out: show the anonymous progress. The account's own copy stays under its key,
         // so answers the cloud never confirmed upload on that account's next sign-in.
@@ -228,7 +261,21 @@ export function AppProvider({ children }: { children: ReactNode }) {
       return
     }
     const uid = user.id
+    const prevInTab = signedInUidRef.current
     signedInUidRef.current = uid
+    // The waiting set and a running exam are per device: drop the ones another account left
+    // (a direct A → B switch, or B's link opened after A left a set). An anonymous one stays.
+    // B's link opened in another tab has already recorded B as the device account: this tab
+    // knows A from its own sign-in.
+    const prev = swapDeviceAccount(uid)
+    if ((prev && prev !== uid) || (prevInTab && prevInTab !== uid)) {
+      saveRound(null)
+      saveExam(null)
+      // Close A's exam or set on screen (its next answer would count for B). goMenu leaves the
+      // set waiting, so it goes first and the waiting set is cleared after it.
+      if (state.session) dispatch({ type: 'goMenu' })
+      dispatch({ type: 'setPendingRound', round: null })
+    }
     // C3H2: load this user's jizdy lessons from their scoped key; claim+clear the anonymous
     // key so lessons from before sign-in move into exactly one account.
     dispatch({ type: 'hydrateJizdy', state: claimAnonymousJizdy(uid) })
@@ -240,6 +287,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
     ownerRef.current = uid
     progressRef.current = local
     dispatch({ type: 'hydrate', progress: local })
+    if (landingPracticeRef.current !== null) {
+      dispatch({ type: 'startPractice', rng: freshRng(), firstId: landingPracticeRef.current })
+    }
+    landingPracticeRef.current = null
     let cancelled = false
     syncingRef.current = true // H1: block debounced save while fetch is in flight
     let uploadFailed = false
@@ -296,6 +347,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       justHydratedRef.current = false
       return
     }
+    if (uploadedRef.current === canonical(state.progress)) return
     const uid = user.id
     const t = setTimeout(() => {
       cloudMerge(uid, state.progress).catch(() => {})

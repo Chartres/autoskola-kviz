@@ -89,6 +89,8 @@ export default defineConfig({
     environment: 'jsdom',
     environmentOptions: { jsdom: { url: 'http://localhost/' } },
     setupFiles: ['./vitest.setup.ts'],
+    // Journey tests click through 20-question sets; ~1.6 s alone, past 5 s on a loaded parallel run.
+    testTimeout: 15_000,
     css: true,
     include: ['src/**/*.{test,spec}.{ts,tsx}'],
     coverage: {
