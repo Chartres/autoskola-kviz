@@ -538,6 +538,39 @@ describe('AppContext debounced cloud save', () => {
     expect(fakeSave).toHaveBeenCalledTimes(1)
   })
 
+  it('a save that merged in remote answers and then failed is retried', async () => {
+    vi.useFakeTimers()
+    const { supabaseStore } = await import('@/auth/supabaseStore')
+    mockUserHolder.user = { id: 'merge-then-fail' }
+    let capturedDispatch: ReturnType<typeof useApp>['dispatch'] | null = null
+    function DispatchCapture() {
+      capturedDispatch = useApp().dispatch
+      return null
+    }
+    render(
+      <AppProvider>
+        <Spy />
+        <DispatchCapture />
+      </AppProvider>,
+    )
+    await act(async () => {
+      syncResolvers.resolve(emptyProgress())
+    })
+    vi.mocked(supabaseStore.fetch).mockResolvedValueOnce(recordAnswer(emptyProgress(), 2, true, 2000))
+    fakeSave.mockRejectedValueOnce(new Error('offline'))
+    await act(async () => {
+      capturedDispatch!({ type: 'hydrate', progress: recordAnswer(emptyProgress(), 1, true, 3000) })
+    })
+    await act(async () => { vi.advanceTimersByTime(2000) })
+    expect(screen.getByTestId('answered').textContent).toBe('2')
+    expect(fakeSave).toHaveBeenCalledTimes(1)
+    // The merge never reached the cloud: the debounced save runs again.
+    await act(async () => { vi.advanceTimersByTime(2000) })
+    expect(fakeSave).toHaveBeenCalledTimes(2)
+    const saved = fakeSave.mock.calls[1] as unknown as [string, ProgressData]
+    expect(Object.keys(saved[1].stats).sort()).toEqual(['1', '2'])
+  })
+
   it('an answer another signed-in tab saved is uploaded by that tab, not again by this one', async () => {
     vi.useFakeTimers()
     const { supabaseStore } = await import('@/auth/supabaseStore')
