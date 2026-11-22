@@ -246,6 +246,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
         saveRound(null)
         saveExam(null)
         swapDeviceAccount(null)
+        // Close the account's exam or set on screen (signed out in another tab): its next
+        // answer would save it again as anonymous. goMenu leaves the set waiting, so it goes first.
+        if (state.session) dispatch({ type: 'goMenu' })
         dispatch({ type: 'setPendingRound', round: null })
         // Sign-out: show the anonymous progress. The account's own copy stays under its key,
         // so answers the cloud never confirmed upload on that account's next sign-in.

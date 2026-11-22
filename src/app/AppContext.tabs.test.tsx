@@ -98,4 +98,16 @@ describe('AppProvider across tabs on one device', () => {
     expect(screen.getByTestId('view').textContent).toBe('home')
     expect(localStorage.getItem(ROUND_KEY)).toBeNull()
   })
+
+  it("closes the exam on screen when the account signs out in another tab", async () => {
+    const ui = () => <AppProvider><Spy /><ViewSpy /></AppProvider>
+    auth.user = { id: 'A' }
+    const { rerender } = render(ui())
+    act(() => dispatch({ type: 'startExam', rng: freshRng(), now: Date.now() }))
+    act(() => dispatch({ type: 'answer', choice: 'a', now: Date.now() }))
+    auth.user = null
+    await act(async () => rerender(ui()))
+    expect(screen.getByTestId('view').textContent).toBe('home')
+    expect(localStorage.getItem(EXAM_KEY)).toBeNull()
+  })
 })
