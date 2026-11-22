@@ -2,9 +2,13 @@ import { describe, it, expect, vi, afterEach } from 'vitest'
 import { render, screen, act } from '@testing-library/react'
 import { AppProvider, useApp } from './AppContext'
 import { TOPICS } from '@/lib/topics'
+import { byCategory } from '@/domain/questions'
+import { emptyProgress, recordAnswer } from '@/domain/progress'
+import { saveProgress } from '@/domain/storage'
 
+const { auth } = vi.hoisted(() => ({ auth: { user: null as { id: string } | null } }))
 vi.mock('@/auth/AuthContext', () => ({
-  useAuth: () => ({ user: null }),
+  useAuth: () => ({ user: auth.user }),
   registerBeforeSignOut: () => () => {},
 }))
 
@@ -13,7 +17,11 @@ function View() {
   return <button onClick={() => dispatch({ type: 'goMenu' })}>{state.view}</button>
 }
 
-afterEach(() => window.history.replaceState(null, '', '/'))
+afterEach(() => {
+  window.history.replaceState(null, '', '/')
+  auth.user = null
+  localStorage.clear()
+})
 
 describe('SEO topic page', () => {
   it('returns the URL to / when the user leaves the practice started from /okruh/<slug>/', () => {
@@ -25,6 +33,30 @@ describe('SEO topic page', () => {
     expect(screen.getByRole('button').textContent).toBe('home')
     expect(window.location.pathname).toBe('/')
   })
+})
+
+describe('signed-in user on a topic page', () => {
+  // The account answered all of the okruh but three questions: those three open the set.
+  function landSignedIn(sessionLate: boolean) {
+    const topic = TOPICS[0]
+    const qs = byCategory(topic.category)
+    let progress = emptyProgress()
+    for (const q of qs.slice(3)) progress = recordAnswer(progress, q.id, true, 1000)
+    saveProgress(progress, 'A')
+    let set: number[] = []
+    function SetSpy() {
+      set = useApp().state.session?.questions.map((q) => q.id) ?? []
+      return null
+    }
+    window.history.replaceState(null, '', `/okruh/${topic.slug}/`)
+    if (!sessionLate) auth.user = { id: 'A' }
+    const { rerender } = render(<AppProvider><SetSpy /></AppProvider>)
+    auth.user = { id: 'A' }
+    act(() => rerender(<AppProvider><SetSpy /></AppProvider>))
+    expect(set.slice(0, 3).sort()).toEqual(qs.slice(0, 3).map((q) => q.id).sort())
+  }
+  it('gets a set built from the account’s progress (session known a render late)', () => landSignedIn(true))
+  it('gets a set built from the account’s progress (session known on the first render)', () => landSignedIn(false))
 })
 
 describe('question page', () => {

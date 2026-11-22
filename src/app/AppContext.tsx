@@ -115,6 +115,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
     return () => window.removeEventListener('storage', onStorage)
   }, [])
 
+  // The practice a landing page started, until its first answer: the session is known a render
+  // after mount, so a signed-in user's set is built again from the account's progress.
+  const landingPracticeRef = useRef<number | undefined | null>(null)
+  useEffect(() => {
+    if (state.view !== 'quiz' || state.session?.records.length) landingPracticeRef.current = null
+  }, [state.view, state.session])
   // SEO landing pages: /okruh/<slug>/ starts that okruh's practice; /otazka/<id>-…/ starts the
   // practice of the question's okruh on that question; /zkouska-nanecisto/ opens the Procvičovat
   // tab, whose first button starts the timed exam (loading the guide must not start a timer).
@@ -134,6 +140,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     else if (landing && state.view === 'home') {
       dispatch({ type: 'setCategories', categories: new Set([landing.category]) })
       dispatch({ type: 'startPractice', rng: freshRng(), firstId: landing.firstId })
+      landingPracticeRef.current = landing.firstId
       track('start_practice', { topic: landing.category, from: landing.from })
     } else if (landing) {
       // Leave the topic URL so the next reload after the exam doesn't start that practice.
@@ -272,6 +279,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
     ownerRef.current = uid
     progressRef.current = local
     dispatch({ type: 'hydrate', progress: local })
+    if (landingPracticeRef.current !== null) {
+      dispatch({ type: 'startPractice', rng: freshRng(), firstId: landingPracticeRef.current })
+    }
+    landingPracticeRef.current = null
     let cancelled = false
     syncingRef.current = true // H1: block debounced save while fetch is in flight
     let uploadFailed = false
